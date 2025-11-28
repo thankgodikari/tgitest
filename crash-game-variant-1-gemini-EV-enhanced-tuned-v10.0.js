@@ -1,19 +1,69 @@
+var config = {
+    // ===================================
+    // BUSTABIT CONFIGURATION UI
+    // ===================================
+    // === Normal Mode ===
+    normalBaseBet: {
+        value: 100, // 100 satoshis = 1 bit
+        type: 'balance',
+        label: 'Normal Base Bet (bits)'
+    },
+    normalMultiplier: {
+        value: 2.12,
+        type: 'multiplier',
+        label: 'Normal Multiplier'
+    },
+
+    // === Recovery Mode ===
+    enableRecovery: {
+        value: true,
+        type: 'checkbox',
+        label: 'Enable Recovery Mode'
+    },
+    recoveryMultiplier: {
+        value: 2.01,
+        type: 'multiplier',
+        label: 'Recovery Multiplier'
+    },
+
+    // === Stop Limits ===
+    takeProfitBits: {
+        value: 300,
+        type: 'number',
+        label: 'Take Profit (bits)'
+    },
+    minBalanceBits: {
+        value: 1,
+        type: 'number',
+        label: 'Stop Loss (bits)'
+    },
+
+    // === Other ===
+    debug: {
+        value: true,
+        type: 'checkbox',
+        label: 'Enable Debug Logging'
+    }
+};
+// ===================================
+// END BUSTABIT CONFIGURATION
+// ===================================
+
+const BETTING_MODE = "test"
+const BOT_SCRIPT_ID = "Bustabit-CGS-V11.0  - " + BETTING_MODE.toUpperCase() + " <GG> " + userInfo.uname;
+
 // ========================================
 // CRASH GAME BETTING BOT - BALANCED VERSION
 // Author: MiniMax Agent
-// Version: 10.0 BALANCED - Strategic but Not Over-Conservative
+// Version: 11.0 BALANCED - Strategic but Not Over-Conservative
 // ========================================
 // Quick runtime fingerprint to prove which script is loaded (remove after debugging)
-try { console.info('⚙️ Crash bot script fingerprint: v10.0-BALANCED — loaded at ' + new Date().toISOString()); } catch(_) {}
-
-const BETTING_MODE = "test"
-const BOT_SCRIPT_ID = "Coinscrash-CGS-V10.0  - " + BETTING_MODE.toUpperCase() + " <-> " + engine.getUsername();
+try { console.info('⚙️ Crash bot script fingerprint: v11.0-BALANCED — loaded at ' + new Date().toISOString()); } catch(_) {}
 
 class ConfigManager {
     constructor() {
         // --- base constants used for derived values (avoid referencing this.config while constructing it) ---
-        const DEFAULT_TARGET_MULTIPLIER = 1.73;
-        const DEFAULT_RECOVERY_MULTIPLIER = 1.63;
+        const DEFAULT_TARGET_MULTIPLIER = 2.12;
         const DEFAULT_TAKE_PROFIT_BITS = 300;
         const DEFAULT_MIN_BALANCE_BITS = 1;
         const DEFAULT_MAX_STAKE_BITS = 10000;
@@ -21,15 +71,29 @@ class ConfigManager {
         const DEFAULT_DEBT_SLICE_VALUE_TWO = 11;
         const DEFAULT_DEBT_SLICE_VALUE_THREE = 26;
         const DEFAULT_WARMUP_ROUNDS = 15;
+        const DEFAULT_RUN_MODE = BETTING_MODE     // 'test' or 'live'
         this.DEFAULT_SCHEDULE_ONE_TAKE_PROFIT = 300;
         this.DEFAULT_SCHEDULE_TWO_TAKE_PROFIT = 300;
         this.DEFAULT_SCHEDULE_THREE_TAKE_PROFIT = 300;
 
+        // ============================
+        // Read values from the global Bustabit `config` object
+        // Note: 'balance' type in Bustabit gives satoshis, so we convert to bits.
+        const bustabitCfg = (typeof config !== 'undefined') ? config : {};
+        const normalBaseBits = (bustabitCfg.normalBaseBet && bustabitCfg.normalBaseBet.value) ? bustabitCfg.normalBaseBet.value / 100 : 1;
+        const normalMult = (bustabitCfg.normalMultiplier && bustabitCfg.normalMultiplier.value) ? bustabitCfg.normalMultiplier.value : 2.12;
+        const recMult = (bustabitCfg.recoveryMultiplier && bustabitCfg.recoveryMultiplier.value) ? bustabitCfg.recoveryMultiplier.value : 2.01;
+        const enableRec = (bustabitCfg.enableRecovery && bustabitCfg.enableRecovery.value !== null) ? bustabitCfg.enableRecovery.value : true;
+        const takeProfit = (bustabitCfg.takeProfitBits && bustabitCfg.takeProfitBits.value) ? bustabitCfg.takeProfitBits.value : 150;
+        const minBalance = (bustabitCfg.minBalanceBits && bustabitCfg.minBalanceBits.value) ? bustabitCfg.minBalanceBits.value : 1;
+        const debugMode = (bustabitCfg.debug && bustabitCfg.debug.value !== null) ? bustabitCfg.debug.value : false;
+        // ============================
+
         // Consolidated, config-driven structure
         this.config = {
             // === Runtime / Global ===
-            runMode: BETTING_MODE,             // 'test' or 'live'
-            debug: true,                // debug prints
+            runMode: DEFAULT_RUN_MODE,    // 'test' or 'live'
+            debug: debugMode,                // debug prints
             showPanel: true,             // enable UI panel
             testBalanceBits: DEFAULT_TEST_BALANCE_BITS,   // test-mode starting balance (bits)
 
@@ -39,10 +103,10 @@ class ConfigManager {
 
             // Top-level numeric recovery values (moved out of recovery root for easier cross-module access)
             baseBetBits: 1,                                    // base bet used in recovery (bits)
-            targetMultiplier: DEFAULT_TARGET_MULTIPLIER,       // recovery target multiplier
-            takeProfitBits: DEFAULT_TAKE_PROFIT_BITS,          //  take-profit (bits)
-            takeProfitLimit: DEFAULT_TAKE_PROFIT_BITS,         // Take profit limits
-            minBalanceBits: DEFAULT_MIN_BALANCE_BITS,          // minimum balance allowed (bits)
+            targetMultiplier: normalMult,       // recovery target multiplier
+            takeProfitBits: takeProfit,          //  take-profit (bits)
+            takeProfitLimit: takeProfit,         // Take profit limits
+            minBalanceBits: minBalance,          // minimum balance allowed (bits)
             maxStakeBits: DEFAULT_MAX_STAKE_BITS,              // safety cap (bits)
 
             // ADAPTIVE BUNKER MODE
@@ -64,8 +128,8 @@ class ConfigManager {
                 bearishThreshold: 1.75,          // Avg(5) < 1.75 -> Bearish
                 skipThreshold: 1.60,             // Avg(5) < 1.60 -> Skip entirely
 
-                multiplier: DEFAULT_TARGET_MULTIPLIER,                // default normal payout multiplier
-                baseBetBits: 1,                  // base stake (bits)
+                multiplier: normalMult,                // default normal payout multiplier
+                baseBetBits: normalBaseBits,                  // base stake (bits)
                 useEV: true,                     // enable EV gating in normal mode
                 evThreshold: 0.15,               // EV threshold to allow bets
                 evPThreshold: 0.75,              // require empirical P >= this to trust EV
@@ -80,11 +144,19 @@ class ConfigManager {
                 baseBetBitPercent: 0.005,
                 // maximum allowed baseBetBits (clamped). Default: 300 bits.
                 baseBetBitMax: 300,
+
+                dynamicConfidence: {
+                    enabled: true,
+                    window: 20,           // How many recent rounds to check win-rate
+                    minWinRate: 0.40,     // "0.40" extracted: Trigger strict mode if WR < 40%
+                    strictThreshold: 0.65 // "0.65" extracted: The new confidence requirement
+                },
             },
 
             // === Recovery-mode betting (after losses) ===
             recovery: {
-                enableRecovery: true,                           // toggle recovery mode
+                enableRecovery: enableRec,                           // toggle recovery mode
+
                 // --- 3-PHASE CONFIGURATION (The Ruler) ---
                 // Phase 1: Stabilization
                 phase1Mult: 2.01,
@@ -93,10 +165,10 @@ class ConfigManager {
                 phase2Mult: 2.14,
                 phase2Count: 2,        // Stay here for 2 losses (Levels 3, 4)
                 // Phase 3: Clearing
-                phase3Mult: 2.47,      // Stay here for subsequent losses (Levels 5+)
+                phase3Mult: 2.27,      // Stay here for subsequent losses (Levels 5+)
                 // Escape Valve
                 escapeLevel: 8,        // At Level 7, trigger escape logic
-                escapeMult: 2.02,      // Drop target to 2.01x
+                escapeMult: 2.02,      // Drop target to 2.02x
 
                 // --- Shadow Betting ---
                 shadowBetting: true,   // Enable virtual betting after losses
@@ -109,7 +181,8 @@ class ConfigManager {
                 debtSliceInitialParts: 2,                // default parts when slicing enabled
                 debtSlicingMultiplier: 2.06,             // Multiplier to use for computing debt slicing
 
-                multiplier: DEFAULT_RECOVERY_MULTIPLIER,        // recovery-stage multiplier
+                multiplier: recMult,                               // recovery-stage multiplier
+                baseBetBits: 1,                                    // base bet used in recovery (bits)
                 highCrashMultiplier: 2.5,                       // "high crash" multiplier threshold
                 requireHighCrashBeforePlacement: false,          // require high crash before placing recovery bet
                 relaxRegimeProb: 0.75,                          // relaxed regime threshold for permissive recovery
@@ -123,7 +196,6 @@ class ConfigManager {
                 evRelaxFactor: 0.6,                             // relax EV acceptance in recovery
                 projRelaxDelta: 0.035,                          // projection relax delta in recovery
                 projStrongDelta: 0.10,                          // strong projection delta
-                baseBetBits: 1,                                 // base bet used in recovery (bits)
                 targetMultiplier: DEFAULT_TARGET_MULTIPLIER,    // recovery target multiplier
                 takeProfitBits: DEFAULT_TAKE_PROFIT_BITS,       // recovery take-profit (bits)
                 minBalanceBits: DEFAULT_MIN_BALANCE_BITS,       // minimum balance allowed (bits)
@@ -133,14 +205,15 @@ class ConfigManager {
                 minEvSamples: 0.60,                              // require at least this many samples before trusting EV
                 partialRecoveryDenyRounds: 2,
                 sniperThreshold: 2.02,                           // The floor required to place a recovery bet
+                toxicLowThreshold: 1.10,                         // "1.10" extracted: Safety floor for betting into chop
 
                 // --- DYNAMIC RECOVERY TARGET (Escape Velocity) ---
                 dynamicTarget: {
                     enabled: true,
                     depth1: 3,      // At Recovery Level 3...
-                    scale1: 1.06,   // ...lower target to 82% of base (e.g. 2.0 -> 2.07)
+                    scale1: 0.94,   // ...lower target to 82% of base (e.g. 2.0 -> 1.64)
                     depth2: 6,      // At Recovery Level 6...
-                    scale2: 1.07    // ...lower target to 70% of base (e.g. 2.0 -> 2.12)
+                    scale2: 0.86    // ...lower target to 70% of base (e.g. 2.0 -> 1.40)
                 },
 
                 // Regime detection sub-block (tuned windows & thresholds)
@@ -204,6 +277,8 @@ class ConfigManager {
                 SHORT_WINDOW: 20,
                 LONG_WINDOW: 50,
 
+                PATTERN_TOKEN_THRESHOLD: 2.0, // "2.0" extracted: Definition of High vs Low for patterns
+
                 // crash/momentum thresholds
                 HIGH_CRASH_MULTIPLIER: 2.0,
                 SHORT_VS_LONG_DELTA: 0.03,
@@ -263,8 +338,8 @@ class ConfigManager {
 
             // --- SMART SKEW SETTINGS (No Hardcoding) ---
             skew: {
-                skewCap: 4.0,              // Coinscrash allows higher skew (Jackpots)
-                slopeThreshold: -0.05,     // Downtrend definition
+                skewCap: 3.5,              // Coinscrash allows higher skew (Jackpots)
+                slopeThreshold: -0.1,     // Downtrend definition
                 highSkewConfidence: 0.4,    // Confidence when Skew is high but trend is up
                 minSkew: -2.0 // Configurable floor
             },
@@ -276,6 +351,8 @@ class ConfigManager {
                 MAX_WEIGHT: 0.65,                                // max per-expert weight
                 PLACE_SCORE_THRESHOLD: 0.24,                     // permissive place threshold
                 VOTE_REQUIRED: 2,                                 // how many votes are required to pass a vote quorum: default 2 (out of 3 experts: pattern, ev, ai)
+
+                NEUTRAL_MIN_EV_CONF: 0.60,                      // "0.6" extracted: EV requirement for neutral markets
 
                 // initialization & observation
                 INIT_WEIGHTS: {pattern: 0.35, ev: 0.35, ai: 0.30}, // initial priors
@@ -313,7 +390,7 @@ class ConfigManager {
 
                 EV_CONF_TANH_SCALE: 3,
                 WEIGHTS_DEFAULT: { regime: 0.4, ev: 0.3, ai: 0.3 },
-                WEIGHTS_BULLISH: { regime: 0.5, ev: 0.25, ai: 0.25 },
+                WEIGHTS_BULLISH: { regime: 0.70, ev: 0.15, ai: 0.15 },
                 WEIGHTS_VOLATILE: { regime: 0.3, ev: 0.4, ai: 0.3 },
 
                 EV_STRONG_CONF_THRESHOLD: 0.75,
@@ -568,13 +645,19 @@ class ConfigManager {
             // config.testBalanceBits is in bits — convert to satoshi when returning
             return (this.config.testBalanceBits || 0) * 100;
         } else {
+            // --- BUSTABIT API CHANGE ---
             try {
-                // engine likely returns satoshi already
-                return engine.getBalance();
+                // Bustabit's global variable `userInfo.balance` holds the balance in satoshis
+                if (typeof userInfo !== 'undefined' && typeof userInfo.balance !== 'undefined') {
+                    return userInfo.balance;
+                }
+                // Fallback if userInfo is not ready
+                return 0;
             } catch (error) {
-                console.log('⚠️ Error getting balance, using test balance');
-                return (this.config.testBalanceBits || 0) * 100;
+                console.log('⚠️ Error getting balance, using 0');
+                return 0;
             }
+            // --- END CHANGE ---
         }
     }
 
@@ -661,6 +744,7 @@ class Logger {
     }
 
     log(message, type = 'info') {
+        // First, check if we should log at all (debug mode)
         if (!this.config.get('debug')) return;
 
         const timestamp = new Date().toISOString();
@@ -675,7 +759,16 @@ class Logger {
             stats: '📊'
         };
 
-        console.log(`${timestamp} ${icons[type] || '📝'} ${message}`);
+        // Construct the full message string
+        const fullMessage = `${timestamp} ${icons[type] || '📝'} ${message}`;
+
+        // Use Bustabit's global log() function if it exists
+        if (typeof log === 'function') {
+            log(fullMessage);
+        } else {
+            // Fallback to console.log if 'log' isn't available (e.g., testing)
+            console.log(fullMessage);
+        }
     }
 
     logBetResult(result) {
@@ -1465,15 +1558,17 @@ class EVModule {
 }
 
 class PatternMatcher {
-    constructor(historySize = 1000) {
+    // Pass threshold from config (defaulting only if config fails)
+    constructor(historySize = 1000, tokenThreshold = 2.0) {
         this.historySize = historySize;
-        this.patterns = {}; // Map of "L-H-L" -> { nextH: 5, nextL: 10 }
-        this.tokens = [];   // Stream of 'H' (High) and 'L' (Low)
+        this.tokenThreshold = Number.isFinite(tokenThreshold) ? tokenThreshold : 2.0;
+        this.tokens = [];
+        this.patterns = {};
     }
 
-    // Convert multiplier to token
+    // Convert multiplier to token using Configured Threshold
     _tokenize(crash) {
-        return crash >= 2.0 ? 'H' : 'L';
+        return crash >= this.tokenThreshold ? 'H' : 'L';
     }
 
     feed(crash) {
@@ -1482,36 +1577,57 @@ class PatternMatcher {
         if (this.tokens.length > this.historySize) this.tokens.shift();
     }
 
+    // Detect Alternating "Ping-Pong" Regime (H-L-H-L)
+    detectChop(crashes) {
+        if (!crashes || crashes.length < 4) return false;
+
+        const last4 = crashes.slice(-4).map(c => this._tokenize(c));
+        const pattern = last4.join('');
+
+        // Check for perfect alternation
+        const isPerfectChop4 = (pattern === 'HLHL' || pattern === 'LHLH');
+        const isPerfectChop3 = (pattern.endsWith('HLH') || pattern.endsWith('LHL'));
+
+        return isPerfectChop4 || isPerfectChop3;
+    }
+
     // Look back 3 rounds and predict next
     getPrediction(crashes) {
-        // Need at least 4 rounds to form a 3-gram + prediction
-        if (crashes.length < 4) return null;
+        if (!crashes || crashes.length < 4) return null;
 
-        // 1. Build current context from recent crashes
-        const recent = crashes.slice(-3).map(c => this._tokenize(c)); // e.g. ['L', 'H', 'L']
-        const key = recent.join('-'); // "L-H-L"
+        // 1. CHOP DETECTION OVERRIDE
+        if (this.detectChop(crashes)) {
+            const lastCrash = crashes[crashes.length - 1];
+            const lastToken = this._tokenize(lastCrash);
 
-        // 2. Scan internal memory for this key
-        // (We rebuild memory dynamically from the passed crash array to ensure sync)
+            if (lastToken === 'L') {
+                return { direction: 'HIGH', confidence: 0.85, pattern: 'CHOP-REVERSAL (Buy Low)' };
+            } else {
+                return { direction: 'LOW', confidence: 0.85, pattern: 'CHOP-CONTINUATION (Skip High)' };
+            }
+        }
+
+        // 2. Standard N-Gram Logic
+        const recent = crashes.slice(-3).map(c => this._tokenize(c));
+        const key = recent.join('-');
+
+        // Rebuild memory locally
         const memory = {};
         const tokens = crashes.map(c => this._tokenize(c));
 
-        // Simple N-Gram scanner
         for (let i = 0; i < tokens.length - 3; i++) {
             const gram = tokens.slice(i, i+3).join('-');
             const next = tokens[i+3];
-
-            if (!memory[gram]) memory[gram] = { H: 0, L: 0, total: 0 };
+            if (!memory[gram]) memory[gram] = { H: 0, L: 0, total: 0 }
             memory[gram][next]++;
             memory[gram].total++;
         }
 
         const match = memory[key];
-        if (!match || match.total < 3) return null; // Not enough data
+        if (!match || match.total < 3) return null;
 
         const probH = match.H / match.total;
 
-        // Detect strong pattern (e.g. > 70% probability)
         if (probH > 0.7) return { direction: 'HIGH', confidence: probH, pattern: key };
         if (probH < 0.3) return { direction: 'LOW', confidence: 1 - probH, pattern: key };
 
@@ -1530,6 +1646,28 @@ class MarketRegimeDetector {
         const rawCfg = (config && config.config) ? config.config : (config || {});
         // Bind to the new HYDRA_STRATEGY block
         this.cfg = (rawCfg && rawCfg.HYDRA_STRATEGY) || {};
+    }
+
+    _getStdDev(data) {
+        if (data.length === 0) return 0;
+        const mean = data.reduce((a, b) => a + b, 0) / data.length;
+        const variance = data.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / data.length;
+        return Math.sqrt(variance);
+    }
+
+    // NEW: Linear Regression Slope (Measure Trend Direction)
+    _calculateSlope(data) {
+        if (data.length < 2) return 0;
+        const n = data.length;
+        let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+        for (let i = 0; i < n; i++) {
+            sumX += i;
+            sumY += data[i];
+            sumXY += i * data[i];
+            sumXX += i * i;
+        }
+        const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+        return slope;
     }
 
     // V10 Hydra Analysis
@@ -1658,6 +1796,181 @@ class MarketRegimeDetector {
     }
 }
 
+// ------------------------------
+// InternalState + Bayesian + MAD helpers
+// ------------------------------
+class InternalStateManager {
+    constructor(bot) {
+        this.bot = bot;
+        // minimal atomic internal state (display-only copy is produced by snapshot())
+        this.state = {
+            regimeFlag: null,
+            regimeScore: 0,
+            perRegimeStats: {}, // map regime -> { wins, losses, ev }
+            consecutiveRecoveryLosses: 0,
+            lastDecision: null,
+            diagnostics: [] // circular buffer of short diagnostics
+        };
+        this._maxDiag = 300;
+    }
+
+    setRegime(flag, score, stats = {}) {
+        this.state.regimeFlag = flag;
+        this.state.regimeScore = Number(score || 0);
+        this.state.perRegimeStats[flag] = Object.assign({}, this.state.perRegimeStats[flag] || {}, stats);
+        this._pushDiag({ t: Date.now(), type: 'regime', flag, score, stats });
+    }
+
+    addDecision(decision) {
+        // decision should be a small object: { allow, mode, reason, conf, multiplier }
+        this.state.lastDecision = decision;
+        this._pushDiag({ t: Date.now(), type: 'decision', d: decision });
+    }
+
+    incrConsecutiveRecoveryLosses() {
+        this.state.consecutiveRecoveryLosses = (Number(this.state.consecutiveRecoveryLosses) || 0) + 1;
+        this._pushDiag({ t: Date.now(), type: 'recLossInc', v: this.state.consecutiveRecoveryLosses });
+    }
+
+    resetConsecutiveRecoveryLosses() {
+        if ((Number(this.state.consecutiveRecoveryLosses) || 0) !== 0) {
+            this.state.consecutiveRecoveryLosses = 0;
+            this._pushDiag({ t: Date.now(), type: 'recLossReset' });
+        }
+    }
+
+    addPerRegimeOutcome(flag, isWin, ev = 0) {
+        const s = this.state.perRegimeStats[flag] || { wins: 0, losses: 0, ev: 0, samples: 0 };
+        if (isWin) s.wins = (s.wins || 0) + 1; else s.losses = (s.losses || 0) + 1;
+        s.ev = (Number(s.ev || 0) + Number(ev || 0));
+        s.samples = (Number(s.samples || 0) + 1);
+        this.state.perRegimeStats[flag] = s;
+        this._pushDiag({ t: Date.now(), type: 'regimeOutcome', flag, isWin, ev });
+    }
+
+    _pushDiag(item) {
+        try {
+            this.state.diagnostics.push(item);
+            if (this.state.diagnostics.length > this._maxDiag) this.state.diagnostics.shift();
+        } catch (_) { /* ignore */ }
+    }
+
+    // return a shallow safe snapshot for UI
+    snapshot() {
+        try {
+            // return only the structure needed for the panel (small)
+            return {
+                regimeFlag: this.state.regimeFlag,
+                regimeScore: this.state.regimeScore,
+                consecutiveRecoveryLosses: Number(this.state.consecutiveRecoveryLosses || 0),
+                lastDecision: this.state.lastDecision || null,
+                perRegimeStats: this.state.perRegimeStats || {},
+                diagnosticsTail: this.state.diagnostics.slice(-12)
+            };
+        } catch (e) {
+            return {};
+        }
+    }
+}
+
+/**
+ * BayesianPosterior
+ * Lightweight per-multiplier posterior: Beta-style counts but using a Wilson-style lower-bound for
+ * conservative decision gating (avoids heavy special functions). All data stored in memory.
+ */
+class BayesianPosterior {
+    constructor(config = {}) {
+        // config is ConfigManager instance or raw config object
+        this.config = config;
+        this.map = {}; // key -> { a, b, n, s }  (a=success prior count, b=failure prior count, s=successes, n=observations)
+        // prior strength (read from config if set; else 1/1)
+        this.priorA = 1;
+        this.priorB = 1;
+    }
+
+    _key(mult) {
+        // canonicalize multiplier key to 2 decimals
+        return `m_${Number(mult).toFixed(2)}`;
+    }
+
+    addObservation(multiplier, success) {
+        const key = this._key(multiplier);
+        if (!this.map[key]) this.map[key] = { a: this.priorA, b: this.priorB, n: 0, s: 0 };
+        const rec = this.map[key];
+        rec.n = (rec.n || 0) + 1;
+        if (success) {
+            rec.s = (rec.s || 0) + 1;
+            rec.a = (rec.a || 0) + 1;
+        } else {
+            rec.b = (rec.b || 0) + 1;
+        }
+    }
+
+    mean(mult) {
+        const key = this._key(mult);
+        const r = this.map[key];
+        if (!r) return 0.5;
+        return r.a / (r.a + r.b);
+    }
+
+    // Wilson score lower bound — conservative confidence bound for proportion
+    lowerBound(mult, conf = 0.95) {
+        const key = this._key(mult);
+        const r = this.map[key];
+        if (!r || !r.n) return 0.0;
+        const s = Number(r.s || 0);
+        const n = Number(r.n || 0);
+        const phat = s / n;
+        // map conf to z (approx)
+        let z;
+        if (conf >= 0.999) z = 3.29;
+        else if (conf >= 0.975) z = 1.96; // 97.5 ~ 1.96 (use 95% nominal fallback)
+        else if (conf >= 0.95) z = 1.96;
+        else if (conf >= 0.9) z = 1.64;
+        else z = 1.28;
+        const z2 = z * z;
+        const denom = 1 + z2 / n;
+        const centre = phat + z2 / (2 * n);
+        const margin = z * Math.sqrt((phat * (1 - phat) + z2 / (4 * n)) / n);
+        const lower = (centre - margin) / denom;
+        return Math.max(0, Math.min(1, lower));
+    }
+}
+
+/**
+ * MAD calibrator — keep short-window rolling absolute errors and expose a median + MAD derived threshold.
+ * Use for short-window quick reaction (config-driven window).
+ */
+class MADCalibrator {
+    constructor(window = 25) {
+        this.window = Math.max(3, Number(window || 25));
+        this.errs = [];
+    }
+    addError(err) {
+        try {
+            this.errs.push(Math.abs(Number(err || 0)));
+            if (this.errs.length > this.window) this.errs.shift();
+        } catch (_) {}
+    }
+    _median(arr) {
+        if (!arr || arr.length === 0) return 0;
+        const a = arr.slice().sort((x, y) => x - y);
+        const m = Math.floor(a.length / 2);
+        return (a.length % 2 === 1) ? a[m] : ((a[m - 1] + a[m]) / 2);
+    }
+    median() { return this._median(this.errs); }
+    mad() {
+        const med = this.median();
+        const devs = this.errs.map(e => Math.abs(e - med));
+        return this._median(devs);
+    }
+    // Dynamic threshold (median + k * MAD)
+    threshold(k = 1.5) {
+        return this.median() + (k * this.mad());
+    }
+}
+
+
 class EnsemblePredictionEngine {
     constructor(config, stats, logger, botApi = {}) {
         this.config = config;
@@ -1665,8 +1978,14 @@ class EnsemblePredictionEngine {
         this.logger = logger;
         // store small API injected by CrashBot (or other caller)
         this.botApi = botApi || {};
+
+        // NO HARDCODING: Get pattern threshold from config (defaulting to 2.0 only if missing)
+        const rawCfg = (this.config && this.config.config) ? this.config.config : (this.config || {});
+        const marketCfg = rawCfg.MARKET || {};
+        const patternThresh = Number.isFinite(Number(marketCfg.PATTERN_TOKEN_THRESHOLD)) ? Number(marketCfg.PATTERN_TOKEN_THRESHOLD) : 2.0;
+
         this.regimeDetector = new MarketRegimeDetector(this.stats, this.logger, this.config);
-        this.patternMatcher = new PatternMatcher();
+        this.patternMatcher = new PatternMatcher(1000, patternThresh);
         // convenience alias: allow older code to access this.bot (may be null)
         this.bot = (this.botApi && this.botApi._fullBotRef) ? this.botApi._fullBotRef : ((this.botApi && this.botApi.bot) || null);
         this.patternSkips = 0;
@@ -1681,6 +2000,8 @@ class EnsemblePredictionEngine {
         } catch (e) {
             this.observationRounds = 3;
         }
+
+
         // adaptive module accuracy stats (simple online counters)
         try {
             const raw = (this.config && this.config.config) ? this.config.config : (this.config || {});
@@ -2032,6 +2353,7 @@ class EnsemblePredictionEngine {
                     } catch (er) {
                         normalBits = 0;
                     }
+
                     const amountSat = Number(normalBits || 0) * 100;
                     // Use canonical normal multiplier ONLY via getNormalMultiplier()
                     let multiplier = Number(this.bot.getNormalMultiplier());
@@ -2479,6 +2801,7 @@ class EnsemblePredictionEngine {
             const ensembleCfg = (rawCfg && rawCfg.ENSEMBLE) || {};
 
             // 1) resolve targetMultiplier and mode
+            // 1) resolve targetMultiplier and mode
             // Accept either numeric multiplier or the mode string ('NORMAL'|'RECOVERY').
             let modeStr = (typeof modeOrMultiplier === 'string') ? modeOrMultiplier.toUpperCase() : 'NORMAL';
             let targetMultiplier;
@@ -2672,51 +2995,211 @@ class EnsemblePredictionEngine {
         }
     }
 
-    // Accept optional 'mode' so callers can request predictions in a specific mode.
-    // Defensive: when called for RECOVERY, do not produce a suggestedBet override.
-    getPrediction(modeOrMultiplier = 'NORMAL') {
-        // NEW: single-source-of-truth delegate
-        //
-        // This method no longer performs any EV/ensemble gating or "decision"
-        // logic itself. It simply delegates to unifyEvEnsembleDecision which
-        // is the canonical, signal-only implementation that:
-        //   - detects market regime (detectMarketRegime),
-        //   - computes pattern/ai/ev signals,
-        //   - returns a suggested decision object (shouldBet, confidence, evVote, suggestedBet, details)
-        //
-        // Important: unifyEvEnsembleDecision MUST NOT perform gating. Its job
-        // is to *signal* when we're in high-crash regime and recommend bets —
-        // callers (CrashBot) decide how to act on that signal.
+    /**
+     * getPrediction(mode)
+     * mode: 'NORMAL' or 'RECOVERY'
+     * returns a prediction object used by the rest of the bot:
+     * { shouldBet: bool, confidence: 0..1, suggestedBet: sat, suggestedMultiplier: number, reason: string, details: {...} }
+     */
+    getPrediction(mode = 'NORMAL') {
         try {
-            if (typeof this.unifyEvEnsembleDecision === 'function') {
-                // return whatever the unified method returns (value or Promise) so caller
-                // retains original sync/async behavior. CrashBot already handles both.
-                return this.unifyEvEnsembleDecision(modeOrMultiplier);
-            }
-            // Back-compat fallback: if for some reason unifyEvEnsembleDecision doesn't exist,
-            // try a legacy shim if you kept one (optional). We look for a `_legacyGetPrediction`
-            // helper so you can preserve the old behavior during transition. If you don't
-            // keep such a shim, this block will fall-through to the conservative fallback.
-            if (typeof this._legacyGetPrediction === 'function') {
-                return this._legacyGetPrediction(modeOrMultiplier);
-            }
-        } catch (e) {
-            // Defensive logging — don't throw (so callers don't crash the bot tick).
-            try {
-                if (this.logger && typeof this.logger.error === 'function') this.logger.error('getPrediction delegate error', e);
-            } catch (_) {
-            }
-        }
+            const evalMode = (mode || 'NORMAL').toString().toUpperCase();
+            const rawCfg = (this.config && this.config.config) ? this.config.config : (this.config || {});
+            const ensembleCfg = rawCfg.ENSEMBLE || {};
+            const marketCfg = rawCfg.MARKET || {};
+            const recCfg = (rawCfg && rawCfg.recovery) ? rawCfg.recovery : (rawCfg.RECOVERY || {});
 
-        // Conservative fallback (no bet). Matches the shape callers expect.
-        return {
-            shouldBet: false,
-            confidence: 0.05,
-            reason: 'delegate-fallback',
-            evVote: false,
-            suggestedBet: 0,
-            details: null
-        };
+            // 1) collect expert signals (pattern, ev, ai) — gracefully degrade if modules missing
+            const crashes = this.getCrashArray();
+            const patternSigObj = this.patternMatcher ? this.patternMatcher.getPrediction(crashes) : null;
+            const patternProb = (patternSigObj && patternSigObj.direction === 'HIGH') ? Number(patternSigObj.confidence || 0) : ((patternSigObj && patternSigObj.direction === 'NEUTRAL') ? 0.5 : 0.0);
+
+            // EV signal: compute empirical P for canonical multiplier
+            let evProb = 0;
+            let evPerUnit = 0;
+            let canonicalMult = (evalMode === 'NORMAL') ? (this.bot && this.bot.getNormalMultiplier ? Number(this.bot.getNormalMultiplier()) : (this.config && this.config.normal && Number(this.config.normal.multiplier) ? Number(this.config.normal.multiplier) : 1.73)) : (this.bot && this.bot.getCanonicalRecoveryMultiplier ? Number(this.bot.getCanonicalRecoveryMultiplier()) : (this.config && this.config.recovery && Number(this.config.recovery.multiplier) ? Number(this.config.recovery.multiplier) : 1.63));
+
+            if (this.ev && typeof this.ev.expectedValue === 'function') {
+                try {
+                    const evEst = this.ev.expectedValue(canonicalMult, 100); // per-unit EV
+                    if (evEst) {
+                        evProb = Number(evEst.p || 0);
+                        evPerUnit = Number(evEst.evPerUnit || evEst.evAbsolute || 0);
+                    }
+                } catch (_) {}
+            }
+
+            // AI signal (if available)
+            let aiProb = 0;
+            if (this.ai && typeof this.ai.predict === 'function') {
+                try {
+                    const aPred = this.ai.predict(crashes, {targetMultiplier: canonicalMult, mode: evalMode});
+                    aiProb = Math.max(0, Math.min(1, Number(aPred && aPred.probability || aPred || 0)));
+                } catch (_) { aiProb = 0; }
+            }
+
+            // Build signals object and combine via existing getWeightedEnsemble helper (keeps prior behavior)
+            const signals = { pattern: patternProb, ev: evProb, ai: aiProb };
+            const weighted = this.getWeightedEnsemble(signals);
+            let ensembleProb = Number(weighted.ensembleProb || 0);
+
+            // Calibration: short-window MAD + small posterior correction (if available)
+            // If MAD says our recent error is small, trust ensembleProb more; otherwise scale down.
+            try {
+                if (this.bot && this.bot.madCalibrator && typeof this.bot.madCalibrator.threshold === 'function') {
+                    const madThr = this.bot.madCalibrator.threshold(Number(ensembleCfg && ensembleCfg.MAD_SCALE) || 1.5);
+                    // If MAD is large relative to median -> reduce trust
+                    if (madThr > 0 && this.bot.madCalibrator.median() > 0) {
+                        // scale trust by inverse ratio (cap to [0.4,1.2]) to avoid extreme jumps
+                        const ratio = Math.max(0.4, Math.min(1.2, 1.0 / (1.0 + madThr / (this.bot.madCalibrator.median() + 1e-9))));
+                        ensembleProb = ensembleProb * ratio;
+                    }
+                }
+            } catch (_) {}
+
+            // Combine ensembleProb with a Bayesian posterior check (if available) to produce a conservative calibrated probability
+            let calibratedP = ensembleProb;
+            let posteriorLower = 0;
+            try {
+                if (this.bot && this.bot.bayesPosterior && typeof this.bot.bayesPosterior.lowerBound === 'function') {
+                    posteriorLower = Number(this.bot.bayesPosterior.lowerBound(canonicalMult, Number(ensembleCfg.POSTERIOR_CONF || 0.95)) || 0);
+                    // Blend: take max(ensembleProb * alpha, posteriorLower * (1-alpha)) with alpha from config (favor ensemble but not blind)
+                    const alpha = Number(ensembleCfg && ensembleCfg.CALIBRATION_ALPHA) ? Number(ensembleCfg.CALIBRATION_ALPHA) : 0.7;
+                    calibratedP = (alpha * ensembleProb) + ((1 - alpha) * posteriorLower);
+                } else {
+                    calibratedP = ensembleProb;
+                }
+            } catch (_) {
+                calibratedP = ensembleProb;
+            }
+
+            // Confidence metric: short-term reliability + module reliabilities
+            const reliabilityAvg = (weighted && weighted.denom && weighted.denom > 0) ? ((weighted.contributions.pattern || 0) + (weighted.contributions.ev || 0) + (weighted.contributions.ai || 0)) / weighted.denom : calibratedP;
+            const confidence = Math.max(0, Math.min(1, (calibratedP + (Number(reliabilityAvg) || 0)) / 2));
+
+            // OBSERVE-after-2-losses rule (but allow opportunistic override)
+            const consecutiveRecLosses = (this.bot && this.bot.internalState && this.bot.internalState.state && Number(this.bot.internalState.state.consecutiveRecoveryLosses || 0)) ? Number(this.bot.internalState.state.consecutiveRecoveryLosses) : 0;
+            let shouldObserve = false;
+            if (String(evalMode).toUpperCase() === 'RECOVERY' && consecutiveRecLosses >= 2) {
+                shouldObserve = true;
+            }
+
+            // Opportunistic override rule: allow one-time bet if posteriorLower implies positive EV even under conservative bound
+            let opportunisticAllowed = false;
+            try {
+                if (shouldObserve && this.bot && this.bot.bayesPosterior) {
+                    const lower = Number(this.bot.bayesPosterior.lowerBound(canonicalMult, Number(ensembleCfg.POSTERIOR_CONF || 0.95)) || 0);
+                    // EV estimate using lower bound p: evPerUnitLower = p*(m-1) - (1-p)
+                    const evPerUnitLower = lower * (canonicalMult - 1) - (1 - lower);
+                    const evFloor = Number(ensembleCfg.OPPORTUNISTIC_MIN_EV) || 0.0;
+                    if (evPerUnitLower > evFloor) {
+                        opportunisticAllowed = true;
+                    }
+                }
+            } catch (_) { opportunisticAllowed = false; }
+
+            // Final decision rule
+            let shouldBet = false;
+            let reason = 'NO_DECISION';
+            // Use different gating logic for NORMAL vs RECOVERY (config-driven)
+            if (String(evalMode).toUpperCase() === 'NORMAL') {
+                // Use EV gating if enabled in normal config
+                const normalCfg = (this.config && this.config.normal) ? this.config.normal : {};
+                const useEv = !!normalCfg.useEV;
+                if (useEv) {
+                    // require calibratedP and (if EV module available) evPerUnit threshold
+                    const evThreshold = Number(normalCfg.evThreshold || 0.12);
+                    const pThreshold = Number(normalCfg.evPThreshold || 0.70);
+                    if (calibratedP >= pThreshold && this.ev && evPerUnit > evThreshold) {
+                        shouldBet = true;
+                        reason = 'NORMAL-EV-PASS';
+                    } else if (calibratedP >= pThreshold && !this.ev) {
+                        // If EV module missing but calibratedP high, allow permissive bet
+                        shouldBet = true;
+                        reason = 'NORMAL-ENSEMBLE-PASS-NOEV';
+                    } else {
+                        shouldBet = false;
+                        reason = 'NORMAL-GATED';
+                    }
+                } else {
+                    // ensemble-only gating
+                    const placeThresh = Number(ensembleCfg.PLACE_SCORE_THRESHOLD || 0.24);
+                    if (calibratedP >= placeThresh) {
+                        shouldBet = true;
+                        reason = 'NORMAL-ENSEMBLE-PASS';
+                    } else {
+                        shouldBet = false;
+                        reason = 'NORMAL-LOW-SCORE';
+                    }
+                }
+            } else { // RECOVERY
+                const recCfgLocal = (this.config && this.config.recovery) ? this.config.recovery : {};
+                const recPThreshold = Number(recCfgLocal.relaxRegimeProb || recCfgLocal.relaxRegimeProb === 0 ? recCfgLocal.relaxRegimeProb : (ensembleCfg.RECOVERY_P_THRESHOLD || 0.60));
+                const recEvRequired = Number((rawCfg.EVsettings && rawCfg.EVsettings.recoveryEvThreshold) || recCfgLocal.recoveryEvThreshold || 0.12);
+                // If we are in observe-after-2-losses, deny unless opportunistic override true
+                if (shouldObserve && !opportunisticAllowed) {
+                    shouldBet = false;
+                    reason = `RECOVERY-OBSERVE (consecLoss=${consecutiveRecLosses})`;
+                } else {
+                    // Standard recovery gating: require posteriorLower or ensembleProb above recovery thresholds
+                    const posteriorCheck = (this.bot && this.bot.bayesPosterior) ? Number(this.bot.bayesPosterior.lowerBound(canonicalMult, Number(ensembleCfg.POSTERIOR_CONF || 0.95)) || 0) : 0;
+                    if (posteriorCheck >= recPThreshold && (evPerUnit >= recEvRequired || !this.ev)) {
+                        shouldBet = true;
+                        reason = 'RECOVERY-POSTERIOR-PASS';
+                    } else if (opportunisticAllowed) {
+                        shouldBet = true;
+                        reason = 'RECOVERY-OPPORTUNISTIC-OVERRIDE';
+                    } else {
+                        shouldBet = false;
+                        reason = 'RECOVERY-GATED';
+                    }
+                }
+            }
+
+            // compose predicted suggestion (suggestedBet is a soft suggestion; engine resolves canonical stake)
+            const suggestedBetSat = (this.bot && typeof this.bot.resolveCanonicalStakeSat === 'function')
+                ? this.bot.resolveCanonicalStakeSat(null, { shouldBet, confidence, suggestedMultiplier: canonicalMult }, evalMode)
+                : 100; // fallback 100 sat (very defensive; engine will clamp)
+
+            // Save the unified decision to internal state (for UI only)
+            try {
+                if (this.bot && this.bot.internalState && typeof this.bot.internalState.addDecision === 'function') {
+                    this.bot.internalState.addDecision({
+                        allow: shouldBet,
+                        mode: evalMode,
+                        reason,
+                        conf: confidence,
+                        ensemble: ensembleProb,
+                        posteriorLower,
+                        canonicalMultiplier: canonicalMult,
+                        timestamp: Date.now()
+                    });
+                }
+            } catch (_) { /* ignore */ }
+
+            // Return a normalized prediction object used by the scheduling code
+            return {
+                shouldBet: !!shouldBet,
+                confidence: Number(confidence || 0),
+                suggestedBet: Number(suggestedBetSat || 0),
+                suggestedMultiplier: Number(canonicalMult || 0),
+                reason: String(reason || ''),
+                details: {
+                    ensemble: Number(ensembleProb || 0),
+                    calibratedP: Number(calibratedP || 0),
+                    pattern: Number(patternProb || 0),
+                    ev: Number(evProb || 0),
+                    evPerUnit: Number(evPerUnit || 0),
+                    ai: Number(aiProb || 0),
+                    posteriorLower: Number(posteriorLower || 0),
+                    consecutiveRecoveryLosses
+                }
+            };
+
+        } catch (e) {
+            try { if (this.logger) this.logger.log(`getPrediction EXCEPTION: ${e && e.message}`, 'error'); } catch (_) {}
+            return { shouldBet: false, confidence: 0, suggestedBet: 0, suggestedMultiplier: 0, reason: 'ERROR', details: { error: String(e && e.message) } };
+        }
     }
 
     // call once per round to train internal AI and EV after crash known
@@ -2812,40 +3295,7 @@ class BettingEngine {
             suppliedBatchId = modeOrMeta.batchId;
         }
 
-        // Test mode -> simulate and return true (no debt effects)
-        if (runMode === 'test') {
-            const bits = Math.round((amount || 0) / 100);
-            const computedMode = suppliedMode || (this.mode || (this.bot && this.bot.mode)) || 'NORMAL';
-            const normalizedBatchId = (typeof suppliedBatchId !== 'undefined') ? suppliedBatchId : null;
-
-            this.activeBet = {
-                amount: amount,
-                stakeBits: bits,
-                targetMultiplier: targetMultiplier,
-                timestamp: Date.now(),
-                modeAtPlace: computedMode,
-                batchId: normalizedBatchId,
-                preBalanceSat: this.config.getCurrentBalance()
-            };
-
-            // mirror for follow-up result tracking (test bets do not affect actual debt)
-            this._updateFollowupResultTracker(this.activeBet.batchId, this.activeBet.stakeBits);
-            this.logger.log(`🎯 TEST BET PLACED | Amount: ${amount} sat (${amount / 100} bits) | Target: ${targetMultiplier}x`, 'bet');
-            return true;
-        }
-
-        // Live mode: anti-duplicateLock
-        if (!this._placeLock) this._placeLock = false;
-        if (this._placeLock) {
-            this.logger.log('⚠️ placeBet locked — preventing duplicate placement', 'warning');
-            return false;
-        }
-
-        // Acquire lock; will be released after confirmed placement or on giving up
-        this._placeLock = true;
-        this._placeRetryPending = false;
-
-        // Helper: reconcile & mark bet as placed (this is the ONLY place we should call debt/follow-up logic)
+        // Helper: reconcile & mark bet as placed
         const reconcileAsPlaced = (placedAmount, placedTargetMultiplier, normalizedBatchId) => {
             const placedBits = Math.round((placedAmount || 0) / 100);
             const computedMode = suppliedMode || (this.mode || (this.bot && this.bot.mode)) || 'NORMAL';
@@ -2869,308 +3319,65 @@ class BettingEngine {
             }
         };
 
-        // Helper: verify presence of a placed bet on platform using engine-provided introspection APIs (best-effort).
-        // Returns a Promise that resolves true if verification succeeded (and optionally returns the platform's bet info).
-        const verifyPlacedBetViaEngine = async (expectedAmount, expectedTarget) => {
-            // Try several candidate engine methods in order of likely availability.
-            // Each method must be non-blocking or return quickly.
-            try {
-                // If engine exposes a direct getActiveBets / getOpenBets API, use it
-                if (typeof engine.getActiveBets === 'function') {
-                    try {
-                        const active = await Promise.resolve(engine.getActiveBets());
-                        if (Array.isArray(active)) {
-                            // Look for a bet matching amount (or stake) and/or target if available
-                            for (const b of active) {
-                                // try common fields: amount, stake, value, target, cashout, id, timestamp
-                                const a = (b.amount || b.stake || b.value || 0);
-                                const t = (b.target || b.auto_cashout || b.cashoutAt || null);
-                                if (Number(a) === Number(expectedAmount) || (t && Number(t) === Number(expectedTarget))) {
-                                    return true;
-                                }
-                            }
-                        }
-                    } catch (e) { /* ignore and try next */
-                    }
-                }
 
-                if (typeof engine.getOpenBets === 'function') {
-                    try {
-                        const open = await Promise.resolve(engine.getOpenBets());
-                        if (Array.isArray(open)) {
-                            for (const b of open) {
-                                const a = (b.amount || b.stake || b.value || 0);
-                                const t = (b.target || b.auto_cashout || b.cashoutAt || null);
-                                if (Number(a) === Number(expectedAmount) || (t && Number(t) === Number(expectedTarget))) {
-                                    return true;
-                                }
-                            }
-                        }
-                    } catch (e) {
-                    }
-                }
+        // Test mode -> simulate and return true (no debt effects)
+        if (runMode === 'test') {
+            const bits = Math.round((amount || 0) / 100);
+            const computedMode = suppliedMode || (this.mode || (this.bot && this.bot.mode)) || 'NORMAL';
+            const normalizedBatchId = (typeof suppliedBatchId !== 'undefined') ? suppliedBatchId : null;
 
-                // Some engines provide getLastPlacedBet or getLastBet
-                if (typeof engine.getLastPlacedBet === 'function') {
-                    try {
-                        const last = await Promise.resolve(engine.getLastPlacedBet());
-                        if (last) {
-                            const a = (last.amount || last.stake || last.value || 0);
-                            const t = (last.target || last.auto_cashout || last.cashoutAt || null);
-                            // last bet may match expected by timestamp closeness too
-                            if (Number(a) === Number(expectedAmount) || (t && Number(t) === Number(expectedTarget))) return true;
-                        }
-                    } catch (e) {
-                    }
-                }
+            this.activeBet = {
+                amount: amount,
+                stakeBits: bits,
+                targetMultiplier: targetMultiplier,
+                timestamp: Date.now(),
+                modeAtPlace: computedMode,
+                batchId: normalizedBatchId,
+                preBalanceSat: this.config.getCurrentBalance()
+            };
 
-                if (typeof engine.getLastBet === 'function') {
-                    try {
-                        const last = await Promise.resolve(engine.getLastBet());
-                        if (last) {
-                            const a = (last.amount || last.stake || last.value || 0);
-                            const t = (last.target || last.auto_cashout || last.cashoutAt || null);
-                            if (Number(a) === Number(expectedAmount) || (t && Number(t) === Number(expectedTarget))) return true;
-                        }
-                    } catch (e) {
-                    }
-                }
+            // mirror for follow-up result tracking (test bets do not affect actual debt)
+            this._updateFollowupResultTracker(this.activeBet.batchId, this.activeBet.stakeBits);
+            this.logger.log(`🎯 TEST BET PLACED | Amount: ${amount} sat (${amount / 100} bits) | Target: ${targetMultiplier}x`, 'bet');
+            return true;
+        }
 
-                // No engine introspection available or verification failed
-                return false;
-            } catch (e) {
-                return false;
-            }
-        };
+        // ---------- LIVE MODE PLACEMENT (Bustabit API) ----------
 
-        // The retry/verification strategy:
-        // - Attempt an immediate synchronous placeBet() call first.
-        // - On ALREADY_PLACED_BET / GAME_IN_PROGRESS, attempt immediate verification via engine methods.
-        // - If verification fails immediately, schedule non-blocking verification attempts (polling up to maxVerifyAttempts).
-        // - Only call reconcileAsPlaced() (which affects debt) once verification is successful.
-        // - If verification ultimately fails, do not affect debt; release lock and return false.
+        const autoCashOut = targetMultiplier;
+
+        // Quick check: is betting open now?
+        if (typeof engine.isBettingOpen === 'function' && !engine.isBettingOpen()) {
+            this.logger.log('⚠️ Betting closed — not placing live bet', 'warning');
+            return false;
+        }
 
         try {
-            const autoCashOut = Math.floor(targetMultiplier * 100);
+            // --- Primary Bet Attempt ---
+            engine.bet(amount, autoCashOut);
 
-            // Quick check: is betting open now?
-            if (typeof engine.isBettingOpen === 'function' && !engine.isBettingOpen()) {
-                this.logger.log('⚠️ Betting closed — not placing live bet', 'warning');
-                this._placeLock = false;
-                return false;
-            }
+            // --- SUCCESS ---
+            // If engine.bet() does not throw, the bet is placed.
+            reconcileAsPlaced(amount, targetMultiplier, suppliedBatchId);
+            this.logger.log(`💰 LIVE BET PLACED | Amount: ${amount} sat (${amount / 100} bits) | Target: ${targetMultiplier}x`, 'bet');
+            return true;
 
-            // config-driven retry/timeout settings (defensive read supports ConfigManager or plain config)
-            const rawCfg = (this.config && this.config.config) ? this.config.config : (this.config || {});
+        } catch (err) {
+            const msg = err && err.message ? err.message : String(err || '');
 
-            const maxRetries = (rawCfg.protection && Number.isFinite(Number(rawCfg.protection.placeBetRetries)))
-                ? Number(rawCfg.protection.placeBetRetries)
-                : (this.config && this.config.protection && Number.isFinite(Number(this.config.protection.placeBetRetries)) ? Number(this.config.protection.placeBetRetries) : 2);
-
-            const retryDelayMs = (rawCfg.protection && Number.isFinite(Number(rawCfg.protection.placeBetRetryDelayMs)))
-                ? Number(rawCfg.protection.placeBetRetryDelayMs)
-                : (this.config && this.config.protection && Number.isFinite(Number(this.config.protection.placeBetRetryDelayMs)) ? Number(this.config.protection.placeBetRetryDelayMs) : 150);
-
-            // total placement verification timeout (ms) — use protection.betPlacementTimeoutMs if present, else 350ms
-            const placeTimeout = (rawCfg.protection && Number.isFinite(Number(rawCfg.protection.betPlacementTimeoutMs)))
-                ? Number(rawCfg.protection.betPlacementTimeoutMs)
-                : (this.config && this.config.protection && Number.isFinite(Number(this.config.protection.betPlacementTimeoutMs)) ? Number(this.config.protection.betPlacementTimeoutMs) : 350);
-
-            const placeDeadline = Date.now() + Math.max(0, Number(placeTimeout));
-
-            // immediate attempt
-            try {
-                engine.placeBet(amount, autoCashOut);
-
-                // success => confirm and reconcile immediately (safe to affect debt)
+            // --- Handle "ALREADY_PLACED_BET" ---
+            // This error means a bet *is* active, usually from a script reload.
+            // We must reconcile it to track the result.
+            if (/ALREADY_PLACED_BET/i.test(msg)) {
+                this.logger.log(`⚠️ ALREADY_PLACED_BET. Reconciling active bet.`, 'warning');
                 reconcileAsPlaced(amount, targetMultiplier, suppliedBatchId);
-                this.logger.log(`💰 LIVE BET PLACED | Amount: ${amount} sat (${amount / 100} bits) | Target: ${targetMultiplier}x`, 'bet');
-
-                this._placeLock = false;
-                return true;
-            } catch (err) {
-                const msg = err && err.message ? err.message : String(err || '');
-
-                // If engine reports ALREADY_PLACED_BET or GAME_IN_PROGRESS, DO NOT assume a bet is placed yet.
-                if (/ALREADY_PLACED_BET|GAME_IN_PROGRESS/i.test(msg)) {
-                    this.logger.log(`⚠️ placeBet returned "${msg}". Attempting verification before marking as placed.`, 'warning');
-
-                    // Try immediate verification (sync/fast)
-                    (async () => {
-                        try {
-                            const verifiedNow = await verifyPlacedBetViaEngine(amount, Math.floor(targetMultiplier * 100));
-                            if (verifiedNow) {
-                                // Verified: reconcile and update trackers (affects debt)
-                                reconcileAsPlaced(amount, targetMultiplier, suppliedBatchId);
-                                this.logger.log(`✅ Verified existing live bet via engine introspection — reconciled.`, 'bet');
-                                this._placeLock = false;
-                                return;
-                            }
-
-                            // Schedule non-blocking verification attempts (polling)
-                            this._placeRetryPending = true;
-                            let attempt = 1;
-                            const maxVerifyAttempts = Math.max(3, maxRetries); // conservative
-                            const verifyLoop = () => {
-                                // deadline check: if we've already waited longer than placeTimeout, give up
-                                if (Date.now() > placeDeadline) {
-                                    try {
-                                        this.logger.log(`❌ Verification timed out after ${placeTimeout}ms. Will NOT reconcile; no debt change.`, 'error');
-                                    } catch (_) {
-                                    }
-                                    this._placeRetryPending = false;
-                                    this._placeLock = false;
-                                    return;
-                                }
-                                setTimeout(async () => {
-                                    try {
-                                        const ok = await verifyPlacedBetViaEngine(amount, Math.floor(targetMultiplier * 100));
-                                        if (ok) {
-                                            reconcileAsPlaced(amount, targetMultiplier, suppliedBatchId);
-                                            this.logger.log(`✅ Verification succeeded on retry #${attempt} — reconciled.`, 'bet');
-                                            this._placeRetryPending = false;
-                                            this._placeLock = false;
-                                            return;
-                                        } else {
-                                            attempt++;
-                                            if (attempt > maxVerifyAttempts) {
-                                                this.logger.log(`❌ Verification failed after ${maxVerifyAttempts} attempts. Will NOT reconcile; no debt change.`, 'error');
-                                                this._placeRetryPending = false;
-                                                this._placeLock = false;
-                                                return;
-                                            } else {
-                                                // continue polling (deadline will be re-checked at loop start)
-                                                verifyLoop();
-                                            }
-                                        }
-                                    } catch (e) {
-                                        attempt++;
-                                        if (attempt > maxVerifyAttempts) {
-                                            this.logger.log(`❌ Verification failed after ${maxVerifyAttempts} attempts (error). Will NOT reconcile; no debt change.`, 'error');
-                                            this._placeRetryPending = false;
-                                            this._placeLock = false;
-                                            return;
-                                        } else {
-                                            verifyLoop();
-                                        }
-                                    }
-
-                                }, retryDelayMs);
-                            };
-                            // start polling
-                            verifyLoop();
-                        } catch (e) {
-                            // If verification mechanism threw, give up safely (do NOT mark reconciled)
-                            this.logger.log(`❌ Verification attempt errored: ${e && e.message ? e.message : String(e)} — not reconciling`, 'error');
-                            this._placeRetryPending = false;
-                            this._placeLock = false;
-                        }
-                    })();
-
-                    // Return false for now: the method did not synchronously confirm placement.
-                    // Background verification may still reconcile later; debt will only be affected after verification.
-                    return false;
-                }
-
-                // Other non-idempotent errors -> attempt retries (non-blocking), similar to earlier patch
-                // We'll schedule non-blocking retries; each retry will attempt engine.placeBet and on success reconcile.
-                this.logger.log(`⚠️ Initial placeBet attempt failed: ${msg}. Scheduling non-blocking retries (max ${maxRetries}).`, 'warning');
-                this._placeRetryPending = true;
-
-                let retryAttempt = 1;
-                const scheduleRetry = () => {
-                    setTimeout(() => {
-                        try {
-                            // re-check betting window
-                            if (typeof engine.isBettingOpen === 'function' && !engine.isBettingOpen()) {
-                                this.logger.log(`⚠️ Retry #${retryAttempt} skipped because betting closed.`, 'warning');
-                                retryAttempt++;
-                                if (retryAttempt > maxRetries) {
-                                    this.logger.log(`❌ Giving up placing bet after ${maxRetries} retries (betting closed).`, 'error');
-                                    this._placeRetryPending = false;
-                                    this._placeLock = false;
-                                    return;
-                                }
-                                scheduleRetry();
-                                return;
-                            }
-
-                            engine.placeBet(amount, autoCashOut);
-                            // success path
-                            reconcileAsPlaced(amount, targetMultiplier, suppliedBatchId);
-                            this.logger.log(`💰 LIVE BET PLACED (retry #${retryAttempt}) | Amount: ${amount} sat | Target: ${targetMultiplier}x`, 'bet');
-                            this._placeRetryPending = false;
-                            this._placeLock = false;
-                            return;
-                        } catch (retryErr) {
-                            const rmsg = retryErr && retryErr.message ? retryErr.message : String(retryErr || '');
-                            if (/ALREADY_PLACED_BET|GAME_IN_PROGRESS/i.test(rmsg)) {
-                                // Similar to above: verify before reconciling
-                                (async () => {
-                                    try {
-                                        const ok = await verifyPlacedBetViaEngine(amount, Math.floor(targetMultiplier * 100));
-                                        if (ok) {
-                                            reconcileAsPlaced(amount, targetMultiplier, suppliedBatchId);
-                                            this.logger.log(`✅ Verified existing live bet during retry — reconciled.`, 'bet');
-                                            this._placeRetryPending = false;
-                                            this._placeLock = false;
-                                            return;
-                                        } else {
-                                            retryAttempt++;
-                                            if (retryAttempt > maxRetries) {
-                                                this.logger.log(`❌ Retry finished: verification failed; not reconciling`, 'error');
-                                                this._placeRetryPending = false;
-                                                this._placeLock = false;
-                                                return;
-                                            } else {
-                                                scheduleRetry();
-                                            }
-                                        }
-                                    } catch (e) {
-                                        retryAttempt++;
-                                        if (retryAttempt > maxRetries) {
-                                            this.logger.log(`❌ Retry finished with error; not reconciling`, 'error');
-                                            this._placeRetryPending = false;
-                                            this._placeLock = false;
-                                            return;
-                                        } else {
-                                            scheduleRetry();
-                                        }
-                                    }
-                                })();
-                                return;
-                            }
-
-                            retryAttempt++;
-                            if (retryAttempt > maxRetries) {
-                                this.logger.log(`❌ Failed to place live bet after ${retryAttempt - 1} retries: ${rmsg}`, 'error');
-                                this._placeRetryPending = false;
-                                this._placeLock = false;
-                                return;
-                            } else {
-                                this.logger.log(`⚠️ placeBet retry #${retryAttempt - 1} failed: ${rmsg}. Retrying...`, 'warning');
-                                scheduleRetry();
-                            }
-                        }
-                    }, retryDelayMs);
-                };
-
-                // start first scheduled retry
-                scheduleRetry();
-                return false;
+                return true; // The bet is placed and reconciled.
             }
-        } catch (e) {
-            this.logger.log(`❌ placeBet unexpected error: ${e && e.message ? e.message : String(e)}`, 'error');
-            // ensure lock cleared
-            try {
-                this._placeLock = false;
-            } catch (er) {
-            }
-            try {
-                this._placeRetryPending = false;
-            } catch (er) {
-            }
-            return false;
+
+            // --- Handle "GAME_IN_PROGRESS" or other errors ---
+            // These mean the bet *failed* and was *not* placed.
+            this.logger.log(`❌ Failed to place live bet: ${msg}`, 'error');
+            return false; // The bet is not placed.
         }
     }
 
@@ -3224,7 +3431,7 @@ class BettingEngine {
         } else {
 
             try {
-                const engineBalance = engine.getBalance();
+                const engineBalance = userInfo.balance;
                 console.log(`🔧 LIVE BALANCE FROM ENGINE: ${engineBalance}`);
 
                 // Recalculate actual profit using the engine-reported balance delta against the authoritative pre-bet balance.
@@ -3479,7 +3686,6 @@ class StatsPanel {
             ? Number(typeof this.bot.getCanonicalRecoveryMultiplier === 'function' ? this.bot.getCanonicalRecoveryMultiplier() : 1.63)
             : Number(typeof this.bot.getNormalMultiplier === 'function' ? this.bot.getNormalMultiplier() : 1.63);
 
-
         // Debt & Stake
         const debtText = (this.bot && this.bot.debtBits ? this.bot.debtBits.toFixed(2) : '0.00');
         const recMultForUi = Number(this.bot && this.bot.getCanonicalRecoveryMultiplier ? this.bot.getCanonicalRecoveryMultiplier() : 2.08);
@@ -3592,8 +3798,13 @@ class StatsPanel {
                 maxRecTimeText, maxRecAgeText, lastActionText
             };
 
-            // Call the retry helper defined below
-            this.sendStatsWithRetry(statsPayload);
+            // Send this payload to your server.
+            // !! REPLACE with your live server URL !!
+            fetch('https://bot-stats-server.onrender.com/log-stats', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(statsPayload)
+            });
 
         } catch (e) {
             // Fails silently so it doesn't break the bot
@@ -3633,32 +3844,17 @@ class StatsPanel {
 
         // --- 3. Log the stats string ---
         this.bot.logger.log(output, 'stats');
-    }
 
-    // New helper method for robust stats sending (Retry Mechanism)
-    async sendStatsWithRetry(payload, retries = 3) {
-        const url = 'https://bot-stats-server.onrender.com/log-stats';
-
-        for (let i = 0; i < retries; i++) {
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
-
-                await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal
-                });
-
-                clearTimeout(timeoutId);
-                return; // Success
-            } catch (e) {
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1s
-                if (i === retries - 1) {
-                    console.warn(`⚠️ Stats upload failed after ${retries} attempts:`, e.message);
-                }
-            }
+        // --- include internal state snapshot into lastPanelAction (for UI) ---
+        try {
+            const internal = (this.bot && this.bot.internalState && typeof this.bot.internalState.snapshot === 'function')
+                ? this.bot.internalState.snapshot()
+                : null;
+            // Keep existing last-panel object but merge internal snapshot into a `.internal` field
+            this._lastPanelAction = Object.assign({}, this._lastPanelAction || {}, { internal });
+        } catch (e) {
+            // Non-fatal: do not break panel if snapshot fails
+            try { this.bot && this.bot.logger && this.bot.logger.log(`Panel internal snapshot failed: ${e && e.message}`, 'warning'); } catch (_) {}
         }
     }
 
@@ -3781,6 +3977,18 @@ class CrashBot {
         // and let the engine refer back to the bot when needed
         this.betting.bot = this;
         this.panel = new StatsPanel(this.config);
+
+        // wire internal helpers (non-invasive)
+        try {
+            this.internalState = new InternalStateManager(this);
+        } catch (e) { this.internalState = null; }
+        try {
+            this.bayesPosterior = new BayesianPosterior(this.config);
+        } catch (e) { this.bayesPosterior = null; }
+        try {
+            const madWin = (this.config && this.config.config && this.config.config.ENSEMBLE && Number.isFinite(Number(this.config.config.ENSEMBLE.MAD_WINDOW))) ? Number(this.config.config.ENSEMBLE.MAD_WINDOW) : 25;
+            this.madCalibrator = new MADCalibrator(madWin);
+        } catch (e) { this.madCalibrator = null; }
 
         // Recovery / debt bookkeeping
         // Mode can be 'NORMAL' | 'RECOVERY' | 'WARMUP'
@@ -4349,7 +4557,7 @@ class CrashBot {
             } else {
                 // if no schedules configured, fallback to stopping (safer)
                 try {
-                    if (typeof engine !== 'undefined' && typeof engine.stop === 'function') engine.stop();
+                    if (typeof engine !== 'undefined' && typeof stop === 'function') stop();
                 } catch (e) {
                 } finally {
                     try {
@@ -4471,7 +4679,7 @@ class CrashBot {
         this.runtime = this.runtime || {};
         this.runtime.currentScheduleKey = null;     // 'betSchedule1' | 'betSchedule2' | 'betSchedule3' | null
         this.runtime.resumesDone = Number(this.runtime.resumesDone || 0); // number of resume-from-schedule events this run
-        this.runtime.pausedBecauseTP = false;       // true when TP caused a pause (not engine.stop)
+        this.runtime.pausedBecauseTP = false;       // true when TP caused a pause (not stop())
         this.runtime.startedBySchedule = false;     // true if the current betting run started because of schedule
 
         // Helper to count configured schedules (non-null times)
@@ -4678,12 +4886,13 @@ class CrashBot {
 
     setupEventListeners() {
         try {
-            // Game starting event
-            // Implements:
-            //  - warmup closes gate & discards any schedules (EV still trains)
-            //  - only EV-scheduled requests or scheduled FOLLOWUP slots may place bets
-            //  - BettingGateController is the single authority to allow/deny placement
-            engine.on('game_starting', (info) => {
+            // --- BUSTABIT API CHANGE: Use Bustabit's log() ---
+            this.logger.log('Setting up Bustabit event listeners...', 'info');
+
+            // 1. GAME_STARTING: All your original logic is preserved.
+            // --- BUSTABIT API CHANGE: 'game_starting' -> 'GAME_STARTING', remove '(info)' ---
+            engine.on('GAME_STARTING', () => {
+                // --- END CHANGE ---
 
                 if (!this.isRunning) return;
 
@@ -4699,7 +4908,9 @@ class CrashBot {
                     }
                 }
 
-                this.logger.log(`🎯 Game starting in ${info.time_till_start}ms`, 'info');
+                // --- BUSTABIT API CHANGE: Remove 'info.time_till_start' ---
+                this.logger.log('🎯 Game starting...', 'info');
+                // --- END CHANGE ---
 
                 // WARMUP: close gate, clear follow-ups & pending EV requests, update panel and count warmup rounds.
                 if (String(this.mode || '').toUpperCase() === 'WARMUP') {
@@ -5635,21 +5846,37 @@ class CrashBot {
                 }
             });
 
-            // Game started event
-            engine.on('game_started', () => {
+            // 2. GAME_STARTED: This is identical to the Bustabit API
+            // --- BUSTABIT API CHANGE: 'game_started' -> 'GAME_STARTED' ---
+            engine.on('GAME_STARTED', () => {
+                // --- END CHANGE ---
                 if (!this.isRunning) return;
                 this.logger.log('🎮 Game started', 'info');
             });
 
-            // Game crash event
-            // Implements:
-            //  - always record crash for training
-            //  - warmup completion transitions only (no pausing)
-            //  - authoritative bet result processing
-            //  - Normal loss -> enter RECOVERY and close gate
-            //  - Recovery lose -> schedule follow-ups ONLY if the lost bet was an EV-scheduled RECOVERY bet
-            //  - Partial recovery win -> reduce debt and DENY next immediate one round (via bettingGate.onPartialRecoveryWin)
-            engine.on('game_crash', (data) => {
+            // 3. GAME_CRASH: All your original logic is preserved.
+            // --- BUSTABIT API CHANGE: 'game_crash' -> 'GAME_ENDED', remove '(data)' ---
+            engine.on('GAME_ENDED', () => {
+                // --- END CHANGE ---
+
+                // --- BUSTABIT API CHANGE: We must get the crash data from history ---
+                // We add this block *before* your original code
+                const lastGame = engine.history.first();
+                if (!lastGame || typeof lastGame.bust === 'undefined') {
+                    this.logger.log('❌ Could not get last game crash value from history.', 'error');
+                    return;
+                }
+
+                const crashValueFloat = lastGame.bust; // This is the float multiplier (e.g., 2.34)
+
+                // Create the 'data' object your original logic expects
+                const data = {
+                    game_crash: crashValueFloat * 100, // Convert float (2.34) to satoshis (234)
+                    hash: lastGame.hash
+                };
+                // --- END CHANGE ---
+
+                // [ALL YOUR ORIGINAL 'game_crash' LOGIC STARTS HERE AND IS PRESERVED]
 
                 if (!this.isRunning) return;
 
@@ -5728,7 +5955,7 @@ class CrashBot {
                 } catch (e) { /* defensive — do not let tick errors break crash processing */
                 }
 
-                const crashValue = data.game_crash / 100;
+                const crashValue = data.game_crash / 100; // Your original line, still works
                 this.logger.log(`💥 Game crashed at ${crashValue}x`, 'crash');
 
                 // Always record crash so EV / AI train during warmup and beyond (prediction updates)
@@ -5739,6 +5966,48 @@ class CrashBot {
                 if (this.prediction && typeof this.prediction.updateAfterCrash === 'function') {
                     try {
                         this.prediction.updateAfterCrash(crashValue, this.mode);
+                        
+                        // --- posterior + MAD hooks (atomic, non-blocking) ---
+                        try {
+                            // determine the multiplier we predicted (approx)
+                            const lastPred = (this.prediction && this.prediction.lastDecisionSignals) ? this.prediction.lastDecisionSignals : null;
+                            const placedMultiplier = (this._lastEvRecoveryBatch && this._lastPlacedWasEvRecovery) ? (this.getCanonicalRecoveryMultiplier && Number(this.getCanonicalRecoveryMultiplier()) ? Number(this.getCanonicalRecoveryMultiplier()) : null) : (this.getNormalMultiplier ? Number(this.getNormalMultiplier()) : null);
+                            const lastMult = Number(placedMultiplier || 0);
+
+                            // success flag: standard interpretation: crashValue >= lastMult means win
+                            const isWin = (Number(crashValue) >= Number(lastMult));
+
+                            if (this.bayesPosterior && lastMult > 0) {
+                                this.bayesPosterior.addObservation(lastMult, isWin ? 1 : 0);
+                            }
+
+                            // add MAD calibrator error (if last ensemble prob exists)
+                            if (this.madCalibrator && this.prediction && this.prediction.lastUnifiedDecision && typeof this.prediction.lastUnifiedDecision.conf !== 'undefined') {
+                                const lastConf = Number(this.prediction.lastUnifiedDecision.conf || 0);
+                                const observed = (Number(crashValue) >= (Number(lastMult) || 1.0)) ? 1 : 0;
+                                this.madCalibrator.addError(lastConf - observed);
+                            }
+
+                            // update internalState counters for recovery losses
+                            if (this.internalState) {
+                                if (this.mode === 'RECOVERY') {
+                                    if (!isWin) this.internalState.incrConsecutiveRecoveryLosses();
+                                    else this.internalState.resetConsecutiveRecoveryLosses();
+                                } else {
+                                    // normal-mode resets recovery counter
+                                    this.internalState.resetConsecutiveRecoveryLosses();
+                                }
+                                // record regime update snapshot
+                                if (this.prediction && typeof this.prediction.regimeDetector !== 'undefined') {
+                                    try {
+                                        const r = this.prediction.regimeDetector.analyze(this.stats.getRecentCrashes(50), lastMult || 0);
+                                        if (r && r.state) this.internalState.setRegime(r.state, r.confidence || 0, { samples: (r.samples || 0) });
+                                    } catch (_) {}
+                                }
+                            }
+                        } catch (e) {
+                            try { this.logger && this.logger.log && this.logger.log(`posterior hook failed: ${e && e.message}`, 'warning'); } catch(_) {}
+                        }
                     } catch (e) {
                         this.logger.log(`Prediction update error: ${e && e.message}`, 'error');
                     }
@@ -6164,20 +6433,13 @@ class CrashBot {
                                     const expireRounds = nowRounds + Math.max(1, desiredCount + bufferRounds);
 
                                     // set authoritative lock BEFORE calling scheduler
-
                                     this._authoritativeFollowup = {
-
                                         active: true,
                                         batchId,
-
                                         remaining: desiredCount,
-
                                         total: desiredCount,
-
                                         expireRound: expireRounds,
-
                                         isForced: isForcedSchedule
-
                                     };
 
                                     // ALSO: create a canonical pending EV request for the follow-up placement consumer.
@@ -6525,7 +6787,7 @@ class CrashBot {
         // currentBalance is in satoshi, initialBalance is stored in satoshi
         // This function only *evaluates* conditions and returns a decision object:
         //   { action: 'ok'|'stop'|'tp', reason: string, details: {...} }
-        // It must NOT call engine.stop() / this.stop() / update the UI directly.
+        // It must NOT call stop() / this.stop() / update the UI directly.
         try {
             const result = {action: 'ok', reason: '', details: {}};
 
@@ -6866,7 +7128,6 @@ class CrashBot {
         return {stakeBits, sliceInfo, error: null};
     }
 
-
     // Compute the integer-bit stake that yields profit >= debt using multiplier m.
     // IMPORTANT: return 0 when invalid (caller decides to halt or fallback).
     computeRecoveryStakeBits(debtBits, m) {
@@ -6962,7 +7223,6 @@ class CrashBot {
      *
      * Keep this method small and side-effect free beyond updating these trackers.
      */
-    // +++ canonical, unit-safe _updateMaxRecoveryStats helper +++
     // +++ canonical, unit-safe _updateMaxRecoveryStats helper +++
     _updateMaxRecoveryStats(currentStakeBits = 0) {
         try {
@@ -7290,89 +7550,26 @@ class CrashBot {
 }
 
 // ========================================
-// KEEP-ALIVE ENGINE (Prevents Disconnects)
-// ========================================
-// ========================================
-// KEEP-ALIVE ENGINE (Heartbeat & Raw Engine Ping)
-// ========================================
-class KeepAliveManager {
-    constructor() {
-        // 1. Silent Audio (Keeps Browser Tab Awake)
-        this.silentAudio = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
-        this.audio = new Audio(this.silentAudio);
-        this.audio.loop = true;
-        this.audio.volume = 0.01;
-        this.started = false;
-    }
-
-    start() {
-        if (this.started) return;
-
-        // --- A. Start Audio (Anti-Sleep) ---
-        this.audio.play().then(() => {
-            this.started = true;
-            console.log('🔊 Keep-Alive Audio Started');
-        }).catch(() => {
-            // If blocked, wait for a click
-            document.body.addEventListener('click', () => {
-                if (!this.started) {
-                    this.audio.play();
-                    this.started = true;
-                    console.log('🔊 Keep-Alive Audio Started (After Click)');
-                }
-            }, { once: true });
-        });
-
-        // --- B. Start Data Heartbeat (Anti-Disconnect) ---
-        this.startHeartbeat();
-    }
-
-    startHeartbeat() {
-        console.log('💓 Connection Heartbeat: Active (10s interval)');
-
-        setInterval(() => {
-            try {
-                // STRATEGY: Send data upstream to prevent "Idle Timeout" disconnects.
-
-                // 1. PING BALANCE (Proven to work in your logs)
-                // This forces a request to the server. Even if balance hasn't changed,
-                // the request keeps the socket open.
-                if (typeof engine.getBalance === 'function') {
-                    const bal = engine.getBalance();
-                }
-
-                // 2. PING RAW ENGINE (Found in your API docs)
-                // Accessing the raw engine keeps the underlying socket object active.
-                if (typeof engine.getEngine === 'function') {
-                    const raw = engine.getEngine();
-                }
-
-            } catch (e) {
-                // Ignore errors (e.g. if game is crashing and engine is busy)
-                // We do NOT want to stop the loop.
-            }
-        }, 10000); // Ping every 10 seconds
-    }
-}
-
-// ========================================
 // INITIALIZATION AND GLOBAL ACCESS
 // ========================================
 
-// Auto-start the bot
-console.log('🤖 Initializing Crash Bot v10.0 BALANCED...');
-window.keepAlive = new KeepAliveManager();
-window.keepAlive.start(); // <--- STARTS THE ANTI-SLEEP ENGINE
-window.crashBot = new CrashBot();
+// In Bustabit, the script is run from top to bottom when you click "Run Script".
+// We just need to create the instance.
+try {
+    var crashBot = new CrashBot();
 
-// Global helper functions
-window.botStart = () => window.crashBot.start();
-window.botStop = () => window.crashBot.stop();
-window.botRestart = () => window.crashBot.restart();
-window.botStats = () => window.crashBot.getStats();
-window.botConfig = (config) => config ? window.crashBot.updateConfig(config) : window.crashBot.getConfig();
-window.botDestroy = () => window.crashBot.destroy();
+    // The script is now running and listening for events.
+    // We can log to the Bustabit console.
+    log('✅ Crash Bot v10.0 (Bustabit Adapter) loaded successfully!');
+    log('📋 Script is running and waiting for GAME_STARTING event.');
 
-console.log('✅ Crash Bot v10.0 BALANCED loaded successfully!');
-console.log('📋 Commands: botSart(), botStop(), botRestart(), botStats(), botConfig(), botDestroy()');
-console.log('🎯 Features: Balanced Strategic Betting (55% threshold) + Fixed Loss Calculation + Quick Start (5 rounds)');
+} catch (e) {
+    // If initialization fails, log it
+    try {
+        log(`❌ CRITICAL INIT ERROR: ${e && e.message ? e.message : 'Unknown error'}`);
+        log(e.stack);
+    } catch (e2) {
+        console.error(e);
+        console.error(e.stack);
+    }
+}
