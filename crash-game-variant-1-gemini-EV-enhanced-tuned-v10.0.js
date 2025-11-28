@@ -272,6 +272,20 @@ class ConfigManager {
                 PLACE_SCORE_THRESHOLD: 0.24,                     // permissive place threshold
                 VOTE_REQUIRED: 2,                                 // how many votes are required to pass a vote quorum: default 2 (out of 3 experts: pattern, ev, ai)
 
+                NEUTRAL_MIN_EV_CONF: 0.60,                      // "0.6" extracted: EV requirement for neutral markets
+
+                MAD_WINDOW: 25,
+                MAD_SCALE: 1.5,
+                CALIBRATION_ALPHA: 0.70,
+                POSTERIOR_CONF: 0.95,
+                OPPORTUNISTIC_MIN_EV: 0.00,
+                OPPORTUNISTIC_CONF_MULT: 1.0,
+                PLACE_SCORE_THRESHOLD: 0.24,
+                EV_CONF_TANH_SCALE: 3,
+                FOLLOWUP_ABORT_LOGGING: true,
+                // follow-up tuning (array)
+                FOLLOWUP_PLACE_THRESHOLDS: [0.58, 0.54, 0.49, 0.44],
+
                 // initialization & observation
                 INIT_WEIGHTS: {pattern: 0.35, ev: 0.35, ai: 0.30}, // initial priors
                 OBSERVATION_ROUNDS: 3,                           // number of rounds to observe before adapting
@@ -308,7 +322,7 @@ class ConfigManager {
 
                 EV_CONF_TANH_SCALE: 3,
                 WEIGHTS_DEFAULT: { regime: 0.4, ev: 0.3, ai: 0.3 },
-                WEIGHTS_BULLISH: { regime: 0.5, ev: 0.25, ai: 0.25 },
+                WEIGHTS_BULLISH: { regime: 0.70, ev: 0.15, ai: 0.15 },
                 WEIGHTS_VOLATILE: { regime: 0.3, ev: 0.4, ai: 0.3 },
 
                 EV_STRONG_CONF_THRESHOLD: 0.75,
