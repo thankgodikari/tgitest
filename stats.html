@@ -12,6 +12,31 @@
         }
         h1 { padding: 0 20px; }
 
+        /* ===== Provisional badge + Watchdog log ===== */
+        .provisional-badge {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: #f59e0b;
+            color: #111;
+            padding: 4px 8px;
+            font-weight: 700;
+            border-radius: 6px;
+            font-size: 12px;
+            display: none;
+            z-index: 20;
+        }
+        .watchdog-log {
+            font-size: 12px;
+            color: #9CA3AF;
+            max-height: 70px;
+            overflow: auto;
+            border-top: 1px dashed rgba(255,255,255,0.03);
+            margin-top: 8px;
+            padding-top: 6px;
+        }
+        .stat-card .card-header { position: relative; }
+
         /* --- MASONRY LAYOUT FIX --- */
         .stats-grid {
             display: flex;
@@ -294,6 +319,130 @@
             }
         }
 
+        /* ===== Dashboard: process server broadcast payloads, show provisional & watchdog ===== */
+        // Call this function from your existing ws.onmessage handler:
+        //    const payload = JSON.parse(event.data); processServerResponse(payload);
+
+        function processServerResponse(resp) {
+            if (!resp) return;
+            // resp can be { botId:..., ... } or array of such objects or an object keyed by botId
+            if (Array.isArray(resp)) {
+                resp.forEach(p => createOrUpdateCard(p));
+                return;
+            }
+            if (typeof resp === 'object') {
+                if (resp.botId || resp.botId === 0) {
+                    createOrUpdateCard(resp);
+                    return;
+                }
+                // map-of-botId -> payload
+                Object.values(resp).forEach(v => { if (v && v.botId) createOrUpdateCard(v); });
+            }
+        }
+
+        function createOrUpdateCard(payload) {
+            // Normalize botId to safe id
+            const botIdRaw = payload.botId || 'bot';
+            const botId = encodeURIComponent(String(botIdRaw));
+            // Container that your HTML already has (adjust ID if your layout uses another)
+            const container = document.getElementById('bot-container') || document.body;
+
+            let card = document.getElementById('card-' + botId);
+            if (!card) {
+                // Create a simple card structure consistent with your layout
+                card = document.createElement('div');
+                card.className = 'stat-card';
+                card.id = 'card-' + botId;
+                card.innerHTML = `
+      <div class="card-header">
+        <h2>${botIdRaw}</h2>
+        <div id="provisionalBadge-${botId}" class="provisional-badge">PROVISIONAL</div>
+      </div>
+     <div class="card-body">
+        <div><strong>Live:</strong> <span id="liveCrash-${botId}">--</span></div>
+        <div><strong>Target:</strong> <span id="target-${botId}">--</span></div>
+        <div><strong>Last Crash:</strong> <span id="lastCrash-${botId}">--</span></div>
+        <div><strong>Debt:</strong> <span id="debt-${botId}">0</span></div>
+        <div><strong>P/L:</strong> <span id="pl-${botId}">0</span> | <strong>Last P/L:</strong> <span id="lastPl-${botId}">0</span></div>
+        <div><strong>Runtime:</strong> <span id="runtime-${botId}">--:--:--</span></div>
+        <div><strong>LastAction:</strong> <span id="lastAction-${botId}">--</span></div>
+        <div id="watchdogLog-${botId}" class="watchdog-log"></div>
+      </div>
+    `;
+                container.appendChild(card);
+            }
+
+            // Update texts (safe setters)
+            const setText = (idSuffix, value) => {
+                const el = document.getElementById(idSuffix + '-' + botId);
+                if (!el) return;
+                const txt = (value === undefined || value === null) ? '--' : String(value);
+                if (el.innerText !== txt) el.innerText = txt;
+            };
+
+            setText('liveCrash', (payload.liveCrashDisplay !== undefined) ? payload.liveCrashDisplay : (payload.rollingDisplay || '--'));
+            setText('target', (payload.activeTarget !== undefined) ? (Number(payload.activeTarget).toFixed(2) + '×') : '--');
+            setText('lastCrash', (payload.lastActualCrash !== undefined && payload.lastActualCrash !== null) ? Number(payload.lastActualCrash).toFixed(2) + 'x' : '--');
+            setText('debt', payload.debtText || payload.debt || '0');
+            setText('pl', payload.plStr || payload.pl || '0');
+            setText('lastPl', payload.lastPlStr || payload.lastPl || '0');
+            setText('runtime', payload.runtimeText || payload.runtime || '--:--:--');
+            setText('lastAction', payload.lastActionText || payload.lastAction || '--');
+
+            // Provisional badge: controlled by visualHints.provisionalActive
+            const provEl = document.getElementById('provisionalBadge-' + botId);
+            if (payload.visualHints && payload.visualHints.provisionalActive) {
+                provEl.style.display = 'block';
+            } else {
+                provEl.style.display = 'none';
+            }
+
+            // Append watchdogLog entries if provided (server can add short strings)
+            const wdEl = document.getElementById('watchdogLog-' + botId);
+            if (wdEl) {
+                // payload.watchdogLog can be an array of messages; show last 6
+                if (Array.isArray(payload.watchdogLog)) {
+                    wdEl.innerHTML = payload.watchdogLog.slice(-6).map(s => `<div>${s}</div>`).join('');
+                }
+            }
+
+            // Visual sync behavior (use gameStatus + visualHints to control the rolling UI)
+            const isBetting = !!payload.isBetting;
+            const status = (payload.gameStatus || '').toUpperCase();
+            // Use your existing rolling functions on the page. The bot provides gameStartTime / projectedStartTime.
+            if (status === 'PREPARING' && payload.gameStartTime) {
+                // start countdown using existing function
+                if (typeof startCountdown === 'function') startCountdown(botId, Number(payload.gameStartTime));
+            } else if (status === 'RUNNING') {
+                const startTs = payload.gameStartTime ? Number(payload.gameStartTime) : Date.now();
+                if (typeof startRollingCounter === 'function') startRollingCounter(botId, startTs, isBetting, Number(payload.activeTarget || 0));
+            } else if (status === 'ENDED') {
+                if (typeof stopAnimation === 'function') stopAnimation(botId, Number(payload.lastActualCrash || 0), isBetting, Number(payload.activeTarget || 0));
+            } else {
+                // fallback: if lastActualCrash present, stop animation and display it
+                if (typeof payload.lastActualCrash === 'number' && typeof stopAnimation === 'function') {
+                    stopAnimation(botId, Number(payload.lastActualCrash), isBetting, Number(payload.activeTarget || 0));
+                }
+            }
+
+            // Defensive: if server reports absurd multiplier (or visualHints indicates runaway), force stopAnimation
+            try {
+                const lastMult = payload.lastMult || payload.lastActualCrash || 0;
+                const MAX_REASONABLE = 100;
+                if (lastMult && Number(lastMult) > MAX_REASONABLE) {
+                    appendWatchdogLog(botId, `Watchdog: unreasonable multiplier ${lastMult} → forcing resync`);
+                    if (typeof stopAnimation === 'function') stopAnimation(botId, payload.lastActualCrash || 0, isBetting, Number(payload.activeTarget || 0));
+                }
+            } catch (e) { /* ignore */ }
+        }
+
+        function appendWatchdogLog(botIdRaw, msg) {
+            const botId = encodeURIComponent(String(botIdRaw));
+            const el = document.getElementById('watchdogLog-' + botId);
+            if (!el) return;
+            el.innerHTML = `<div>${new Date().toLocaleTimeString()} — ${msg}</div>` + el.innerHTML;
+        }
+
         // --- Standard Helper ---
         function updateText(botId, elementId, value) {
             const el = document.getElementById(elementId + '-' + botId);
@@ -431,6 +580,7 @@
 
             ws.onmessage = (event) => {
                 const data = JSON.parse(event.data);
+
                 const botId = data.botId;
                 if (!botId) return;
 
