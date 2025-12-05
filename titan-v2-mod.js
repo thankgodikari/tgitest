@@ -1135,21 +1135,31 @@ class StatsPanel {
         this.stopRuntimeTicker();
 
         // Set an interval to run every 1000ms (1 second)
+        // read configured poll interval (ms) if present, fallback to 1000
+        const cfgInterval = (this.config && this.config.config && Number.isFinite(Number(this.config.config.protection && this.config.config.protection.uiThrottleMs)) ) ? null : null;
+        const pollMs = (this.config && this.config.config && this.config.config.panelPollIntervalMs && Number.isFinite(Number(this.config.config.panelPollIntervalMs))) ? Number(this.config.config.panelPollIntervalMs) : 1000;
+
         this._runtimeInterval = setInterval(() => {
-            if (bot) {
-                // Determine if we are betting to keep that status accurate
-                const isBetting = bot.betting && bot.betting.hasActiveBet();
-                // Trigger the update
-                // This will recalculate runtime, countdowns, and timers, then send to server
-                this.updateStats(
-                    bot.stats.getStats(),
-                    bot.config.getCurrentBalance(),
-                    bot.config.initialBalance,
-                    bot.betting.getActiveBet(),
-                    isBetting
-                );
+            if (!bot) return;
+            const isBetting = bot.betting && bot.betting.hasActiveBet();
+            // 1) Update panel as before
+            this.updateStats( bot.stats.getStats(), bot.config.getCurrentBalance(), bot.config.initialBalance, bot.betting.getActiveBet(), isBetting );
+
+            // 2) Simple watchdog sanity check:
+            try {
+                const lastMult = (bot && bot.stats && bot.stats.getStats && bot.stats.getStats().lastMultiplier) ? bot.stats.getStats().lastMultiplier : null;
+                const maxReason = (this.config && this.config.config && Number.isFinite(this.config.config.maxReasonableMultiplier)) ? Number(this.config.config.maxReasonableMultiplier) : 100;
+                if (lastMult && Number(lastMult) > maxReason) {
+                    // Detected unreasonable multiplier — force a defensive re-sync
+                    if (bot && typeof bot.initialize === 'function') {
+                        this.bot && this.bot.logger && this.bot.logger.log && this.bot.logger.log(`Watchdog: detected unreasonable multiplier ${lastMult} > ${maxReason} — forcing initSync()`, 'warning');
+                        try { bot.initialize(); } catch(e) { /* fail safe */ }
+                    }
+                }
+            } catch (e) {
+                // non-fatal
             }
-        }, 1000);
+        }, pollMs);
     }
 
     stopRuntimeTicker() {
@@ -1327,6 +1337,49 @@ class StatsPanel {
             nextMultValue = 1.87;
         }
 
+        // +++ Visual Hints (for external stats panel to color UI elements) +++
+        const visualHints = (() => {
+            const activeTarget = activeBet ? (activeBet.targetMultiplier || 0) : nextMultValue || 0;
+            const provisionalActive = !!(this.bot && this.bot._provisionalActive);
+            const lastCrash = (this.bot && typeof this.bot.lastActualCrash === 'number') ? this.bot.lastActualCrash : null;
+            // Defaults: 'default' means "do not change color mid-round" (panel should show grey/white while running)
+            let rollingColor = 'default';
+            let targetColor = 'default';
+            let lastCrashColor = 'default';
+
+            if (!isBetting) {
+                // When not betting, rolling should remain default/grey while running.
+                // On crash the panel should show RED regardless of crash value — handler on server/panel side.
+                if (lastCrash !== null) lastCrashColor = 'red';
+            } else {
+                // If provisionalActive or lastCrash confirms >= target -> target/rolling green
+                if (provisionalActive) {
+                    rollingColor = 'green';
+                    targetColor = 'green';
+                    lastCrashColor = 'green';
+                } else if (lastCrash !== null && activeTarget && lastCrash >= activeTarget) {
+                    rollingColor = 'green';
+                    targetColor = 'green';
+                    lastCrashColor = 'green';
+                } else if (lastCrash !== null && activeTarget && lastCrash < activeTarget) {
+                    // Lost
+                    rollingColor = 'red';
+                    targetColor = 'red';
+                    lastCrashColor = 'red';
+                } else {
+                    // Running state while betting and no crash yet -> keep default (panel can show rolling and target in running color)
+                    rollingColor = 'default';
+                    targetColor = 'default';
+                }
+            }
+            return { provisionalActive, activeTarget, rollingColor, targetColor, lastCrashColor };
+        })();
+
+        // Expose visualHints on the StatsPanel instance for easy consumption if needed
+        this._lastVisualHints = visualHints;
+
+        // If you send a structured payload to an external stats server, attach visualHints:
+        // statsPayload.visualHints = visualHints;  // <-- attach to any existing payload you already POST
 
         // Debt & Stake
         const debtText = (this.bot && this.bot.debtBits ? this.bot.debtBits.toFixed(2) : '0.00');
