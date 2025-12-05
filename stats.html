@@ -675,6 +675,57 @@
                 updateText(botId, 'maxRecStake', data.maxRecStake);
                 updateText(botId, 'maxRecTimeText', data.maxRecTimeText);
                 updateText(botId, 'maxRecAgeText', data.maxRecAgeText);
+
+                // +++ PROVISIONAL BADGE + WATCHDOG LOG (non-invasive additions) +++
+                // Create/show a provisional badge appended to the card header (created on demand)
+                try {
+                    const provId = botId + '-provisional-badge';
+                    let provEl = document.getElementById(provId);
+                    if (!provEl) {
+                        const cardHeader = document.querySelector('#' + botId + ' .card-header');
+                        if (cardHeader) {
+                            provEl = document.createElement('div');
+                            provEl.id = provId;
+                            provEl.className = 'provisional-badge';
+                            provEl.innerText = 'PROVISIONAL';
+                            cardHeader.appendChild(provEl);
+                        }
+                    }
+                    if (provEl) {
+                        if (data.visualHints && data.visualHints.provisionalActive) provEl.style.display = 'block';
+                        else provEl.style.display = 'none';
+                    }
+                } catch (e) {
+                    // non-fatal
+                    console.warn('Provisional badge error', e);
+                }
+
+                // Create/update watchdog log area (created on demand)
+                try {
+                    const wdId = botId + '-watchdog-log';
+                    let wdEl = document.getElementById(wdId);
+                    if (!wdEl) {
+                        const bodyEl = document.querySelector('#' + botId + ' .card-body');
+                        if (bodyEl) {
+                            wdEl = document.createElement('div');
+                            wdEl.id = wdId;
+                            wdEl.className = 'watchdog-log';
+                            bodyEl.appendChild(wdEl);
+                        }
+                    }
+                    if (wdEl) {
+                        if (Array.isArray(data.watchdogLog) && data.watchdogLog.length) {
+                            const slice = data.watchdogLog.slice(-6);
+                            wdEl.innerHTML = slice.map(s => `<div>${s}</div>`).join('');
+                        } else {
+                            // If server doesn't supply an array, clear or show last auto message
+                            // We can also push small runtime hints here if you want:
+                            // wdEl.innerHTML = `<div>${data.lastActionText || ''}</div>`;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Watchdog log error', e);
+                }
             };
         }
         connect();
