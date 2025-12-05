@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Stats (Live)</title>
+    <style>
+        body { 
+            background: #111; 
+            color: #eee; 
+            font-family: "Consolas", monospace; 
+        }
+        h1 { padding: 0 20px; }
+
+        /* --- MASONRY LAYOUT FIX --- */
+        .stats-grid {
+            display: flex;
+            align-items: flex-start; /* items align to top */
+            justify-content: center; /* Center the columns */
+            gap: 20px;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .stats-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1; /* Allow columns to grow evenly */
+            min-width: 0; /* Prevent flex overflow issues */
+            /* Ensure the column has height even when empty so you can drop into it */
+            min-height: 100px;
+        }
+
+        .stat-card {
+            background: #1F2937;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+
+            margin-bottom: 0;
+            display: block;
+            /* Add Cursor for Dragging */
+            cursor: grab;
+            /* Smooth movement */
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        /* Dragging Visuals */
+        .stat-card.dragging {
+            opacity: 0.5;
+            border: 2px dashed #60A5FA;
+            transform: scale(0.95);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header {
+            background: #2a3a4f;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            position: relative;
+        }
+        .card-header:hover { background: #374151; }
+        .card-header h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 18px;
+            /* Make room for the icon */
+            padding-right: 20px; 
+        }
+        
+        /* Expand/collapse icon */
+        .card-header::after {
+            content: '+';
+            font-size: 24px;
+            color: #9CA3AF;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+        }
+        .stat-card.active .card-header::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        /* Collapsible body */
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            padding: 0 20px;
+        }
+        /* Fix for Problem 1: Increased max-height */
+        .stat-card.active .card-body {
+            max-height: 2000px; /* Increased from 1000px */
+            transition: max-height 0.6s ease-in;
+            padding: 15px 20px;
+        }
+
+        .card-body h3 {
+            margin: 15px 0 10px;
+            color: #60A5FA;
+            font-size: 16px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 5px;
+        }
+        .card-body h3:first-child { margin-top: 0; }
+        .stat-line { margin: 8px 0; font-size: 14px; }
+        .stat-line strong { color: #A5D6A7; min-width: 150px; display: inline-block; }
+        .lastAction { color: #FCD34D; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>🤖 Bot Stats Dashboard (Live)</h1>
+    
+    <div id="bot-container" class="stats-grid">
+        </div>
+
+    <script>
+        // +++ ANIMATION & STATE ENGINE +++
+        const activeGames = {};
+
+        // Global visual state for persistence
+        // Stores { [botId]: 'GREEN' | 'RED' | 'GREY' }
+        const lastResultColorState = {};
+
+        // 1. Rolling Crash Counter (The "Graph")
+        function startRollingCounter(botId, startTime, isBetting, target) {
+            // Update state if already running
+            if (activeGames[botId] && activeGames[botId].type === 'ROLLING') {
+                activeGames[botId].isBetting = isBetting;
+                activeGames[botId].target = target;
+                return;
+            }
+            if (activeGames[botId]) cancelAnimationFrame(activeGames[botId].rafId);
+
+            activeGames[botId] = {
+                type: 'ROLLING',
+                rafId: null,
+                startTime: startTime,
+                isBetting: isBetting,
+                target: target
+            };
+
+            const elCounter = document.getElementById(`liveCrash-${botId}`);
+            const elTarget = document.getElementById(`nextMultValue-${botId}`);
+
+            if (!elCounter) return;
+
+            function step() {
+                if (!activeGames[botId]) return;
+                const state = activeGames[botId];
+                const now = Date.now();
+                const elapsedMs = Math.max(0, now - state.startTime);
+
+                // Crash Formula
+                const multiplier = Math.pow(Math.E, 0.00006 * elapsedMs);
+                elCounter.innerText = multiplier.toFixed(2) + 'x';
+
+                // +++ UPDATED COLOR LOGIC +++
+                let color = '#E5E7EB'; // Default Grey
+
+                if (state.isBetting && state.target > 0) {
+                    // 2. Betting Scenario
+                    if (multiplier >= state.target) {
+                        // WE WON (Early Cashout Visual) -> GREEN
+                        color = '#34D399';
+                        if (elTarget) elTarget.style.color = '#34D399'; // Target turns Green
+                    } else {
+                        // CHASING -> GREY
+                        color = '#E5E7EB';
+                        if (elTarget) elTarget.style.color = '#E5E7EB'; // Target stays Grey
+                    }
+                } else {
+                    // 1. Not Betting Scenario -> ALWAYS GREY while rolling
+                    // (User req: "rolling counter should remain Default/Grey... it should not turn Green at 2.0x")
+                    color = '#E5E7EB';
+                }
+
+                elCounter.style.color = color;
+
+                activeGames[botId].rafId = requestAnimationFrame(step);
+            }
+            activeGames[botId].rafId = requestAnimationFrame(step);
+        }
+
+        // 2. Countdown Timer (The "Preparing" Phase)
+        function startCountdown(botId, targetTime) {
+            if (activeGames[botId] && activeGames[botId].type === 'COUNTDOWN') return;
+            if (activeGames[botId]) cancelAnimationFrame(activeGames[botId].rafId);
+
+            activeGames[botId] = { type: 'COUNTDOWN', rafId: null };
+            const elCounter = document.getElementById(`liveCrash-${botId}`);
+            const elTarget = document.getElementById(`nextMultValue-${botId}`);
+            const elLastCrash = document.getElementById(`lastActualCrash-${botId}`);
+
+            if (!elCounter) return;
+
+            // Reset Rolling Counter to Default Grey immediately
+            elCounter.style.color = '#9CA3AF';
+            if (elTarget) elTarget.style.color = '#9CA3AF';
+
+            // +++ PERSISTENCE: Ensure Last Crash keeps its color +++
+            if (elLastCrash && lastResultColorState[botId]) {
+                elLastCrash.style.color = lastResultColorState[botId];
+            }
+
+            function step() {
+                if (!activeGames[botId]) return;
+                const now = Date.now();
+                const remaining = targetTime - now;
+
+                if (remaining <= 0) {
+                    // Auto-switch to Rolling
+                    startRollingCounter(botId, targetTime, false, 0);
+                    return;
+                }
+
+                elCounter.innerText = (remaining / 1000).toFixed(1) + 's';
+                activeGames[botId].rafId = requestAnimationFrame(step);
+            }
+            activeGames[botId].rafId = requestAnimationFrame(step);
+        }
+
+        // 3. Stop / Crash Result
+        function stopAnimation(botId, finalCrash, isBetting, target) {
+            if (activeGames[botId]) {
+                cancelAnimationFrame(activeGames[botId].rafId);
+                delete activeGames[botId];
+            }
+            const elCounter = document.getElementById(`liveCrash-${botId}`);
+            const elTarget = document.getElementById(`nextMultValue-${botId}`);
+            const elLastCrash = document.getElementById(`lastActualCrash-${botId}`);
+
+            if (elCounter) {
+                elCounter.innerText = finalCrash.toFixed(2) + 'x';
+
+                // +++ FINAL RESULT COLOR LOGIC +++
+                let resultColor = '#EF4444'; // Default Red (Loss)
+
+                if (isBetting && target > 0) {
+                    // BETTING ROUND
+                    if (finalCrash >= target) {
+                        resultColor = '#34D399'; // Green (Win)
+                        if (elTarget) elTarget.style.color = '#34D399';
+                    } else {
+                        resultColor = '#EF4444'; // Red (Loss)
+                        if (elTarget) elTarget.style.color = '#EF4444'; // Target Red
+                    }
+                    // Save this color for persistence
+                    lastResultColorState[botId] = resultColor;
+                } else {
+                    // SKIPPED ROUND
+                    // Logic: "On Crash: It should use the platform standard (Red < 2x, Green > 2x)."
+                    if (finalCrash >= 2.00) {
+                        resultColor = '#34D399'; // Green
+                    } else {
+                        resultColor = '#EF4444'; // Red
+                    }
+                    // Note: We do NOT update lastResultColorState here.
+                    // We want to keep the color of the last *Betting* result if we are skipping.
+                    // However, the Rolling Counter itself needs to show the platform standard for this specific crash.
+                }
+
+                elCounter.style.color = resultColor;
+
+                // Update Last Actual Crash Logic
+                if (elLastCrash) {
+                    elLastCrash.innerText = finalCrash.toFixed(2) + 'x';
+
+                    // If we bet, update the last crash color to match the result
+                    if (isBetting) {
+                        elLastCrash.style.color = resultColor;
+                    } else {
+                        // If we didn't bet, maintain the previous betting color?
+                        // User said: "It only updates (changes color/value) when the next game ends."
+                        // "While in game pause, Last Crash Display must maintain the previous win color but continue to update its value"
+
+                        // Update value (done above).
+                        // Apply persistent color if it exists
+                        if (lastResultColorState[botId]) {
+                            elLastCrash.style.color = lastResultColorState[botId];
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- Standard Helper ---
+        function updateText(botId, elementId, value) {
+            const el = document.getElementById(elementId + '-' + botId);
+            if (el && el.innerText !== value) el.innerText = value;
+        }
+
+        // ... (Layout code remains unchanged: getOptimalColumnCount, rebalanceLayout, enableDragAndDrop) ...
+        const CARD_MIN_WIDTH = 320;
+        let currentColumnCount = 0;
+        function getOptimalColumnCount() {
+            const container = document.getElementById('bot-container');
+            if (!container) return 1;
+            const availableWidth = container.clientWidth;
+            let cols = Math.floor(availableWidth / CARD_MIN_WIDTH);
+            return Math.max(1, cols);
+        }
+        function rebalanceLayout() {
+            const container = document.getElementById('bot-container');
+            const neededCols = getOptimalColumnCount();
+            if (neededCols === currentColumnCount) return;
+            currentColumnCount = neededCols;
+            const cards = Array.from(document.querySelectorAll('.stat-card'));
+            container.innerHTML = '';
+            const columns = [];
+            for (let i = 0; i < neededCols; i++) {
+                const col = document.createElement('div');
+                col.className = 'stats-column';
+                setupColumnDrop(col);
+                container.appendChild(col);
+                columns.push(col);
+            }
+            cards.forEach((card, index) => {
+                columns[index % neededCols].appendChild(card);
+            });
+        }
+        function enableDragAndDrop(card) {
+            card.setAttribute('draggable', 'true');
+            card.addEventListener('dragstart', (e) => { card.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
+            card.addEventListener('dragend', () => { card.classList.remove('dragging'); });
+            card.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); });
+            card.addEventListener('drop', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                const draggingCard = document.querySelector('.dragging');
+                if (!draggingCard || draggingCard === card) return;
+                card.parentNode.insertBefore(draggingCard, card);
+            });
+        }
+        function setupColumnDrop(column) {
+            column.addEventListener('dragover', (e) => { e.preventDefault(); });
+            column.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggingCard = document.querySelector('.dragging');
+                if (draggingCard) column.appendChild(draggingCard);
+            });
+        }
+        window.addEventListener('resize', () => { clearTimeout(window.resizeTimer); window.resizeTimer = setTimeout(rebalanceLayout, 100); });
+        document.addEventListener('DOMContentLoaded', () => { rebalanceLayout(); });
+
+        // --- Card HTML ---
+        function createBotCardHtml(botId) {
+            return `
+                <div class="card-header">
+                    <h2 id="bot-title-${botId}">🤖 ${botId}</h2>
+                </div>
+                <div class="card-body">
+                     <div style="background: #111; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #374151;">
+                        <div style="text-align: left;">
+                           <div style="font-size: 11px; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Live Game</div>
+                           <div id="liveCrash-${botId}" style="font-size: 32px; font-weight: bold; font-family: 'Courier New', monospace; color: #9CA3AF;">--</div>
+                       </div>
+                       <div style="text-align: right;">
+                           <div style="font-size: 11px; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Last Crash</div>
+                           <div id="lastActualCrash-${botId}" style="font-size: 24px; font-weight: bold; color: #EF4444;">--</div>
+                       </div>
+                    </div>
+                    <h3>🧭 Status</h3>
+                    <div class="stat-line"><strong>Mode:</strong> <span id="modeText-${botId}">...</span></div>
+                    <div class="stat-line"><strong>Betting Now:</strong> <span id="bettingNowText-${botId}">...</span></div>
+                    <div class="stat-line"><strong>Last Action:</strong> <span class="lastAction" id="lastActionText-${botId}">...</span></div>
+
+                    <h3>📈 P/L & Multipliers</h3>
+                    <div class="stat-line"><strong>Init Bal:</strong> <span id="initBits-${botId}">0.00</span></div>
+                    <div class="stat-line"><strong>Current Bal:</strong> <span id="curBits-${botId}">0.00</span></div>
+                    <div class="stat-line"><strong>Total P/L:</strong> <span id="plStr-${botId}">+0.00</span></div>
+                    <div class="stat-line"><strong>Last P/L:</strong> <span id="lastPlStr-${botId}">0.00</span></div>
+                    <div class="stat-line"><strong>Last / Next Mult:</strong> <span id="lastMult-${botId}">0.00</span>x / <span id="nextMultValue-${botId}">0.00</span>x</div>
+
+                    <h3>🎯 Take Profit</h3>
+                    <div class="stat-line"><strong>TP Target:</strong> <span id="tpDisplay-${botId}">--</span></div>
+                    <div class="stat-line"><strong>Coverage:</strong> <span id="pcov-${botId}">0.0%</span></div>
+                    <div class="stat-line"><strong>Remaining:</strong> <span id="rem-${botId}">0.00</span></div>
+
+                    <h3>⏱️ Time</h3>
+                    <div class="stat-line"><strong>Start Time:</strong> <span id="startTimeStr-${botId}">--:--:--</span></div>
+                    <div class="stat-line"><strong>Runtime:</strong> <span id="runtimeText-${botId}">00:00:00</span></div>
+                    <div class="stat-line"><strong>B.Start Time:</strong> <span id="bStartText-${botId}">--:--:--</span></div>
+                    <div class="stat-line"><strong>B.End Time:</strong> <span id="bEndText-${botId}">--:--:--</span></div>
+
+                    <h3>📅 Schedule</h3>
+                    <div class="stat-line"><strong>Warm-up:</strong> <span id="warmupText-${botId}">0/15</span></div>
+                    <div class="stat-line"><strong>Scheduled:</strong> <span id="scheduledText-${botId}">--:--:--</span></div>
+                    <div class="stat-line"><strong>Waiting:</strong> <span id="countdownText-${botId}">--:--:--</span></div>
+                    <div class="stat-line"><strong>Until:</strong> <span id="targetText-${botId}">--:--:--</span></div>
+
+                    <h3>📊 Bets & Streaks</h3>
+                    <div class="stat-line"><strong>Bets / Skips:</strong> <span id="totalBets-${botId}">0</span> / <span id="totalSkips-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Normal Skips:</strong> <span id="normalSkips-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Recovery Skips:</strong> <span id="recSkips-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Normal W / L:</strong> <span id="normalWin-${botId}">0</span> / <span id="normalLoss-${botId}">0</span></div>
+                    <div class.stat-line"><strong>Recovery W / L:</strong> <span id="recoveryWin-${botId}">0</span> / <span id="recoveryLoss-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Win Streak:</strong> <span id="consecutiveWins-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Loss Streak:</strong> <span id="consecutiveLosses-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Max W / L:</strong> <span id="maxConsecutiveWins-${botId}">0</span> / <span id="maxConsecutiveLosses-${botId}">0</span></div>
+
+                    <h3>🔁 Recovery</h3>
+                    <div class="stat-line"><strong>Debt:</strong> <span id="debtText-${botId}">0.00</span></div>
+                    <div class="stat-line"><strong>Next Stake:</strong> <span id="nextStake-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Rec Level / Rounds:</strong> <span id="recLevel-${botId}">0</span> / <span id="rounds-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Max Rec Level:</strong> <span id="maxRecLevel-${botId}">0</span></div>
+                    <div class="stat-line"><strong>Max Rec Stake:</strong> <span id="maxRecStake-${botId}">0.00</span></div>
+                    <div class="stat-line"><strong>Max Rec Time:</strong> <span id="maxRecTimeText-${botId}">--:--:--</span></div>
+                    <div class="stat-line"><strong>Max Rec Age:</strong> <span id="maxRecAgeText-${botId}">00:00:00</span></div>
+                </div>
+            `;
+        }
+
+        // --- Connection ---
+        const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+        const wsUrl = wsProtocol + window.location.host;
+
+        function connect() {
+            const ws = new WebSocket(wsUrl);
+            ws.onopen = () => console.log('Connected');
+            ws.onclose = () => setTimeout(connect, 3000);
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                const botId = data.botId;
+                if (!botId) return;
+
+                if (currentColumnCount === 0) rebalanceLayout();
+
+                let card = document.getElementById(botId);
+                if (!card) {
+                    card = document.createElement('div');
+                    card.id = botId;
+                    card.className = 'stat-card';
+                    card.innerHTML = createBotCardHtml(botId);
+                    card.querySelector('.card-header').addEventListener('click', () => card.classList.toggle('active'));
+                    enableDragAndDrop(card);
+                    const columns = document.querySelectorAll('.stats-column');
+                    let shortestCol = columns[0];
+                    columns.forEach(col => { if (col.children.length < shortestCol.children.length) shortestCol = col; });
+                    if (shortestCol) shortestCol.appendChild(card);
+                }
+
+                // +++ WATCHDOG LOGIC (Self-Healing) +++
+
+                // 1. Fix Infinite Counter: If Server says ENDED/PAUSED but we are Rolling, Stop.
+                if (data.gameStatus === 'ENDED' && activeGames[botId] && activeGames[botId].type !== 'ENDED') {
+                    stopAnimation(botId, data.lastActualCrash, data.isBetting, data.activeTarget);
+                }
+
+                // 2. Fix Mid-Game Start:
+                // If Server is RUNNING, but we are not, Start.
+                // Also, if we are running but the start times drift significantly, re-sync.
+                if (data.gameStatus === 'RUNNING') {
+                    // Check if we need to start or re-sync
+                    if (!activeGames[botId] || activeGames[botId].type !== 'ROLLING' || Math.abs(activeGames[botId].startTime - data.gameStartTime) > 200) {
+                        startRollingCounter(botId, data.gameStartTime, data.isBetting, data.activeTarget);
+                    } else {
+                        // Just update target/betting status live
+                        activeGames[botId].isBetting = data.isBetting;
+                        activeGames[botId].target = data.activeTarget;
+                    }
+                }
+                else if (data.gameStatus === 'PREPARING') {
+                    // Check if we need to start countdown
+                    if (!activeGames[botId] || activeGames[botId].type !== 'COUNTDOWN') {
+                        startCountdown(botId, data.projectedStartTime);
+                    }
+                }
+                else if (data.gameStatus === 'ENDED') {
+                    // Force update visuals if we missed the transition
+                    if (!activeGames[botId] || activeGames[botId].type !== 'ENDED') {
+                        stopAnimation(botId, data.lastActualCrash, data.isBetting, data.activeTarget);
+                        updateText(botId, 'lastActualCrash', data.lastActualCrash.toFixed(2) + 'x');
+                    }
+                }
+
+                // Update text fields
+                updateText(botId, 'modeText', data.modeText);
+                updateText(botId, 'bettingNowText', data.bettingNowText);
+                updateText(botId, 'lastActionText', data.lastActionText);
+                updateText(botId, 'initBits', data.initBits.toFixed(2));
+                updateText(botId, 'curBits', data.curBits.toFixed(2));
+                updateText(botId, 'plStr', data.plStr);
+                updateText(botId, 'lastPlStr', data.lastPlStr);
+                updateText(botId, 'lastMult', data.lastMult.toFixed(2));
+                updateText(botId, 'nextMultValue', data.nextMultValue.toFixed(2));
+                updateText(botId, 'tpDisplay', data.tpDisplay);
+                updateText(botId, 'pcov', data.pcov + '%');
+                updateText(botId, 'rem', data.rem);
+                updateText(botId, 'startTimeStr', data.startTimeStr);
+                updateText(botId, 'runtimeText', data.runtimeText);
+                updateText(botId, 'bStartText', data.bStartText);
+                updateText(botId, 'bEndText', data.bEndText);
+                updateText(botId, 'warmupText', data.warmupText);
+                updateText(botId, 'scheduledText', data.scheduledText);
+                updateText(botId, 'countdownText', data.countdownText);
+                updateText(botId, 'targetText', data.targetText);
+                updateText(botId, 'totalBets', data.totalBets);
+                updateText(botId, 'totalSkips', data.totalSkips);
+                updateText(botId, 'normalSkips', data.normalSkips);
+                updateText(botId, 'recSkips', data.recSkips);
+                updateText(botId, 'normalWin', data.normalWin);
+                updateText(botId, 'normalLoss', data.normalLoss);
+                updateText(botId, 'recoveryWin', data.recoveryWin);
+                updateText(botId, 'recoveryLoss', data.recoveryLoss);
+                updateText(botId, 'consecutiveWins', data.consecutiveWins);
+                updateText(botId, 'consecutiveLosses', data.consecutiveLosses);
+                updateText(botId, 'maxConsecutiveWins', data.maxConsecutiveWins);
+                updateText(botId, 'maxConsecutiveLosses', data.maxConsecutiveLosses);
+                updateText(botId, 'debtText', data.debtText);
+                updateText(botId, 'nextStake', data.nextStake);
+                updateText(botId, 'recLevel', data.recLevel);
+                updateText(botId, 'rounds', data.rounds);
+                updateText(botId, 'maxRecLevel', data.maxRecLevel);
+                updateText(botId, 'maxRecStake', data.maxRecStake);
+                updateText(botId, 'maxRecTimeText', data.maxRecTimeText);
+                updateText(botId, 'maxRecAgeText', data.maxRecAgeText);
+            };
+        }
+        connect();
+    </script>
+</body>
+</html>
