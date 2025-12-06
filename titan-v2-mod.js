@@ -1529,8 +1529,14 @@ class StatsPanel {
                         }
                         return 'default';
                     })()
-                }
+                },
+                watchdogLog: (this.bot && this.bot._watchdogLog) ? this.bot._watchdogLog.slice(-12) : [],
             };
+
+            // if provisional flagged, record that event for dashboard diagnostics
+            if (this.bot && this.bot._provisionalActive) {
+                try { this.bot._pushWatchdogLog && this.bot._pushWatchdogLog(`Provisional ACTIVE @ target ${activeBet ? activeBet.targetMultiplier : 'N/A'}x`); } catch(e) {}
+            }
 
             // Call the retry helper defined below
             this.sendStatsWithRetry(statsPayload);
@@ -1690,6 +1696,10 @@ class CrashBot {
         this._provisionalActive = false;      // boolean flag
         this._provisionalSnapshot = null;     // deep snapshot object
         this._provisionalTimeoutId = null;    // timeout handle (ms fallback)
+
+        // +++ Watchdog Log (for external dashboard debug / provisional events) +++
+        // A circular (bounded) list of timestamped short strings for the dashboard
+        this._watchdogLog = [];   // array of "ISOtimestamp — message" strings
 
         // Start timers
         this.firstStartedAt = Date.now();
@@ -2426,6 +2436,8 @@ class CrashBot {
 
         // +++ SET STICKY REASON +++
         this.haltReason = `[${type.toUpperCase()}] ${reason}`;
+        // record event for external dashboard
+        this._pushWatchdogLog(this.haltReason || `HALT: ${type} ${reason || ''}`);
 
         // 2. Stop Loss logic
         if (typeKey === 'stoploss') {
@@ -2467,6 +2479,21 @@ class CrashBot {
 
         // Default Fallback
         this.stop(message);
+    }
+
+    // Lightweight watchdog logger (keeps last N entries)
+    _pushWatchdogLog(message) {
+        try {
+            if (!this._watchdogLog) this._watchdogLog = [];
+            const ts = (new Date()).toISOString();
+            // Short single-line message (trim to avoid huge payloads)
+            const shortMsg = String(message).replace(/\s+/g, ' ').trim().slice(0, 240);
+            this._watchdogLog.push(`${ts} — ${shortMsg}`);
+            // Trim to last 30 entries (adjustable)
+            if (this._watchdogLog.length > 30) this._watchdogLog.splice(0, this._watchdogLog.length - 30);
+        } catch (e) {
+            // swallow errors to avoid affecting bot execution
+        }
     }
 
     // Restored exactly
