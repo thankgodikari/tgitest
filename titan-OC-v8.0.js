@@ -10,6 +10,7 @@ var config = {
         author: 'TGI',
         id: ""
     },
+
     // === Normal Mode ===
     normalBaseBet: { value: 100, type: 'balance', label: 'Normal Base Bet (bits)' },
     normalBaseBetMax: { value: 300, type: 'number', label: 'Normal Base Bet (bits) max stake bit' },
@@ -23,7 +24,7 @@ var config = {
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
     recoveryMultiplier: { value: 2.01, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
     recoveryCapMult: { value: 20, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
-    recoveryLevelSimThreshold: {value: 50, type: 'number', label: 'Recovery Level Simulation Threshold'},
+    recoveryLevelSimThreshold: { value: 50, type: 'number', label: 'Recovery Level Simulation Threshold' },
     maxFollowUps: { value: 2, type: 'number', label: 'Recovery: Max Follow-Up Bets (Trend/PingPong)' },
 
     // === SENTIENT SNIPER & MSV TACTICS ===
@@ -53,26 +54,24 @@ var config = {
     weightVolatility: { value: 0.15, type: 'number', label: 'Weight: Volatility' },
     weightAutocorr: { value: 0.10, type: 'number', label: 'Weight: Autocorrelation' },
     weightEWMA: { value: 0.10, type: 'number', label: 'Weight: EWMA Trend' },
-    weightGARCH: { value: 0.00, type: 'number', label: 'Weight: GARCH (Experimental)' }, // Added explicit 0 default
+    weightGARCH: { value: 0.00, type: 'number', label: 'Weight: GARCH (Experimental)' },
 
     // Technical Thresholds & System
     varThreshold: { value: 0.20, type: 'number', label: 'Variance Threshold (0.20)' },
     warmupDefault: { value: 25, type: 'number', label: 'Warmup Rounds' },
-    warmupMax: { value: 50, type: 'number', label: 'Warmup Max Rounds' }, // Added
-    minEffectiveSample: { value: 12, type: 'number', label: 'Min Effective Sample Size' }, // Added
+    warmupMax: { value: 50, type: 'number', label: 'Warmup Max Rounds' },
+    minEffectiveSample: { value: 12, type: 'number', label: 'Min Effective Sample Size' },
 
     // Tuning Scalar
-    cpIncreaseFactor: { value: 1.5, type: 'number', label: 'CPD Penalty Factor' }, // Added to config UI
+    cpIncreaseFactor: { value: 1.5, type: 'number', label: 'CPD Penalty Factor' },
 
-    // === Prediction / Titan Brain (Legacy/Grouped Params kept for compatibility if needed, but overridden by above) ===
+    // === Prediction / Titan Brain (Grouped Params) ===
     prediction: {
         // buffer sizes (in-memory only)
         bufferMicro: { value: 5, type: 'number', label: 'Prediction: Micro Buffer Size' },
         bufferShort: { value: 10, type: 'number', label: 'Prediction: Short Buffer Size' },
         bufferMedium: { value: 25, type: 'number', label: 'Prediction: Medium Buffer Size' },
         bufferLong: { value: 100, type: 'number', label: 'Prediction: Long Buffer Size (calibration)' },
-
-        // (Warmup & Tuning values moved to root level above for correct mapping)
 
         // follow-up and recovery
         followUpExtraMargin: { value: 0.02, type: 'number', label: 'Prediction: extra margin required per follow-up (p_k)' },
@@ -90,7 +89,7 @@ var config = {
         bocpdHazard: { value: 1/200, type: 'number', label: 'Prediction: BOCPD hazard (1/expected run length)' },
         bocpdThreshold: { value: 0.70, type: 'number', label: 'Prediction: BOCPD trigger threshold (0-1)' },
 
-        // --- GARCH(1,1) volatility (optional, complementary to EWMA)
+        // --- GARCH(1,1) volatility (optional)
         enableGARCH: { value: true, type: 'checkbox', label: 'Prediction: enable GARCH(1,1) variance' },
         garchOmega: { value: 1e-4, type: 'number', label: 'Prediction: GARCH omega (constant)' },
         garchAlpha: { value: 0.08, type: 'number', label: 'Prediction: GARCH alpha (ARCH term)' },
@@ -106,12 +105,12 @@ var config = {
         autoTune_enable: { value: true, type: 'checkbox', label: 'Prediction: enable auto-tuner (runtime)' },
         autoTune_intervalRounds: { value: 50, type: 'number', label: 'Prediction: auto-tune interval (rounds)' },
         autoTune_learningRate: { value: 0.05, type: 'number', label: 'Prediction: auto-tune learning rate (LR)' },
-        autoTune_minFactor: { value: 0.8, type: 'number', label: 'Prediction: auto-tune min factor (<=1 -> more aggressive)' },
-        autoTune_maxFactor: { value: 1.25, type: 'number', label: 'Prediction: auto-tune max factor (>=1 -> more conservative)' },
+        autoTune_minFactor: { value: 0.8, type: 'number', label: 'Prediction: auto-tune min factor' },
+        autoTune_maxFactor: { value: 1.25, type: 'number', label: 'Prediction: auto-tune max factor' },
         autoTune_minTrials: { value: 30, type: 'number', label: 'Prediction: min trials before tuning' },
         autoTune_targets: { value: { low: 0.95, med: 0.88, high: 0.82 }, type: 'object', label: 'Prediction: per-mult target win rates' },
 
-        // --- small convenience: sync prediction warmup default to global warmup rounds
+        // convenience
         syncWarmupToGlobal: { value: true, type: 'checkbox', label: 'Prediction: sync warmupDefault to global warmup.rounds on start' },
 
         // Change-point (CUSUM) params
@@ -121,11 +120,11 @@ var config = {
         // safety business caps
         business_k_loss_tolerance: { value: 3, type: 'number', label: 'Prediction: max consecutive recovery losses tolerated (business rule)' },
 
-        // operational mode: conservative|balanced|aggressive (applies sensible bundles at start)
-        operationalMode: { value: 'balanced', type: 'string', label: 'Prediction: operational mode (conservative|balanced|aggressive)' },
+        // operational mode
+        operationalMode: { value: 'balanced', type: 'string', label: 'Prediction: operational mode (conservative|balanced|aggressive)' }
     },
 
-    // --- 1. Pattern Adaptation Engine (PAE) & Q-Learning ---
+    // --- Pattern Adaptation Engine (PAE) & Q-Learning ---
     qLearn_enable: { value: true, type: 'checkbox', label: 'Enable Session Q-Learning' },
     qLearn_criticalLevel: { value: 6, type: 'number', label: 'Critical Stress Level (Recovery Step)' },
     qLearn_rewardWin: { value: 10, type: 'number', label: 'Q-Reward: Standard Recovery Win' },
@@ -133,18 +132,18 @@ var config = {
     qLearn_penaltyCritical: { value: -50, type: 'number', label: 'Q-Penalty: Critical Event Trigger' },
     qLearn_vetoThreshold: { value: -40, type: 'number', label: 'Q-Veto Threshold (Score)' },
 
-    // --- 2. Multi-Scale Entropy (Chaos Detection) ---
+    // --- Multi-Scale Entropy (Chaos Detection) ---
     entropy_microWindow: { value: 5, type: 'number', label: 'Micro-Entropy Window (Reflex)' },
     entropy_mesoWindow: { value: 12, type: 'number', label: 'Meso-Entropy Window (Tactician)' },
     entropy_macroWindow: { value: 20, type: 'number', label: 'Macro-Entropy Window (Strategist)' },
     entropy_highThreshold: { value: 0.5, type: 'number', label: 'High Entropy Threshold (0.0 - 1.0)' },
 
-    // --- 3. Context-Aware Safety ---
+    // --- Context-Aware Safety ---
     safety_cliffGuardTrigger: { value: 2, type: 'number', label: 'Cliff Guard: Cons. Low Losses to Ghost' },
     safety_sniperColdWait: { value: 2, type: 'number', label: 'Adaptive Sniper: Cold Market Wait (Wins)' },
     safety_probationWait: { value: 1, type: 'number', label: 'Probation: Virtual Wins to Exit Ghost Mode' },
 
-    // --- Learning config (used by in-run Q updates & conservative Q influence) ---
+    // --- Learning config ---
     learning: {
         alpha: { value: 0.08, type: 'number', label: 'Learning: alpha (learning rate)' },
         gamma: { value: 0.0, type: 'number', label: 'Learning: gamma (discount factor)' },
@@ -153,12 +152,28 @@ var config = {
         rewardType: { value: 'binary', type: 'string', label: 'Learning: reward type (binary|profit)' }
     },
 
+    // Schedule times: accept either an ISO timestamp string, epoch ms, or "HH:MM" (24h)
+    // Examples:
+    //   "2025-12-20T13:30:00Z"  -> exact UTC time
+    //   1763650200000           -> epoch ms (UTC)
+    //   "13:30"                 -> daily time (local / bot timezone) — implementation may parse as next occurrence
+    sch1Time: { value: null, type: 'time', label: 'Schedule 1 Time (ISO / epoch ms / HH:MM)' },
+    sch2Time: { value: null, type: 'time', label: 'Schedule 2 Time (ISO / epoch ms / HH:MM)' },
+    sch3Time: { value: null, type: 'time', label: 'Schedule 3 Time (ISO / epoch ms / HH:MM)' },
+
     // === Stop Limits ===
     takeProfitBits: { value: 250, type: 'number', label: 'Take Profit (bits)' },
     sch1ProfitBits: { value: 250, type: 'number', label: 'Schedule 1 Profit (bits)' },
     sch2ProfitBits: { value: 250, type: 'number', label: 'Schedule 2 Profit (bits)' },
     sch3ProfitBits: { value: 250, type: 'number', label: 'Schedule 3 Profit (bits)' },
     minBalanceBits: { value: 1, type: 'number', label: 'Stop Loss (bits)' },
+
+    // === Protection UI keys (mapped if you want UI control) ===
+    protectionUiThrottleMs: { value: 0, type: 'number', label: 'UI Throttle (ms)' },
+    protectionBetPlacementTimeoutMs: { value: 350, type: 'number', label: 'Bet Placement Timeout (ms)' },
+    protectionPlaceBetRetries: { value: 2, type: 'number', label: 'Place Bet Retries' },
+
+    testBalanceBits: { value:100, type: 'number', label: 'Test Balance (ms)' },
 
     // === System ===
     debug: { value: true, type: 'checkbox', label: 'Enable Debug Logging' }
@@ -418,20 +433,21 @@ class UnifiedEngineAdapter {
     }
 }
 
+/* === DROP-IN REPLACEMENT: ConfigManager (START) === */
 class ConfigManager {
     // ==========================================
     // 1. Static Constants (Defaults)
     // ==========================================
     static DEFAULTS = {
         MAX_STAKE_BITS: 10000,
-        TEST_BALANCE_BITS: 100,
-        WARMUP_ROUNDS: 25,
+        TEST_BALANCE_BITS: config.testBalanceBits.value,
+        WARMUP_ROUNDS: config.warmupDefault.value,
         SCHEDULE_TP_1: config.sch1ProfitBits.value,
         SCHEDULE_TP_2: config.sch2ProfitBits.value,
         SCHEDULE_TP_3: config.sch3ProfitBits.value,
         MIN_BALANCE_BITS: 1,
         TAKE_PROFIT_BITS: config.takeProfitBits.value,
-        NORMAL_BASE_BET_PERCENT: 0.0025,
+        NORMAL_BASE_BET_PERCENT: config.normalBaseBetPercentOfBal.value,
         NORMAL_BASE_BET_MAX: config.normalBaseBetMax.value
     };
 
@@ -439,11 +455,23 @@ class ConfigManager {
         this.adapter = adapter; // Initialize adapter first
         this.initialBalance = null;
 
-        // --- Read External Config ---
-        const cfg = (typeof config !== 'undefined') ? config : {};
+        // --- Read External Config (once) ---
+        // Prefer window.config if present, otherwise global config variable.
+        const cfg = (typeof window !== 'undefined' && typeof window.config !== 'undefined') ? window.config :
+            (typeof config !== 'undefined' ? config : {});
+
+        // Namespace the UI-provided config for clarity (keeps single source of truth)
+        try {
+            if (typeof window !== 'undefined') {
+                window.TITAN_UI_CONFIG = cfg;
+            }
+        } catch (e) {
+            // ignore if we can't write to window
+        }
+
+        // The original helper kept: val(key, def)
         const val = (key, def) => (cfg[key] && cfg[key].value !== undefined && cfg[key].value !== null) ? cfg[key].value : def;
 
-        // --- Build Configuration Object ---
         // --- Build Configuration Object ---
         this.config = {
             meta: cfg.meta,
@@ -611,9 +639,18 @@ class ConfigManager {
 
             // Schedules
             schedules: {
-                betSchedule1: { time: null, takeProfitBits: null },
-                betSchedule2: { time: null, takeProfitBits: null },
-                betSchedule3: { time: null, takeProfitBits: null }
+                betSchedule1: {
+                    time: readVal('sch1Time'),              // maps config.sch1Time.value
+                    takeProfitBits: readVal('sch1ProfitBits')
+                },
+                betSchedule2: {
+                    time: readVal('sch2Time'),
+                    takeProfitBits: readVal('sch2ProfitBits')
+                },
+                betSchedule3: {
+                    time: readVal('sch3Time'),
+                    takeProfitBits: readVal('sch3ProfitBits')
+                }
             },
             behavior: {
                 stopOnTakeProfitOnlyFrom: 'betSchedule3'
@@ -723,8 +760,30 @@ class ConfigManager {
         }
     }
 
+    // Deep-merge utility (mutates target). Preserves nested siblings.
+    static _deepMerge(target, source) {
+        if (!source || typeof source !== 'object') return target;
+        if (!target || typeof target !== 'object') return source;
+        for (const k of Object.keys(source)) {
+            const sv = source[k];
+            const tv = target[k];
+            if (Array.isArray(sv)) {
+                target[k] = sv.slice();
+            } else if (sv && typeof sv === 'object') {
+                if (!tv || typeof tv !== 'object') target[k] = {};
+                ConfigManager._deepMerge(target[k], sv);
+            } else {
+                target[k] = sv;
+            }
+        }
+        return target;
+    }
+
     update(newConfig) {
-        Object.assign(this.config, newConfig);
+        // Replace shallow assign with deep-merge to avoid wiping nested objects on partial updates
+        if (newConfig && typeof newConfig === 'object') {
+            ConfigManager._deepMerge(this.config, newConfig);
+        }
         if (this.config.debug) {
             console.log('🔧 Config updated:', newConfig);
         }
