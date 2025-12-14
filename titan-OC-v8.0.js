@@ -779,14 +779,50 @@ class ConfigManager {
         return target;
     }
 
+    // ==========================================
+// ConfigManager.update (DROP-IN REPLACEMENT)
+// Normalizes UI-shaped objects like { key: { value: X } } to plain scalars
+// then deep-merges into this.config.
+// ==========================================
     update(newConfig) {
-        // Replace shallow assign with deep-merge to avoid wiping nested objects on partial updates
-        if (newConfig && typeof newConfig === 'object') {
-            ConfigManager._deepMerge(this.config, newConfig);
+        // Helper: recursively strip UI wrappers { value: X } -> X
+        const stripValues = (obj) => {
+            if (obj === null || obj === undefined) return obj;
+            if (Array.isArray(obj)) return obj.map(stripValues);
+            if (typeof obj === 'object') {
+                const keys = Object.keys(obj);
+                // If it's exactly { value: ... }, return the inner scalar
+                if (keys.length === 1 && keys[0] === 'value') return obj.value;
+                const out = {};
+                for (const k of keys) out[k] = stripValues(obj[k]);
+                return out;
+            }
+            return obj;
+        };
+
+        if (!newConfig || typeof newConfig !== 'object') {
+            if (this.config && this.config.debug) console.warn('ConfigManager.update called with non-object:', newConfig);
+            return;
         }
-        if (this.config.debug) {
-            console.log('🔧 Config updated:', newConfig);
+
+        // 1) Normalize incoming payload to strip UI wrappers
+        const normalized = stripValues(newConfig);
+
+        // 2) Deep-merge into runtime this.config (preserves siblings)
+        try {
+            ConfigManager._deepMerge(this.config, normalized);
+            if (this.config.debug) {
+                console.log(' 🔧 Config updated (normalized + merged):', normalized);
+            }
+        } catch (e) {
+            // Fallback to safe shallow assign if deep merge fails
+            try {
+                Object.assign(this.config, normalized);
+            } catch (ex) { /* no-op */ }
+            if (this.config && this.config.debug) console.warn('ConfigManager.update merge error', e);
         }
+
+        // 3) Emit/update hooks (if desired). Keep existing behavior: no change.
     }
 
     // ==========================================
@@ -856,7 +892,8 @@ class TitanPredictionEngine {
     constructor(configManager) {
         this.config = configManager;
         this.adapter = null;
-        this.qTable = new Map(); // Session Q-Learning memory (Map used by adviceRecovery / Q-signal)
+        this.qTable = new Map();
+        // Session Q-Learning memory (Map used by adviceRecovery / Q-signal)
         this.logger = new Logger(this.config);
 
         // --- In-memory buffers (no disk persistence) ---
@@ -878,34 +915,36 @@ class TitanPredictionEngine {
         this.warmupCounter = 0;
         this.inWarmup = true;
         this._initialized = false;
-        this.decisionLog = [];      // stores {ts, lane, chosenMult, shouldBet, pbs..., pmins..., ensemble, reason}
-        this.shadowSamples = [];    // stores { decision, outcome } for in-run backtest/bootstrapping
+        this.decisionLog = []; // stores {ts, lane, chosenMult, shouldBet, ...}
+        this.shadowSamples = []; // stores { decision, outcome } for in-run backtest
+
         // per-run bootstrap tail probability (computed once after warmup)
-        this._prob_k_losses = 1.0; // default conservative value until bootstrap runs
+        this._prob_k_losses = 1.0;
+
         // CUSUM internal state for quick change detection
         this.cusumPos = 0;
         this.cusumNeg = 0;
 
-        // runtime stats for new detectors
+        // runtime stats for detectors
         this.lastEWMA = { micro: 0, meso: 0, macro: 0 };
         this.lastAutocorr = { micro: 0, meso: 0, macro: 0 };
-        this.lastSkewKurt = { micro: {skew:0,kurt:0}, meso: {skew:0,kurt:0}, macro: {skew:0,kurt:0} };
-
-        // shadow mode decision/outcome recording
-        this.shadowSamples = [];
+        this.lastSkewKurt = {
+            micro: { skew: 0, kurt: 0 },
+            meso: { skew: 0, kurt: 0 },
+            macro: { skew: 0, kurt: 0 }
+        };
 
         // Ensure qTable exists (defensive)
         if (!this.qTable) this.qTable = new Map();
 
-        // --- Optional: sync prediction warmupDefault to global warmup rounds (single source of truth)
-        // Sync prediction warmup to global warmup if requested
-        if (this.config.get('prediction','syncWarmupToGlobal')) {
+        // --- Optional: sync prediction warmupDefault to global warmup rounds
+        if (this.config.get('prediction', 'syncWarmupToGlobal')) {
             try {
-                const gw = this.config.get('warmup','rounds');
+                const gw = this.config.get('warmup', 'rounds');
                 if (typeof gw === 'number' && gw > 0) {
-                    // Use ConfigManager.update API to keep changes consistent
+                    // Write a scalar into runtime prediction.warmupDefault (DO NOT wrap in {value:...})
                     if (typeof this.config.update === 'function') {
-                        this.config.update({ prediction: { warmupDefault: { value: gw } } });
+                        this.config.update({ prediction: { warmupDefault: gw } });
                     } else {
                         this.config.prediction.warmupDefault = gw;
                     }
@@ -914,15 +953,16 @@ class TitanPredictionEngine {
         }
 
         // Apply operational-mode bundle
-        const mode = (this.config.get('prediction','operationalMode') || 'balanced').toLowerCase();
+        const mode = (this.config.get('prediction', 'operationalMode') || 'balanced').toLowerCase();
+
         if (mode === 'conservative') {
-            // tighten thresholds
+            // tighten thresholds (pass raw scalars)
             if (typeof this.config.update === 'function') {
                 this.config.update({
                     prediction: {
-                        pMinReference: { value: 0.97 },
-                        ensembleVarThresholdNormal: { value: 0.02 },
-                        cpIncreaseFactor: { value: 1.6 }
+                        pMinReference: 0.97,
+                        ensembleVarThresholdNormal: 0.02,
+                        cpIncreaseFactor: 1.6
                     }
                 });
             } else {
@@ -931,13 +971,13 @@ class TitanPredictionEngine {
                 this.config.prediction.cpIncreaseFactor = 1.6;
             }
         } else if (mode === 'aggressive') {
-            // loosen thresholds for sniper behaviour
+            // loosen thresholds (pass raw scalars)
             if (typeof this.config.update === 'function') {
                 this.config.update({
                     prediction: {
-                        pMinReference: { value: 0.90 },
-                        ensembleVarThresholdNormal: { value: 0.20 },
-                        cpIncreaseFactor: { value: 1.1 }
+                        pMinReference: 0.90,
+                        ensembleVarThresholdNormal: 0.20,
+                        cpIncreaseFactor: 1.1
                     }
                 });
             } else {
@@ -946,21 +986,22 @@ class TitanPredictionEngine {
                 this.config.prediction.cpIncreaseFactor = 1.1;
             }
         } else {
-            // balanced (defaults) — ensure sensible defaults are present
+            // Balanced: only re-assert existing scalars (no fallback defaults)
             if (typeof this.config.update === 'function') {
-                this.config.update({
-                    prediction: {
-                        pMinReference: { value: this.config.get('prediction', 'pMinReference') || 0.95 },
-                        ensembleVarThresholdNormal: { value: this.config.get('prediction', 'ensembleVarThresholdNormal') || 0.05 },
-                        cpIncreaseFactor: { value: this.config.get('prediction', 'cpIncreaseFactor') || 1.5 }
-                    }
-                });
+                const upd = {};
+                const pmin = this.config.get('prediction', 'pMinReference');
+                const envVar = this.config.get('prediction', 'ensembleVarThresholdNormal');
+                const cp = this.config.get('prediction', 'cpIncreaseFactor');
+                if (typeof pmin !== 'undefined') upd.pMinReference = pmin;
+                if (typeof envVar !== 'undefined') upd.ensembleVarThresholdNormal = envVar;
+                if (typeof cp !== 'undefined') upd.cpIncreaseFactor = cp;
+                if (Object.keys(upd).length > 0) this.config.update({ prediction: upd });
             }
         }
 
         // BOCPD state (approximation using Bernoulli observations on reference multiplier)
         this._bocpd = {
-            runProb: 1.0,       // probability mass at r=0 (we keep a scalar "change probability" estimate)
+            runProb: 1.0,
             lastAlpha: this.config.get('prediction', 'priorAlpha'),
             lastBeta: this.config.get('prediction', 'priorBeta')
         };
@@ -970,19 +1011,28 @@ class TitanPredictionEngine {
 
         // +++ Auto-tuner runtime state +++
         this.autoTune = {
-            enabled: this.config.get('prediction','autoTune_enable'),
-            intervalRounds: this.config.get('prediction','autoTune_intervalRounds'),
-            lr: this.config.get('prediction','autoTune_learningRate'),
-            minFactor: this.config.get('prediction','autoTune_minFactor'),
-            maxFactor: this.config.get('prediction','autoTune_maxFactor'),
-            minTrials: this.config.get('prediction','autoTune_minTrials'),
-            targets: this.config.get('prediction','autoTune_targets') || { low:0.95, med:0.88, high:0.82 },
+            enabled: this.config.get('prediction', 'autoTune_enable'),
+            intervalRounds: this.config.get('prediction', 'autoTune_intervalRounds'),
+            lr: this.config.get('prediction', 'autoTune_learningRate'),
+            minFactor: this.config.get('prediction', 'autoTune_minFactor'),
+            maxFactor: this.config.get('prediction', 'autoTune_maxFactor'),
+            minTrials: this.config.get('prediction', 'autoTune_minTrials'),
+            targets: this.config.get('prediction', 'autoTune_targets'),
             lastRunAtRound: 0,
-            factors: { low: 1.0, med: 1.0, high: 1.0 } // multiplicative tuning factors (1.0 = neutral)
+            factors: { low: 1.0, med: 1.0, high: 1.0 }
         };
+
         // ensure decisionLog and shadowSamples exist
         this.decisionLog = this.decisionLog || [];
-        this.shadowSamples = this.shadowSamples || []; // {round, multLabel, outcome:true/false, ts}
+        this.shadowSamples = this.shadowSamples || [];
+
+        // runtime object (created here to be available immediately)
+        this.runtime = {
+            roundsSinceStart: 0,
+            resumesDone: 0,
+            currentScheduleKey: null,
+            pausedBecauseTP: false
+        };
     }
 
     // Bridge for UI / StatsPanel: provide compact brain state
