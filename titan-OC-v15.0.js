@@ -18,8 +18,8 @@ var config =    {
     normalBaseBetMax: { value: 300, type: 'number', label: 'Normal Base Bet (bits) max stake bit' },
     normalBaseBetPercentOfBal: { value: 0.0025, type: 'number', label: 'Normal Base Bet (bits) percent of balance to stake' },
     // Dynamic Multipliers (The Gearbox)
-    normal_normalDefaultMult: { value: 1.87, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
-    normal_normalHighMult: { value: 3.23, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
+    normal_normalDefaultMult: { value: 2.12, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
+    normal_normalHighMult: { value: 2.63, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
 
     // --- Normal mode: High-sniper confirmation & default consecutive shots ---
     normal_highHitsWindow:        { value: 5, type: 'number', label: 'Normal: High-sniper confirm window (rounds)' },
@@ -33,7 +33,7 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 4.29, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryMultiplier: { value: 3.74, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
     recoveryStakeCap: { value: 50, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
 
     // === Recovery Strategy (Complex) ===
@@ -52,9 +52,11 @@ var config =    {
     hybridMartingaleAttempts: { value: 1, type: 'number', label: 'Hybrid: Martingale Attempts' },
     labouchereMinSlices: { value: 4, type: 'number', label: 'Labouchere: Min Slices' },
     // Recovery simulation parameters (used to compute recoveryLevel via simulation)
-    recoverySimPayout: { value: 2.09, type: 'number', label: 'Recovery Simulation Payout (x)' },
+    recoverySimPayout: { value: 2.57, type: 'number', label: 'Recovery Simulation Payout (x)' },
     recoverySimMaxAttempts: { value: 20, type: 'number', label: 'Recovery Simulation Max Attempts' },
-
+    // Labouchere Aggressive Settings
+    recovery_labouchereMult4Slice: { value: 2.50, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
+    recovery_labouchereMult6Slice: { value: 3.50, type: 'number', label: 'Labouchere: Min Multiplier for 6 Slices' },
 
     warmup_rounds: { value: 12, type: 'number', label: 'warmup: Warmup Rounds' },
     warmup_enabled: { value: true, type: 'boolean', label: 'warmup: enable or disable warmup' },
@@ -94,7 +96,7 @@ var config =    {
     // 1. Math & Lookback
     wma_window:                { value: 10,     type: 'number',      label: 'WMA: History Lookback Window' },
     wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
-    wma_ewma_alpha:            { value: 0.60,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
+    wma_ewma_alpha:            { value: 0.70,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
     wma_min_samples:           { value: 3,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
 
     // 2. Bayesian Calibration
@@ -115,9 +117,9 @@ var config =    {
     wma_trap_boost:              { value: 1.1,    type: 'number',      label: 'WMA: Trap Momentum Boost (Multiplier)' },
 
     // 4. Decision Thresholds (Dynamic Hysteresis)
-    wma_threshold_on:       { value: 0.70,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
+    wma_threshold_on:       { value: 0.65,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
     wma_threshold_floor:    { value: 0.45,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.10,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_step_win: { value: 0.12,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
     wma_threshold_step_loss:{ value: 0.20,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
     wma_hysteresis_gap:     { value: 0.08,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
     wma_cooldown_rounds:    { value: 1,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
@@ -152,9 +154,9 @@ var config =    {
 
     // Multi-timescale fusion
     wma_fastWindow:                { value: 4,     type: 'number', label: 'WMA: Fast window (rounds)' },
-    wma_slowWindow:                { value: 20,    type: 'number', label: 'WMA: Slow window (rounds)' },
-    wma_fastWeight:                { value: 0.86,   type: 'number', label: 'WMA: Fast weight in fusion' }, // Trust recent data more
-    wma_slowWeight:                { value: 0.14,   type: 'number', label: 'WMA: Slow weight in fusion' },
+    wma_slowWindow:                { value: 18,    type: 'number', label: 'WMA: Slow window (rounds)' },
+    wma_fastWeight:                { value: 0.88,   type: 'number', label: 'WMA: Fast weight in fusion' }, // Trust recent data more
+    wma_slowWeight:                { value: 0.12,   type: 'number', label: 'WMA: Slow weight in fusion' },
 
     // Bayesian decay during recovery
     wma_recoveryBayesDecay:        { value: 0.0,   type: 'number', label: 'WMA: Recovery posterior decay factor' },
@@ -538,6 +540,9 @@ class ConfigManager {
                 },
                 // The recoveryMode string is stored in root so code can query this.config.get('recovery','recoveryMode')
                 recoveryMode: cfg.recoveryMode?.value,
+                // Map the new Labouchere thresholds
+                labouchereMult4Slice: val('recovery_labouchereMult4Slice', cfg.recovery_labouchereMult4Slice?.value),
+                labouchereMult6Slice: val('recovery_labouchereMult6Slice', cfg.recovery_labouchereMult6Slice?.value),
             },
 
             // UI & Protections
@@ -3642,41 +3647,56 @@ class CrashBot {
     }
 
     /**
-     * Calculates the required stake to recover the sum of First + Last items
+     * Calculates the required stake to recover specific slices
      * based on the specific Target Multiplier.
-     * Formula: Stake = (First + Last) / (Target - 1)
-     * Now applies Recovery Stake Cap logic internally.
+     * Logic:
+     * - < 3.00x: 2 slices (1 front, 1 back)
+     * - 3.00x to < 4.00x: 4 slices (2 front, 2 back)
+     * - >= 4.00x: 6 slices (3 front, 3 back)
      */
     labouchereNextStake(targetMultiplier) {
         if (!Array.isArray(this.labouchereList) || this.labouchereList.length === 0) return 0;
 
-        let neededProfit = 0;
-        if (this.labouchereList.length === 1) {
-            neededProfit = this.labouchereList[0];
-        } else {
-            const first = this.labouchereList[0];
-            const last = this.labouchereList[this.labouchereList.length - 1];
-            neededProfit = first + last;
-        }
-
-        // Default to 2.0 if target is missing or invalid (Standard Labouchère)
+        // Default to 2.04 if target is missing or invalid
         const target = (Number.isFinite(targetMultiplier) && targetMultiplier > 1.0) ? targetMultiplier : 2.04;
 
-        // 1. Calculate Theoretical Stake
+        // 1. Determine Aggression Level (Slices per side) based on Config
+        const thr4 = Number(this.config.get('recovery', 'labouchereMult4Slice')) || 3.0;
+        const thr6 = Number(this.config.get('recovery', 'labouchereMult6Slice')) || 4.0;
+
+        let k = 1; // Default: 1 front + 1 back = 2 slices total
+        if (target >= thr6) k = 3;      // 3 front + 3 back = 6 slices
+        else if (target >= thr4) k = 2; // 2 front + 2 back = 4 slices
+
+        // 2. Calculate Needed Profit (Sum of k front + k back)
+        let neededProfit = 0;
+        const len = this.labouchereList.length;
+
+        // Safety: If list is shorter than the requested slices (2*k), sum the whole list
+        if (len <= (k * 2)) {
+            neededProfit = this.labouchereList.reduce((sum, val) => sum + val, 0);
+        } else {
+            // Sum k from front
+            for (let i = 0; i < k; i++) neededProfit += this.labouchereList[i];
+            // Sum k from back
+            for (let i = 0; i < k; i++) neededProfit += this.labouchereList[len - 1 - i];
+        }
+
+        // 3. Calculate Theoretical Stake
         const theoreticalStake = Math.ceil(neededProfit / (target - 1));
 
-        // 2. Calculate Cap (Initial Loss * Configured Cap Multiplier)
-        // Fallback to normal base bet if initialLossBits is not set (safety)
+        // 4. Calculate Cap (Initial Loss * Configured Cap Multiplier)
         const baseLoss = (this.initialLossBits > 0) ? this.initialLossBits : (Number(this.config.get('normal', 'baseBetBits')) || 1);
         const recStakeBitCap = Number(this.config.get('recovery', 'recStakeCap'));
         const cap = Math.max(1, Math.floor(baseLoss * recStakeBitCap));
 
-        // 3. Return Capped Stake
+        // 5. Return Capped Stake
         return Math.min(theoreticalStake, cap);
     }
 
     /**
      * Updates the Labouchère list based on the bet result.
+     * Removes 2, 4, or 6 slices based on the configured multipliers.
      * Handles partial wins caused by Stake Caps.
      */
     processLabouchereResult(isWin, stakeBits) {
@@ -3684,27 +3704,37 @@ class CrashBot {
         if (!Array.isArray(this.labouchereList)) this.labouchereList = [Math.floor(this.debtBits) || 0];
 
         if (isWin) {
-            // 1. Calculate the Debt we *intended* to cover (First + Last)
+            // 1. Determine Slices intended to cover (Must match labouchereNextStake logic)
+            const target = Number(this.config.get('recovery', 'targetRecMult')) || 2.04;
+            const thr4 = Number(this.config.get('recovery', 'labouchereMult4Slice')) || 3.0;
+            const thr6 = Number(this.config.get('recovery', 'labouchereMult6Slice')) || 4.0;
+
+            let k = 1; // Default 1 per side
+            if (target >= thr6) k = 3;
+            else if (target >= thr4) k = 2;
+
+            // 2. Calculate the Profit we *intended* to cover
             let neededProfit = 0;
-            if (this.labouchereList.length === 1) {
-                neededProfit = this.labouchereList[0];
-            } else if (this.labouchereList.length > 1) {
-                const first = this.labouchereList[0];
-                const last = this.labouchereList[this.labouchereList.length - 1];
-                neededProfit = first + last;
+            const len = this.labouchereList.length;
+
+            if (len <= (k * 2)) {
+                neededProfit = this.labouchereList.reduce((sum, val) => sum + val, 0);
+            } else {
+                for (let i = 0; i < k; i++) neededProfit += this.labouchereList[i];
+                for (let i = 0; i < k; i++) neededProfit += this.labouchereList[len - 1 - i];
             }
 
-            // 2. Standard Removal (Shift & Pop)
-            if (this.labouchereList.length === 1) {
+            // 3. Remove Slices (Shift & Pop k times)
+            if (len <= (k * 2)) {
                 this.labouchereList = [];
             } else {
-                this.labouchereList.shift();
-                if (this.labouchereList.length > 0) this.labouchereList.pop();
+                // Remove k from front
+                this.labouchereList.splice(0, k);
+                // Remove k from back
+                this.labouchereList.splice(-k);
             }
 
-            // 3. Check for Capped/Partial Win
-            // Fetch target from config to calculate actual profit realized
-            const target = Number(this.config.get('recovery', 'targetRecMult')) || 2.0;
+            // 4. Check for Capped/Partial Win
             const actualProfit = stakeBits * (target - 1);
 
             // If we won less than we needed (due to cap), add the remainder back to the end
@@ -3717,7 +3747,7 @@ class CrashBot {
             }
 
         } else {
-            // loss: append stakeBits as new last item (per your spec)
+            // Loss: append stakeBits as new last item
             this.labouchereList.push(Math.max(1, Math.floor(stakeBits)));
         }
 
