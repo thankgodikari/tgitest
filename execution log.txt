@@ -1754,3 +1754,2373 @@ VM13:26 2026-01-11T21:37:13.959Z 📊
         -------------------------------------------------
         
 VM13:26 2026-01-11T21:37:13.961Z 💰 🎲 BET: 1.00 bits @ 2.09x [NORMAL]
+
+main-new-6469eb26.js:11 WebSocket connection to 'wss://game.coinscrash.com/socket.io/?EIO=3&transport=websocket&sid=5WvM6CJKN4gWlP5zAK7v' failed: 
+(anonymous) @ main-new-6469eb26.js:11
+VM35:274 ⚙️ Titan-v15.0-OC @ Coinscrash Mode: TEST User: moneybag  UAT-11 — loaded at 2026-01-11T21:25:46.177Z
+VM35:223 2026-01-11T21:25:46.194Z 📝 🤖 Booting Titan v15.0-OC ...
+VM35:223 2026-01-11T21:25:46.202Z 📝 🔌 Unified Adapter attached to: COINSCRASH
+VM35:223 2026-01-11T21:25:46.207Z 📝 🧠 TitanPredictionEngine: Consensus System Online.
+VM35:223 2026-01-11T21:25:46.208Z 📝 ✅ StatsPanel connected to KeepAlive Heartbeat
+VM35:223 2026-01-11T21:25:46.208Z 📝 ✅ StatsPanel connected to KeepAlive Heartbeat
+VM35:223 2026-01-11T21:25:46.209Z 📝 💓 KeepAlive: Starting Heartbeat...
+VM35:223 2026-01-11T21:25:46.213Z ✅ ✅ KeepAlive: Background Worker Active (High Precision)
+VM35:223 2026-01-11T21:25:46.213Z 📝 ✅ Coinscrash Detected. Attaching Console Commands...
+VM35:223 2026-01-11T21:25:46.214Z 📝 🚀 Titan v15.0-OC (Sentient AI) Initializing...
+VM35:223 2026-01-11T21:25:46.341Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 0/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:00
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: ⛔ READY
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:25:46.342Z 📝 🚀 Titan Sentient AI System is Operational.
+VM35:223 2026-01-11T21:25:48.300Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:25:48.308Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 0/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:02
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 0% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:25:53.589Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 1/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:07
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 0% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:25:53.589Z 📝 🔥 Warmup 1/12
+VM35:223 2026-01-11T21:25:53.590Z 💥 💥 Game crashed at 0x
+VM35:223 2026-01-11T21:25:56.258Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:25:56.262Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 1/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:10
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:26:11.316Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 2/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:25
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:26:11.324Z 📝 🔥 Warmup 2/12
+VM35:223 2026-01-11T21:26:11.325Z 💥 💥 Game crashed at 1.79x
+VM35:223 2026-01-11T21:26:14.088Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:26:14.099Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 2/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:27
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:26:22.210Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 3/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:35
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:26:22.215Z 📝 🔥 Warmup 3/12
+VM35:223 2026-01-11T21:26:22.216Z 💥 💥 Game crashed at 1.18x
+VM35:223 2026-01-11T21:26:24.999Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:26:25.010Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 3/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:38
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:26:42.394Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 4/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:56
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:26:42.400Z 📝 🔥 Warmup 4/12
+VM35:223 2026-01-11T21:26:42.401Z 💥 💥 Game crashed at 2.07x
+VM35:223 2026-01-11T21:26:45.222Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:26:45.236Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 4/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:00:59
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:27:03.974Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 5/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:01:17
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:27:03.981Z 📝 🔥 Warmup 5/12
+VM35:223 2026-01-11T21:27:03.982Z 💥 💥 Game crashed at 2.26x
+VM35:223 2026-01-11T21:27:06.901Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:27:06.912Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 5/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:01:20
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:27:56.244Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 6/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:02:10
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 30% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:27:56.249Z 📝 🔥 Warmup 6/12
+VM35:223 2026-01-11T21:27:56.251Z 💥 💥 Game crashed at 14.16x
+VM35:223 2026-01-11T21:27:59.108Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:27:59.118Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 6/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:02:12
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 32% (58) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:28:15.451Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 7/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:02:29
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 32% (58) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:28:15.457Z 📝 🔥 Warmup 7/12
+VM35:223 2026-01-11T21:28:15.460Z 💥 💥 Game crashed at 1.94x
+VM35:223 2026-01-11T21:28:18.273Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:28:18.306Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 7/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:02:32
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 32% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:28:44.861Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 8/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:02:58
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 32% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:28:44.868Z 📝 🔥 Warmup 8/12
+VM35:223 2026-01-11T21:28:44.870Z 💥 💥 Game crashed at 3.62x
+VM35:223 2026-01-11T21:28:47.746Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:28:47.757Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 8/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:03:01
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 49% (60) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:28:58.176Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 9/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:03:11
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 49% (60) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:28:58.181Z 📝 🔥 Warmup 9/12
+VM35:223 2026-01-11T21:28:58.183Z 💥 💥 Game crashed at 1.37x
+VM35:223 2026-01-11T21:29:01.129Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:29:01.140Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 9/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:03:14
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 53% (60) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:29:06.768Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 10/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:03:20
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 53% (60) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:29:06.772Z 📝 🔥 Warmup 10/12
+VM35:223 2026-01-11T21:29:06.773Z 💥 💥 Game crashed at 1.02x
+VM35:223 2026-01-11T21:29:09.636Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:29:09.647Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 10/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:03:23
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 45% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:29:54.536Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 11/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:04:08
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 45% (65) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:29:54.544Z 📝 🔥 Warmup 11/12
+VM35:223 2026-01-11T21:29:54.546Z 💥 💥 Game crashed at 10.89x
+VM35:223 2026-01-11T21:29:57.452Z 📝 🔥 Warmup: Simulated Skip (WARMUP)
+VM35:223 2026-01-11T21:29:57.461Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 11/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:04:11
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 50% (59) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:23.588Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][WARMUP][RUNNING]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: 12/12
+        | ⏱️ Start Time: 05:25:46 | Time: 00:04:37
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: --:--:-- | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 0
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 50% (59) | SKIP: WARM_UP
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:23.592Z 📝 🔥 Warmup 12/12
+VM35:223 2026-01-11T21:30:23.595Z ✅ ✅ Warm-up complete — switching to NORMAL mode
+VM35:223 2026-01-11T21:30:23.603Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:04:37
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: ⛔ READY
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:23.607Z 💥 💥 Game crashed at 3.54x
+VM35:223 2026-01-11T21:30:26.591Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 350.00
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:04:40
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.00
+        | 📈 P/L: +0.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 0.00× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 0
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 0
+        | 🎲 Bets: 0 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 0
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: ⛔ BETTING (NORMAL)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:26.596Z 💰 🎲 BET: 1.00 bits @ 2.09x [NORMAL]
+VM35:223 2026-01-11T21:30:43.386Z 📝 📊 VERIFICATION: Total Bets: 1 | Wins: 0 | Losses: 1 | Rounds: 1 | Total P/L: -1.00 bits
+VM35:223 2026-01-11T21:30:43.387Z 💥 💥 Game crashed at 1.99x
+VM35:223 2026-01-11T21:30:43.389Z ❌ 💸 LOSS | Bet: 1 bits | Target: undefinedx | Crash: undefinedx | Lost: 1 bits | Net P/L: -1.00 bits
+VM35:223 2026-01-11T21:30:43.390Z 📊 💰 Balance: 250.00 → 249.00 bits | Total P/L: -1.00 bits
+VM35:223 2026-01-11T21:30:43.392Z 📊 🧾 Last P/L (bits): -1.00
+VM35:223 2026-01-11T21:30:43.404Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.00
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:04:57
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 249.00
+        | 📈 P/L: -1.00 | 🧾 Last P/L: -1.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 1
+        | 🎲 Bets: 1 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 1
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:46.265Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.00
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:00
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 249.00
+        | 📈 P/L: -1.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 0
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 1
+        | 🎲 Bets: 1 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 1
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 0.00
+        | ⏱️ Time: --:--:-- | 🕒 Age: 00:00:00
+        | ✍️ Last Action: ⛔ BETTING (RECOVERY)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:46.269Z 💰 🎲 BET: 1.00 bits @ 2.04x [STANDARD_RECOVERY]
+VM35:223 2026-01-11T21:30:53.422Z 📝 📊 VERIFICATION: Total Bets: 2 | Wins: 0 | Losses: 2 | Rounds: 2 | Total P/L: -2.00 bits
+VM35:223 2026-01-11T21:30:53.423Z 💥 💥 Game crashed at 1.12x
+VM35:223 2026-01-11T21:30:53.424Z ❌ 💸 LOSS | Bet: 1 bits | Target: undefinedx | Crash: undefinedx | Lost: 1 bits | Net P/L: -1.00 bits
+VM35:223 2026-01-11T21:30:53.425Z 📊 💰 Balance: 250.00 → 248.00 bits | Total P/L: -2.00 bits
+VM35:223 2026-01-11T21:30:53.427Z 📊 🧾 Last P/L (bits): -1.00
+VM35:223 2026-01-11T21:30:53.439Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 352.00
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:07
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.00
+        | 📈 P/L: -2.00 | 🧾 Last P/L: -1.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 2.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 2 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 2
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 1.00
+        | ⏱️ Time: 05:30:53 | 🕒 Age: 00:05:07
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:56.315Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 352.00
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:10
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.00
+        | 📈 P/L: -2.00 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 2.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 2 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 2
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 1.00
+        | ⏱️ Time: 05:30:53 | 🕒 Age: 00:05:07
+        | ✍️ Last Action: ⛔ BETTING (RECOVERY)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:30:56.320Z 💰 🎲 BET: 2.00 bits @ 2.04x [RECOVERY_FOLLOWUP]
+VM35:223 2026-01-11T21:31:16.694Z 📝 🎉 Recovery Cleared. Re-entering Normal Mode IMMEDIATELY.
+VM35:223 2026-01-11T21:31:16.697Z ✅ 🎉 Labouchère cleared debt; switching to NORMAL
+VM35:223 2026-01-11T21:31:16.706Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:30
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 0 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 0 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 2 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 2
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 1.00
+        | ⏱️ Time: 05:30:53 | 🕒 Age: 00:05:07
+        | ✍️ Last Action: ⛔ RECOVERY_CLEARED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:31:16.711Z 📝 📊 VERIFICATION: Total Bets: 3 | Wins: 1 | Losses: 2 | Rounds: 3 | Total P/L: 0.08 bits
+VM35:223 2026-01-11T21:31:16.712Z 💥 💥 Game crashed at 2.49x
+VM35:223 2026-01-11T21:31:16.713Z ✅ 🎉 WIN | Bet: 2.00 bits | Target: undefinedx | Crash: undefinedx | Winnings: 0.00 bits | Net P/L: +2.08 bits
+VM35:223 2026-01-11T21:31:16.714Z 📊 💰 Balance: 250.00 → 250.00 bits | Total P/L: 0.00 bits
+VM35:223 2026-01-11T21:31:16.716Z 📊 🧾 Last P/L (bits): +2.08
+VM35:223 2026-01-11T21:31:16.717Z ✅ 🎉 RECOVERY CLEARED. Switching to NORMAL.
+VM35:223 2026-01-11T21:31:16.727Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:30
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: +2.08
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 1 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 3 | ⏭️ Skipped: 0
+        | 🔍 Normal Skips: 0 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 3
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ WIN
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:31:19.585Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:31:19.597Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:33
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 1 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 3 | ⏭️ Skipped: 1
+        | 🔍 Normal Skips: 1 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 4
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 55% (61) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:31:35.704Z 💥 💥 Game crashed at 1.93x
+VM35:223 2026-01-11T21:31:35.715Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:49
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 1 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 3 | ⏭️ Skipped: 1
+        | 🔍 Normal Skips: 1 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 4
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:31:38.644Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:31:38.656Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:05:52
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 1 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 3 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 5
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 57% (61) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:32:18.609Z 💥 💥 Game crashed at 8.08x
+VM35:223 2026-01-11T21:32:18.620Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:06:32
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 1 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 3 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 5
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:32:21.508Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 349.92
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:06:35
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.08
+        | 📈 P/L: +0.08 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 0 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 1 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 3 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 5
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (NORMAL)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:32:21.512Z 💰 🎲 BET: 1.00 bits @ 2.09x [NORMAL]
+VM35:223 2026-01-11T21:33:05.049Z 📝 📊 VERIFICATION: Total Bets: 4 | Wins: 2 | Losses: 2 | Rounds: 6 | Total P/L: 1.17 bits
+VM35:223 2026-01-11T21:33:05.051Z 💥 💥 Game crashed at 9.96x
+VM35:223 2026-01-11T21:33:05.052Z ✅ 🎉 WIN | Bet: 1.00 bits | Target: undefinedx | Crash: undefinedx | Winnings: 0.00 bits | Net P/L: +1.09 bits
+VM35:223 2026-01-11T21:33:05.053Z 📊 💰 Balance: 250.00 → 251.00 bits | Total P/L: 1.00 bits
+VM35:223 2026-01-11T21:33:05.054Z 📊 🧾 Last P/L (bits): +1.09
+VM35:223 2026-01-11T21:33:05.065Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.3% | REM: 348.83
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:07:18
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.17
+        | 📈 P/L: +1.17 | 🧾 Last P/L: +1.09
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 1 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 2 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 2 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 4 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 6
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ WIN
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:07.945Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.3% | REM: 348.83
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:07:21
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.17
+        | 📈 P/L: +1.17 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 1 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 2 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 2 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 4 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 6
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (NORMAL)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:07.950Z 💰 🎲 BET: 1.00 bits @ 2.09x [NORMAL]
+VM35:223 2026-01-11T21:33:33.075Z 📝 📊 VERIFICATION: Total Bets: 5 | Wins: 3 | Losses: 2 | Rounds: 7 | Total P/L: 2.26 bits
+VM35:223 2026-01-11T21:33:33.076Z 💥 💥 Game crashed at 3.3x
+VM35:223 2026-01-11T21:33:33.077Z ✅ 🎉 WIN | Bet: 1.00 bits | Target: undefinedx | Crash: undefinedx | Winnings: 0.00 bits | Net P/L: +1.09 bits
+VM35:223 2026-01-11T21:33:33.078Z 📊 💰 Balance: 250.00 → 252.00 bits | Total P/L: 2.00 bits
+VM35:223 2026-01-11T21:33:33.079Z 📊 🧾 Last P/L (bits): +1.09
+VM35:223 2026-01-11T21:33:33.088Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.6% | REM: 347.74
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:07:46
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.26
+        | 📈 P/L: +2.26 | 🧾 Last P/L: +1.09
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 3 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 5 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 7
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ WIN
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:35.910Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.6% | REM: 347.74
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:07:49
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.26
+        | 📈 P/L: +2.26 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 1
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 3 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 5 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 7
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (NORMAL)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:35.916Z 💰 🎲 BET: 1.00 bits @ 2.09x [NORMAL]
+VM35:223 2026-01-11T21:33:45.545Z 📝 📊 VERIFICATION: Total Bets: 6 | Wins: 3 | Losses: 3 | Rounds: 8 | Total P/L: 1.26 bits
+VM35:223 2026-01-11T21:33:45.546Z 💥 💥 Game crashed at 1.3x
+VM35:223 2026-01-11T21:33:45.547Z ❌ 💸 LOSS | Bet: 1 bits | Target: undefinedx | Crash: undefinedx | Lost: 1 bits | Net P/L: -1.00 bits
+VM35:223 2026-01-11T21:33:45.548Z 📊 💰 Balance: 250.00 → 251.00 bits | Total P/L: 1.00 bits
+VM35:223 2026-01-11T21:33:45.549Z 📊 🧾 Last P/L (bits): -1.00
+VM35:223 2026-01-11T21:33:45.558Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.74
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:07:59
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.26
+        | 📈 P/L: +1.26 | 🧾 Last P/L: -1.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 6 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 8
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:48.424Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.74
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:02
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.26
+        | 📈 P/L: +1.26 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 1
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 6 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 8
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (RECOVERY)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:48.428Z 💰 🎲 BET: 1.00 bits @ 2.04x [STANDARD_RECOVERY]
+VM35:223 2026-01-11T21:33:54.532Z 📝 📊 VERIFICATION: Total Bets: 7 | Wins: 3 | Losses: 4 | Rounds: 9 | Total P/L: 0.26 bits
+VM35:223 2026-01-11T21:33:54.533Z 💥 💥 Game crashed at 1.05x
+VM35:223 2026-01-11T21:33:54.535Z ❌ 💸 LOSS | Bet: 1 bits | Target: undefinedx | Crash: undefinedx | Lost: 1 bits | Net P/L: -1.00 bits
+VM35:223 2026-01-11T21:33:54.536Z 📊 💰 Balance: 250.00 → 250.00 bits | Total P/L: 0.00 bits
+VM35:223 2026-01-11T21:33:54.537Z 📊 🧾 Last P/L (bits): -1.00
+VM35:223 2026-01-11T21:33:54.547Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.1% | REM: 349.74
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:08
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.26
+        | 📈 P/L: +0.26 | 🧾 Last P/L: -1.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 2.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 7 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 9
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:57.398Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.1% | REM: 349.74
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:11
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.26
+        | 📈 P/L: +0.26 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 2.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 7 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 9
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (RECOVERY)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:33:57.403Z 💰 🎲 BET: 2.00 bits @ 2.04x [RECOVERY_FOLLOWUP]
+VM35:223 2026-01-11T21:34:19.748Z 📝 🎉 Recovery Cleared. Re-entering Normal Mode IMMEDIATELY.
+VM35:223 2026-01-11T21:34:19.749Z ✅ 🎉 Labouchère cleared debt; switching to NORMAL
+VM35:223 2026-01-11T21:34:19.759Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:33
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 1 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 7 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 9
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ RECOVERY_CLEARED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:34:19.764Z 📝 📊 VERIFICATION: Total Bets: 8 | Wins: 4 | Losses: 4 | Rounds: 10 | Total P/L: 2.34 bits
+VM35:223 2026-01-11T21:34:19.766Z 💥 💥 Game crashed at 2.79x
+VM35:223 2026-01-11T21:34:19.767Z ✅ 🎉 WIN | Bet: 2.00 bits | Target: undefinedx | Crash: undefinedx | Winnings: 0.00 bits | Net P/L: +2.08 bits
+VM35:223 2026-01-11T21:34:19.768Z 📊 💰 Balance: 250.00 → 252.00 bits | Total P/L: 2.00 bits
+VM35:223 2026-01-11T21:34:19.769Z 📊 🧾 Last P/L (bits): +2.08
+VM35:223 2026-01-11T21:34:19.770Z ✅ 🎉 RECOVERY CLEARED. Switching to NORMAL.
+VM35:223 2026-01-11T21:34:19.779Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:33
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: +2.08
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 2
+        | 🔍 Normal Skips: 2 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 10
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ WIN
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:34:22.561Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:34:22.570Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:36
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 3
+        | 🔍 Normal Skips: 3 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 11
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 60% (61) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:34:37.187Z 💥 💥 Game crashed at 1.76x
+VM35:223 2026-01-11T21:34:37.196Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:50
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 3
+        | 🔍 Normal Skips: 3 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 11
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:34:40.098Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:34:40.107Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:08:53
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 4
+        | 🔍 Normal Skips: 4 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 12
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 59% (61) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:34:55.180Z 💥 💥 Game crashed at 1.82x
+VM35:223 2026-01-11T21:34:55.191Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:09:08
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 4
+        | 🔍 Normal Skips: 4 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 12
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:34:58.176Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:34:58.187Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:09:11
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 5
+        | 🔍 Normal Skips: 5 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 13
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 49% (65) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:35:11.693Z 💥 💥 Game crashed at 1.65x
+VM35:223 2026-01-11T21:35:11.704Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:09:25
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 5
+        | 🔍 Normal Skips: 5 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 13
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:35:14.637Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:35:14.647Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:09:28
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 6
+        | 🔍 Normal Skips: 6 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 14
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 42% (65) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:36:01.349Z 💥 💥 Game crashed at 12.16x
+VM35:223 2026-01-11T21:36:01.359Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:10:15
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 6
+        | 🔍 Normal Skips: 6 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 14
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:36:04.293Z ⏭️ ⏭️ SKIP | Reason: No Signal
+VM35:223 2026-01-11T21:36:04.311Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:10:18
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 7
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 15
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.09x | Votes: 0/1 | WMA: 🔴 42% (58) | SKIP: WAITING_SIGNAL
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:36:55.523Z 💥 💥 Game crashed at 15.95x
+VM35:223 2026-01-11T21:36:55.540Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:11:09
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 7
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 15
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:36:58.492Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][NORMAL][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.7% | REM: 347.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:11:12
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 252.34
+        | 📈 P/L: +2.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 2
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 0.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 1 | 🌧 Loss Streaks: 0
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 8 | ⏭️ Skipped: 7
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 15
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (NORMAL)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:36:58.497Z 💰 🎲 BET: 1.00 bits @ 2.09x [NORMAL]
+VM35:223 2026-01-11T21:37:08.141Z 📝 📊 VERIFICATION: Total Bets: 9 | Wins: 4 | Losses: 5 | Rounds: 16 | Total P/L: 1.34 bits
+VM35:223 2026-01-11T21:37:08.142Z 💥 💥 Game crashed at 1.3x
+VM35:223 2026-01-11T21:37:08.143Z ❌ 💸 LOSS | Bet: 1 bits | Target: undefinedx | Crash: undefinedx | Lost: 1 bits | Net P/L: -1.00 bits
+VM35:223 2026-01-11T21:37:08.145Z 📊 💰 Balance: 250.00 → 251.00 bits | Total P/L: 1.00 bits
+VM35:223 2026-01-11T21:37:08.146Z 📊 🧾 Last P/L (bits): -1.00
+VM35:223 2026-01-11T21:37:08.155Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:11:21
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.34
+        | 📈 P/L: +1.34 | 🧾 Last P/L: -1.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.09×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 9 | ⏭️ Skipped: 7
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 0
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 16
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:37:11.005Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:37:11.020Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:11:24
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.34
+        | 📈 P/L: +1.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 9 | ⏭️ Skipped: 8
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 1
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 17
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 49% (65) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:37:55.271Z 💥 💥 Game crashed at 10.37x
+VM35:223 2026-01-11T21:37:55.282Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:09
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.34
+        | 📈 P/L: +1.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 9 | ⏭️ Skipped: 8
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 1
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 17
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:37:58.013Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:37:58.025Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:11
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.34
+        | 📈 P/L: +1.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 9 | ⏭️ Skipped: 9
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 2
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 18
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 58% (59) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:11.732Z 💥 💥 Game crashed at 1.67x
+VM35:223 2026-01-11T21:38:11.766Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:25
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.34
+        | 📈 P/L: +1.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 9 | ⏭️ Skipped: 9
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 2
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 18
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:14.704Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.4% | REM: 348.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:28
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 251.34
+        | 📈 P/L: +1.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.09× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 2
+        | 💸 Debts: 1.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 1
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 9 | ⏭️ Skipped: 9
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 2
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 18
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (RECOVERY)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:14.708Z 💰 🎲 BET: 1.00 bits @ 2.04x [STANDARD_RECOVERY]
+VM35:223 2026-01-11T21:38:28.372Z 📝 📊 VERIFICATION: Total Bets: 10 | Wins: 4 | Losses: 6 | Rounds: 19 | Total P/L: 0.34 bits
+VM35:223 2026-01-11T21:38:28.373Z 💥 💥 Game crashed at 1.65x
+VM35:223 2026-01-11T21:38:28.374Z ❌ 💸 LOSS | Bet: 1 bits | Target: undefinedx | Crash: undefinedx | Lost: 1 bits | Net P/L: -1.00 bits
+VM35:223 2026-01-11T21:38:28.375Z 📊 💰 Balance: 250.00 → 250.00 bits | Total P/L: 0.00 bits
+VM35:223 2026-01-11T21:38:28.376Z 📊 🧾 Last P/L (bits): -1.00
+VM35:223 2026-01-11T21:38:28.386Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.1% | REM: 349.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:42
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.34
+        | 📈 P/L: +0.34 | 🧾 Last P/L: -1.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 3
+        | 💸 Debts: 2.00 | 💰 Stake: 1
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 10 | ⏭️ Skipped: 9
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 2
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 19
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:31.158Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.1% | REM: 349.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:44
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 250.34
+        | 📈 P/L: +0.34 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 3
+        | 💸 Debts: 2.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 2
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 2
+        | 🎲 Bets: 10 | ⏭️ Skipped: 9
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 2
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 19
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ BETTING (RECOVERY)
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:31.162Z 💰 🎲 BET: 2.00 bits @ 2.04x [RECOVERY_FOLLOWUP]
+VM35:223 2026-01-11T21:38:40.470Z 📝 📊 VERIFICATION: Total Bets: 11 | Wins: 4 | Losses: 7 | Rounds: 20 | Total P/L: -1.66 bits
+VM35:223 2026-01-11T21:38:40.473Z 💥 💥 Game crashed at 1.27x
+VM35:223 2026-01-11T21:38:40.475Z ❌ 💸 LOSS | Bet: 2 bits | Target: undefinedx | Crash: undefinedx | Lost: 2 bits | Net P/L: -2.00 bits
+VM35:223 2026-01-11T21:38:40.476Z 📊 💰 Balance: 250.00 → 248.00 bits | Total P/L: -2.00 bits
+VM35:223 2026-01-11T21:38:40.478Z 📊 🧾 Last P/L (bits): -2.00
+VM35:223 2026-01-11T21:38:40.502Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][BETTING]
+        | 🎯 Betting Now: Yes
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:54
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: -2.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 2
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 9
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 2
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 20
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ LOSS
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:43.266Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:38:43.280Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:12:57
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 10
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 3
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 21
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 45% (65) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:38:59.943Z 💥 💥 Game crashed at 1.99x
+VM35:223 2026-01-11T21:38:59.969Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:13:13
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 10
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 3
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 21
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:39:02.832Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:39:02.848Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:13:16
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 11
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 4
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 22
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 40% (65) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:39:17.230Z 💥 💥 Game crashed at 1.73x
+VM35:223 2026-01-11T21:39:17.242Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:13:31
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 11
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 4
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 22
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:39:20.075Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:39:20.087Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:13:33
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 12
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 5
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 23
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 36% (65) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:39:40.382Z 💥 💥 Game crashed at 2.46x
+VM35:223 2026-01-11T21:39:40.399Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:13:54
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 12
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 5
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 23
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:39:43.163Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:39:43.186Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:13:56
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 13
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 6
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 24
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 36% (61) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:40:04.621Z 💥 💥 Game crashed at 2.65x
+VM35:223 2026-01-11T21:40:04.644Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:14:18
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 13
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 6
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 24
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:40:07.485Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:40:07.500Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:14:21
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 14
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 7
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 25
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 38% (57) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:40:18.579Z 💥 💥 Game crashed at 1.42x
+VM35:223 2026-01-11T21:40:18.597Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:14:32
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 14
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 7
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 25
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:40:21.480Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:40:21.492Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:14:35
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 15
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 8
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 26
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 35% (65) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:40:38.199Z 💥 💥 Game crashed at 2x
+VM35:223 2026-01-11T21:40:38.212Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:14:51
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 15
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 8
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 26
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:40:41.096Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:40:41.109Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:14:54
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 16
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 9
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 27
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 33% (65) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:41:19.703Z 💥 💥 Game crashed at 7.43x
+VM35:223 2026-01-11T21:41:19.718Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:15:33
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 16
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 9
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 27
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:41:22.658Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:41:22.672Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:15:36
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 17
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 10
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 28
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 50% (59) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:41:28.425Z 💥 💥 Game crashed at 1.03x
+VM35:223 2026-01-11T21:41:28.472Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:15:42
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 17
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 10
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 28
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: ⛔ GAME_ENDED
+        -------------------------------------------------
+        
+VM35:223 2026-01-11T21:41:31.328Z ⏭️ ⏭️ SKIP | Reason: Recovery Consensus Failed
+VM35:223 2026-01-11T21:41:31.340Z 📊 
+        ----------------- [ 🤖 BOT STATS ] -----------------
+        | 🧭 Mode: [TEST][RECOVERY][PAUSED]
+        | 🎯 Betting Now: No
+        | 🎯 TP TGT: 350.00 | PCOV: 0.0% | REM: 351.66
+        | 🔥 Warm-up: Betting started at 05:30:23
+        | ⏱️ Start Time: 05:25:46 | Time: 00:15:45
+        | 📅 Scheduled: --:--:--
+        | 🚀 B.Start Time: 05:30:23 | 🏁 B.End Time: --:--:--
+        | ⏳ Waiting: --:--:-- until --:--:--
+        | 💰 Init Bal: 250.00 | 💵 Bal: 248.34
+        | 📈 P/L: -1.66 | 🧾 Last P/L: 0.00
+        | 🔢 Last Mult: 2.04× | 🔜 Next Mult: 2.04×
+        | ✅ Normal Win: 2 | ❌ Normal Loss: 3
+        | 🔁 Recovery Win: 2 | 🔻 Recovery Loss: 4
+        | 💸 Debts: 4.00 | 💰 Stake: 4
+        | 🔥 Win Streaks: 0 | 🌧 Loss Streaks: 3
+        | 🏆 H.Win Streak: 3 | ⚠️ H.Loss streak: 3
+        | 🎲 Bets: 11 | ⏭️ Skipped: 18
+        | 🔍 Normal Skips: 7 | 🔁 Recovery Skips: 11
+        | ↕️ Recovery Level: 0 | 🔁 Rounds: 29
+        | 📊 Max Rec Level: 0 | 💹 MaxRecStake: 2.00
+        | ⏱️ Time: 05:31:16 | 🕒 Age: 00:05:30
+        | ✍️ Last Action: 🎯 2.04x | Votes: 0/1 | WMA: 🔴 49% (59) | SKIP: RECOVERY_PAUSED
+        -------------------------------------------------
+        
+
+
