@@ -63,10 +63,10 @@ var config =    {
     warmup_startInWarmup: { value: true, type: 'boolean', label: 'warmup: start bot in warm up mode' },
 
     // === Stop Limits ===
-    takeProfitBits: { value: 250, type: 'number', label: 'Take Profit (bits)' },
-    sch1ProfitBits: { value: 250, type: 'number', label: 'Schedule 1 Profit (bits)' },
-    sch2ProfitBits: { value: 250, type: 'number', label: 'Schedule 2 Profit (bits)' },
-    sch3ProfitBits: { value: 250, type: 'number', label: 'Schedule 3 Profit (bits)' },
+    takeProfitBits: { value: 350, type: 'number', label: 'Take Profit (bits)' },
+    sch1ProfitBits: { value: 350, type: 'number', label: 'Schedule 1 Profit (bits)' },
+    sch2ProfitBits: { value: 350, type: 'number', label: 'Schedule 2 Profit (bits)' },
+    sch3ProfitBits: { value: 350, type: 'number', label: 'Schedule 3 Profit (bits)' },
     minBalanceBits: { value: 1, type: 'number', label: 'Stop Loss (bits)' },
 
     // Schedule times: accept either an ISO timestamp string, epoch ms, or "HH:MM" (24h)
@@ -3464,154 +3464,239 @@ class CrashBot {
     // Recovery manager helpers
     // -------------------------
     /**
-     * generateRecoveryLadder(initialLoss, target, cap, settings)
+     * generateRecoveryLadder(initialLoss, target, cap, settings = {})
      *
-     * Simulates a simple martingale ladder to compute the "recovery level"
-     * required to reach the target and returns an object:
-     *   { level, ladder, totalDebt }
+     * Simulates a martingale-style debt ladder using the *given* target multiplier.
+     * Returns: { level, ladder, totalDebt }
      *
-     * - initialLoss: bits (number)
-     * - target: multiplier (e.g. 2.04)
+     * - initialLoss: bits (number) - seed debt when entering recovery
+     * - target: multiplier (number) - TARGET MULTIPLIER to recover to (use this, do NOT use separate sim payout)
      * - cap: maximum stake allowed in bits
-     * - settings: optional object { maxAttempts: number, payout: number } (payout default 2.00)
+     * - settings: optional { maxAttempts: number } - note: payout is ignored (we use `target`)
      *
-     * This intentionally does NOT use the old "debt-slicing" logic; it
-     * simulates martingale stakes only (doubling) until either the target
-     * is achievable or cap reached.
+     * Ladder entries: { level: i, lowerBound: prevDebt, upperBound: nextDebt, stake: executedStake }
+     *
+     * Important: this function is purely predictive and does NOT mutate `this.*`.
      */
     generateRecoveryLadder(initialLoss, target, cap, settings = {}) {
-        const payout = Number(settings.payout);
-        const maxAttempts = Number(settings.maxAttempts);
+        // Defensive reads from settings
+        const maxAttempts = Number(settings.maxAttempts) || Number(this.config.get('recovery', 'sim')?.maxAttempts) || 20;
+
+        // Normalize inputs
+        const initial = Math.max(1, Number(initialLoss) || 1);
+        const payout = Number(target) || Number(this.config.get('recovery', 'targetRecMult')) || 2.0;
+        const maxIter = Math.max(1, Math.floor(maxAttempts));
+
         const ladder = [];
-        let level = 0;
         let cumulativeLoss = 0;
 
-        // Base stake: start from initialLoss as the base of the martingale leg
-        // (This mirrors your previous approach where initial normal loss is the seed)
-        let stake = Math.max(1, Math.floor(initialLoss));
+        // Start ranges: previous upper bound (0) to nextDebt after stake
+        let prevDebt = 0;
+        let currentDebt = initial;
 
-        while (level < maxAttempts) {
-            // push this stake to ladder and update cumulative losses
-            ladder.push(stake);
-            cumulativeLoss += stake;
+        // Build ladder entries up to maxIter
+        for (let i = 1; i <= maxIter; i++) {
+            // compute stake using canonical rule: ceil(currentDebt / (payout - 1))
+            const raw = (payout - 1) > 0 ? (currentDebt / (payout - 1)) : currentDebt;
+            const stake = Math.max(1, Math.ceil(raw));
 
-            // If a win at this stake recovers previous losses + target profit?
-            // Compute profit on a win at this stake = stake * (payout - 1)
-            const profitOnWin = stake * (payout - 1);
-            // If profitOnWin >= (cumulativeLoss - stake) + initialLoss * (target - 1)
-            // then the ladder at this level achieves target recovery.
-            // Explanation: cumulativeLoss - stake = losses already suffered prior to this bet.
-            const needed = (cumulativeLoss - stake) + (initialLoss * (target - 1));
+            // enforce cap
+            const executedStake = Math.min(stake, Math.max(1, Math.floor(cap || Infinity)));
+
+            // debt after a simulated loss
+            const nextDebt = currentDebt + executedStake;
+
+            // push range: (prevDebt, nextDebt] belongs to this level
+            ladder.push({
+                level: i,
+                lowerBound: prevDebt,
+                upperBound: nextDebt,
+                stake: executedStake,
+                rawStakeDecimal: raw
+            });
+
+            cumulativeLoss += executedStake;
+
+            // Stop early if a win at this stake would cover prior losses + intended profit
+            // Profit on win at this stake:
+            const profitOnWin = executedStake * (payout - 1);
+            // Needed to cover previously accumulated losses (cumulativeLoss - executedStake) plus
+            // the profit target equal to initial * (target - 1)
+            const needed = (cumulativeLoss - executedStake) + (initial * (payout - 1));
             if (profitOnWin >= needed) {
-                level = ladder.length - 1; // zero-indexed level; following your code you may assign 1..n
-                // Normalize to 1-based step count to preserve existing semantics elsewhere:
-                return { level: ladder.length, ladder, totalDebt: cumulativeLoss + initialLoss };
+                // Found a ladder level that would resolve the debt if won here
+                return {
+                    level: i,
+                    ladder,
+                    totalDebt: cumulativeLoss  // cumulativeLoss is the true sum of stakes, no double-count
+                };
             }
 
-            // If next doubling would exceed cap, stop
-            const nextStake = stake * 2;
-            if (nextStake > cap) {
-                // cannot continue martingale safely beyond cap
+            // Prepare for next iteration
+            prevDebt = nextDebt;
+            currentDebt = nextDebt;
+
+            // If cap prevented meaningful progress (executedStake == cap and next stake would also be > cap),
+            // we still record this state but may break if further doubling is impossible.
+            const nextRaw = (payout - 1) > 0 ? (currentDebt / (payout - 1)) : currentDebt;
+            const nextStakeGuess = Math.ceil(nextRaw);
+            if (nextStakeGuess > cap) {
+                // Can't continue beyond cap - stop building ladder (we included this capped level)
                 break;
             }
-            stake = nextStake;
-            level++;
         }
 
-        // If we exit loop without meeting target
-        return { level: ladder.length, ladder, totalDebt: cumulativeLoss + initialLoss };
+        // Exhausted attempts without satisfying profit condition
+        return {
+            level: ladder.length,
+            ladder,
+            totalDebt: cumulativeLoss
+        };
     }
 
     /**
      * calculateRecoveryStake(simulate = false)
      *
-     * If simulate === true: compute and return the stake that *would* be used,
-     * but do not mutate any bot state (no writes to lastRecoveryStakeBits, peakStakeBits,
-     * recoveryLevel, etc.). This preserves updateStats(true) behavior.
+     * Always compute the *actual* stake for this recovery round from current debt using:
+     * stake = ceil(currentDebt / (targetRecMult - 1))
      *
-     * If simulate === false: compute the stake and update in-memory state as normal.
+     * Uses the cached ladder (built by generateRecoveryLadder) to determine the recovery level
+     * for the current debt range. The ladder is built once on entering recovery (cached in
+     * this.recoveryLadderCache) and reused. If simulate === true, no this.* state is mutated.
+     *
+     * Returns executedStake (bits, integer).
      */
     calculateRecoveryStake(simulate = false) {
-        // Keep strictly to the single-source config (no hard-coded fallback)
-        const recStakeBitCap = Number(this.config.get('recovery', 'recStakeCap'));
-        const targetMultiplier = Number(this.config.get('recovery', 'targetRecMult'));
+        // Strict reads from config (single-source)
+        const recStakeCapMultiplier = Number(this.config.get('recovery', 'recStakeCap'));
+        const targetRecMult = Number(this.config.get('recovery', 'targetRecMult'));
 
-        // Defensive: ensure we are in RECOVERY mode
+        // Defensive: must be in RECOVERY mode
         if (this.mode !== 'RECOVERY') return 0;
 
-        // compute cap using configured multiplier and initialLossBits (config must contain values)
-        const cap = Math.max(1, Math.floor((this.initialLossBits) * recStakeBitCap));
+        // Compute cap in bits: cap = Math.max(1, Math.floor(initialLoss * recStakeCapMultiplier))
+        const baseLoss = (this.initialLossBits > 0) ? Number(this.initialLossBits) : Math.max(1, Number(this.config.get('normal', 'baseBetBits')) || 1);
+        const recStakeCap = Math.max(1, Math.floor(baseLoss * (isFinite(recStakeCapMultiplier) ? recStakeCapMultiplier : 1)));
 
-        // update peakDebt for telemetry (this is safe to update even in simulate? No — we must not mutate on simulate)
+        // ensure peakDebt updated only when not simulating
         if (!simulate) {
-            this.peakDebt = Math.max(this.peakDebt || 0, this.debtBits || 0);
+            this.peakDebt = Math.max(this.peakDebt || 0, Number(this.debtBits || 0));
         }
 
-        // MARTINGALE phase: double lastStake (preserve previous martingale behavior)
-        if (this.recoveryPhase === 'martingale') {
-            const lastStake = (this.lastRecoveryStakeBits || this.initialLossBits);
-            const nextStake = Math.max(1, Math.floor(lastStake * 2));
-            const executedStake = Math.min(nextStake, cap);
-
-            // Only mutate state when NOT simulating
-            if (!simulate) {
-                this.lastRecoveryStakeBits = executedStake;
-                this.peakStakeBits = Math.max(this.peakStakeBits || 0, executedStake);
-
-                // +++ FIX: Record Max Stake + Time +++
-                if (executedStake > (this.maxRecStakeBitsEver || 0)) {
-                    this.maxRecStakeBitsEver = executedStake;
-                    this.maxRecTime = Date.now(); // timestamp when this max rec stake was placed
-                }
-            }
-
-            // Recompute recovery level via generateRecoveryLadder but only assign it when not simulating
-            // Use simulation parameters from the single-source config
-            const simCfg = this.config.get('recovery','sim');
-            const simPayout = Number(simCfg.payout);
-            const simMaxAttempts = Number(simCfg.maxAttempts);
-            const simResult = this.generateRecoveryLadder(this.initialLossBits, targetMultiplier, cap, { payout: simPayout, maxAttempts: simMaxAttempts });
-            if (!simulate) {
-                this.recoveryLevel = simResult.level;
-                // Update Max Level Stat
-                this.maxRecLevel = Math.max(this.maxRecLevel || 0, this.recoveryLevel);
-            }
-
-            return executedStake;
-        }
-
-        // LABOUCHERE phase: first + last (or single slice). Use labouchereNextStake()
+        // If in Labouchere phase, delegate to labouchereNextStake (preserve existing behavior)
         if (this.recoveryPhase === 'labouchere') {
-            // Pass the targetMultiplier (retrieved at top of this function) to the helper
-            const theoretical = this.labouchereNextStake(targetMultiplier);
-            const executedStake = Math.min(Math.max(1, Math.floor(theoretical)), cap);
+            // compute theoretical stake from labouchere helper
+            const theoretical = this.labouchereNextStake(targetRecMult);
+            // labouchereNextStake already uses ceil and cap semantics; ensure integer & cap again defensively
+            const executedStake = Math.min(recStakeCap, Math.max(1, Math.ceil(Number(theoretical) || 0)));
 
             if (!simulate) {
-                this.peakStakeBits = Math.max(this.peakStakeBits || 0, executedStake);
+                // update telemetry
                 this.lastRecoveryStakeBits = executedStake;
-
-                // +++ FIX: Record Max Stake + Time (Was missing here) +++
+                this.peakStake = Math.max(this.peakStake || 0, executedStake);
                 if (executedStake > (this.maxRecStakeBitsEver || 0)) {
                     this.maxRecStakeBitsEver = executedStake;
                     this.maxRecTime = Date.now();
+                    this.maxRecRuntimeSeconds = (Date.now() - (this.firstStartedAt || Date.now())) / 1000;
                 }
             }
             return executedStake;
         }
 
-        // Fallback: if no phase set, return initialLossBits (do not mutate when simulating)
-        const fallbackStake = Math.max(1, Math.floor(this.initialLossBits));
-        if (!simulate) {
-            this.lastRecoveryStakeBits = fallbackStake;
-            this.peakStakeBits = Math.max(this.peakStakeBits || 0, fallbackStake);
+        // --- MARTINGALE / canonical recovery stake computation path ---
 
-            // +++ FIX: Record Max Stake + Time +++
-            if (fallbackStake > (this.maxRecStakeBitsEver || 0)) {
-                this.maxRecStakeBitsEver = fallbackStake;
-                this.maxRecTime = Date.now(); // timestamp when this max rec stake was placed
+        // Ensure ladder: build if not present (and only cache when NOT simulating)
+        const simCfg = this.config.get('recovery', 'sim') || {};
+        const simMaxAttempts = Number(simCfg.maxAttempts) || 20;
+
+        let ladderObj = null;
+        if (!simulate) {
+            // Build and cache ladder only once per recovery session
+            if (!this.recoveryLadderCache || !Array.isArray(this.recoveryLadderCache.ladder)) {
+                try {
+                    const built = this.generateRecoveryLadder(Number(this.initialLossBits || 1), targetRecMult, recStakeCap, { maxAttempts: simMaxAttempts });
+                    // Cache ladder structure (non-mutating elsewhere)
+                    this.recoveryLadderCache = {
+                        builtAt: Date.now(),
+                        params: { initialLoss: Number(this.initialLossBits || 1), target: targetRecMult, cap: recStakeCap, maxAttempts: simMaxAttempts },
+                        ladder: built.ladder
+                    };
+                } catch (e) {
+                    // Defensive fallback: create a minimal ladder entry
+                    this.recoveryLadderCache = {
+                        builtAt: Date.now(),
+                        params: { initialLoss: Number(this.initialLossBits || 1), target: targetRecMult, cap: recStakeCap, maxAttempts: simMaxAttempts },
+                        ladder: [{ level: 1, lowerBound: 0, upperBound: Number(this.initialLossBits || 1), stake: Math.max(1, Math.ceil((Number(this.initialLossBits || 1) / (targetRecMult - 1)) || 1)) }]
+                    };
+                }
             }
+            ladderObj = this.recoveryLadderCache;
+        } else {
+            // simulate: build a local ladder but do NOT write to this.*
+            ladderObj = { ladder: this.generateRecoveryLadder(Number(this.initialLossBits || 1), targetRecMult, recStakeCap, { maxAttempts: simMaxAttempts }).ladder };
         }
-        return fallbackStake;
+
+        const ladder = ladderObj.ladder || [];
+
+        // Live current debt
+        const currentDebt = Number(this.debtBits || this.initialLossBits || 1);
+
+        // Canonical stake computation: ceil(currentDebt / (targetRecMult - 1))
+        const denom = (targetRecMult - 1) > 0 ? (targetRecMult - 1) : 1;
+        const rawStake = currentDebt / denom;
+        const stake = Math.max(1, Math.ceil(rawStake));
+        const executedStake = Math.min(stake, recStakeCap);
+
+        // Determine recovery level by looking up currentDebt in ladder ranges (lowerBound, upperBound]
+        let foundLevel = 0;
+        if (Array.isArray(ladder) && ladder.length > 0) {
+            for (let i = 0; i < ladder.length; i++) {
+                const e = ladder[i];
+                const lower = Number(e.lowerBound || 0);
+                const upper = Number(e.upperBound || 0);
+                // Check membership in (lower, upper] as requested
+                if ((currentDebt > lower) && (currentDebt <= upper)) {
+                    foundLevel = Number(e.level) || (i + 1);
+                    break;
+                }
+            }
+            // If not found and currentDebt is above the last upperBound, mark level as last+1
+            if (foundLevel === 0) {
+                if (currentDebt > (ladder[ladder.length - 1].upperBound || 0)) {
+                    foundLevel = ladder.length + 1;
+                } else {
+                    // If it's at or below the first range lower bound, treat as level 1
+                    foundLevel = 1;
+                }
+            }
+        } else {
+            // No ladder: fallback to level = 1
+            foundLevel = 1;
+        }
+
+        // Update live stats & telemetry only when not simulating
+        if (!simulate) {
+            // Assign level & update maxRecLevel
+            this.recoveryLevel = foundLevel;
+            this.maxRecLevel = Math.max(this.maxRecLevel || 0, this.recoveryLevel);
+
+            // Update last stake and peak/record metrics
+            this.lastRecoveryStakeBits = executedStake;
+            this.peakStake = Math.max(this.peakStake || 0, executedStake);
+            if (executedStake > (this.maxRecStakeBitsEver || 0)) {
+                this.maxRecStakeBitsEver = executedStake;
+                this.maxRecTime = Date.now();
+                this.maxRecRuntimeSeconds = (Date.now() - (this.firstStartedAt || Date.now())) / 1000;
+            }
+
+            // Update peakDebt telemetry (debt after placing this stake)
+            const debtAfter = currentDebt + executedStake;
+            this.peakDebt = Math.max(this.peakDebt || 0, debtAfter);
+
+            // NOTE: We intentionally DO NOT mutate the ladder here (ladder cached was set earlier)
+        }
+
+        return executedStake;
     }
 
     // -------------------------
