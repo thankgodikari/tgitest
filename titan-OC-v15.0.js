@@ -11,7 +11,7 @@ var config =    {
         id: ""
     },
     // === Simulation Initial balance ====
-    testBalanceBits: {value: 200, type: 'number', label: 'Initial test balance (bits)' },
+    testBalanceBits: {value: 250, type: 'number', label: 'Initial test balance (bits)' },
 
     // === Normal Mode ===
     normalBaseBet: { value: 100, type: 'balance', label: 'Normal Base Bet (bits)' },
@@ -33,7 +33,7 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 3.74, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryMultiplier: { value: 3.22, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
     recoveryStakeCap: { value: 50, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
 
     // === Recovery Strategy (Complex) ===
@@ -52,7 +52,6 @@ var config =    {
     hybridMartingaleAttempts: { value: 1, type: 'number', label: 'Hybrid: Martingale Attempts' },
     labouchereMinSlices: { value: 4, type: 'number', label: 'Labouchere: Min Slices' },
     // Recovery simulation parameters (used to compute recoveryLevel via simulation)
-    recoverySimPayout: { value: 2.57, type: 'number', label: 'Recovery Simulation Payout (x)' },
     recoverySimMaxAttempts: { value: 20, type: 'number', label: 'Recovery Simulation Max Attempts' },
     // Labouchere Aggressive Settings
     recovery_labouchereMult4Slice: { value: 2.50, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
@@ -94,7 +93,7 @@ var config =    {
     // WMA CLIMATE SENSOR CONFIGURATION
     // ===================================
     // 1. Math & Lookback
-    wma_window:                { value: 10,     type: 'number',      label: 'WMA: History Lookback Window' },
+    wma_window:                { value: 8,     type: 'number',      label: 'WMA: History Lookback Window' },
     wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
     wma_ewma_alpha:            { value: 0.70,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
     wma_min_samples:           { value: 3,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
@@ -535,7 +534,6 @@ class ConfigManager {
                 labouchere: { minSlices: cfg.labouchereMinSlices?.value },
                 // Recovery simulation params (mapped from the flat global config so runtime reads come from single source)
                 sim: {
-                    payout: cfg.recoverySimPayout ? cfg.recoverySimPayout?.value : undefined,
                     maxAttempts: cfg.recoverySimMaxAttempts ? cfg.recoverySimMaxAttempts?.value : undefined
                 },
                 // The recoveryMode string is stored in root so code can query this.config.get('recovery','recoveryMode')
@@ -2074,6 +2072,7 @@ class TitanPredictionEngine {
         this.followUpCount = 0;
         this.smartOverrideActive = false;
         this.smartOverrideCount = 0;
+        this.recoveryLadderCache = null;
 
         if (this.bot) {
             this.bot.debtBits = 0;
@@ -3020,6 +3019,7 @@ class CrashBot {
         this.recoveryStartTime = null;  // Start of current recovery cycle
         this.maxRecoveryDuration = 0;   // Longest recovery duration (ms)
         this.ruinFlag = false;          // Did we hit Stop Loss?
+        this.recoveryLadderCache = null; // Simulated recovery debt ladder
 
         // seconds used by the panel for age formatting (kept in some flows)
         this.maxRecRuntimeSeconds = this.maxRecRuntimeSeconds || 0;
@@ -3480,11 +3480,11 @@ class CrashBot {
      */
     generateRecoveryLadder(initialLoss, target, cap, settings = {}) {
         // Defensive reads from settings
-        const maxAttempts = Number(settings.maxAttempts) || Number(this.config.get('recovery', 'sim')?.maxAttempts) || 20;
+        const maxAttempts = Number(settings.maxAttempts) || Number(this.config.get('recovery', 'sim')?.maxAttempts);
 
         // Normalize inputs
-        const initial = Math.max(1, Number(initialLoss) || 1);
-        const payout = Number(target) || Number(this.config.get('recovery', 'targetRecMult')) || 2.0;
+        const initial = Math.max(1, Number(initialLoss));
+        const payout = Number(target) || Number(this.config.get('recovery', 'targetRecMult'));
         const maxIter = Math.max(1, Math.floor(maxAttempts));
 
         const ladder = [];
@@ -3588,7 +3588,7 @@ class CrashBot {
             // compute theoretical stake from labouchere helper
             const theoretical = this.labouchereNextStake(targetRecMult);
             // labouchereNextStake already uses ceil and cap semantics; ensure integer & cap again defensively
-            const executedStake = Math.min(recStakeCap, Math.max(1, Math.ceil(Number(theoretical) || 0)));
+            const executedStake = Math.min(recStakeCap, Math.max(1, Math.ceil(Number(theoretical))));
 
             if (!simulate) {
                 // update telemetry
@@ -3688,12 +3688,6 @@ class CrashBot {
                 this.maxRecTime = Date.now();
                 this.maxRecRuntimeSeconds = (Date.now() - (this.firstStartedAt || Date.now())) / 1000;
             }
-
-            // Update peakDebt telemetry (debt after placing this stake)
-            const debtAfter = currentDebt + executedStake;
-            this.peakDebt = Math.max(this.peakDebt || 0, debtAfter);
-
-            // NOTE: We intentionally DO NOT mutate the ladder here (ladder cached was set earlier)
         }
 
         return executedStake;
