@@ -18,7 +18,7 @@ var config =    {
     normalBaseBetMax: { value: 300, type: 'number', label: 'Normal Base Bet (bits) max stake bit' },
     normalBaseBetPercentOfBal: { value: 0.0025, type: 'number', label: 'Normal Base Bet (bits) percent of balance to stake' },
     // Dynamic Multipliers (The Gearbox)
-    normal_normalDefaultMult: { value: 2.12, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
+    normal_normalDefaultMult: { value: 2.09, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
     normal_normalHighMult: { value: 2.63, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
 
     // --- Normal mode: High-sniper confirmation & default consecutive shots ---
@@ -33,7 +33,7 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 3.22, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryMultiplier: { value: 2.04, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
     recoveryStakeCap: { value: 50, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
 
     // === Recovery Strategy (Complex) ===
@@ -43,7 +43,7 @@ var config =    {
     recovery_smartOverrideThreshold: { value: 1, type: 'number', label: 'Recovery: Smart Override Shots' },
 
     // Recovery: relaxation when recent window is high-biased
-    recovery_relaxFactor: { value: 0.95, type: 'number', label: 'Recovery: Relax factor (accept weaker vote when highs dominant, 0-1)' },
+    recovery_relaxFactor: { value: 1.0, type: 'number', label: 'Recovery: Relax factor (accept weaker vote when highs dominant, 0-1)' },
     recovery_relaxVolWindow: { value: 8, type: 'number', label: 'Recovery: recent window for relaxation (rounds)' },
     recovery_relaxLowBias: { value: 0.40, type: 'number', label: 'Recovery: max low-bias allowed to relax (fraction 0-1)' },
 
@@ -54,7 +54,7 @@ var config =    {
     // Recovery simulation parameters (used to compute recoveryLevel via simulation)
     recoverySimMaxAttempts: { value: 20, type: 'number', label: 'Recovery Simulation Max Attempts' },
     // Labouchere Aggressive Settings
-    recovery_labouchereMult4Slice: { value: 2.50, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
+    recovery_labouchereMult4Slice: { value: 2.00, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
     recovery_labouchereMult6Slice: { value: 3.50, type: 'number', label: 'Labouchere: Min Multiplier for 6 Slices' },
 
     warmup_rounds: { value: 12, type: 'number', label: 'warmup: Warmup Rounds' },
@@ -95,7 +95,7 @@ var config =    {
     // 1. Math & Lookback
     wma_window:                { value: 8,     type: 'number',      label: 'WMA: History Lookback Window' },
     wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
-    wma_ewma_alpha:            { value: 0.70,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
+    wma_ewma_alpha:            { value: 0.35,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
     wma_min_samples:           { value: 3,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
 
     // 2. Bayesian Calibration
@@ -118,15 +118,15 @@ var config =    {
     // 4. Decision Thresholds (Dynamic Hysteresis)
     wma_threshold_on:       { value: 0.65,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
     wma_threshold_floor:    { value: 0.45,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.12,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
-    wma_threshold_step_loss:{ value: 0.20,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
+    wma_threshold_step_win: { value: 0.04,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_step_loss:{ value: 0.12,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
     wma_hysteresis_gap:     { value: 0.08,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
     wma_cooldown_rounds:    { value: 1,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
 
     // Smart Logic Parameters (No Hard-coding)
-    wma_threshold_smart_cap:    { value: 4.0,    type: 'number',      label: 'WMA: Smart Drop Cap (Max Multiplier)' },
-    wma_threshold_smart_scalar: { value: 6.0,   type: 'number',      label: 'WMA: Smart Drop Scalar (Log10 Sensitivity)' },
+    wma_threshold_smart_cap:    { value: 2.0,    type: 'number',      label: 'WMA: Smart Drop Cap (Max Multiplier)' },
+    wma_threshold_smart_scalar: { value: 8.0,   type: 'number',      label: 'WMA: Smart Drop Scalar (Log10 Sensitivity)' },
 
     // Crash clustering detection
     wma_lowCrashClusterThreshold: { value: 0.50, type: 'number', label: 'WMA: Low-crash cluster threshold (ratio 0-1)' },
@@ -137,25 +137,25 @@ var config =    {
 
     // 6. Advanced WMA tuning (new Phase 0 additions)
     wma_score_floor:               { value: 0.30,  type: 'number', label: 'WMA: Hard Score Floor' }, // score FLOOR
-    wma_rewardMin:                 { value: -6.0,  type: 'number', label: 'WMA: Reward Min (log-space clamp)' }, // Less punishment for losses
-    wma_rewardMax:                 { value: 1.0,   type: 'number', label: 'WMA: Reward Max (log-space clamp)' },
+    wma_rewardMin:                 { value: -5.0,  type: 'number', label: 'WMA: Reward Min (log-space clamp)' }, // Less punishment for losses
+    wma_rewardMax:                 { value: 1.5,   type: 'number', label: 'WMA: Reward Max (log-space clamp)' },
     wma_volWeight:                 { value: 0.2,   type: 'number', label: 'WMA: Volatility weight (amplitude)' },
     wma_skewWeight:                { value: 0.3,   type: 'number', label: 'WMA: Directional skew weight (downside)' }, // Ignore history of losses
     wma_minSlope:                  { value: 0.00,  type: 'number', label: 'WMA: Minimum positive slope to enter (delta)' },
     wma_exitSlope:                 { value: 0.02,  type: 'number', label: 'WMA: Exit slope threshold (negative delta)' },
-    wma_adaptiveAlphaBoost:        { value: 1.15,  type: 'number', label: 'WMA: Adaptive Alpha Boost (Upside)' },
+    wma_adaptiveAlphaBoost:        { value: 1.20,  type: 'number', label: 'WMA: Adaptive Alpha Boost (Upside)' },
 
     // Regime multipliers (scale base score by regime; RECOVERY_FOLLOWUP remains ungated)
     wma_regime_normal:             { value: 1.0,   type: 'number', label: 'WMA: Regime multiplier - normal' },
-    wma_regime_recovery:           { value: 1.15,   type: 'number', label: 'WMA: Regime multiplier - standard recovery' }, // No handicap
+    wma_regime_recovery:           { value: 1.0,   type: 'number', label: 'WMA: Regime multiplier - standard recovery' }, // No handicap
     wma_regime_followup:           { value: 1.0,   type: 'number', label: 'WMA: Regime multiplier - recovery followup' },
     wma_regime_smartOverride:      { value: 1.0,   type: 'number', label: 'WMA: Regime multiplier - smart override' },
 
     // Multi-timescale fusion
     wma_fastWindow:                { value: 4,     type: 'number', label: 'WMA: Fast window (rounds)' },
     wma_slowWindow:                { value: 18,    type: 'number', label: 'WMA: Slow window (rounds)' },
-    wma_fastWeight:                { value: 0.88,   type: 'number', label: 'WMA: Fast weight in fusion' }, // Trust recent data more
-    wma_slowWeight:                { value: 0.12,   type: 'number', label: 'WMA: Slow weight in fusion' },
+    wma_fastWeight:                { value: 0.60,   type: 'number', label: 'WMA: Fast weight in fusion' }, // Trust recent data more
+    wma_slowWeight:                { value: 0.40,   type: 'number', label: 'WMA: Slow weight in fusion' },
 
     // Bayesian decay during recovery
     wma_recoveryBayesDecay:        { value: 0.0,   type: 'number', label: 'WMA: Recovery posterior decay factor' },
@@ -1054,11 +1054,19 @@ class WMALane {
         const trapPenalty = Number(this.config.get('wma', 'trapPenalty'));
         const trapBoost = Number(this.config.get('wma', 'trapBoost'));
 
+        // [LOGIC ADJUSTMENT]: Read the scalar used to differentiate signal strength
+        // Defaults to 1.0 if not set in config, preserving original behavior
+        const scoreScalar = Number(this.config.get('wma', 'smartScalar')) || 1.0;
+
         // === 2) Calculate Rewards ===
         const rewards = this.history.map(h => {
             const crash = Number(h.crash);
             const target = Number(h.target);
-            const raw = Math.log(crash / target);
+
+            // [LOGIC ADJUSTMENT]: Apply scalar to raw log before clamping.
+            // This allows small wins (e.g., 1.01 ratio) to become meaningful scores if scalar is high.
+            const raw = Math.log(crash / target) * scoreScalar;
+
             return Math.max(rewardMin, Math.min(rewardMax, raw));
         });
 
