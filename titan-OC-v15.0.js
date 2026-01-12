@@ -33,7 +33,7 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 2.02, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryMultiplier: { value: 2.07, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
     recoveryStakeCap: { value: 50, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
 
     // === Recovery Strategy (Complex) ===
@@ -118,11 +118,16 @@ var config =    {
     // 4. Decision Thresholds (Dynamic Hysteresis)
     wma_threshold_on:       { value: 0.65,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
     wma_threshold_floor:    { value: 0.45,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.07,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
-    wma_threshold_step_loss:{ value: 0.15,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
+    wma_threshold_step_win: { value: 0.06,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_step_loss:{ value: 0.20,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
     wma_hysteresis_gap:     { value: 0.08,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
     wma_cooldown_rounds:    { value: 1,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
+
+    // --- LOGIC TUNING: Drop Fast, Rise Slow ---
+    wma_penalty_single_loss:    { value: 0.25,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
+    wma_stable_vol_thresh:      { value: 0.15,   type: 'number',      label: 'WMA: Stable Regime Volatility Threshold' },
+    wma_stable_loss_dampener:   { value: 0.50,   type: 'number',      label: 'WMA: Stable Regime Loss Dampener (0.5 = Half Penalty)' },
 
     // Smart Logic Parameters (No Hard-coding)
     wma_threshold_smart_cap:    { value: 2.0,    type: 'number',      label: 'WMA: Smart Drop Cap (Max Multiplier)' },
@@ -619,6 +624,11 @@ class ConfigManager {
                 stepLoss:               val('wma_threshold_step_loss', cfg.wma_threshold_step_loss?.value),
                 hysteresisGap:          val('wma_hysteresis_gap', cfg.wma_hysteresis_gap?.value),
 
+                // === REGIME LOGIC ===
+                singleLossPenalty:      val('wma_penalty_single_loss', cfg.wma_penalty_single_loss?.value),
+                stableVolThresh:        val('wma_stable_vol_thresh', cfg.wma_stable_vol_thresh?.value),
+                stableLossDampener:     val('wma_stable_loss_dampener', cfg.wma_stable_loss_dampener?.value),
+
                 // === SMART LOGIC MAPPINGS ===
                 smartCap:               val('wma_threshold_smart_cap', cfg.wma_threshold_smart_cap?.value),
                 smartScalar:            val('wma_threshold_smart_scalar', cfg.wma_threshold_smart_scalar?.value),
@@ -1003,7 +1013,6 @@ class WMALane {
 
             // 1. Calculate base rise amount
             // We apply the stepLoss immediately.
-            // If it is a consecutive loss, we apply a massive multiplier to ensure it stays above score.
             let recentConsec = 0;
             for (let i = this.history.length - 1; i >= 0 && recentConsec < 5; i--) {
                 if (Number(this.history[i].isHit) === 0) recentConsec++;
@@ -1013,8 +1022,28 @@ class WMALane {
             // Aggressive scaling on consecutive losses
             const scale = (recentConsec > 1) ? 2.0 : 1.0;
 
+            // 2. STABILITY EXCEPTION: Check volatility to determine regime
+            // If stable, we dampen the threshold rise to allow faster recovery (1 high)
+            const stableVolThresh = Number(this.config.get('wma', 'stableVolThresh'));
+            const stableDampener = Number(this.config.get('wma', 'stableLossDampener'));
+
+            // Re-calculate local volatility for recent window (same logic as calc)
+            const volWin = Number(this.config.get('wma', 'volWindow'));
+            const recent = this.history.slice(-volWin);
+            const vals = recent.map(h => Number(h.crash));
+            const meanV = vals.reduce((s,v)=>s+v, 0)/vals.length;
+            const varV = vals.reduce((s,v)=>s+Math.pow(v-meanV,2), 0)/vals.length;
+            const curVol = (meanV > 0) ? (Math.sqrt(varV)/meanV) : 99;
+
+            let regimeMod = 1.0;
+            // If volatility is LOW (Stable) AND we aren't in a consecutive loss streak
+            if (curVol <= stableVolThresh && recentConsec === 1) {
+                regimeMod = stableDampener; // Apply dampener (e.g. 0.5x rise)
+            }
+
             // Always raise, never wait.
-            const raiseAmt = stepLoss * (1 + hysteresis) * scale;
+            // Raise Amount = BaseStep * Hysteresis * ConsecScale * StabilityRegime
+            const raiseAmt = stepLoss * (1 + hysteresis) * scale * regimeMod;
             const newThr = Math.min(ceil, this.currentThreshold + raiseAmt);
 
             if (newThr !== this.currentThreshold) {
@@ -1099,8 +1128,11 @@ class WMALane {
         } else if (consecMiss >= 2 && instMedPenalty > 0) {
             baseScore = Math.max(0, baseScore * (1 - instMedPenalty));
         } else if (consecMiss === 1) {
-            // NEW: Apply 20% penalty immediately on first loss to force crossing
-            baseScore = Math.max(0, baseScore * 0.80);
+            // Configurable Single Loss Penalty
+            const singleLossPenalty = Number(this.config.get('wma', 'singleLossPenalty'));
+            if (singleLossPenalty > 0) {
+                baseScore = Math.max(0, baseScore * (1 - singleLossPenalty));
+            }
         }
 
         // === VOLATILITY GUARD (direction-aware) ===
@@ -1552,7 +1584,8 @@ class TitanPredictionEngine {
         // 1. Instantiate Modules
         // We instantiate them regardless of 'enabled' config so we can toggle them on/off at runtime
         this.modules.wma = new WMAModule(this.config, this.logger);
-        // Future: this.modules.ev = new EVModule(...);
+        this.modules.ev  = new EVModule(this.config, this.logger);
+        // Future: this.modules.pattern = new PatternModule(...);
 
         // 2. Hydrate Modules (Train on History)
         // Use the configured window size.
@@ -1564,6 +1597,7 @@ class TitanPredictionEngine {
             history.forEach(crash => {
                 // Update all modules
                 if (this.modules.wma) this.modules.wma.update(crash);
+                if (this.modules.ev)  this.modules.ev.update(crash);
             });
         }
 
@@ -1966,6 +2000,7 @@ class TitanPredictionEngine {
     update(lastCrash, wasWin, currentRecoveryLevel, wasBetting = false) {
         // 1. Update Modules
         if (this.modules.wma) this.modules.wma.update(lastCrash);
+        if (this.modules.ev)  this.modules.ev.update(lastCrash);
 
         // 2. State Machine Updates
         if (wasBetting) {
