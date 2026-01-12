@@ -33,7 +33,7 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 2.04, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryMultiplier: { value: 2.02, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
     recoveryStakeCap: { value: 50, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
 
     // === Recovery Strategy (Complex) ===
@@ -95,7 +95,7 @@ var config =    {
     // 1. Math & Lookback
     wma_window:                { value: 8,     type: 'number',      label: 'WMA: History Lookback Window' },
     wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
-    wma_ewma_alpha:            { value: 0.35,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
+    wma_ewma_alpha:            { value: 0.50,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
     wma_min_samples:           { value: 3,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
 
     // 2. Bayesian Calibration
@@ -118,8 +118,8 @@ var config =    {
     // 4. Decision Thresholds (Dynamic Hysteresis)
     wma_threshold_on:       { value: 0.65,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
     wma_threshold_floor:    { value: 0.45,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.04,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
-    wma_threshold_step_loss:{ value: 0.12,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
+    wma_threshold_step_win: { value: 0.07,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_step_loss:{ value: 0.15,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
     wma_hysteresis_gap:     { value: 0.08,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
     wma_cooldown_rounds:    { value: 1,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
@@ -999,31 +999,27 @@ class WMALane {
                 this._dynCooldown = 0; // reset cooldown when threshold moves down
             }
         } else {
+            // LOSS: IMMEDIATE REACTION (No Cooldowns, No Waiting)
 
-            // LOSS: accelerate threshold-rise for consecutive misses
-            // Count consecutive recent misses (cap at 5)
+            // 1. Calculate base rise amount
+            // We apply the stepLoss immediately.
+            // If it is a consecutive loss, we apply a massive multiplier to ensure it stays above score.
             let recentConsec = 0;
             for (let i = this.history.length - 1; i >= 0 && recentConsec < 5; i--) {
                 if (Number(this.history[i].isHit) === 0) recentConsec++;
                 else break;
             }
 
-            // Instability penalty multipliers (use existing config)
-            const instMed = Number(this.config.get('wma', 'instabilityMed')) || 0;
-            const instHigh = Number(this.config.get('wma', 'instabilityHigh')) || 0;
-            const instScale = (recentConsec >= 3) ? (1 + instHigh) : ((recentConsec >= 2) ? (1 + instMed) : 1);
+            // Aggressive scaling on consecutive losses
+            const scale = (recentConsec > 1) ? 2.0 : 1.0;
 
-            // If we have 2+ consecutive misses, bypass cooldown and apply a stronger raise
-            if (recentConsec >= 2 || (this._dynCooldown >= cooldown)) {
-                const raiseAmt = stepLoss * (1 + hysteresis) * instScale;
-                const newThr = Math.min(ceil, this.currentThreshold + raiseAmt);
-                if (newThr !== this.currentThreshold) {
-                    this.currentThreshold = newThr;
-                    this._dynCooldown = 0; // reset after effective change
-                }
-            } else {
-                // increment cooldown counter until we can apply a meaningful rise
-                this._dynCooldown = (this._dynCooldown || 0) + 1;
+            // Always raise, never wait.
+            const raiseAmt = stepLoss * (1 + hysteresis) * scale;
+            const newThr = Math.min(ceil, this.currentThreshold + raiseAmt);
+
+            if (newThr !== this.currentThreshold) {
+                this.currentThreshold = newThr;
+                this._dynCooldown = 0;
             }
         }
     }
@@ -1096,10 +1092,15 @@ class WMALane {
             if (Number(this.history[i].crash) < Number(this.history[i].target)) consecMiss++;
             else break;
         }
+
+        // STRICT ENFORCEMENT: Penalize immediately on single loss
         if (consecMiss >= 3 && instHighPenalty > 0) {
             baseScore = Math.max(0, baseScore * (1 - instHighPenalty));
         } else if (consecMiss >= 2 && instMedPenalty > 0) {
             baseScore = Math.max(0, baseScore * (1 - instMedPenalty));
+        } else if (consecMiss === 1) {
+            // NEW: Apply 20% penalty immediately on first loss to force crossing
+            baseScore = Math.max(0, baseScore * 0.80);
         }
 
         // === VOLATILITY GUARD (direction-aware) ===
