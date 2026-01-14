@@ -125,7 +125,9 @@ var config =    {
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
 
     // --- LOGIC TUNING: Drop Fast, Rise Slow ---
-    wma_penalty_single_loss:    { value: 0.25,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
+    wma_penalty_single_loss:    { value: 0.20,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
+    wma_rising_boost:           { value: 2.0,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
+    wma_rising_win_rate:        { value: 0.60,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
     wma_stable_vol_thresh:      { value: 0.15,   type: 'number',      label: 'WMA: Stable Regime Volatility Threshold' },
     wma_stable_loss_dampener:   { value: 0.50,   type: 'number',      label: 'WMA: Stable Regime Loss Dampener (0.5 = Half Penalty)' },
 
@@ -626,6 +628,8 @@ class ConfigManager {
 
                 // === REGIME LOGIC ===
                 singleLossPenalty:      val('wma_penalty_single_loss', cfg.wma_penalty_single_loss?.value),
+                risingBoost:            val('wma_rising_boost', cfg.wma_rising_boost?.value),
+                risingWinRate:          val('wma_rising_win_rate', cfg.wma_rising_win_rate?.value),
                 stableVolThresh:        val('wma_stable_vol_thresh', cfg.wma_stable_vol_thresh?.value),
                 stableLossDampener:     val('wma_stable_loss_dampener', cfg.wma_stable_loss_dampener?.value),
 
@@ -984,66 +988,63 @@ class WMALane {
     }
 
     _adjustThreshold(crash, target) {
-
         // Safe Config Retrieval (all via config API)
         const ceil       = Number(this.config.get('wma', 'thrOn'));
         const floor      = Number(this.config.get('wma', 'thrFloor'));
         const stepWin    = Number(this.config.get('wma', 'stepWin'));
         const stepLoss   = Number(this.config.get('wma', 'stepLoss'));
-        const smartCap   = Number(this.config.get('wma', 'smartCap'));
-        const smartScalar= Number(this.config.get('wma', 'smartScalar'));
 
-        // Hysteresis / cooldown controls (read-only from config)
+        // New Smart Logic Keys
+        const risingBoost   = Number(this.config.get('wma', 'risingBoost'));
+        const risingWinRate = Number(this.config.get('wma', 'risingWinRate'));
+        const volWindow     = Number(this.config.get('wma', 'volWindow')); // Use Reflex Window (6)
+
+        // Hysteresis / cooldown controls
         const hysteresis = Number(this.config.get('wma', 'hysteresisGap'));
-        const cooldown   = Number(this.config.get('wma', 'cooldown'));
 
         if (crash >= target) {
-            // WIN: drop threshold proportionally (same math as before)
-            const ratio = crash / target;
-            const smartMult = Math.min(smartCap, Math.log10(ratio * smartScalar));
-            const drop = stepWin * smartMult;
+            // WIN: Check Stability (Reflex Window)
+
+            // 1. Calculate Reflex Win Rate (Last N rounds)
+            const recent = this.history.slice(-volWindow);
+            const wins = recent.filter(h => Number(h.isHit) === 1).length;
+            const currentWinRate = (recent.length > 0) ? (wins / recent.length) : 0;
+
+            // 2. Check Slope (Trend)
+            const diag = this.getScore();
+            const slope = diag.slope || 0;
+
+            // 3. Determine Step Size
+            let drop = stepWin;
+
+            // "Smart Exception": If Stable Highs AND Rising -> Boost the drop
+            if (currentWinRate >= risingWinRate && slope > 0) {
+                drop = stepWin * risingBoost; // e.g. 0.06 * 2.0 = 0.12 (Fast Close)
+            }
+
+            // 4. Apply Drop
             const newThr = Math.max(floor, this.currentThreshold - drop);
 
             if (newThr !== this.currentThreshold) {
                 this.currentThreshold = newThr;
-                this._dynCooldown = 0; // reset cooldown when threshold moves down
+                this._dynCooldown = 0;
             }
         } else {
-            // LOSS: IMMEDIATE REACTION (No Cooldowns, No Waiting)
+            // LOSS: IMMEDIATE REPULSION (Open the Jaws)
 
             // 1. Calculate base rise amount
-            // We apply the stepLoss immediately.
+            // We apply the stepLoss immediately to force gap > 0.
+
+            // Consecutive Loss Scaling (Optional aggression)
             let recentConsec = 0;
             for (let i = this.history.length - 1; i >= 0 && recentConsec < 5; i--) {
                 if (Number(this.history[i].isHit) === 0) recentConsec++;
                 else break;
             }
-
-            // Aggressive scaling on consecutive losses
             const scale = (recentConsec > 1) ? 2.0 : 1.0;
 
-            // 2. STABILITY EXCEPTION: Check volatility to determine regime
-            // If stable, we dampen the threshold rise to allow faster recovery (1 high)
-            const stableVolThresh = Number(this.config.get('wma', 'stableVolThresh'));
-            const stableDampener = Number(this.config.get('wma', 'stableLossDampener'));
-
-            // Re-calculate local volatility for recent window (same logic as calc)
-            const volWin = Number(this.config.get('wma', 'volWindow'));
-            const recent = this.history.slice(-volWin);
-            const vals = recent.map(h => Number(h.crash));
-            const meanV = vals.reduce((s,v)=>s+v, 0)/vals.length;
-            const varV = vals.reduce((s,v)=>s+Math.pow(v-meanV,2), 0)/vals.length;
-            const curVol = (meanV > 0) ? (Math.sqrt(varV)/meanV) : 99;
-
-            let regimeMod = 1.0;
-            // If volatility is LOW (Stable) AND we aren't in a consecutive loss streak
-            if (curVol <= stableVolThresh && recentConsec === 1) {
-                regimeMod = stableDampener; // Apply dampener (e.g. 0.5x rise)
-            }
-
-            // Always raise, never wait.
-            // Raise Amount = BaseStep * Hysteresis * ConsecScale * StabilityRegime
-            const raiseAmt = stepLoss * (1 + hysteresis) * scale * regimeMod;
+            // 2. Apply Rise
+            const raiseAmt = stepLoss * (1 + hysteresis) * scale;
             const newThr = Math.min(ceil, this.currentThreshold + raiseAmt);
 
             if (newThr !== this.currentThreshold) {
@@ -1112,10 +1113,12 @@ class WMALane {
         let baseScore = Math.max(0, Math.min(1, mapped));
 
         // === IMMEDIATE CONSECUTIVE-LOSS CLUSTER PENALTY (config-driven) ===
-        // Uses configured instability penalties to force a rapid score drop on 2+ consecutive lows.
         const instMedPenalty  = Number(this.config.get('wma', 'instabilityMed'));
         const instHighPenalty = Number(this.config.get('wma', 'instabilityHigh'));
-        // Count consecutive misses (cap at 3)
+        // New Key
+        const singleLossPenalty = Number(this.config.get('wma', 'singleLossPenalty'));
+
+        // Count consecutive misses
         let consecMiss = 0;
         for (let i = this.history.length - 1; i >= 0 && consecMiss < 3; i--) {
             if (Number(this.history[i].crash) < Number(this.history[i].target)) consecMiss++;
@@ -1128,8 +1131,7 @@ class WMALane {
         } else if (consecMiss >= 2 && instMedPenalty > 0) {
             baseScore = Math.max(0, baseScore * (1 - instMedPenalty));
         } else if (consecMiss === 1) {
-            // Configurable Single Loss Penalty
-            const singleLossPenalty = Number(this.config.get('wma', 'singleLossPenalty'));
+            // NEW: Apply Configurable Penalty immediately to ensure Score < Threshold
             if (singleLossPenalty > 0) {
                 baseScore = Math.max(0, baseScore * (1 - singleLossPenalty));
             }
