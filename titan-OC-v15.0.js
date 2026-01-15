@@ -95,39 +95,39 @@ var config =    {
     // 1. Math & Lookback
     wma_window:                { value: 12,     type: 'number',      label: 'WMA: History Lookback Window' },
     wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
-    wma_ewma_alpha:            { value: 0.68,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
+    wma_ewma_alpha:            { value: 0.72,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
     wma_min_samples:           { value: 2,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
 
     // 2. Bayesian Calibration
     wma_prior_a:            { value: 1.0,    type: 'number',      label: 'WMA: Bayesian Prior Alpha (Wins)' },
     wma_prior_b:            { value: 1.0,    type: 'number',      label: 'WMA: Bayesian Prior Beta (Losses)' },
-    wma_timeDecay_halfLife: { value: 7,     type: 'number',      label: 'WMA: Time Decay Half-Life (Rounds)' },
+    wma_timeDecay_halfLife: { value: 8,     type: 'number',      label: 'WMA: Time Decay Half-Life (Rounds)' },
     wma_beta_blend:         { value: 0.14,    type: 'number',      label: 'WMA: Mix Ratio (0.7 = 70% WMA / 30% Bayes)' },
 
     // 3. Volatility Guard (The Brake)
     wma_vol_window:              { value: 8,     type: 'number',      label: 'WMA: Volatility Scan Window' },
-    wma_vol_thresh:              { value: 0.32,   type: 'number',      label: 'WMA: Volatility Threshold (StdDev/Mean)' },
-    wma_vol_penalty:             { value: 0.035,   type: 'number',      label: 'WMA: Volatility Penalty (Score Reduction)' }, // Disabled
-    wma_instability_penalty_med: { value: 0.14,   type: 'number',      label: 'WMA: Instability Penalty (2 consecutive crashes)' },
-    wma_instability_penalty_high:{ value: 0.26,   type: 'number',      label: 'WMA: Instability Penalty (3+ consecutive crashes)' },
+    wma_vol_thresh:              { value: 0.36,   type: 'number',      label: 'WMA: Volatility Threshold (StdDev/Mean)' },
+    wma_vol_penalty:             { value: 0.02,   type: 'number',      label: 'WMA: Volatility Penalty (Score Reduction)' }, // Disabled
+    wma_instability_penalty_med: { value: 0.10,   type: 'number',      label: 'WMA: Instability Penalty (2 consecutive crashes)' },
+    wma_instability_penalty_high:{ value: 0.20,   type: 'number',      label: 'WMA: Instability Penalty (3+ consecutive crashes)' },
     wma_trap_spike_mult:         { value: 6.0,    type: 'number',      label: 'WMA: Trap Spike Multiplier (vs Target)' },
-    wma_trap_trend_thresh:       { value: 0.24,    type: 'number',      label: 'WMA: Trap Trend Threshold (Score)' },
-    wma_trap_penalty:            { value: 0.08,    type: 'number',      label: 'WMA: Trap Detection Penalty (Multiplier)' },
-    wma_trap_boost:              { value: 1.35,    type: 'number',      label: 'WMA: Trap Momentum Boost (Multiplier)' },
+    wma_trap_trend_thresh:       { value: 0.22,    type: 'number',      label: 'WMA: Trap Trend Threshold (Score)' },
+    wma_trap_penalty:            { value: 0.06,    type: 'number',      label: 'WMA: Trap Detection Penalty (Multiplier)' },
+    wma_trap_boost:              { value: 1.5,    type: 'number',      label: 'WMA: Trap Momentum Boost (Multiplier)' },
 
     // 4. Decision Thresholds (Dynamic Hysteresis)
-    wma_threshold_on:       { value: 0.575,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
-    wma_threshold_floor:    { value: 0.38,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.20,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_on:       { value: 0.58,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
+    wma_threshold_floor:    { value: 0.36,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
+    wma_threshold_step_win: { value: 0.22,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
     wma_threshold_step_loss:{ value: 0.14,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
-    wma_hysteresis_gap:     { value: 0.07,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
+    wma_hysteresis_gap:     { value: 0.06,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
     wma_cooldown_rounds:    { value: 0,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
 
     // --- LOGIC TUNING: Drop Fast, Rise Slow ---
     wma_penalty_single_loss:    { value: 0.12,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
-    wma_rising_boost:           { value: 3.5,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
-    wma_rising_win_rate:        { value: 0.48,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
+    wma_rising_boost:           { value: 4.0,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
+    wma_rising_win_rate:        { value: 0.46,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
     wma_stable_vol_thresh:      { value: 0.15,   type: 'number',      label: 'WMA: Stable Regime Volatility Threshold' },
     wma_stable_loss_dampener:   { value: 0.50,   type: 'number',      label: 'WMA: Stable Regime Loss Dampener (0.5 = Half Penalty)' },
 
@@ -137,7 +137,7 @@ var config =    {
 
     // Crash clustering detection
     wma_lowCrashClusterThreshold: { value: 0.50, type: 'number', label: 'WMA: Low-crash cluster threshold (ratio 0-1)' },
-    wma_clusterPenalty:             { value: 0.16, type: 'number', label: 'WMA: Cluster Penalty (multiplicative factor, 0-1)' },
+    wma_clusterPenalty:             { value: 0.12, type: 'number', label: 'WMA: Cluster Penalty (multiplicative factor, 0-1)' },
 
     // 5. System
     wma_eps:                { value: 1e-6,   type: 'number',      label: 'WMA: Math Epsilon (Zero prevention)' },
