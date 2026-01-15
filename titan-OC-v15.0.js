@@ -18,8 +18,8 @@ var config =    {
     normalBaseBetMax: { value: 300, type: 'number', label: 'Normal Base Bet (bits) max stake bit' },
     normalBaseBetPercentOfBal: { value: 0.0025, type: 'number', label: 'Normal Base Bet (bits) percent of balance to stake' },
     // Dynamic Multipliers (The Gearbox)
-    normal_normalDefaultMult: { value: 2.09, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
-    normal_normalHighMult: { value: 2.63, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
+    normal_normalDefaultMult: { value: 2.12, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
+    normal_normalHighMult: { value: 2.73, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
 
     // --- Normal mode: High-sniper confirmation & default consecutive shots ---
     normal_highHitsWindow:        { value: 5, type: 'number', label: 'Normal: High-sniper confirm window (rounds)' },
@@ -33,8 +33,8 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 2.07, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
-    recoveryStakeCap: { value: 50, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
+    recoveryMultiplier: { value: 2.02, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryStakeCap: { value: 500000, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
 
     // === Recovery Strategy (Complex) ===
     recovery_enabledFollowUp: { value: true, type: 'checkbox', label: 'Recovery: Enable Ungated Follow-ups' },
@@ -54,18 +54,18 @@ var config =    {
     // Recovery simulation parameters (used to compute recoveryLevel via simulation)
     recoverySimMaxAttempts: { value: 20, type: 'number', label: 'Recovery Simulation Max Attempts' },
     // Labouchere Aggressive Settings
-    recovery_labouchereMult4Slice: { value: 2.00, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
-    recovery_labouchereMult6Slice: { value: 3.50, type: 'number', label: 'Labouchere: Min Multiplier for 6 Slices' },
+    recovery_labouchereMult4Slice: { value: 5.00, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
+    recovery_labouchereMult6Slice: { value: 2.00, type: 'number', label: 'Labouchere: Min Multiplier for 6 Slices' },
 
     warmup_rounds: { value: 12, type: 'number', label: 'warmup: Warmup Rounds' },
     warmup_enabled: { value: true, type: 'boolean', label: 'warmup: enable or disable warmup' },
     warmup_startInWarmup: { value: true, type: 'boolean', label: 'warmup: start bot in warm up mode' },
 
     // === Stop Limits ===
-    takeProfitBits: { value: 350, type: 'number', label: 'Take Profit (bits)' },
-    sch1ProfitBits: { value: 350, type: 'number', label: 'Schedule 1 Profit (bits)' },
-    sch2ProfitBits: { value: 350, type: 'number', label: 'Schedule 2 Profit (bits)' },
-    sch3ProfitBits: { value: 350, type: 'number', label: 'Schedule 3 Profit (bits)' },
+    takeProfitBits: { value: 250, type: 'number', label: 'Take Profit (bits)' },
+    sch1ProfitBits: { value: 250, type: 'number', label: 'Schedule 1 Profit (bits)' },
+    sch2ProfitBits: { value: 250, type: 'number', label: 'Schedule 2 Profit (bits)' },
+    sch3ProfitBits: { value: 250, type: 'number', label: 'Schedule 3 Profit (bits)' },
     minBalanceBits: { value: 1, type: 'number', label: 'Stop Loss (bits)' },
 
     // Schedule times: accept either an ISO timestamp string, epoch ms, or "HH:MM" (24h)
@@ -93,16 +93,16 @@ var config =    {
     // WMA CLIMATE SENSOR CONFIGURATION
     // ===================================
     // 1. Math & Lookback
-    wma_window:                { value: 8,     type: 'number',      label: 'WMA: History Lookback Window' },
-    wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
-    wma_ewma_alpha:            { value: 0.50,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
-    wma_min_samples:           { value: 3,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
+    wma_window:                { value: 5,     type: 'number',      label: 'WMA: History Lookback Window' },
+    wma_linearWeightingWindow: { value: 2,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
+    wma_ewma_alpha:            { value: 0.70,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
+    wma_min_samples:           { value: 2,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
 
     // 2. Bayesian Calibration
     wma_prior_a:            { value: 1.0,    type: 'number',      label: 'WMA: Bayesian Prior Alpha (Wins)' },
     wma_prior_b:            { value: 1.0,    type: 'number',      label: 'WMA: Bayesian Prior Beta (Losses)' },
-    wma_timeDecay_halfLife: { value: 10,     type: 'number',      label: 'WMA: Time Decay Half-Life (Rounds)' },
-    wma_beta_blend:         { value: 0.3,    type: 'number',      label: 'WMA: Mix Ratio (0.7 = 70% WMA / 30% Bayes)' },
+    wma_timeDecay_halfLife: { value: 6,     type: 'number',      label: 'WMA: Time Decay Half-Life (Rounds)' },
+    wma_beta_blend:         { value: 0.20,    type: 'number',      label: 'WMA: Mix Ratio (0.7 = 70% WMA / 30% Bayes)' },
 
     // 3. Volatility Guard (The Brake)
     wma_vol_window:              { value: 6,     type: 'number',      label: 'WMA: Volatility Scan Window' },
@@ -116,18 +116,18 @@ var config =    {
     wma_trap_boost:              { value: 1.1,    type: 'number',      label: 'WMA: Trap Momentum Boost (Multiplier)' },
 
     // 4. Decision Thresholds (Dynamic Hysteresis)
-    wma_threshold_on:       { value: 0.65,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
-    wma_threshold_floor:    { value: 0.45,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.06,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
-    wma_threshold_step_loss:{ value: 0.20,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
+    wma_threshold_on:       { value: 0.58,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
+    wma_threshold_floor:    { value: 0.40,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
+    wma_threshold_step_win: { value: 0.12,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_step_loss:{ value: 0.14,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
     wma_hysteresis_gap:     { value: 0.08,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
-    wma_cooldown_rounds:    { value: 1,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
+    wma_cooldown_rounds:    { value: 0,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
 
     // --- LOGIC TUNING: Drop Fast, Rise Slow ---
-    wma_penalty_single_loss:    { value: 0.20,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
-    wma_rising_boost:           { value: 2.0,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
-    wma_rising_win_rate:        { value: 0.60,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
+    wma_penalty_single_loss:    { value: 0.12,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
+    wma_rising_boost:           { value: 3.0,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
+    wma_rising_win_rate:        { value: 0.50,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
     wma_stable_vol_thresh:      { value: 0.15,   type: 'number',      label: 'WMA: Stable Regime Volatility Threshold' },
     wma_stable_loss_dampener:   { value: 0.50,   type: 'number',      label: 'WMA: Stable Regime Loss Dampener (0.5 = Half Penalty)' },
 
