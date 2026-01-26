@@ -15,11 +15,13 @@ var config =    {
 
     // === Normal Mode ===
     normalBaseBet: { value: 100, type: 'balance', label: 'Normal Base Bet (bits)' },
-    normalBaseBetMax: { value: 300, type: 'number', label: 'Normal Base Bet (bits) max stake bit' },
-    normalBaseBetPercentOfBal: { value: 0.0025, type: 'number', label: 'Normal Base Bet (bits) percent of balance to stake' },
+    normalBaseBetMax: { value: 50, type: 'number', label: 'Normal Base Bet (bits) max stake bit' },
+    normalBaseBetPercentOfBal: { value: 0.000667, type: 'number', label: 'Normal Base Bet (bits) percent of balance to stake' },
+    // === BC.GAME SPECIFIC ===
+    normal_bcgameBasebet: { value: 0.10, type: 'number', label: 'BC.Game: Base Bet (USDT/Currency)' },
     // Dynamic Multipliers (The Gearbox)
-    normal_normalDefaultMult: { value: 2.07, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
-    normal_normalHighMult: { value: 2.23, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
+    normal_normalDefaultMult: { value: 2.12, type: 'multiplier', label: 'Normal Default Target (Sniper)' },
+    normal_normalHighMult: { value: 2.27, type: 'multiplier', label: 'Normal High Target (Super Hot)' },
 
     // --- Normal mode: High-sniper confirmation & default consecutive shots ---
     normal_highHitsWindow:        { value: 5, type: 'number', label: 'Normal: High-sniper confirm window (rounds)' },
@@ -33,12 +35,13 @@ var config =    {
 
     // === Recovery Mode ===
     enableRecovery: { value: true, type: 'checkbox', label: 'Enable Recovery Mode' },
-    recoveryMultiplier: { value: 2.02, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
-    recoveryStakeCap: { value: 60, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
+    recoveryMultiplier: { value: 2.10, type: 'multiplier', label: 'Recovery Fixed Target (x)' },
+    recoveryStakeCap: { value: 65, type: 'number', label: 'Recovery Cap (x Initial Loss)' },
+    recovery_hybridRecoveryStakeCap: { value: 300, type: 'balance', label: 'Hybrid: Martingale Stake Cap (bits)' },
 
     // === Recovery Strategy (Complex) ===
     recovery_enabledFollowUp: { value: true, type: 'checkbox', label: 'Recovery: Enable Ungated Follow-ups' },
-    recovery_maxRecoveryFollowUpThreshold: { value: 2, type: 'number', label: 'Recovery: Max Follow-up Bets' },
+    recovery_maxRecoveryFollowUpThreshold: { value: 1, type: 'number', label: 'Recovery: Max Follow-up Bets' },
     recovery_enableSmartOverride: { value: false, type: 'checkbox', label: 'Recovery: Enable Smart Override (Partial Win)' },
     recovery_smartOverrideThreshold: { value: 1, type: 'number', label: 'Recovery: Smart Override Shots' },
 
@@ -54,18 +57,19 @@ var config =    {
     // Recovery simulation parameters (used to compute recoveryLevel via simulation)
     recoverySimMaxAttempts: { value: 20, type: 'number', label: 'Recovery Simulation Max Attempts' },
     // Labouchere Aggressive Settings
-    recovery_labouchereMult4Slice: { value: 5.00, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
+    recovery_labouchereMult4Slice: { value: 4.00, type: 'number', label: 'Labouchere: Min Multiplier for 4 Slices' },
     recovery_labouchereMult6Slice: { value: 2.00, type: 'number', label: 'Labouchere: Min Multiplier for 6 Slices' },
+    recovery_labouchereMult8Slice: { value: 4.21, type: 'number', label: 'Labouchere: Min Multiplier for 12 Slices (Sniper)' },
 
     warmup_rounds: { value: 12, type: 'number', label: 'warmup: Warmup Rounds' },
     warmup_enabled: { value: true, type: 'boolean', label: 'warmup: enable or disable warmup' },
     warmup_startInWarmup: { value: true, type: 'boolean', label: 'warmup: start bot in warm up mode' },
 
     // === Stop Limits ===
-    takeProfitBits: { value: 200, type: 'number', label: 'Take Profit (bits)' },
-    sch1ProfitBits: { value: 200, type: 'number', label: 'Schedule 1 Profit (bits)' },
-    sch2ProfitBits: { value: 200, type: 'number', label: 'Schedule 2 Profit (bits)' },
-    sch3ProfitBits: { value: 200, type: 'number', label: 'Schedule 3 Profit (bits)' },
+    takeProfitBits: { value: 400, type: 'number', label: 'Take Profit (bits)' },
+    sch1ProfitBits: { value: 400, type: 'number', label: 'Schedule 1 Profit (bits)' },
+    sch2ProfitBits: { value: 400, type: 'number', label: 'Schedule 2 Profit (bits)' },
+    sch3ProfitBits: { value: 400, type: 'number', label: 'Schedule 3 Profit (bits)' },
     minBalanceBits: { value: 1, type: 'number', label: 'Stop Loss (bits)' },
 
     // Schedule times: accept either an ISO timestamp string, epoch ms, or "HH:MM" (24h)
@@ -95,41 +99,63 @@ var config =    {
     // 1. Math & Lookback
     wma_window:                { value: 12,     type: 'number',      label: 'WMA: History Lookback Window' },
     wma_linearWeightingWindow: { value: 3,     type: 'number',      label: 'WMA: Linear Weighting Window (Recent)' },
-    wma_ewma_alpha:            { value: 0.72,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
+    wma_ewma_alpha:            { value: 0.64,   type: 'number',      label: 'WMA: EWMA Smoothing Factor (Alpha)' },
     wma_min_samples:           { value: 2,      type: 'number',      label: 'WMA: Minimum Samples to Activate' },
 
     // 2. Bayesian Calibration
     wma_prior_a:            { value: 1.0,    type: 'number',      label: 'WMA: Bayesian Prior Alpha (Wins)' },
     wma_prior_b:            { value: 1.0,    type: 'number',      label: 'WMA: Bayesian Prior Beta (Losses)' },
     wma_timeDecay_halfLife: { value: 8,     type: 'number',      label: 'WMA: Time Decay Half-Life (Rounds)' },
-    wma_beta_blend:         { value: 0.14,    type: 'number',      label: 'WMA: Mix Ratio (0.7 = 70% WMA / 30% Bayes)' },
+    wma_beta_blend:         { value: 0.22,    type: 'number',      label: 'WMA: Mix Ratio (0.7 = 70% WMA / 30% Bayes)' },
 
     // 3. Volatility Guard (The Brake)
-    wma_vol_window:              { value: 8,     type: 'number',      label: 'WMA: Volatility Scan Window' },
-    wma_vol_thresh:              { value: 0.36,   type: 'number',      label: 'WMA: Volatility Threshold (StdDev/Mean)' },
-    wma_vol_penalty:             { value: 0.02,   type: 'number',      label: 'WMA: Volatility Penalty (Score Reduction)' }, // Disabled
-    wma_instability_penalty_med: { value: 0.10,   type: 'number',      label: 'WMA: Instability Penalty (2 consecutive crashes)' },
-    wma_instability_penalty_high:{ value: 0.20,   type: 'number',      label: 'WMA: Instability Penalty (3+ consecutive crashes)' },
-    wma_trap_spike_mult:         { value: 6.0,    type: 'number',      label: 'WMA: Trap Spike Multiplier (vs Target)' },
-    wma_trap_trend_thresh:       { value: 0.22,    type: 'number',      label: 'WMA: Trap Trend Threshold (Score)' },
-    wma_trap_penalty:            { value: 0.06,    type: 'number',      label: 'WMA: Trap Detection Penalty (Multiplier)' },
-    wma_trap_boost:              { value: 1.5,    type: 'number',      label: 'WMA: Trap Momentum Boost (Multiplier)' },
+    wma_vol_window:               { value: 8,     type: 'number',      label: 'WMA: Volatility Scan Window' },
+    wma_vol_thresh:               { value: 0.36,   type: 'number',      label: 'WMA: Volatility Threshold (StdDev/Mean)' },
+    wma_vol_penalty:              { value: 0.15,   type: 'number',      label: 'WMA: Volatility Penalty (Score Reduction)' }, // Disabled
+    wma_instability_penalty_med:  { value: 0.12,   type: 'number',      label: 'WMA: Instability Penalty (2 consecutive crashes)' },
+    wma_instability_penalty_high: { value: 0.22,   type: 'number',      label: 'WMA: Instability Penalty (3+ consecutive crashes)' },
+    wma_minInstabilityImpact:     { value: 0.10, type: 'number', label: 'WMA: Minimum instability impact (prevents zeroing finalScore)' },
+    wma_trap_spike_mult:          { value: 6.0,    type: 'number',      label: 'WMA: Trap Spike Multiplier (vs Target)' },
+    wma_trap_trend_thresh:        { value: 0.22,    type: 'number',      label: 'WMA: Trap Trend Threshold (Score)' },
+    wma_trap_penalty:             { value: 0.06,    type: 'number',      label: 'WMA: Trap Detection Penalty (Multiplier)' },
+    wma_trap_boost:               { value: 1.3,    type: 'number',      label: 'WMA: Trap Momentum Boost (Multiplier)' },
+
+    // === Smart Guard Settings (New) ===
+    wma_smart_guard_hits:         { value: 2,    type: 'number', label: 'WMA: Smart Guard - Min Consecutive Hits to Confirm' },
+    wma_smart_guard_penalty:      { value: 0.40, type: 'number', label: 'WMA: Smart Guard - Suppression Multiplier (0.4 = 60% drop)' },
+
+    // === Instability Thresholds (Tunable) ===
+    wma_instability_thresh_med:   { value: 2,    type: 'number', label: 'WMA: Instability Threshold - Med Penalty (Losses)' },
+    wma_instability_thresh_high:  { value: 3,    type: 'number', label: 'WMA: Instability Threshold - High Penalty (Losses)' },
+
+    // === Smart Market Guard (3-Stage Logic) ===
+    wma_guard_bad_thresh:       { value: 0.50, type: 'number', label: 'WMA: Bad Market Threshold (Ratio of Lows > X triggers Defensive)' },
+    wma_guard_extreme_thresh:   { value: 0.75, type: 'number', label: 'WMA: Extreme Market Threshold (Ratio of Lows > X triggers Pause)' },
+
+    wma_guard_confirm_hits:     { value: 2,    type: 'number', label: 'WMA: Defensive Mode - Hits required to Vote' },
+    wma_guard_penalty_bad:      { value: 0.40, type: 'number', label: 'WMA: Defensive Mode - Score Multiplier (0.4 = Wait)' },
+    wma_guard_penalty_extreme:  { value: 0.05, type: 'number', label: 'WMA: Extreme Mode - Score Multiplier (0.05 = Pause)' },
+
+    // Spike-aware controls (conservative)
+    wma_spike_ignore_vol_for_nrounds: { value: 1,    type: 'number', label: 'WMA: If spike detected, ignore volatility penalty for N rounds' },
+    wma_spike_threshold_mult:         { value: 3.5,  type: 'number', label: 'WMA: Spike threshold: treat crash >= target * this as spike' },
+    wma_spike_penalty_scale:          { value: 0.60, type: 'number', label: 'WMA: Spike penalty scale (min allowed when spike active) — 0.6 => keep 60% of penalty' },
 
     // 4. Decision Thresholds (Dynamic Hysteresis)
-    wma_threshold_on:       { value: 0.58,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
+    wma_threshold_on:       { value: 0.59,   type: 'number',      label: 'WMA: Threshold Ceiling (Start/Max)' },
     wma_threshold_floor:    { value: 0.36,   type: 'number',      label: 'WMA: Threshold Floor (Min)' },
-    wma_threshold_step_win: { value: 0.22,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
-    wma_threshold_step_loss:{ value: 0.14,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
-    wma_hysteresis_gap:     { value: 0.06,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
-    wma_cooldown_rounds:    { value: 0,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
+    wma_threshold_step_win: { value: 0.12,   type: 'number',      label: 'WMA: Dyn Thresh Step (Base Win)' },
+    wma_threshold_step_loss:{ value: 0.20,   type: 'number',      label: 'WMA: Dyn Thresh Step (Loss)' },
+    wma_hysteresis_gap:     { value: 0.12,   type: 'number',      label: 'WMA: Gap between ON and OFF' },
+    wma_cooldown_rounds:    { value: 1,      type: 'number',      label: 'WMA: Cooldown rounds between switches' },
     wma_score_floor_buffer: { value: 0.02, type: 'number', label: 'WMA: Score floor buffer (scoreFloor + buffer triggers safety reset)' },
 
     // --- LOGIC TUNING: Drop Fast, Rise Slow ---
-    wma_penalty_single_loss:    { value: 0.12,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
-    wma_rising_boost:           { value: 4.0,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
-    wma_rising_win_rate:        { value: 0.46,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
+    wma_penalty_single_loss:    { value: 0.18,   type: 'number',      label: 'WMA: Single Loss Penalty (Score Reduction)' },
+    wma_rising_boost:           { value: 2.2,    type: 'number',      label: 'WMA: Rising Trend Boost (Multiplier)' },
+    wma_rising_win_rate:        { value: 0.50,   type: 'number',      label: 'WMA: Rising Trend Win Rate (0.60 = 60%)' },
     wma_stable_vol_thresh:      { value: 0.15,   type: 'number',      label: 'WMA: Stable Regime Volatility Threshold' },
-    wma_stable_loss_dampener:   { value: 0.50,   type: 'number',      label: 'WMA: Stable Regime Loss Dampener (0.5 = Half Penalty)' },
+    wma_stable_loss_dampener:   { value: 0.60,   type: 'number',      label: 'WMA: Stable Regime Loss Dampener (0.5 = Half Penalty)' },
 
     // Smart Logic Parameters (No Hard-coding)
     wma_threshold_smart_cap:    { value: 2.0,    type: 'number',      label: 'WMA: Smart Drop Cap (Max Multiplier)' },
@@ -137,7 +163,7 @@ var config =    {
 
     // Crash clustering detection
     wma_lowCrashClusterThreshold: { value: 0.50, type: 'number', label: 'WMA: Low-crash cluster threshold (ratio 0-1)' },
-    wma_clusterPenalty:             { value: 0.12, type: 'number', label: 'WMA: Cluster Penalty (multiplicative factor, 0-1)' },
+    wma_clusterPenalty:             { value: 0.20, type: 'number', label: 'WMA: Cluster Penalty (multiplicative factor, 0-1)' },
 
     // 5. System
     wma_eps:                { value: 1e-6,   type: 'number',      label: 'WMA: Math Epsilon (Zero prevention)' },
@@ -278,55 +304,97 @@ const BOT_SCRIPT_ID = config.meta.name + "-v" + config.meta.version +
 // Quick runtime fingerprint
 try { console.info('⚙️ ' + BOT_SCRIPT_ID + ' — loaded at ' + new Date().toISOString()); } catch(_) {}
 
+/**
+ * UNIFIED ENGINE ADAPTER (Bustabit / Coinscrash / BC.Game)
+ * Abstracts platform-specific API calls into a standard interface.
+ */
 class UnifiedEngineAdapter {
     constructor() {
         this.platform = this.detectPlatform();
-        this.logger = new Logger(new ConfigManager(this));
-        this.logger.log(`🔌 Unified Adapter attached to: ${this.platform}`);
+        // We defer Logger init slightly or assume ConfigManager is available.
+        // If your script initializes Logger inside here, keep it. 
+        // For safety, I will assume Logger exists or is passed in, but if you create it here:
+        if (typeof Logger !== 'undefined' && typeof ConfigManager !== 'undefined') {
+            this.logger = new Logger(new ConfigManager(this));
+            this.logger.log(`🔌 Unified Adapter attached to: ${this.platform}`);
+        }
 
         // Event Emitter delegates
         this.listeners = {
             'GAME_STARTING': [],
+            'GAME_STARTED': [], // Added for robust timing
             'GAME_ENDED': []
         };
 
+        this.bcGamePendingBet = null; // Store BC.Game bet promises here
         this.bindNativeEvents();
     }
 
     detectPlatform() {
-        if (typeof engine.placeBet === 'function') return 'COINSCRASH';
-        if (typeof engine.bet === 'function') return 'BUSTABIT';
+        // 1. Check BC.Game (game object exists)
+        if (typeof game !== 'undefined' && typeof game.bet === 'function') return 'BCGAME';
+        // 2. Check Coinscrash (engine.placeBet exists)
+        if (typeof engine !== 'undefined' && typeof engine.placeBet === 'function') return 'COINSCRASH';
+        // 3. Check Bustabit (engine.bet exists)
+        if (typeof engine !== 'undefined' && typeof engine.bet === 'function') return 'BUSTABIT';
         return 'UNKNOWN';
     }
 
     // --- API UNIFICATION ---
 
     getUsername() {
+        if (this.platform === 'BCGAME') {
+            // BC.Game uses the 'config' object for user inputs
+            return (typeof config !== 'undefined' && config.name) ? config.name.value : 'BCGameUser';
+        }
         if (this.platform === 'BUSTABIT' && typeof userInfo !== 'undefined') return userInfo.uname;
         if (this.platform === 'COINSCRASH') return engine.getUsername();
         return 'Guest';
     }
 
     getBalance() {
-        // Returns Satoshis
+        if (this.platform === 'BCGAME') {
+            // Returns USDT/Currency Float
+            return (typeof currency !== 'undefined') ? currency.amount : 0;
+        }
+        // Returns Satoshis (Bits)
         if (this.platform === 'BUSTABIT' && typeof userInfo !== 'undefined') return userInfo.balance;
         if (this.platform === 'COINSCRASH') return engine.getBalance();
         return 0;
     }
 
-    placeBet(satoshis, multiplierFloat) {
-        if (this.platform === 'BUSTABIT') {
-            engine.bet(satoshis, multiplierFloat);
-        } else if (this.platform === 'COINSCRASH') {
-            // Coinscrash expects integer multiplier (e.g. 200 for 2.0x)
-            engine.placeBet(satoshis, Math.round(multiplierFloat * 100));
+    /**
+     * Places a bet.
+     * @param {number} amount - wager (Bits for BB/CC, USDT for BCGame)
+     * @param {number} payout - multiplier (float)
+     */
+    placeBet(amount, payout) {
+        if (this.platform === 'BCGAME') {
+            // BC.Game: Do NOT floor. Allow decimals (0.1).
+            // Store the promise to be returned by main() loop.
+            this.bcGamePendingBet = game.bet(amount, payout);
+        }
+        else if (this.platform === 'BUSTABIT') {
+            // Bustabit: Requires Integer Bits
+            if (typeof engine !== 'undefined') engine.bet(Math.floor(amount), payout);
+        }
+        else if (this.platform === 'COINSCRASH') {
+            // Coinscrash: Requires Integer Bits & Integer Payout (2x = 200)
+            if (typeof engine !== 'undefined') engine.placeBet(Math.floor(amount), Math.round(payout * 100));
         }
     }
 
     getHistory() {
-        // Returns array of crash floats
+        // Returns array of crash floats (e.g. [1.98, 2.05, ...])
+        if (this.platform === 'BCGAME') {
+            if (typeof game !== 'undefined' && game.history && game.history.length > 0) {
+                // BC.Game history objects usually have { crash: 2.05 } or are raw numbers
+                return game.history.slice(0, 50).map(h => (typeof h === 'object' ? h.crash : h));
+            }
+            return [];
+        }
+
         if (this.platform === 'BUSTABIT') {
-            // FIX: Use toArray() for Bustabit compatibility
             if (engine.history && typeof engine.history.toArray === 'function') {
                 return engine.history.toArray().slice(0, 50).map(g => g.crash / 100);
             }
@@ -334,10 +402,23 @@ class UnifiedEngineAdapter {
         }
 
         if (this.platform === 'COINSCRASH') {
-            // FIX: Coinscrash does not provide history getter. Return empty.
+            // Coinscrash does not expose history array easily in all versions, 
+            // returning empty is safer than crashing.
             return [];
         }
         return [];
+    }
+
+    /**
+     * Helper to get the very last crash value (useful for BC.Game bridge)
+     */
+    getLastCrash() {
+        if (this.platform === 'BCGAME') {
+            const h = this.getHistory();
+            return (h.length > 0) ? h[0] : 0;
+        }
+        // For others, we rely on event listeners to populate data
+        return 0;
     }
 
     // --- EVENT NORMALIZATION ---
@@ -354,67 +435,48 @@ class UnifiedEngineAdapter {
         }
     }
 
-    // Added to silence dead bot instances
     disconnect() {
-        this.listeners = {
-            'GAME_STARTING': [],
-            'GAME_ENDED': []
-        };
+        this.listeners = { 'GAME_STARTING': [], 'GAME_STARTED': [], 'GAME_ENDED': [] };
     }
 
     bindNativeEvents() {
         const self = this;
 
-        // --- HELPER: Normalize Timestamps to Epoch Milliseconds ---
+        // BC.Game does not use engine.on(), so we skip binding native events.
+        // The main() function will manually call self.emit().
+        if (this.platform === 'BCGAME') return;
+
+        // --- HELPER: Normalize Timestamps ---
         const normalizeToMs = (val) => {
             if (val === undefined || val === null) return null;
             const n = Number(val);
             if (!Number.isFinite(n)) return null;
-            // If number looks like seconds (small float or int < 1e10), treat as seconds
-            // Bustabit/Coinscrash sometimes send '5' for 5s, sometimes epoch ms.
             if (n > 0 && n < 10000000000) return Math.round(n * 1000);
             return Math.round(n);
         };
 
-        // Helper to handle the "Preparing -> Running" transition reliably
         const handleGameStarting = (info) => {
             self.emit('GAME_STARTING', info || {});
-
+            // ... (Keep your existing timer logic here for projected start times) ...
             if (self._startTimer) clearTimeout(self._startTimer);
-
-            // Parse time_till_start robustly
-            let delayMs = 5000; // Default fallback
+            let delayMs = 5000;
             if (info && info.time_till_start !== undefined) {
                 const raw = Number(info.time_till_start);
-                if (Number.isFinite(raw) && raw > 0) {
-                    // If raw is small (< 1000), assume seconds, else ms
-                    delayMs = (raw < 1000) ? Math.round(raw * 1000) : Math.round(raw);
-                }
+                if (Number.isFinite(raw) && raw > 0) delayMs = (raw < 1000) ? Math.round(raw * 1000) : Math.round(raw);
             }
-
-            // Calculate projected start time (Epoch MS)
-            // Use server provided projected start if available, else calc from delay
-            const projectedEpochMs = (info && info.projectedStartTime)
-                ? normalizeToMs(info.projectedStartTime)
-                : (Date.now() + delayMs);
-
-            // Set backup timer to emit GAME_STARTED with the PRECISE timestamp
             self._startTimer = setTimeout(() => {
-                self.emit('GAME_STARTED', { startTime: projectedEpochMs });
+                const now = Date.now();
+                self.emit('GAME_STARTED', { startTime: now });
             }, delayMs);
         };
 
         const handleGameStarted = (info) => {
             if (self._startTimer) clearTimeout(self._startTimer);
-
-            // Normalize start time if provided, else use Now
             let startMs = Date.now();
             if (info && (info.start_time || info.startTime || info.started_at)) {
                 const normalized = normalizeToMs(info.start_time || info.startTime || info.started_at);
                 if (normalized) startMs = normalized;
             }
-
-            // Emit with normalized timestamp so Bot can sync UI
             self.emit('GAME_STARTED', { startTime: startMs });
         };
 
@@ -424,21 +486,18 @@ class UnifiedEngineAdapter {
             let crashVal = 0;
 
             if (self.platform === 'BUSTABIT') {
+                // ... Keep existing Bustabit crash parsing ...
                 if (engine.history && typeof engine.history.first === 'function') {
                     const last = engine.history.first();
                     if (last && typeof last.bust === 'number') crashVal = Number(last.bust);
                 }
                 if (!crashVal && data && data.crash) crashVal = Number(data.crash);
-
-                // Bustabit usually provides float (e.g. 1.98), ensure it's not scaled integer
                 if (crashVal > 1000) crashVal = crashVal / 100;
             }
-            else {
-                // Coinscrash usually provides integer (e.g. 198 for 1.98x)
+            else { // COINSCRASH
+                // ... Keep existing Coinscrash crash parsing ...
                 if (data && data.game_crash) crashVal = Number(data.game_crash);
                 else if (data && data.crash) crashVal = Number(data.crash);
-
-                // Normalize Coinscrash integer to float
                 if (crashVal > 10) crashVal = crashVal / 100;
             }
 
@@ -452,7 +511,6 @@ class UnifiedEngineAdapter {
             engine.on('GAME_ENDED', handleGameEnded);
         }
         else if (this.platform === 'COINSCRASH') {
-            // Coinscrash event names are lowercase
             engine.on('game_starting', handleGameStarting);
             engine.on('game_started', handleGameStarted);
             engine.on('game_crash', handleGameEnded);
@@ -501,6 +559,7 @@ class ConfigManager {
             // Normal Mode (User Facing)
             normal: {
                 baseBetBits: val('normalBaseBet', cfg.normalBaseBet?.value) / 100, // Convert Sat to Bits
+                bcGameBaseBet: val('bcgame_baseBet', cfg.normal_bcgameBasebet?.value);
                 normalDefaultMult: val('normalDefaultMult', cfg.normal_normalDefaultMult?.value),
                 normalHighMult: val('normalHighMult', cfg.normal_normalHighMult?.value),
                 maxConsecutiveWins: val('normal_maxConsecutiveWins', cfg.normal_maxConsecutiveWins?.value),
@@ -522,6 +581,7 @@ class ConfigManager {
                 enabled: val('enableRecovery', cfg.enableRecovery?.value),
                 targetRecMult: val('recoveryMultiplier', cfg.recoveryMultiplier?.value),
                 recStakeCap: val('recoveryStakeCap', cfg.recoveryStakeCap?.value),
+                hybridRecoveryStakeCap: val('recovery_hybridRecoveryStakeCap', cfg.recovery_hybridRecoveryStakeCap?.value),
                 baseProfitMult: 0,
                 // Fallback for legacy getters if needed
                 takeProfitBits: val('takeProfitBits', ConfigManager.DEFAULTS.TAKE_PROFIT_BITS),
@@ -548,6 +608,7 @@ class ConfigManager {
                 // Map the new Labouchere thresholds
                 labouchereMult4Slice: val('recovery_labouchereMult4Slice', cfg.recovery_labouchereMult4Slice?.value),
                 labouchereMult6Slice: val('recovery_labouchereMult6Slice', cfg.recovery_labouchereMult6Slice?.value),
+                labouchereMult8Slice: val('recovery_labouchereMult8Slice', cfg.recovery_labouchereMult8Slice?.value),
             },
 
             // UI & Protections
@@ -609,10 +670,27 @@ class ConfigManager {
                 volPenalty:             val('wma_vol_penalty', cfg.wma_vol_penalty?.value),
                 instabilityMed:         val('wma_instability_penalty_med', cfg.wma_instability_penalty_med?.value),
                 instabilityHigh:        val('wma_instability_penalty_high', cfg.wma_instability_penalty_high?.value),
+                minInstabilityImpact:   val('wma_minInstabilityImpact', cfg.wma_minInstabilityImpact?.value),
                 trapSpikeMult:          val('wma_trap_spike_mult', cfg.wma_trap_spike_mult?.value),
                 trapTrendThresh:        val('wma_trap_trend_thresh', cfg.wma_trap_trend_thresh?.value),
                 trapPenalty:            val('wma_trap_penalty', cfg.wma_trap_penalty?.value),
                 trapBoost:              val('wma_trap_boost', cfg.wma_trap_boost?.value),
+
+                guardBadThresh:         val('wma_guard_bad_thresh', cfg.wma_guard_bad_thresh?.value),
+                guardExtremeThresh:     val('wma_guard_extreme_thresh', cfg.wma_guard_extreme_thresh?.value),
+                guardConfirmHits:       val('wma_guard_confirm_hits', cfg.wma_guard_confirm_hits?.value),
+                guardPenaltyBad:        val('wma_guard_penalty_bad', cfg.wma_guard_penalty_bad?.value),
+                guardPenaltyExtreme:    val('wma_guard_penalty_extreme', cfg.wma_guard_penalty_extreme?.value),
+
+                smartGuardHits:         val('wma_smart_guard_hits', cfg.wma_smart_guard_hits?.value),
+                smartGuardPenalty:      val('wma_smart_guard_penalty', cfg.wma_smart_guard_penalty?.value),
+                instabilityThreshMed:   val('wma_instability_thresh_med', cfg.wma_instability_thresh_med?.value),
+                instabilityThreshHigh:  val('wma_instability_thresh_high', cfg.wma_instability_thresh_high?.value),
+
+                // Spike-aware mappings (new)
+                spikeIgnoreVolForNRounds: val('wma_spike_ignore_vol_for_nrounds', cfg.wma_spike_ignore_vol_for_nrounds?.value),
+                spikeThresholdMult:       val('wma_spike_threshold_mult',        cfg.wma_spike_threshold_mult?.value),
+                spikePenaltyScale:        val('wma_spike_penalty_scale',         cfg.wma_spike_penalty_scale?.value),
 
                 thrOn:                  val('wma_threshold_on', cfg.wma_threshold_on?.value),
                 thrOff:                 val('wma_threshold_off', cfg.wma_threshold_off?.value),
@@ -700,12 +778,17 @@ class ConfigManager {
         };
 
         // --- Dynamic Initialization ---
-
         // 1. Set Initial Balance
         this.setInitialBalance();
 
         // 2. Compute dynamic base bet based on percentage of balance
         this.computeAndSetBaseBetFromPercent();
+
+        // Scale the Global Take Profit by the Base Bet
+        // Use the raw config value as the 'multiplier' and multiply by the calculated base bet
+        const rawTpMultiplier = val('takeProfitBits', ConfigManager.DEFAULTS.TAKE_PROFIT_BITS);
+        const currentBaseBet = this.config.normal.baseBetBits || 1;
+        this.config.takeProfitBits = rawTpMultiplier * currentBaseBet;
 
         // 3. Populate Schedule Take Profits (dependent on base bet)
         this.initializeScheduleTakeProfits();
@@ -966,6 +1049,7 @@ class WMALane {
 
         // cooldown counter used by dynamic threshold logic
         this._dynCooldown = 0;
+        this._wmaSpikeIgnoreRounds = 0;   // spike-aware temporary ignore window counter
     }
 
     update(crash, target) {
@@ -1064,108 +1148,104 @@ class WMALane {
         const rewardMax = Number(this.config.get('wma', 'rewardMax'));
         const scoreFloor = Number(this.config.get('wma', 'scoreFloor'));
 
-        // Advanced Configs
         const volWindow = Number(this.config.get('wma', 'volWindow'));
         const volWeight = Number(this.config.get('wma', 'volWeight'));
         const skewWeight = Number(this.config.get('wma', 'skewWeight'));
-        const lowClusterThresh = Number(this.config.get('wma', 'lowCrashClusterThreshold'));
-        const clusterPenalty = Number(this.config.get('wma', 'clusterPenalty'));
         const fastWindow = Number(this.config.get('wma', 'fastWindow'));
         const linearWin = Number(this.config.get('wma', 'linearWeightingWindow'));
         const eps = Number(this.config.get('wma', 'eps'));
-        const recoveryBayesDecay = Number(this.config.get('wma', 'recoveryBayesDecay'));
-        const volPenalty = Number(this.config.get('wma', 'volPenalty'));
         const trapSpikeMult = Number(this.config.get('wma', 'trapSpikeMult'));
         const trapTrendThresh = Number(this.config.get('wma', 'trapTrendThresh'));
-        const trapPenalty = Number(this.config.get('wma', 'trapPenalty'));
         const trapBoost = Number(this.config.get('wma', 'trapBoost'));
+        const scoreScalar = Number(this.config.get('wma', 'smartScalar'));
 
-        // [LOGIC ADJUSTMENT]: Read the scalar used to differentiate signal strength
-        // Defaults to 1.0 if not set in config, preserving original behavior
-        const scoreScalar = Number(this.config.get('wma', 'smartScalar')) || 1.0;
+        // === 2) Spike Awareness ===
+        const spikePenaltyScaleCfg = Number(this.config.get('wma', 'spikePenaltyScale'));
+        const spikeThresholdMultCfg = Number(this.config.get('wma', 'spikeThresholdMult'));
+        const spikeIgnoreRoundsCfg = Number(this.config.get('wma', 'spikeIgnoreVolForNRounds'));
 
-        // === 2) Calculate Rewards ===
+        const latestHistEntry = (this.history && this.history.length) ? this.history[this.history.length - 1] : null;
+        if (latestHistEntry) {
+            const lastCrashValLocal = Number(latestHistEntry.crash);
+            const lastTargetLocal = Number(latestHistEntry.target);
+            if (lastCrashValLocal >= (lastTargetLocal * spikeThresholdMultCfg)) {
+                this._wmaSpikeIgnoreRounds = spikeIgnoreRoundsCfg;
+            }
+        }
+
+        const spikePenaltyScaleActive = (this._wmaSpikeIgnoreRounds > 0) ? spikePenaltyScaleCfg : 1.0;
+        if (this._wmaSpikeIgnoreRounds > 0) this._wmaSpikeIgnoreRounds--;
+
+        let volPenalty = Number(this.config.get('wma', 'volPenalty')) * spikePenaltyScaleActive;
+        let clusterPenalty = Number(this.config.get('wma', 'clusterPenalty')) * spikePenaltyScaleActive;
+        let trapPenalty = Number(this.config.get('wma', 'trapPenalty')) * spikePenaltyScaleActive;
+
+        // === 3) Calculate Base Score (EWMA - Correctly Implemented) ===
+        // This is the Fast Trend Detector. It uses Exponential Weighting to prioritize recent data.
         const rewards = this.history.map(h => {
             const crash = Number(h.crash);
             const target = Number(h.target);
-
-            // [LOGIC ADJUSTMENT]: Apply scalar to raw log before clamping.
-            // This allows small wins (e.g., 1.01 ratio) to become meaningful scores if scalar is high.
             const raw = Math.log(crash / target) * scoreScalar;
-
             return Math.max(rewardMin, Math.min(rewardMax, raw));
         });
 
-        // === 3) EWMA Calculation ===
         let ewma = 0;
         if (rewards.length > 0) {
             ewma = rewards[0];
             for (let i = 1; i < rewards.length; i++) {
-                // standard EWMA using configured alpha
+                // Standard EWMA Formula: New * alpha + Old * (1-alpha)
                 ewma = alpha * rewards[i] + (1 - alpha) * ewma;
             }
         }
 
-        // Map EWMA to baseScore [0, 1]
-        // [CRITICAL FIX]: baseScore is defined HERE, making it available for later steps.
         const rewardRange = (rewardMax - rewardMin);
         const mapped = (rewardRange === 0) ? 0.5 : ((ewma - rewardMin) / rewardRange);
         let baseScore = Math.max(0, Math.min(1, mapped));
 
-        // === IMMEDIATE CONSECUTIVE-LOSS CLUSTER PENALTY (config-driven) ===
+        // === 4) Immediate Instability Penalties ===
+        // Note: This logic suppresses the SCORE, it does NOT stop the strategy.
+        // It simply tells the bot "Wait, don't bet yet" while in debt.
         const instMedPenalty  = Number(this.config.get('wma', 'instabilityMed'));
         const instHighPenalty = Number(this.config.get('wma', 'instabilityHigh'));
-        // New Key
         const singleLossPenalty = Number(this.config.get('wma', 'singleLossPenalty'));
 
-        // Count consecutive misses
+        const threshHigh = Number(this.config.get('wma', 'instabilityThreshHigh'));
+        const threshMed  = Number(this.config.get('wma', 'instabilityThreshMed'));
+
         let consecMiss = 0;
-        for (let i = this.history.length - 1; i >= 0 && consecMiss < 3; i--) {
+        for (let i = this.history.length - 1; i >= 0 && consecMiss < threshHigh; i--) {
             if (Number(this.history[i].crash) < Number(this.history[i].target)) consecMiss++;
             else break;
         }
 
-        // STRICT ENFORCEMENT: Penalize immediately on single loss
-        if (consecMiss >= 3 && instHighPenalty > 0) {
-            baseScore = Math.max(0, baseScore * (1 - instHighPenalty));
-        } else if (consecMiss >= 2 && instMedPenalty > 0) {
-            baseScore = Math.max(0, baseScore * (1 - instMedPenalty));
-        } else if (consecMiss === 1) {
-            // NEW: Apply Configurable Penalty immediately to ensure Score < Threshold
-            if (singleLossPenalty > 0) {
-                baseScore = Math.max(0, baseScore * (1 - singleLossPenalty));
-            }
-        }
+        if (consecMiss >= threshHigh && instHighPenalty > 0) baseScore *= (1 - instHighPenalty);
+        else if (consecMiss >= threshMed && instMedPenalty > 0) baseScore *= (1 - instMedPenalty);
+        else if (consecMiss === 1 && singleLossPenalty > 0) baseScore *= (1 - singleLossPenalty);
 
-        // === VOLATILITY GUARD (direction-aware) ===
-        // Applies vol penalty ONLY when recent volatility (sd/mean) is high AND the window is biased toward lows.
-        const volThresh = Number(this.config.get('wma', 'volThresh'));
-        const lowBiasThreshold = Number(this.config.get('wma', 'lowCrashClusterThreshold'));
+        // === 5) MARKET REGIME DETECTION (Corrected) ===
+        // We use a Simple Density Check (Ratio) over the window.
+        // This is "Background Stability". It is NOT weighted heavily on the last result.
+        // This ensures a single high crash does NOT instantly flip the "Bad Market" status to Good.
 
-        if (volWindow > 1 && volPenalty > 0 && this.history.length >= volWindow) {
-            const recent = this.history.slice(-volWindow);
-            const vals = recent.map(h => Number(h.crash) || 0);
-
-            const meanV = vals.reduce((s, v) => s + v, 0) / vals.length;
-            const varianceV = vals.reduce((s, v) => s + Math.pow(v - meanV, 2), 0) / vals.length;
-            const sdV = Math.sqrt(varianceV);
-            const ratio = meanV > 0 ? sdV / meanV : Number.POSITIVE_INFINITY;
-
-            // direction test: fraction of recent entries that are "low" (crash < their target)
-            const lowCount = recent.filter(h => Number(h.crash) < Number(h.target)).length;
-            const lowBias = lowCount / vals.length;
-
-            // Apply penalty only when volatility is high AND the recent window is biased toward lows
-            if (ratio >= volThresh && lowBias >= lowBiasThreshold) {
-                baseScore = Math.max(0, baseScore * (1 - volPenalty));
-            }
-        }
-
-        // === 4) Volatility & Skew ===
         const volN = Math.min(volWindow, this.history.length);
         let mean = 0, variance = 0;
+        let lowCrashCount = 0;
+
+        // Use the Cluster Threshold to define what a "Low" is for the Regime Check
+        // If crash < 2.0 (or whatever target logic implies), we count it.
+        // We use the recorded target in history to allow dynamic adaptation.
+
         if (volN > 0) {
-            for (let i = 0; i < volN; i++) mean += this.history[this.history.length - 1 - i].crash;
+            for (let i = 0; i < volN; i++) {
+                const entry = this.history[this.history.length - 1 - i];
+                const val = Number(entry.crash);
+                mean += val;
+
+                // Count exact lows (Regime Density)
+                if (val < Number(entry.target)) {
+                    lowCrashCount++;
+                }
+            }
             mean /= volN;
             for (let i = 0; i < volN; i++) {
                 const d = this.history[this.history.length - 1 - i].crash - mean;
@@ -1173,132 +1253,121 @@ class WMALane {
             }
             variance /= volN;
         }
+
         const stdDev = Math.sqrt(variance);
         const volScore = (mean > 0) ? (stdDev / mean) : 0;
 
-        // Downside Skew
-        const laneTarget = this.history.length ? Number(this.history[this.history.length - 1].target) : 1;
-        let downsideCount = 0;
-        const lookbackForSkew = Math.min(this.history.length, volWindow);
-        for (let i = 0; i < lookbackForSkew; i++) {
-            if (this.history[this.history.length - 1 - i].crash < laneTarget) downsideCount++;
-        }
-        const downsideSkew = lookbackForSkew > 0 ? (downsideCount / lookbackForSkew) : 0;
+        // This is the TRUE regime indicator. It won't fluctuate wildly on one result.
+        const downsideSkew = (volN > 0) ? (lowCrashCount / volN) : 0;
 
+        // === 6) Apply Standard Weights ===
+        const lowClusterThresh = Number(this.config.get('wma', 'lowCrashClusterThreshold'));
         const instabilityScore = (volScore * volWeight) + (downsideSkew * skewWeight);
 
-        // === 5) Cluster Penalty ===
-        const lowCrashRatio = lookbackForSkew > 0 ? (downsideCount / lookbackForSkew) : 0;
         let clusterFactor = 1.0;
-        if (lowCrashRatio > lowClusterThresh) {
-            clusterFactor = clusterPenalty;
+        if (downsideSkew > lowClusterThresh) {
+            clusterFactor = Math.max(0, 1 - (isFinite(clusterPenalty) ? clusterPenalty : 0));
         }
 
-        // === 6) Bayesian Decay ===
-        let bayesFactor = 1.0;
-        if (this.label === 'RECOVERY' && recoveryBayesDecay > 0) {
-            let consecMiss = 0;
-            for (let i = this.history.length - 1; i >= 0 && i >= this.history.length - 10; i--) {
-                if (this.history[i].crash < this.history[i].target) consecMiss++;
-                else break;
-            }
-            if (consecMiss >= 2) {
-                bayesFactor = Math.max(0, 1 - recoveryBayesDecay * (consecMiss / 10));
-            }
-        }
-
-        // === 7) Final Score Assembly ===
         let finalScore = baseScore;
-        const instabilityImpact = Math.max(0, 1 - (instabilityScore * volPenalty));
-        // Apply penalties to baseScore
-        finalScore = finalScore * instabilityImpact * clusterFactor * bayesFactor;
+        const minInstImpact = Number(this.config.get('wma', 'minInstabilityImpact'));
+        const instabilityImpact = Math.max(minInstImpact, 1 - (instabilityScore * volPenalty));
 
-        // === 8) Trap Detection (Safe to use baseScore now) ===
+        finalScore = finalScore * instabilityImpact * clusterFactor;
+
+        // === 7) Trap Detection ===
         const latestEntry = this.history[this.history.length - 1];
         const lastCrashVal = Number(latestEntry.crash);
         const currentTarget = Number(latestEntry.target);
-
         const isHugeSpike = lastCrashVal > (currentTarget * trapSpikeMult);
-        const isTrendDead = baseScore < trapTrendThresh; // ReferenceError Fixed
+        const isTrendDead = baseScore < trapTrendThresh;
 
-        if (isHugeSpike && isTrendDead) {
-            finalScore = finalScore * trapPenalty;
-        } else if (isHugeSpike && !isTrendDead) {
-            finalScore = Math.min(0.99, finalScore * trapBoost);
+        if (isHugeSpike && isTrendDead) finalScore *= trapPenalty;
+        else if (isHugeSpike && !isTrendDead) finalScore = Math.min(0.99, finalScore * trapBoost);
+
+        // =========================================================
+        // 🚀 SMART MARKET GUARD (Fixed Logic)
+        // =========================================================
+
+        const guardBadThresh = Number(this.config.get('wma', 'guardBadThresh'));
+        const guardExtremeThresh = Number(this.config.get('wma', 'guardExtremeThresh'));
+        const guardHitsReq = Number(this.config.get('wma', 'guardConfirmHits'));
+        const penaltyBad = Number(this.config.get('wma', 'guardPenaltyBad'));
+        const penaltyExtreme = Number(this.config.get('wma', 'guardPenaltyExtreme'));
+
+        // 1. Determine Regime
+        // downsideSkew is now the "Density of Lows" (e.g. 0.70 = 70% lows in last 20 rounds).
+        // A single high crash (1/20) will only change this to 0.65, keeping us in "Bad" mode.
+        const isExtreme = downsideSkew > guardExtremeThresh;
+        const isBad = !isExtreme && (downsideSkew > guardBadThresh);
+
+        // 2. Determine Trend (Consecutive Hits)
+        let consecHits = 0;
+        for (let i = this.history.length - 1; i >= 0; i--) {
+            if (Number(this.history[i].crash) >= Number(this.history[i].target)) consecHits++;
+            else break;
         }
 
-        // === 9) ANTI-DRAG & FLOOR ===
+        // 3. Apply Guard
+        if (isExtreme) {
+            // Extreme (e.g. > 75% lows) -> Wait it out
+            finalScore *= penaltyExtreme;
+        }
+        else if (isBad) {
+            // Bad Market (e.g. > 50% lows) -> Require Confirmation
+            // If we don't have enough hits, we suppress the score to prevent a premature bet.
+            if (consecHits < guardHitsReq) {
+                finalScore *= penaltyBad;
+            }
+        }
+        // Good Market (Aggressive) -> No Guard penalties applied.
+
+        // =========================================================
+
+        // === 8) Anti-Drag & Floor ===
         if (this.lastScore !== undefined && latestEntry.isHit === 1) {
             finalScore = Math.max(this.lastScore, finalScore);
         }
         finalScore = Math.max(scoreFloor, finalScore);
 
-        // === 10) SAFETY RESET (revised) ===
-        // Only force-to-ceiling when the recent window shows a sustained low-crash cluster.
-        // Otherwise: gently raise currentThreshold (so we don't repeatedly force ceiling on small dips).
+        // === 9) Safety Reset ===
         const scoreFloorBuffer = Number(this.config.get('wma', 'scoreFloorBuffer'));
         if (finalScore <= (scoreFloor + scoreFloorBuffer)) {
-            const volWindowLocal = Math.max(1, Math.min(this.history.length, Number(this.config.get('wma', 'volWindow')) || 1));
-            const recent = this.history.slice(-volWindowLocal);
-            const lowCountLocal = recent.filter(h => Number(h.crash) < Number(h.target)).length;
-            const lowBiasLocal = (volWindowLocal > 0) ? (lowCountLocal / volWindowLocal) : 0;
-            const clusterThresh = Number(this.config.get('wma', 'lowCrashClusterThreshold'));
-
-            if (lowBiasLocal >= clusterThresh) {
-                // Sustained low-cluster: force to configured ceiling (original safety behaviour)
+            if (downsideSkew >= lowClusterThresh) {
                 this.currentThreshold = Number(this.config.get('wma', 'thrOn'));
             } else {
-                // Small dip: gently raise existing threshold by a configured stepLoss * (1 + hysteresis)
                 const stepLossLocal = Number(this.config.get('wma', 'stepLoss'));
                 const hysteresisLocal = Number(this.config.get('wma', 'hysteresisGap'));
                 const ceil = Number(this.config.get('wma', 'thrOn'));
-                const raiseAmtLocal = stepLossLocal * (1 + hysteresisLocal);
-                this.currentThreshold = Math.min(ceil, (this.currentThreshold || 0) + raiseAmtLocal);
+                this.currentThreshold = Math.min(ceil, (this.currentThreshold || 0) + stepLossLocal * (1 + hysteresisLocal));
             }
         }
 
-        // === 11) Update State (Smart Catch-Up) ===
+        // === 10) Update State ===
         if (this.ewmaState === null) {
             this.ewmaState = finalScore;
         } else {
-            // [UPDATED] Use Configurable Boost instead of hard-coded 1.2
             const adaptiveBoost = Number(this.config.get('wma', 'adaptiveAlphaBoost'));
-
-            // LOGIC ADJUSTMENT: If the new signal is strong (> state), react slightly faster (Adaptive Alpha).
-            // This prevents "lag" during recovery when a good trend starts.
             let adaptiveAlpha = alpha;
-            if (finalScore > this.ewmaState) {
-                adaptiveAlpha = Math.min(1.0, alpha * adaptiveBoost); // Boost reaction speed on UPSIDE only
-            }
+            if (finalScore > this.ewmaState) adaptiveAlpha = Math.min(1.0, alpha * adaptiveBoost);
             this.ewmaState = (adaptiveAlpha * finalScore) + ((1 - adaptiveAlpha) * this.ewmaState);
         }
 
-        // Internal Floor (Allows fast rise on next good signal)
         this.ewmaState = Math.max(scoreFloor, this.ewmaState);
         this.lastScore = Math.max(eps, Math.min(1 - eps, this.ewmaState));
 
         this.wmaHistory.push(this.lastScore);
         if (this.wmaHistory.length > Math.max(fastWindow, linearWin)) this.wmaHistory.shift();
 
-        // Compute Slope
-        let slope = 0;
-        if (this.wmaHistory.length >= 2) {
-            slope = this.wmaHistory[this.wmaHistory.length - 1] - this.wmaHistory[this.wmaHistory.length - 2];
-        }
-
-        // Diagnostics
-        const regimeCfg = this.config.get('wma', 'regime') || {};
         this._diagnostics = {
             rawFast: ewma,
             instability: instabilityScore,
             volScore: volScore,
-            downsideSkew: downsideSkew,
+            downsideSkew: downsideSkew, // Now reflects Stable Density
             clusterFactor: clusterFactor,
-            bayesFactor: bayesFactor,
-            regimeNormal: regimeCfg.normalRegime,
-            regimeRecovery: regimeCfg.recoveryRegime,
-            slope: slope,
-            samples: n
+            slope: (this.wmaHistory.length >= 2) ? this.wmaHistory[this.wmaHistory.length - 1] - this.wmaHistory[this.wmaHistory.length - 2] : 0,
+            samples: n,
+            guardState: isExtreme ? 'EXTREME' : (isBad ? 'BAD' : 'GOOD')
         };
     }
 
@@ -1657,7 +1726,7 @@ class TitanPredictionEngine {
         if (this.modules.ev && this.config.get('prediction', 'evEnabled')) {
             // Fetch latest stats (Safe access in case module is initializing)
             const evVal = this.modules.ev.lastEV !== undefined ? this.modules.ev.lastEV : 0;
-            const evThr = Number(this.config.get('prediction', 'evThreshold')) || 0;
+            const evThr = Number(this.config.get('ensemble', 'evThreshold'))
 
             // Icon: Green if EV >= Threshold, Red if below
             const evIcon = evVal >= evThr ? '🟢' : '🔴';
@@ -1965,6 +2034,34 @@ class TitanPredictionEngine {
                     const score = climate.scores.red ? Math.round(climate.scores.red.finalScore * 100) : 0;
                     logs.push(`WMA:💤(${score}%)`);
                 }
+            }
+        }
+
+        // --- EV Module voting (insert here, after WMA block, before activeModules===0 check)
+        if (this.modules.ev && this.config.get('prediction', 'evEnabled')) {
+            activeModules++;
+
+            // Choose vote target according to mode (RECOVERY vs NORMAL)
+            const candidateTarget = (mode === 'RECOVERY')
+                ? Number(this.config.get('recovery', 'targetRecMult'))
+                : Number(this.config.get('normal', 'normalDefaultMult'));
+
+            // ask EV module to vote (module.vote returns { pass, ev, p_base, components, vol })
+            const evRes = this.modules.ev.vote(candidateTarget);
+
+            // keep diagnostics for UI/debug in logs (threshold lives under ensemble)
+            const evThr = Number(this.config.get('ensemble', 'evThreshold'));
+            if (evRes && evRes.pass) {
+                votes++;
+                targets.push(candidateTarget);
+                reasons.push('EV:Pass');
+                logs.push(`EV:🟢 ${evRes.ev.toFixed(3)} (Thr:${evThr.toFixed(3)})`);
+            } else if (evRes) {
+                // does not vote but show diagnostic
+                logs.push(`EV:🔴 ${evRes.ev.toFixed(3)} (Thr:${evThr.toFixed(3)})`);
+            } else {
+                // defensive - module returned unexpected result
+                logs.push('EV:❓ no result');
             }
         }
 
@@ -3563,36 +3660,21 @@ class CrashBot {
 
             cumulativeLoss += executedStake;
 
-            // Stop early if a win at this stake would cover prior losses + intended profit
-            // Profit on win at this stake:
-            const profitOnWin = executedStake * (payout - 1);
-            // Needed to cover previously accumulated losses (cumulativeLoss - executedStake) plus
-            // the profit target equal to initial * (target - 1)
-            const needed = (cumulativeLoss - executedStake) + (initial * (payout - 1));
-            if (profitOnWin >= needed) {
-                // Found a ladder level that would resolve the debt if won here
-                return {
-                    level: i,
-                    ladder,
-                    totalDebt: cumulativeLoss  // cumulativeLoss is the true sum of stakes, no double-count
-                };
-            }
-
             // Prepare for next iteration
             prevDebt = nextDebt;
             currentDebt = nextDebt;
 
-            // If cap prevented meaningful progress (executedStake == cap and next stake would also be > cap),
-            // we still record this state but may break if further doubling is impossible.
+            // If cap prevented meaningful progress, we may still break to avoid infinite loops
+            // but usually we want to see the level ceiling.
             const nextRaw = (payout - 1) > 0 ? (currentDebt / (payout - 1)) : currentDebt;
             const nextStakeGuess = Math.ceil(nextRaw);
-            if (nextStakeGuess > cap) {
-                // Can't continue beyond cap - stop building ladder (we included this capped level)
+            if (nextStakeGuess > cap && executedStake >= cap) {
+                // If we are strictly capped and can't progress, stop here.
                 break;
             }
         }
 
-        // Exhausted attempts without satisfying profit condition
+        // Return the full ladder
         return {
             level: ladder.length,
             ladder,
@@ -3615,6 +3697,7 @@ class CrashBot {
     calculateRecoveryStake(simulate = false) {
         // Strict reads from config (single-source)
         const recStakeCapMultiplier = Number(this.config.get('recovery', 'recStakeCap'));
+        const hybridCapBits = Number(this.config.get('recovery', 'hybridRecoveryStakeCap'));
         const targetRecMult = Number(this.config.get('recovery', 'targetRecMult'));
 
         // Defensive: must be in RECOVERY mode
@@ -3660,18 +3743,18 @@ class CrashBot {
             // Build and cache ladder only once per recovery session
             if (!this.recoveryLadderCache || !Array.isArray(this.recoveryLadderCache.ladder)) {
                 try {
-                    const built = this.generateRecoveryLadder(Number(this.initialLossBits || 1), targetRecMult, recStakeCap, { maxAttempts: simMaxAttempts });
+                    const built = this.generateRecoveryLadder(Number(this.initialLossBits || 1), targetRecMult, hybridCapBits, { maxAttempts: simMaxAttempts });
                     // Cache ladder structure (non-mutating elsewhere)
                     this.recoveryLadderCache = {
                         builtAt: Date.now(),
-                        params: { initialLoss: Number(this.initialLossBits || 1), target: targetRecMult, cap: recStakeCap, maxAttempts: simMaxAttempts },
+                        params: { initialLoss: Number(this.initialLossBits || 1), target: targetRecMult, cap: hybridCapBits, maxAttempts: simMaxAttempts },
                         ladder: built.ladder
                     };
                 } catch (e) {
                     // Defensive fallback: create a minimal ladder entry
                     this.recoveryLadderCache = {
                         builtAt: Date.now(),
-                        params: { initialLoss: Number(this.initialLossBits || 1), target: targetRecMult, cap: recStakeCap, maxAttempts: simMaxAttempts },
+                        params: { initialLoss: Number(this.initialLossBits || 1), target: targetRecMult, cap: hybridCapBits, maxAttempts: simMaxAttempts },
                         ladder: [{ level: 1, lowerBound: 0, upperBound: Number(this.initialLossBits || 1), stake: Math.max(1, Math.ceil((Number(this.initialLossBits || 1) / (targetRecMult - 1)) || 1)) }]
                     };
                 }
@@ -3679,7 +3762,7 @@ class CrashBot {
             ladderObj = this.recoveryLadderCache;
         } else {
             // simulate: build a local ladder but do NOT write to this.*
-            ladderObj = { ladder: this.generateRecoveryLadder(Number(this.initialLossBits || 1), targetRecMult, recStakeCap, { maxAttempts: simMaxAttempts }).ladder };
+            ladderObj = { ladder: this.generateRecoveryLadder(Number(this.initialLossBits || 1), targetRecMult, hybridCapBits, { maxAttempts: simMaxAttempts }).ladder };
         }
 
         const ladder = ladderObj.ladder || [];
@@ -3691,7 +3774,7 @@ class CrashBot {
         const denom = (targetRecMult - 1) > 0 ? (targetRecMult - 1) : 1;
         const rawStake = currentDebt / denom;
         const stake = Math.max(1, Math.ceil(rawStake));
-        const executedStake = Math.min(stake, recStakeCap);
+        const executedStake = Math.min(stake, hybridCapBits);
 
         // Determine recovery level by looking up currentDebt in ladder ranges (lowerBound, upperBound]
         let foundLevel = 0;
@@ -3777,7 +3860,8 @@ class CrashBot {
      * Logic:
      * - < 3.00x: 2 slices (1 front, 1 back)
      * - 3.00x to < 4.00x: 4 slices (2 front, 2 back)
-     * - >= 4.00x: 6 slices (3 front, 3 back)
+     * - 4.00x to < 5.00x: 6 slices (3 front, 3 back)
+     * - >= 5.00x: 12 slices (6 front, 6 back) [NEW SNIPER STRATEGY]
      */
     labouchereNextStake(targetMultiplier) {
         if (!Array.isArray(this.labouchereList) || this.labouchereList.length === 0) return 0;
@@ -3786,12 +3870,14 @@ class CrashBot {
         const target = (Number.isFinite(targetMultiplier) && targetMultiplier > 1.0) ? targetMultiplier : 2.04;
 
         // 1. Determine Aggression Level (Slices per side) based on Config
-        const thr4 = Number(this.config.get('recovery', 'labouchereMult4Slice')) || 3.0;
-        const thr6 = Number(this.config.get('recovery', 'labouchereMult6Slice')) || 4.0;
+        const thr4 = Number(this.config.get('recovery', 'labouchereMult4Slice'));
+        const thr6 = Number(this.config.get('recovery', 'labouchereMult6Slice'));
+        const thr8 = Number(this.config.get('recovery', 'labouchereMult8Slice'));
 
         let k = 1; // Default: 1 front + 1 back = 2 slices total
-        if (target >= thr6) k = 3;      // 3 front + 3 back = 6 slices
-        else if (target >= thr4) k = 2; // 2 front + 2 back = 4 slices
+        if (target >= thr8) k = 4;      // [NEW] 6 front + 6 back = 12 slices
+        else if (target >= thr6) k = 3;  // 3 front + 3 back = 6 slices
+        else if (target >= thr4) k = 2;  // 2 front + 2 back = 4 slices
 
         // 2. Calculate Needed Profit (Sum of k front + k back)
         let neededProfit = 0;
@@ -3808,6 +3894,7 @@ class CrashBot {
         }
 
         // 3. Calculate Theoretical Stake
+        // Stake = Needed Profit / (Target - 1)
         const theoreticalStake = Math.ceil(neededProfit / (target - 1));
 
         // 4. Calculate Cap (Initial Loss * Configured Cap Multiplier)
@@ -3821,7 +3908,7 @@ class CrashBot {
 
     /**
      * Updates the Labouchère list based on the bet result.
-     * Removes 2, 4, or 6 slices based on the configured multipliers.
+     * Removes 2, 4, 6, or 12 slices based on the configured multipliers.
      * Handles partial wins caused by Stake Caps.
      */
     processLabouchereResult(isWin, stakeBits) {
@@ -3830,12 +3917,14 @@ class CrashBot {
 
         if (isWin) {
             // 1. Determine Slices intended to cover (Must match labouchereNextStake logic)
-            const target = Number(this.config.get('recovery', 'targetRecMult')) || 2.04;
-            const thr4 = Number(this.config.get('recovery', 'labouchereMult4Slice')) || 3.0;
-            const thr6 = Number(this.config.get('recovery', 'labouchereMult6Slice')) || 4.0;
+            const target = Number(this.config.get('recovery', 'targetRecMult'));
+            const thr4 = Number(this.config.get('recovery', 'labouchereMult4Slice'));
+            const thr6 = Number(this.config.get('recovery', 'labouchereMult6Slice'));
+            const thr8 = Number(this.config.get('recovery', 'labouchereMult8Slice')); // [NEW]
 
             let k = 1; // Default 1 per side
-            if (target >= thr6) k = 3;
+            if (target >= thr8) k = 4;      // [NEW] 6 front + 6 back = 12 slices
+            else if (target >= thr6) k = 3;
             else if (target >= thr4) k = 2;
 
             // 2. Calculate the Profit we *intended* to cover
@@ -3900,6 +3989,7 @@ class CrashBot {
         }
         return false;
     }
+
 
     // Updates Bot Mode and Debt based on the result calculated by BettingEngine
     // Added 'silent' parameter to prevent out-of-order logging
