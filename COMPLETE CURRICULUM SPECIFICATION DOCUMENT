@@ -1,0 +1,1277 @@
+# COMPLETE SPECIFICATION DOCUMENT
+## Phase 1 Remaining Updates + Phase 2 + Phase 3 Full Build Instructions
+### Copy this entire document to a new chat window to execute
+
+---
+
+## SECTION 0: CONTEXT AND IDENTITY OF THIS CURRICULUM
+
+This is not a bootcamp. This is not a roadmap. This is a **complete, deterministic, execution-grade operating system for becoming a senior software engineer**. Every resource must be exact, every week must be executable without interpretation, and every tab must function as a precision tool.
+
+**The learner:**
+- Primary dev machine: Baremetal Debian Linux laptop
+- Secondary machines: Proxmox server (Debian VM + Ubuntu VM), 2x Windows 11 machines with WSL2 (Ubuntu + Debian + AlmaLinux distros), Kali Linux machine
+- Mobile devices: Android 14, Android 16, iPhone 13 Pro Max (iOS 26.3.1)
+- MacBook: acquire before Week 35 (iOS development)
+- Daily commitment: 6 hours/day, 6 days/week, Sunday = rest/review only
+- Sleep: 7 hours minimum, non-negotiable
+- Starting point: absolute beginner (zero assumed knowledge)
+- Goal: Cloud Architect + Senior Software Engineer + AI/ML Engineer + Web3 Engineer + Software Architect
+
+**The 6 MIT courses integrated across all phases:**
+1. MIT 6.100L — Intro to CS and Programming using Python (2022): https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/
+2. MIT 6.1200J — Mathematics for Computer Science (2024, replaces 6.042J): https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/
+3. MIT 18.06 — Linear Algebra (Strang): https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/
+4. MIT 6.006 — Introduction to Algorithms (2020): https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/
+5. MIT 6.0002 — Computational Thinking and Data Science (2016): https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/
+6. MIT 6.034 — Artificial Intelligence (2010): https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/
+
+---
+
+## SECTION 1: REVISED TIMELINE WITH RATIONALE
+
+### Original timeline: 124 weeks total (48 + 36 + 40)
+
+### Revised timeline: 136 weeks total
+
+| Phase | Duration | Weeks | Reason for Length |
+|---|---|---|---|
+| Phase 1: Foundation Engineer | 64 weeks | W0–W63 | Added MIT 6.100L, MIT 6.1200J, MIT 6.006 Phase 1 portion, MIT 18.06, MIT 6.0002 intro. Added 16 buffer weeks for proper depth. Original 48 weeks was overloaded for 6h/day mastery-level learning. |
+| Phase 2: Systems Engineer | 36 weeks | W64–W99 | Added MIT 6.006 advanced portion, OSTEP full depth, distributed systems, advanced algorithms, compiler/interpreter, networking internals. 36 weeks allows genuine mastery without rushing. |
+| Phase 3: Cloud + AI + Data + Blockchain | 36 weeks | W100–W135 | Added MIT 6.034, deepened AI/ML, maintained blockchain 8 weeks, added financial data APIs. 36 weeks for production-grade specialization. |
+| **TOTAL** | **136 weeks (~2.6 years)** | **W0–W135** | At 6h/day this is ~4,896 hours of deliberate practice. This is a CS degree + industry experience equivalent. |
+
+### Phase 1 Breakdown — 64 Weeks
+
+| Block | Weeks | Content |
+|---|---|---|
+| Core CS Foundations (C, nand2tetris, Python, Java) | W0–W9 | As before + MIT 6.100L L1-12 in W5-6, MIT 6.1200J L1-14 in W6-9 |
+| Web Foundations + JavaScript + TypeScript | W10–W16 | As before |
+| React + Next.js + Node.js + Auth + DB | W17–W24 | As before + MIT 18.06 W17-22 |
+| DevOps + Security + Performance | W25–W31 | As before |
+| AI/ML Intro + LLMs + MIT 6.0002 | W32–W38 | Expanded: MIT 6.0002 L11-14 integrated |
+| Mobile Development | W39–W45 | As before |
+| Capstone (4 weeks) | W46–W49 | Same capstone structure |
+| MIT 6.006 Phase 1 Deep Dive | W50–W54 | Dedicated 5-week MIT algorithms block (L1-L13: sorting, hashing, graphs, shortest paths) |
+| Phase 1 Buffer + ISTQB + Competitive Programming + Interview Prep | W55–W63 | Expanded buffer for genuine consolidation |
+
+### Phase 2 Breakdown — 36 Weeks
+
+| Block | Weeks | Content |
+|---|---|---|
+| Go + Rust + C++ | W64–W72 | 3 weeks Go, 3 weeks Rust, 2 weeks C++, 1 week review |
+| MIT 6.006 Advanced (Phase 2 portion) | W73–W76 | L14-23: DP deep, string algorithms, complexity theory |
+| Distributed Systems (MIT 6.824 + DDIA) | W77–W83 | 7 weeks |
+| Event-Driven Architecture + Kafka | W84–W86 | 3 weeks |
+| Kubernetes Deep + Service Mesh | W87–W91 | 5 weeks |
+| Observability + SRE + Software Architecture | W92–W95 | 4 weeks |
+| Advanced Topics (Compiler, FP, Search, Micro-frontends) | W96–W99 | 4 weeks |
+
+### Phase 3 Breakdown — 36 Weeks
+
+| Block | Weeks | Content |
+|---|---|---|
+| AWS Deep + Terraform + Pulumi | W100–W107 | 8 weeks |
+| GCP + Azure + Multi-Cloud + FinOps | W108–W112 | 5 weeks |
+| Security Architecture | W113–W115 | 3 weeks |
+| MIT 6.034 AI + PyTorch Advanced + Transformers + Fine-tuning | W116–W122 | 7 weeks |
+| MLOps + Big Data Engineering + Financial APIs | W123–W126 | 4 weeks |
+| Platform Engineering + IoT | W127–W128 | 2 weeks |
+| Blockchain + Web3 | W129–W135 | 7 weeks (expanded from 8 to 7 due to calendar) |
+
+---
+
+## SECTION 2: PHASE 1 REMAINING FIXES (APPLY TO EXISTING SHEET)
+
+The sheet has already received several rounds of edits. The following are the **remaining gaps** that still need fixing before Phase 1 is complete. These are listed in priority order.
+
+---
+
+### 2.1 CRITICAL: Secondary Resource Column (Column I, Tab 1) — ALL WEEKS
+
+**The Problem:** Secondary Resource cells still have generic links without specifying exact lectures, modules, section names, or execution order. A student must be able to open this column and know exactly what to study without any guesswork.
+
+**The Required Format for every Secondary Resource cell:**
+
+```
+[Resource Name] — [Exact Section/Module/Lecture Title]
+URL: [direct deep link to that exact section]
+What to complete: [specific deliverable — exercises, problem sets, chapters]
+Est. time: [hours]
+Dependency: [Do this AFTER [primary resource day X] or ALONGSIDE primary resource]
+```
+
+**Specific fixes needed per week:**
+
+**W0:** Secondary = Ben Eater playlist
+- Must specify: Videos 1–8 titled exactly: "How computers work", "Representing Numbers and Letters with Binary", "Logic gates from transistors", "Making logic gates from transistors", "How Do Logic Gates Work?", "Building an Adder", "ALU"
+- URL: https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU
+- Complete: watch all 8 videos, take notes on how NAND builds everything
+- Do: Day 4-5 alongside MIT Missing Semester
+
+**W1:** Secondary = nand2tetris W1
+- Must specify: Chapter 1 of textbook pp. 1–19 + Project 1 (all 15 gates: Not, And, Or, Xor, Mux, DMux, Not16, And16, Or16, Mux16, Or8Way, Mux4Way16, Mux8Way16, DMux4Way, DMux8Way)
+- URL: https://www.nand2tetris.org/course → Week 1 materials
+- Complete: read Ch1 first (1h), then build all gates in HDL simulator (3h)
+- Do: Day 3–4
+
+**W2:** Secondary = nand2tetris W2
+- Must specify: Chapter 2 pp. 20–39 (Boolean Arithmetic, Adders, ALU) + Project 2 (HalfAdder.hdl, FullAdder.hdl, Add16.hdl, Inc16.hdl, ALU.hdl)
+- URL: https://www.nand2tetris.org/course → Week 2 materials
+- Complete: read Ch2 (1h), build all 5 chips and pass all hardware simulator tests (3h)
+- Do: Day 3–4
+
+**W3:** Secondary = nand2tetris W3 + ISTQB Ch 1
+- nand2tetris: Chapter 3 pp. 40–62 (Sequential Logic, flip-flops, registers, RAM) + Project 3 (Bit.hdl, Register.hdl, RAM8.hdl, RAM64.hdl, RAM512.hdl, RAM4K.hdl, RAM16K.hdl, PC.hdl)
+- ISTQB: Syllabus v4.0 Ch 1 pp.1–19, sections 1.1–1.5, 30 Anki flashcards
+- URL nand2tetris: https://www.nand2tetris.org/course → Week 3
+- URL ISTQB: https://www.istqb.org/certifications/certified-tester-foundation-level → download PDF
+- Do: nand2tetris Day 5, ISTQB Day 6
+
+**W4:** Secondary = nand2tetris W4+W5 (COMPLETES nand2tetris)
+- W4: Ch4 pp.60–76, Machine Language, Project 4 (Mult.asm + Fill.asm in Hack assembly, CPU emulator)
+- W5: Ch5 pp.77–94, Computer Architecture (CPU design, Memory chip), Project 5 (CPU.hdl + Memory.hdl + Computer.hdl + run Pong.hack in hardware simulator)
+- URL: https://www.nand2tetris.org/course → Weeks 4–5
+- Complete: both projects must pass all hardware/CPU emulator tests
+- Do: Day 3–4 (W4), Day 5 (W5 — this completes nand2tetris entirely)
+
+**W5:** Secondary = Helsinki Python MOOC Parts 1–2 + MIT 6.0002 L1–3
+- Helsinki: Part 1 https://programming-26.mooc.fi/part1 (4 sections, all exercises) + Part 2 https://programming-26.mooc.fi/part2 (4 sections, all exercises)
+- MIT 6.0002: L1 (Intro to Computational Thinking) https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/pages/lecture-videos/ + L2 (Optimization Problems) + L3 (Graph-theoretic Models) — watch all 3 lectures + complete pset1
+- Do: Helsinki Day 3, MIT 6.0002 Day 5-6
+
+**W6:** Secondary = Refactoring.guru GoF Creational (all 5) + MIT 6.006 L1–2
+- Refactoring.guru: Singleton https://refactoring.guru/design-patterns/singleton + Factory Method https://refactoring.guru/design-patterns/factory-method + Abstract Factory https://refactoring.guru/design-patterns/abstract-factory + Builder https://refactoring.guru/design-patterns/builder + Prototype https://refactoring.guru/design-patterns/prototype — implement each in Java with real-world example
+- MIT 6.006: L1 (Algorithms and Computation) lecture notes PDF https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/ + L2 (Data Structures and Dynamic Arrays) lecture notes
+- Do: Refactoring.guru Day 5, MIT 6.006 Day 6 (15–20 min reading)
+
+**W7:** Secondary = Refactoring.guru GoF Structural (all 7) + MIT 6.006 L3–4 + MIT 6.031 Readings 1–3
+- Refactoring.guru: Adapter https://refactoring.guru/design-patterns/adapter + Bridge https://refactoring.guru/design-patterns/bridge + Composite https://refactoring.guru/design-patterns/composite + Decorator https://refactoring.guru/design-patterns/decorator + Facade https://refactoring.guru/design-patterns/facade + Flyweight https://refactoring.guru/design-patterns/flyweight + Proxy https://refactoring.guru/design-patterns/proxy
+- MIT 6.006: L3 (Sets and Sequences) + L4 (Hashing) lecture notes
+- MIT 6.031: Reading 1 https://web.mit.edu/6.031/www/sp21/classes/01-static-checking/ + Reading 2 https://web.mit.edu/6.031/www/sp21/classes/02-basic-java/ + Reading 3 https://web.mit.edu/6.031/www/sp21/classes/03-testing/ (complete embedded exercises)
+- Do: Refactoring.guru Day 5, MIT Day 6
+
+**W8:** Secondary = Regexone + Regex101 + MDN HTML/a11y + MIT 6.006 L5
+- Regexone: all 15 lessons https://regexone.com/ + build 10 custom patterns on Regex101 https://regex101.com/ (email, phone, postcode, date, URL, IPv4, hex color, password, time, credit card)
+- MDN HTML: Introduction to HTML https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML + WAI-ARIA basics https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics
+- MIT 6.006: L5 (Linear Sorting) lecture notes PDF
+- Do: Regex Day 3, MDN Day 4, MIT 6.006 Day 6 (20 min)
+
+**W9:** Secondary = Refactoring.guru GoF Behavioral Part 1 (5 patterns) + MIT 6.006 L6–7
+- Refactoring.guru: Chain of Responsibility https://refactoring.guru/design-patterns/chain-of-responsibility + Command https://refactoring.guru/design-patterns/command + Iterator https://refactoring.guru/design-patterns/iterator + Mediator https://refactoring.guru/design-patterns/mediator + Memento https://refactoring.guru/design-patterns/memento — implement each in JavaScript
+- MIT 6.006: L6 (Binary Trees Part 1) + L7 (AVL Trees) lecture notes
+- Do: Refactoring.guru Day 4–5, MIT 6.006 Day 6
+
+**W10:** Secondary = Refactoring.guru GoF Behavioral Part 2 (5 patterns) + Architectural Patterns + MIT 6.006 L8
+- Refactoring.guru: Observer https://refactoring.guru/design-patterns/observer + State https://refactoring.guru/design-patterns/state + Strategy https://refactoring.guru/design-patterns/strategy + Template Method https://refactoring.guru/design-patterns/template-method + Visitor https://refactoring.guru/design-patterns/visitor
+- Architectural Patterns: https://docs.microsoft.com/en-us/azure/architecture/patterns/ — read MVC, MVP, MVVM, Clean Architecture, Hexagonal sections. Draw each as a diagram in Excalidraw https://excalidraw.com/
+- MIT 6.006: L8 (Binary Heaps) lecture notes
+- Do: Refactoring.guru Day 3–4, Architectural Day 5, MIT Day 6
+
+**W11:** Secondary = TypeScript Handbook exact sections + MIT 6.006 L9
+- TypeScript Handbook: The Basics https://www.typescriptlang.org/docs/handbook/2/basic-types.html + Everyday Types https://www.typescriptlang.org/docs/handbook/2/everyday-types.html + Narrowing https://www.typescriptlang.org/docs/handbook/2/narrowing.html + Functions https://www.typescriptlang.org/docs/handbook/2/functions.html + Object Types https://www.typescriptlang.org/docs/handbook/2/objects.html + Generics https://www.typescriptlang.org/docs/handbook/2/generics.html + Utility Types https://www.typescriptlang.org/docs/handbook/2/utility-types.html — read each section + complete the examples
+- MIT 6.006: L9 (BFS — Breadth-First Search) lecture notes
+- Do: TS Handbook Day 3–4, MIT Day 6
+
+**W12:** Secondary = Shadcn/ui docs + Zustand docs + MIT 6.006 L10
+- Shadcn/ui: Introduction https://ui.shadcn.com/docs + Components: Button, Card, Dialog, Form, Input, Select, Table (read all + install in project)
+- Zustand: Getting Started https://docs.pmnd.rs/zustand/getting-started/introduction + Guides: Updating State, Async Actions, Using with TypeScript https://docs.pmnd.rs/zustand/guides/typescript
+- MIT 6.006: L10 (DFS — Depth-First Search) lecture notes
+- Do: Shadcn Day 3–4, Zustand Day 5, MIT Day 6
+
+**W13:** Secondary = Astro docs exact sections + web.dev PWA exact sections + MIT 6.006 L11
+- Astro: Installation https://docs.astro.build/en/install/auto/ + Project Structure https://docs.astro.build/en/core-concepts/project-structure/ + Astro Components https://docs.astro.build/en/core-concepts/astro-components/ + Pages https://docs.astro.build/en/core-concepts/astro-pages/ + Layouts https://docs.astro.build/en/core-concepts/layouts/ + Markdown Content https://docs.astro.build/en/guides/markdown-content/ — build static blog with 3 posts
+- web.dev PWA: Overview https://web.dev/learn/pwa/welcome/ + Getting Started https://web.dev/learn/pwa/getting-started/ + App Design + Assets and Data + Service Workers + Caching
+- MIT 6.006: L11 (Weighted Shortest Paths) lecture notes
+- Do: Astro Day 3–4, PWA Day 5, MIT Day 6
+
+**W14:** Secondary = TAU Playwright Ch 1–5 + RTL docs exact sections + MIT 6.006 L12
+- TAU Playwright: Chapter 1 https://testautomationu.applitools.com/playwright-intro/ + Ch 2 (First Test) + Ch 3 (Selectors/Locator API) + Ch 4 (Assertions) + Ch 5 (Page Interactions) — complete all exercises
+- RTL: Introduction https://testing-library.com/docs/react-testing-library/intro/ + Queries https://testing-library.com/docs/queries/about + User Interactions https://testing-library.com/docs/user-event/intro + Async Utilities https://testing-library.com/docs/dom-testing-library/api-async + FSO Part 5c https://fullstackopen.com/en/part5#testing-react-apps (all exercises)
+- MIT 6.006: L12 (Bellman-Ford) lecture notes
+- Do: TAU Day 1–2, RTL Day 3–4, MIT Day 6
+
+**W15:** Secondary = express-rate-limit docs + Node.js official guides + MIT 6.006 L13
+- express-rate-limit: Quick Start https://express-rate-limit.js.org/#quick-start + Configuration https://express-rate-limit.js.org/#configuration-options + Store (Redis) https://express-rate-limit.js.org/#stores + implement token bucket + Redis sliding window
+- Node.js official: Introduction https://nodejs.org/en/learn/getting-started/introduction-to-nodejs + Anatomy of HTTP transaction https://nodejs.org/en/learn/modules/anatomy-of-an-http-transaction + Event Loop https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick
+- MIT 6.006: L13 (Dijkstra's Algorithm) lecture notes
+- Do: express-rate-limit Day 4, Node.js docs Day 5, MIT Day 6
+
+**W16:** Secondary = Keycloak Getting Started (Docker) + Auth0 Next.js Quickstart + Clerk docs + MIT 6.006 L14
+- Keycloak: Getting Started with Docker https://www.keycloak.org/getting-started/getting-started-docker + Server Administration: Create realm, Create client, Create user
+- Auth0: Next.js Quickstart https://auth0.com/docs/quickstart/webapp/nextjs (read only — for comparison with Clerk)
+- Clerk: Next.js Quickstart https://clerk.com/docs/quickstarts/nextjs + Protecting Pages + Reading User Data + Organizations
+- MIT 6.006: L14 (Dynamic Programming I: SRTBOT, Fibonacci, DAG) lecture notes
+- Do: Keycloak Day 4, Clerk Day 5, MIT Day 6
+
+**W17:** Secondary = Stanford DB modules + Supabase docs + MIT 6.006 L15
+- Stanford DB: Introduction to Databases, Self-Paced — Relational Model module + SQL module: https://online.stanford.edu/courses/soe-ydatabases0005 — complete both video modules + exercises
+- Supabase: Quickstart (Next.js) https://supabase.com/docs/guides/getting-started/quickstarts/nextjs + Database > Tables https://supabase.com/docs/guides/database/tables + Row Level Security https://supabase.com/docs/guides/database/postgres/row-level-security + Auth https://supabase.com/docs/guides/auth
+- MIT 6.006: L15 (Dynamic Programming II: LCS, Longest Increasing Subsequence) lecture notes
+- Do: Stanford Day 2–3, Supabase Day 4–5, MIT Day 6
+
+**W18:** Secondary = Cucumber.js docs exact sections + Jest docs exact sections + MIT 6.006 L16
+- Cucumber.js: Writing Features https://cucumber.io/docs/gherkin/ + Step Definitions https://cucumber.io/docs/cucumber/step-definitions/ + Hooks https://cucumber.io/docs/cucumber/api/#hooks + Configuration https://cucumber.io/docs/cucumber/configuration/ + World https://cucumber.io/docs/cucumber/state/
+- Jest: Getting Started https://jestjs.io/docs/getting-started + Using Matchers https://jestjs.io/docs/using-matchers + Async Testing https://jestjs.io/docs/asynchronous + Mock Functions https://jestjs.io/docs/mock-functions + Setup and Teardown https://jestjs.io/docs/setup-teardown
+- MIT 6.006: L16 (Dynamic Programming III: Knapsack, Pseudopolynomial) lecture notes
+- Do: Cucumber Day 3–4, Jest Day 5, MIT Day 6
+
+**W19:** Secondary = XState docs exact sections + Microsoft Cloud Design Patterns + MIT 6.006 L17
+- XState: Concepts > State Machines https://stately.ai/docs/state-machines + Statecharts https://stately.ai/docs/statecharts + Guards https://stately.ai/docs/guards + Actions https://stately.ai/docs/actions + Context https://stately.ai/docs/context + Services https://stately.ai/docs/invoke — build complex multi-step form (3 steps, validation, error states, submission)
+- Microsoft Cloud Patterns: Retry Pattern https://docs.microsoft.com/en-us/azure/architecture/patterns/retry + Circuit Breaker https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker + Bulkhead https://docs.microsoft.com/en-us/azure/architecture/patterns/bulkhead + Cache-Aside https://docs.microsoft.com/en-us/azure/architecture/patterns/cache-aside + Sidecar https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar — implement Circuit Breaker in Node.js
+- MIT 6.006: L17 (Dynamic Programming IV: Optimal BST) lecture notes
+- Do: XState Day 3–4, Cloud Patterns Day 5, MIT Day 6
+
+**W20:** Secondary = SonarQube docs (Try Out section) + Semgrep Quickstart + MIT 6.006 L18
+- SonarQube: Try Out SonarQube https://docs.sonarsource.com/sonarqube/latest/try-out-sonarqube/ — Docker setup + first analysis. Analyzing Source Code section + Understanding Analysis Results section
+- Semgrep: Quickstart https://semgrep.dev/docs/getting-started/ + Writing a rule https://semgrep.dev/docs/writing-rules/overview/ + Running in CI https://semgrep.dev/docs/semgrep-ci/overview/ — write 1 custom rule detecting console.log in production code
+- MIT 6.006: L18 (Complexity: P, NP, NP-hardness) lecture notes
+- Do: SonarQube Day 4, Semgrep Day 5, MIT Day 6
+
+**W21–W38:** Apply same pattern — Secondary Resource must always have:
+1. Exact documentation section titles with URLs
+2. Exact execution order (Day X)
+3. Specific deliverable (what to build/complete)
+4. MIT 6.006 lecture note reference for the week (15–20 min reading)
+
+---
+
+### 2.2 CRITICAL: Platform Resource Column (Column J, Tab 1) — ALL WEEKS
+
+**The Problem:** Platform Resource cells reference platforms (Exercism, Odin, FSO) without specifying the exact exercises, modules, or lessons to complete.
+
+**Required Format:**
+
+```
+[Platform Name] — [Exact Track/Path/Section Name]
+URL: [direct link to that exact exercise/section]
+Complete: [specific exercises by name, or module numbers, or problem set numbers]
+Target: [minimum count or completion criteria]
+```
+
+**Specific fixes needed:**
+
+**W0:** Platform = Linux Journey — Grasshopper section
+- URL: https://linuxjourney.com/
+- Complete: Getting Started (all 14 lessons) + Text-Fu (all 11 lessons) + Advanced Text-Fu (all 10 lessons) + User Management (all 9 lessons) — ALL exercises in each lesson
+- Target: 100% completion of all 4 Grasshopper chapters
+
+**W1:** Platform = Exercism C track
+- URL: https://exercism.org/tracks/c
+- Complete: Hello World + Resistor Color (resistor-color) + Gigasecond (gigasecond) + Raindrops (raindrops)
+- Target: 4 exercises submitted and approved
+
+**W2:** Platform = Exercism C track
+- URL: https://exercism.org/tracks/c
+- Complete: Leap (leap) + Grains (grains) + RNA Transcription (rna-transcription) + Bob (bob)
+- Target: 4 exercises submitted
+
+**W3:** Platform = Exercism C track + ISTQB Anki
+- Exercism: Two Fer (two-fer) + Space Age (space-age) + Hamming (hamming)
+- URL: https://exercism.org/tracks/c
+- ISTQB Anki: https://apps.ankiweb.net/ — create deck "ISTQB CTFL", add 30 cards from Ch 1
+- Target: 3 Exercism + 30 Anki cards
+
+**W4:** Platform = Exercism C track
+- URL: https://exercism.org/tracks/c
+- Complete: Pangram (pangram) + RNA Transcription revisit + Collatz Conjecture (collatz-conjecture) + Difference of Squares (difference-of-squares)
+- Target: 4 exercises submitted
+
+**W5:** Platform = Exercism Python track
+- URL: https://exercism.org/tracks/python
+- Complete: Hello World + Two Fer (two-fer) + Raindrops (raindrops) + Bob (bob) — complete 3+/day
+- Target: minimum 4, aim for 6
+
+**W6:** Platform = Exercism Java track
+- URL: https://exercism.org/tracks/java
+- Complete: Hello World + Two Fer (two-fer) + Hamming (hamming) + Space Age (space-age)
+- Also: CodeGym Syntax level https://codegym.cc/ — complete 2–3 tasks/day from Syntax quests
+- Target: 4 Exercism + 10+ CodeGym tasks
+
+**W7:** Platform = Exercism Java track + MIT 6.031
+- Exercism: Leap (leap) + Grains (grains) + RNA Transcription (rna-transcription) + Bob (bob)
+- MIT 6.031 Reading 3 exercises: https://web.mit.edu/6.031/www/sp21/classes/03-testing/ — complete all embedded exercises in the testing reading
+- Target: 4 Exercism + all 6.031 Reading 3 embedded exercises
+
+**W8:** Platform = Regexone + Regex101 (detailed)
+- Regexone: all 15 lessons https://regexone.com/ — complete all 15 exercises
+- Regex101: https://regex101.com/ — build and test 10 custom regex patterns: (1) email validation, (2) UK/US phone, (3) strong password (8+ chars, upper, lower, digit, symbol), (4) URL with https, (5) IPv4 address, (6) hex color code, (7) ISO date (YYYY-MM-DD), (8) credit card (4 groups of 4), (9) UK postcode, (10) time HH:MM:SS — save all as a .md file in repo
+- Target: Regexone all 15 done, 10 custom patterns documented
+
+**W9:** Platform = Exercism JavaScript track
+- URL: https://exercism.org/tracks/javascript
+- Complete: Hello World + Two Fer (two-fer) + Hamming (hamming) + Resistor Color (resistor-color)
+- Also: LeetCode 30 Days of JavaScript Days 1–10 https://leetcode.com/studyplan/30-days-of-javascript/ — Day 1: Create Hello World Function, Day 2: Counter, Day 3: Closure, Day 4: Apply Transform Over Each Element, Day 5: Filter Elements from Array, Day 6: Array Reduce Transformation, Day 7: Function Composition, Day 8: Return Length of Arguments Passed, Day 9: Find the Index of the First Occurrence, Day 10: Memoize
+- Target: 4 Exercism + LeetCode 30-Day Days 1–10 all complete
+
+**W10:** Platform = Exercism JavaScript track
+- URL: https://exercism.org/tracks/javascript
+- Complete: Collatz Conjecture (collatz-conjecture) + Space Age (space-age) + RNA Transcription (rna-transcription) + Bob (bob)
+- Also: LeetCode 30 Days of JavaScript Days 11–20
+- Target: 4 Exercism + LeetCode 30-Day Days 11–20
+
+**W11:** Platform = Exercism TypeScript track
+- URL: https://exercism.org/tracks/typescript
+- Complete: Hello World + Two Fer (two-fer) + Hamming (hamming) + Resistor Color (resistor-color)
+- Also: Swagger Editor https://editor.swagger.io/ — write Books API OpenAPI spec (5 endpoints)
+- Target: 4 Exercism + OpenAPI spec valid
+
+**W12:** Platform = Zustand docs + XState Stately Studio
+- Zustand: Getting Started https://docs.pmnd.rs/zustand/getting-started/introduction + all Guides sections — build shopping cart with Zustand (add/remove/clear)
+- XState Stately Studio: https://stately.ai/ — build traffic light state machine visually, then export to code
+- Also: LeetCode 30 Days of JavaScript Days 21–30 https://leetcode.com/studyplan/30-days-of-javascript/
+- Target: Zustand cart working + XState machine + 30-Day JS complete (all 30 days done)
+
+**W13:** Platform = web.dev PWA (specific sections)
+- URL: https://web.dev/learn/pwa/
+- Complete: Progressive Web App Overview + Getting Started + App Design + Assets and Data + Service Workers + Caching (read all + complete all challenges)
+- Target: PWA installable on Android 14, works offline, Lighthouse PWA score passes
+
+**W14:** Platform = RTL docs (additional exercises)
+- RTL: complete all exercises in FSO Part 5c https://fullstackopen.com/en/part5#testing-react-apps
+- Playwright: install + run `npx playwright test` → pass 3 E2E tests
+- Target: FSO 5c all exercises + 3 Playwright tests green
+
+**W15:** Platform = Odin Project NodeJS path (specific sections)
+- URL: https://www.theodinproject.com/paths/full-stack-javascript
+- Complete: Introduction to NodeJS lesson + Getting Started lesson + Debugging Node Projects lesson + APIs lesson
+- All sections have exercises — complete all embedded exercises
+- Target: All 4 Odin NodeJS sections complete + exercises done
+
+**W16:** Platform = Clerk docs (hands-on)
+- URL: https://clerk.com/docs/quickstarts/nextjs
+- Complete: Next.js Quickstart (install + configure) + Protecting Pages https://clerk.com/docs/references/nextjs/auth-middleware + Reading User Data https://clerk.com/docs/references/nextjs/read-session-data
+- Target: Clerk protecting /dashboard route in Next.js portfolio
+
+**W17:** Platform = Supabase docs + FSO Part 13
+- Supabase: Quickstart Next.js https://supabase.com/docs/guides/getting-started/quickstarts/nextjs + Row Level Security https://supabase.com/docs/guides/database/postgres/row-level-security (all examples) + Auth Email/Password https://supabase.com/docs/guides/auth/social-login (Google OAuth too)
+- FSO Part 13: https://fullstackopen.com/en/part13 — complete exercises 13.1–13.24 (all)
+- Target: Supabase task app with RLS + FSO 13 submitted
+
+**W18–W38:** Same pattern — specify exact FSO parts/exercises, exact Odin lessons, exact Exercism exercises by name
+
+---
+
+### 2.3 HIGH PRIORITY: Tab 1 — Extend from 48 to 64 Weeks
+
+The following 16 additional weeks must be added to Tab 1:
+
+**W49–W54: MIT 6.006 Dedicated Block**
+
+This block is dedicated to going deep on the MIT algorithms course — the first 13 lectures cover the algorithmic foundation needed before Phase 2's advanced systems work.
+
+| Week | Primary Focus | MIT 6.006 Content | Project |
+|---|---|---|---|
+| W49 | MIT 6.006 L1–2: Algorithms, Data Structures | https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/ L1+L2 + recitation + problem set | Implement dynamic array from scratch in Python (appendable, resizable, O(1) amortized) |
+| W50 | MIT 6.006 L3–5: Sets, Hashing, Sorting | L3 (Sets/Sequences) + L4 (Hashing) + L5 (Linear Sorting: counting sort, radix sort) + pset | Implement hash table with chaining + open addressing. Implement counting sort + radix sort. Benchmark vs Python sort. |
+| W51 | MIT 6.006 L6–8: Trees, Heaps | L6 (Binary Trees, Traversals) + L7 (AVL Trees, rotations) + L8 (Binary Heaps, heapsort) + pset | Implement AVL tree (insert, delete, search, all rotations). Implement heap sort. Verify O(log n) operations. |
+| W52 | MIT 6.006 L9–11: Graphs I | L9 (BFS) + L10 (DFS, topological sort) + L11 (Weighted Shortest Paths intro) + pset | Implement BFS + DFS from scratch. Topological sort (Kahn's + DFS-based). Shortest path using BFS on unweighted graph. |
+| W53 | MIT 6.006 L12–13: Shortest Paths | L12 (Bellman-Ford, DAG relaxation) + L13 (Dijkstra) + pset | Implement Bellman-Ford (detect negative cycles). Implement Dijkstra with priority queue. Compare on weighted graph. Visualize with matplotlib. |
+| W54 | MIT 6.006 L14–16: Dynamic Programming I | L14 (DP: SRTBOT framework, Fibonacci, DAG) + L15 (DP: LCS, LIS) + L16 (DP: Knapsack) + pset | Implement DP solutions from scratch: Fibonacci (memoized + tabulated), LCS, LIS (O(n log n)), 0/1 Knapsack. |
+
+**W55–W63: Extended Buffer, Certifications, Interview Prep**
+
+| Week | Focus | Content |
+|---|---|---|
+| W55 | ISTQB CTFL Exam + CSES Start | Same as original W41 but now at W55. ISTQB final prep + 2 mock exams + exam day. Start CSES introductory problems. |
+| W56–W58 | Buffer: Deep Reinforce + Open Source | 3 weeks to address all ⚠️ Partial weeks. Open source PR merged. CSES sorting+searching+DP problems. |
+| W59–W61 | Interview Prep: DSA Hard + System Design | NeetCode 150 remaining hard problems. 3 mock interviews (Pramp). System design whiteboards: Twitter feed, payment system, chat app. |
+| W62 | Portfolio Polish + Freelancing Launch | Portfolio final update (5 case studies). Upwork profile published. LinkedIn complete. GitHub green. 3+ job applications sent. GitHub Foundations exam taken. |
+| W63 | Phase 1 Final Review + Phase 2 Preparation | Retrospective. Install Go + Rust. Read Phase 2 Tab 1 in full. Celebrate. Rest. |
+
+---
+
+### 2.4 Tab 1 — Additional Fixes for Existing Weeks
+
+**Action Plan Column (Column K) — All weeks need day-by-day specificity tied to exact resource sections:**
+
+Every Action Plan cell must follow this format:
+```
+D1: [Primary Resource: exact lecture/section name + URL] — [what to produce/complete]
+D2: [Primary Resource continued or Secondary Resource: exact section] — [deliverable]
+D3: [Secondary/Platform Resource: exact section] — [deliverable]
+D4: [Build Block: what to code today] — [specific feature or exercise]
+D5: [Testing/Math/DSA: which one, exact section] — [deliverable]
+D6: [Review + Book Reading + Commit minimum 1 item] — [deliverable]
+```
+
+The current Action Plan cells are directionally correct but lack URL specificity on each line. Every "D1:", "D2:" etc. must reference the exact lecture or section and its URL.
+
+---
+
+### 2.5 Tab 0 — Required Updates After All Edits
+
+Tab 0 (Master Study Guide) must be updated to reflect:
+
+1. **Revised timeline section**: Phase 1 = 64 weeks, Phase 2 = 36 weeks, Phase 3 = 36 weeks = 136 weeks total
+2. **MIT courses section** (already added in previous edit — verify it's complete and correct)
+3. **Infrastructure strategy section**: Add table showing which tool to deploy to in each week type (see Section 2.6 below)
+4. **Updated Phase 1 exit criteria** (for Week 63 not Week 48): must reflect MIT 6.006 L1–16 complete, ISTQB CTFL certified, 50+ LeetCode + 50+ CSES, AVL tree implemented, etc.
+5. **Section on how Secondary and Platform columns work**: explain the Day X usage pattern
+
+---
+
+### 2.6 Tab 10 — Required Infrastructure Additions
+
+Tab 10 (How To Use) must add a new section called **"INFRASTRUCTURE DEPLOYMENT MAP"** with this table:
+
+| Week Type / Task | Local Machine | Cloud/Hosted Service | Why |
+|---|---|---|---|
+| All daily development | Baremetal Debian laptop | N/A | Primary dev machine |
+| Backend API development (W15+) | Baremetal Debian (code) | Railway https://railway.app/ for deployment | Free tier, instant deploy |
+| Database (W17+) | Local PostgreSQL via Docker | Supabase https://supabase.com/ (free tier: 500MB, 2 projects) | Managed PostgreSQL + RLS + Auth |
+| Frontend deployment (W12+) | Local Next.js dev server | Vercel https://vercel.com/ (free tier: unlimited hobby projects) | Zero-config Next.js deploy |
+| Docker containers (W21+) | Local Docker + Docker Compose | GitHub Container Registry (GHCR): free with GitHub account | CI/CD image builds |
+| CI/CD pipelines (W20+) | GitHub Actions | GitHub Actions (free: 2000 min/month on public repos) | Already in curriculum |
+| Static sites (W13+) | Local Astro/HTML dev | Netlify https://www.netlify.com/ (free tier: 100GB bandwidth) | Alternative to Vercel for static |
+| Redis (W15+) | Local Redis via Docker (docker run -d -p 6379:6379 redis:7-alpine) | Upstash https://upstash.com/ (free: 10K commands/day) | Serverless Redis |
+| AWS simulation (W25+) | N/A | AWS Free Tier https://aws.amazon.com/free/ (12 months: EC2 t2.micro, S3 5GB, RDS db.t2.micro) | Real production cloud. Create account at W25. |
+| ML model deployment (W32+) | Local GPU/CPU | HuggingFace Spaces https://huggingface.co/spaces (free: CPU spaces) | Deploy Gradio/Streamlit apps |
+| Security testing (W26+) | Kali Linux machine | N/A | Purpose-built security tooling |
+| OS/server simulation (W22+) | Proxmox (Debian VM + Ubuntu VM) | N/A | Simulate production server environments |
+| iOS development (W43+) | MacBook (acquire before W43) | Apple Developer account (free tier for device testing) | Required for Xcode + XCUITest |
+
+**Also add to Tab 10:** A rule that says: "Every deployed project must have a live URL. Nothing stays only local. Use the deployment map above to choose where to deploy each project type."
+
+---
+
+### 2.7 Tab 8 — Career Section Updates
+
+Add the following rows to Tab 8 (Interview & Career):
+
+| Category | Item | Week | Resource | Notes |
+|---|---|---|---|---|
+| SaaS Monetization | Build a paid SaaS product using Stripe subscriptions (from capstone) | W49 | Stripe Docs + Indie Hackers https://www.indiehackers.com/ | Capstone becomes first real product |
+| Freelancing | Get first paid client (even $50) | W55–W60 | Upwork + Toptal | Use task manager capstone as portfolio piece |
+| Open Source | 1 merged PR to a repo with 500+ stars | W55–W58 | GitHub search: label:good-first-issue stars:>500 | Shows ability to work on real codebases |
+| Income Goal | Stable income from skills BEFORE timeline ends | W60+ | Upwork + direct clients | Phase 1 exit does not require income — but freelancing starts W49 |
+
+---
+
+## SECTION 3: PHASE 2 SPECIFICATION — SYSTEMS ENGINEER (W64–W99, 36 WEEKS)
+
+### Phase 2 Overview
+
+**Milestone at completion:** Senior Backend Engineer + Platform Engineer + DevOps/SRE + Advanced Algorithms
+**Certification targets:** CKA (W92), AWS Cloud Practitioner (W80), HashiCorp Terraform Associate (W96)
+**Languages added:** Go (primary), Rust (secondary), C++ (supplementary), Haskell (FP theory), Elixir (intro)
+
+---
+
+### Phase 2 Workbook Structure — 10 Tabs (Same as Phase 1)
+
+Create a new Google Sheets workbook titled: **"Phase 2 — Systems Engineer (W64–W99)"**
+
+Create the same 10 tabs:
+- TAB 0 🗺️ Master Study Guide (Phase 2 version)
+- TAB 1 📚 Weekly Curriculum (22 columns, same structure as Phase 1)
+- TAB 2 🧠 DSA Track (advanced problems)
+- TAB 3 ⚔️ Competitive Programming Track (continues CSES + adds harder categories)
+- TAB 4 🧪 Testing Track (advanced testing types)
+- TAB 5 📖 Book Reading Track
+- TAB 6 🏆 Certification Roadmap
+- TAB 7 🧮 Math Projects (advanced applied math)
+- TAB 8 🎯 Interview & Career
+- TAB 9 📊 Accountability
+- TAB 10 📖 How To Use
+
+---
+
+### Phase 2 — Tab 1: Weekly Curriculum (W64–W99)
+
+**COLUMN STRUCTURE: Same 22 columns as Phase 1**
+Week | Phase | Milestone | Math Focus | Math Resource (Exact Section + URL + Hours) | Math Project | CS/Tech Focus | Primary Resource (Exact Section + URL + Hours) | Secondary Resource (Exact Section + URL + Hours) | Platform Resource (Exact Section + URL + Hours) | Action Plan (Day-by-Day) | Portfolio Project | Testing Deliverable | Design Patterns | DSA Daily | Book Reading | Cert Prep | Exit Criteria | Accountability Checklist | Status | GitHub Link | Notes
+
+---
+
+#### W64–W67: Go Language Mastery (4 weeks)
+
+**W64 — Go Fundamentals**
+- Math Focus: Discrete Math Review (sets, functions, relations) — MIT 6.1200J review week
+- Math Resource: MIT 6.1200J L1–L4 review https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/ — re-read lecture notes + redo problem sets
+- CS/Tech Focus: Go syntax, types, functions, structs, interfaces, goroutines intro
+- Primary Resource: A Tour of Go — complete ALL exercises: https://go.dev/tour/welcome/1 — all 4 sections: Basics (W1–10), Methods and Interfaces (M1–26), Concurrency (C1–11), Generics (G1–4) — 8h
+- Secondary Resource: Go by Example — examples 1–20: https://gobyexample.com/ — Hello World, Values, Variables, Constants, For, If/Else, Switch, Arrays, Slices, Maps, Range, Functions, Multiple Return Values, Variadic Functions, Closures, Recursion, Pointers, Strings and Runes, Structs, Methods — read + implement each
+- Platform Resource: Exercism Go track — complete Hello World + Two Fer + Hamming + Space Age + Gigasecond: https://exercism.org/tracks/go — 3+/day minimum
+- Action Plan: D1: Tour of Go Basics section (all 10 exercises). D2: Tour of Go Methods and Interfaces (all 26 exercises). D3: Tour of Go Concurrency (all 11). D4: Go by Example 1–20, implement all. D5: Math review + Exercism 4 Go problems. D6: Build Go CLI tool: task manager (add/list/delete/complete tasks, save to JSON file)
+- Portfolio Project: Go Task Manager CLI — `task` binary. Commands: `task add "buy milk"`, `task list`, `task done 1`, `task delete 1`, `task clear`. Stores tasks in ~/.task.json. Exit criteria: all commands work, handles errors gracefully.
+- Book Reading: The Go Programming Language (Donovan & Kernighan) — Ch 1–3: https://www.gopl.io/ (buy or find PDF) — free alternative: https://go.dev/doc/effective_go
+- Cert Prep: AWS Cloud Practitioner study begins — AWS Skill Builder Module 1: Cloud Concepts https://skillbuilder.aws/learn/course/134
+
+**W65 — Go Intermediate + Packages + Modules**
+- CS/Tech Focus: Go packages, modules, testing, error handling, interfaces deep, embedding
+- Primary Resource: Go by Example — examples 21–50: https://gobyexample.com/ — Interfaces, Struct Embedding, Generics, Errors, Custom Errors, Goroutines, Channels, Channel Buffering, Channel Directions, Select, Timeouts, Non-blocking Channel Operations, Closing Channels, Range over Channels, Timers, Tickers, Worker Pools, WaitGroups, Rate Limiting, Atomic Counters, Mutexes, Stateful Goroutines, Sorting, Sorting by Functions, Panic, Defer, Recover, String Functions, String Formatting — 8h
+- Secondary Resource: Effective Go — complete document: https://go.dev/doc/effective_go — read all sections: Formatting, Commentary, Names, Semicolons, Control structures, Functions, Data, Initialization, Methods, Interfaces, Type switches, Errors, Goroutines, Channels, Parallelization, Errors, Web server
+- Platform Resource: Exercism Go track — complete 5 more exercises: Leap + Grains + RNA Transcription + Bob + Word Count
+- Action Plan: D1: Go by Example 21–35 (interfaces, errors, goroutines). D2: Go by Example 36–50 (channels, concurrency patterns). D3: Effective Go read + implement examples. D4: Exercism 5 Go problems. D5: Build Go HTTP server (REST API): GET /tasks, POST /task, DELETE /task/:id. D6: Write tests for the HTTP server (Go testing package + httptest.NewRecorder)
+- Portfolio Project: Go REST API — `portfolio-api-go/`. Rebuild W15's Node.js REST API in Go using only stdlib (net/http). Same endpoints. Same rate limiting logic. Compare code size and performance. Benchmark with autocannon.
+- Book Reading: The Go Programming Language Ch 4–6
+
+**W66 — Go Advanced: Concurrency + Channels + Real Systems**
+- CS/Tech Focus: Go concurrency patterns, channel patterns, context, sync primitives, Go profiling
+- Primary Resource: Go Concurrency Patterns (Rob Pike) — watch 2 talks: Go Concurrency Patterns https://www.youtube.com/watch?v=f6kdp27TYZs (2012, 51 min) + Advanced Go Concurrency Patterns https://www.youtube.com/watch?v=QDDwwePbDtw (2013, 34 min) + read: The Go Memory Model https://go.dev/ref/mem — 5h
+- Secondary Resource: Go standard library deep: sync package (Mutex, RWMutex, WaitGroup, Once, Map) + context package + bufio + encoding/json + database/sql — read godoc for each + implement examples — https://pkg.go.dev/sync, https://pkg.go.dev/context — 3h
+- Platform Resource: Exercism Go track — 5 more exercises: Clock + Linked List + Binary Search + Matrix + Nucleotide Count
+- Action Plan: D1: Watch both Rob Pike concurrency talks + take notes. D2: Implement all concurrency patterns from talks (pipeline, fan-in, fan-out, done channel, timeout). D3: Go Memory Model + sync package deep. D4: Build concurrent web scraper (fetch 10 URLs concurrently, timeout each, aggregate results). D5: Go profiling — pprof https://go.dev/blog/pprof — profile the REST API from W65. D6: Exercism 5 problems + refactor Go CLI with context support
+- Portfolio Project: Concurrent Web Scraper — `go-scraper/`. Given list of URLs (file input), fetches all concurrently with max 10 goroutines (semaphore pattern), 5s timeout per URL, saves results to JSON. Handles errors gracefully (URL not found → log + continue).
+- Book Reading: The Go Programming Language Ch 7–9
+
+**W67 — Go: Build Tools + CLI Framework + Review**
+- CS/Tech Focus: Go tooling (go build, go test -race, go mod, go generate, golangci-lint), CLI framework (Cobra), final Go project
+- Primary Resource: Cobra CLI framework: https://cobra.dev/ — read Getting Started + User Guide + Generator sections (2h) + golangci-lint: https://golangci-lint.run/usage/install/ + go test -race flag + benchmarks (testing.B) — 3h
+- Secondary Resource: Complete any remaining Go by Example sections + read "Structuring Applications in Go" https://www.gobeyond.dev/structuring-applications/ + watch "How I Write HTTP Services after Eight Years" https://www.youtube.com/watch?v=rWBSMsLG8po — 3h
+- Platform Resource: Complete Go Tour (any remaining sections) + 5 more Exercism Go problems of your choice
+- Action Plan: D1: Cobra framework — build multi-command CLI tool. D2: golangci-lint setup + run on all Go projects. D3: Go benchmarks — write benchmarks for critical functions. D4: Review Go by Example all sections. D5: Final Go project review. D6: Write a "Go vs Node.js" comparison post for blog (technical, includes benchmarks)
+- Portfolio Project: Full Go CLI Application — `go-devtools/`. A developer productivity tool with sub-commands: `devtools fetch [url]` (HTTP request with timing), `devtools hash [string]` (SHA256), `devtools env` (list env vars formatted), `devtools uuid` (generate UUID), `devtools time [timezone]` (show time in timezone). Built with Cobra. Has unit tests. Has README with usage.
+- Book Reading: The Go Programming Language Ch 10–13 (finish) + DDIA Phase 2 prep: re-read Ch 5 (Replication)
+
+---
+
+#### W68–W72: Rust Fundamentals + Intermediate (5 weeks)
+
+**W68 — Rust Fundamentals: Ownership + Borrowing**
+- Math Focus: Type Theory basics (types as sets, functions as morphisms) — read: Types and Programming Languages intro chapter (Pierce) or https://www.cs.cmu.edu/~crary/819-f09/Hindley93.pdf overview
+- CS/Tech Focus: Rust ownership, borrowing, lifetimes, structs, enums, pattern matching
+- Primary Resource: The Rust Book Ch 1–9: https://doc.rust-lang.org/book/ — Ch 1 (Getting Started) + Ch 2 (Guessing Game) + Ch 3 (Common Concepts) + Ch 4 (Ownership) + Ch 5 (Structs) + Ch 6 (Enums) + Ch 7 (Modules) + Ch 8 (Collections) + Ch 9 (Error Handling) — complete all projects and listings — 10h
+- Secondary Resource: Rustlings — complete exercises 1–50: https://github.com/rust-lang/rustlings — install + run `rustlings watch`. Variables (6) + Functions (5) + If (2) + Primitive Types (6) + Vectors (2) + Move Semantics (6) + Structs (3) + Enums (5) + Strings (4) + Modules (3) + HashMap (3) + Options (3) + Error Handling (6) — 5h
+- Platform Resource: Exercism Rust track — Hello World + Grains + Raindrops + Bob + Two Fer: https://exercism.org/tracks/rust
+- Action Plan: D1: Rust Book Ch 1–3 (install rustup, run hello world, common programming concepts). D2: Rust Book Ch 4 — Ownership (read slowly, diagram memory on paper). D3: Rust Book Ch 5–6 (structs, enums, pattern matching). D4: Rustlings 1–30. D5: Rust Book Ch 7–9 (modules, collections, error handling). D6: Rustlings 31–50 + Exercism 3 Rust problems
+- Portfolio Project: Rust CLI Calculator — `rust-calc/`. Accepts expression from command line: `calc "2 + 3 * 4"`. Implements: arithmetic, parentheses, floats, handles division by zero with Rust's Result type. Uses only stdlib. Tests with #[cfg(test)] mod.
+- Cert Prep: AWS Cloud Practitioner — Module 2: Cloud Benefits + Module 3: AWS Global Infrastructure
+- Book Reading: DDIA Ch 6 (Partitioning) re-read
+
+**W69 — Rust Intermediate: Traits + Generics + Closures**
+- CS/Tech Focus: Rust traits, generics, closures, iterators, smart pointers (Box, Rc, RefCell, Arc, Mutex)
+- Primary Resource: The Rust Book Ch 10–16: https://doc.rust-lang.org/book/ — Ch 10 (Generic Types, Traits, Lifetimes) + Ch 11 (Testing) + Ch 12 (I/O Project: grep clone) + Ch 13 (Closures + Iterators) + Ch 14 (Cargo + crates.io) + Ch 15 (Smart Pointers) + Ch 16 (Fearless Concurrency) — 10h
+- Secondary Resource: Rustlings — complete exercises 51–94 (remaining): https://github.com/rust-lang/rustlings — Traits + Lifetimes + Iterators + Smart Pointers + Threads + Macros + Clippy + Conversions — 5h
+- Platform Resource: Exercism Rust track — 5 more exercises: Hamming + Nucleotide Count + Word Count + Space Age + Collatz Conjecture
+- Action Plan: D1: Rust Book Ch 10 (generics, traits, lifetimes — most important chapter). D2: Rust Book Ch 11 + 12 (testing + minigrep project — build it). D3: Rust Book Ch 13 (closures, iterators — implement custom iterator). D4: Rust Book Ch 14–15 (Cargo, smart pointers — Box, Rc, Arc). D5: Rust Book Ch 16 (concurrency — threads, channels, Arc<Mutex<T>>). D6: Rustlings 51–94 (finish all) + Exercism 5
+- Portfolio Project: Rust grep clone (minigrep enhanced) — extend the Rust Book's minigrep to support: `-i` (case insensitive), `-n` (show line numbers), `-c` (count matches), `-r` (recursive directory search), color output. All with tests. Deploy as GitHub release.
+- Book Reading: DDIA Ch 7 (Transactions) re-read
+
+**W70 — Rust Advanced: Async + Tokio + WebAssembly intro**
+- CS/Tech Focus: Rust async/await, Tokio runtime, Actix-web, WebAssembly intro (wasm-bindgen)
+- Primary Resource: Async Rust Book (Asynchronous Programming in Rust): https://rust-lang.github.io/async-book/ — Ch 1 (Getting Started) + Ch 2 (Under the Hood) + Ch 3 (async/.await) + Ch 4 (Pinning) + Ch 5 (Streams) + Ch 7 (Workarounds for Async in Traits) + Ch 8 (Final Project: HTTP Server) — 8h
+- Secondary Resource: Tokio tutorial: https://tokio.rs/tokio/tutorial — complete all sections: Hello Tokio + Spawning + Shared State + Channels + I/O + Framing + Async in Depth — 4h
+- Platform Resource: Build a simple Actix-web REST API: https://actix.rs/docs/getting-started/ — Getting Started + Application + Handlers + Extractors — build same portfolio API but in Actix-web
+- Action Plan: D1: Async Rust Book Ch 1–3 (async/.await fundamentals). D2: Tokio tutorial all sections. D3: Build Actix-web REST API (same endpoints as Go version). D4: Async Rust Ch 4–5 (pinning, streams). D5: wasm-bindgen intro https://rustwasm.github.io/docs/book/ — Ch 1–3 (hello wasm, background, tutorial). D6: Final Rust review + portfolio API comparison (Node.js vs Go vs Rust — performance benchmark)
+- Portfolio Project: Rust HTTP Server (Actix-web) — `rust-api/`. Same endpoints as portfolio API. Async handlers. PostgreSQL via sqlx (async). Rate limiting with Governor crate. Compare performance with Go and Node.js versions. Write benchmark results in README.
+- Book Reading: Crafting Interpreters Ch 1–5 (preview for W78)
+
+**W71 — Rust: Systems Programming + CLI + Real Project**
+- CS/Tech Focus: Rust error handling patterns, CLI with clap, file system operations, process management
+- Primary Resource: The Rust Book Ch 17–20 (finish): https://doc.rust-lang.org/book/ — Ch 17 (OOP in Rust) + Ch 18 (Patterns) + Ch 19 (Advanced Features: unsafe, macros, associated types) + Ch 20 (Final Project: Multi-threaded web server) — 6h
+- Secondary Resource: Clap CLI framework: https://docs.rs/clap/latest/clap/ — Builder API + Derive API — read Getting Started + Usage — build a multi-command CLI tool — 3h
+- Platform Resource: Exercism Rust track — 5 more exercises: Luhn + Poker + Dot DSL + React + Series
+- Action Plan: D1: Rust Book Ch 17–18 (OOP, patterns). D2: Rust Book Ch 19 (advanced features — unsafe, macros). D3: Rust Book Ch 20 (multi-threaded web server — build it). D4: Clap framework + build professional CLI. D5: Review all Rust code written — apply clippy linting, fix all warnings. D6: Exercism 5 Rust
+- Portfolio Project: Multi-threaded HTTP server in Rust (from Rust Book Ch 20 enhanced) — add: connection pooling, graceful shutdown (ctrl+C handler), request logging, configurable thread count via CLI arg.
+- Book Reading: DDIA Ch 8 (Distributed Systems Troubles) re-read
+
+**W72 — C++ Basics–Intermediate (2 weeks → Week 72–73 split)**
+- CS/Tech Focus: C++ fundamentals needed for systems work — pointers, classes, STL, templates, RAII
+- Primary Resource: LearnCpp.com — complete Chapters 1–15: https://www.learncpp.com/ — Ch 1 (C++ Basics) + Ch 2 (Functions) + Ch 3 (Debugging) + Ch 4 (Data Types) + Ch 5 (Operators) + Ch 6 (Scope/Duration) + Ch 7 (Control Flow) + Ch 8 (Type Conversion) + Ch 9 (Compound Types: References + Pointers) + Ch 10 (Compound Types: Enums + Structs) + Ch 11 (Arrays) + Ch 12 (Functions deep) + Ch 13 (Intro to OOP) + Ch 14 (Operator Overloading) + Ch 15 (More OOP) — 10h
+- Secondary Resource: Exercism C++ track — Hello World + Grains + Raindrops + Bob + Two Fer: https://exercism.org/tracks/cpp
+- Platform Resource: LeetCode — solve 5 problems in C++ this week: Two Sum + Valid Parentheses + Reverse Linked List + Maximum Depth Binary Tree + Binary Search
+- Action Plan: D1: LearnCpp Ch 1–5 (basics, functions, operators). D2: LearnCpp Ch 6–8 (scope, control flow, type conversion). D3: LearnCpp Ch 9–11 (pointers, references, arrays). D4: LearnCpp Ch 12–13 (functions deep, OOP intro). D5: LearnCpp Ch 14–15 (operator overloading, OOP). D6: Exercism 5 C++ + LeetCode 5 in C++
+- Portfolio Project: C++ Matrix Library — `cpp-matrix/`. Implement Matrix class: constructor, add, subtract, multiply, transpose, determinant (recursive), inverse (Gauss-Jordan). Template for int + float + double. Tests with assert. Compare with Python numpy version.
+- Book Reading: DDIA Ch 9 (Consistency and Consensus) — most important chapter
+
+---
+
+#### W73: C++ Week 2 (continuation of W72 block)
+
+- CS/Tech Focus: C++ STL (vectors, maps, sets, algorithms), templates, smart pointers, move semantics, RAII
+- Primary Resource: LearnCpp.com Ch 16–27: https://www.learncpp.com/ — Ch 16 (Object Relationships) + Ch 17 (Inheritance) + Ch 18 (Virtual Functions) + Ch 19 (Templates) + Ch 20 (Exceptions) + Ch 21 (STL) + Ch 22 (Smart Pointers) + Ch 23 (Move Semantics) + Ch 26 (Input/Output) — 8h
+- Secondary Resource: CppReference STL overview: https://en.cppreference.com/w/cpp/container — read vector, map, unordered_map, set, unordered_set, queue, priority_queue — understand time complexity of each operation
+- Platform Resource: Exercism C++ track — 5 more exercises: Leap + Hamming + Word Count + Nucleotide Count + Space Age
+- Portfolio Project: C++ implementation of LRU Cache — `cpp-lru-cache/`. Implements LRU Cache with capacity. O(1) get and put. Uses doubly linked list + unordered_map. Tests verify eviction behavior.
+
+---
+
+#### W74–W80: Distributed Systems Theory + Implementation (7 weeks)
+
+**W74 — Distributed Systems Theory I: Foundations**
+- Math Focus: Probability for distributed systems — failure probabilities, birthday paradox, consistent hashing math
+- CS/Tech Focus: CAP theorem, consistency models, distributed system fundamentals, fallacies of distributed computing
+- Primary Resource: MIT 6.824 Distributed Systems — Lecture 1 (Introduction) + Lecture 2 (RPC and Threads) + Lecture 3 (GFS — Google File System): https://pdos.csail.mit.edu/6.824/schedule.html — watch all 3 lecture videos + read all 3 associated papers (GFS paper, MapReduce paper) — 10h
+- Secondary Resource: DDIA Chapter 5 (Replication) — re-read the entire chapter, this time implement each concept: Master-slave setup using PostgreSQL streaming replication on Proxmox (Debian VM as primary, Ubuntu VM as replica) — https://www.postgresql.org/docs/current/warm-standby.html — 4h
+- Platform Resource: Exercism Go track — 3 more Go exercises (stay sharp in Go — it will be the language for distributed systems implementations)
+- Action Plan: D1: MIT 6.824 L1 (Introduction to distributed systems — why they're hard). D2: MIT 6.824 L2 (RPC, threads in Go). D3: GFS paper read + notes. D4: DDIA Ch 5 re-read deeply + PostgreSQL streaming replication on Proxmox. D5: Set up Patroni (HA PostgreSQL) on Proxmox: https://patroni.readthedocs.io/ — primary + 2 replicas + auto-failover test. D6: Math: consistent hashing implementation from scratch in Python
+- Portfolio Project: PostgreSQL Streaming Replication Setup — Document in `infrastructure/` repo: step-by-step setup guide, Patroni config files, failover test procedure, screenshot of automatic failover working.
+- Cert Prep: AWS Cloud Practitioner — Module 4: Cloud Security + Module 5: Networking
+- Book Reading: DDIA Ch 5 (Replication) — annotated reading (third encounter)
+
+**W75 — Distributed Systems Theory II: Consensus + Raft**
+- CS/Tech Focus: Paxos (conceptual), Raft consensus algorithm, leader election, log replication
+- Primary Resource: MIT 6.824 Lecture 5 (Raft 1) + Lecture 6 (Raft 2) + Lab 1 (MapReduce in Go): https://pdos.csail.mit.edu/6.824/ — watch both lectures + read Raft paper (https://raft.github.io/raft.pdf) — begin Lab 1 (MapReduce) — 10h
+- Secondary Resource: Raft interactive visualization https://raft.github.io/ — experiment with leader election and log replication. Read: https://thesecretlivesofdata.com/raft/ (visual explanation) + etcd architecture (uses Raft) https://etcd.io/docs/v3.5/learning/why/ — 3h
+- Platform Resource: MIT 6.824 Lab 1 (MapReduce) — implement coordinator + worker in Go: https://pdos.csail.mit.edu/6.824/labs/lab-mr.html — this is a real distributed system implementation
+- Action Plan: D1: MIT 6.824 L5 (Raft 1 — leader election). D2: MIT 6.824 L6 (Raft 2 — log replication, safety). D3: Raft paper read + notes + interactive visualization. D4: MIT 6.824 Lab 1 — MapReduce coordinator implementation. D5: MapReduce worker implementation + testing. D6: DDIA Ch 9 (Consensus) re-read alongside Raft paper
+- Portfolio Project: MapReduce implementation in Go (MIT 6.824 Lab 1) — word count + inverted index using MapReduce framework. All tests in mrtest.sh must pass.
+- Book Reading: DDIA Ch 9 (Consistency and Consensus) annotated — fourth encounter, understand every algorithm
+
+**W76 — Distributed Systems Theory III: Transactions + Concurrency Control**
+- CS/Tech Focus: Distributed transactions, 2PC (Two-Phase Commit), MVCC, snapshot isolation, CRDTs
+- Primary Resource: MIT 6.824 Lecture 12 (Distributed Transactions) + Lecture 13 (Spanner): https://pdos.csail.mit.edu/6.824/schedule.html — watch both + read Spanner paper https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf — 8h
+- Secondary Resource: DDIA Ch 7 (Transactions) — implement in Go: transaction manager with optimistic concurrency control (compare-and-swap) + demonstrate lost update, dirty read, phantom read problems with PostgreSQL before isolation levels — 4h
+- Platform Resource: MIT 6.824 Lab 2 (Raft in Go) start: https://pdos.csail.mit.edu/6.824/labs/lab-raft.html — Lab 2A (leader election only this week)
+- Action Plan: D1: MIT 6.824 L12 (Distributed Transactions — 2PC, 3PC, drawbacks). D2: MIT 6.824 L13 (Spanner — true time, external consistency). D3: Spanner paper read. D4: Implement transaction manager in Go (with optimistic locking). D5: PostgreSQL isolation experiments — show all 4 anomalies (dirty read, non-repeatable read, phantom read, serialization anomaly) + how each isolation level prevents them. D6: Raft Lab 2A (leader election)
+- Portfolio Project: PostgreSQL Transaction Anomaly Demo — `db-transactions/`. Go program that demonstrates: dirty read, non-repeatable read, phantom read, serialization anomaly + shows how READ COMMITTED, REPEATABLE READ, SERIALIZABLE each fix them. Has README with output examples.
+- Book Reading: Database Internals (Petrov) Ch 1–3 — https://www.oreilly.com/library/view/database-internals/9781492040330/ (buy or find PDF)
+
+**W77 — Distributed Systems Implementation I: Key-Value Store in Go**
+- CS/Tech Focus: Build a distributed key-value store (single-node first): storage engine, WAL, crash recovery
+- Primary Resource: MIT 6.824 Lab 2 (Raft) — Lab 2B (log replication) + Lab 2C (persistence): https://pdos.csail.mit.edu/6.824/labs/lab-raft.html — implement full Raft — 12h (this is the hardest lab)
+- Secondary Resource: Bitcask storage engine paper: https://riak.com/assets/bitcask-a-log-structured-hash-table-for-fast-key-value-data.pdf — read + implement a simplified Bitcask in Go (append-only log, in-memory index) — 3h
+- Platform Resource: MIT 6.824 test suite — `go test -v -run TestReElection` etc. — all Part 2A, 2B, 2C tests must pass
+- Action Plan: D1: Raft Lab 2B (log replication — implement AppendEntries RPC). D2: Raft Lab 2B continued (test: TestBasicAgree, TestRPCBytes, TestConcurrentStarts). D3: Raft Lab 2C (persistence — implement persist() and readPersist()). D4: Raft Lab 2C tests. D5: Implement simplified Bitcask in Go. D6: DDIA Ch 3 (Storage and Retrieval) — annotate + add notes about Bitcask
+- Portfolio Project: Raft consensus implementation (MIT 6.824 Lab 2) — Lab 2A+2B+2C all tests passing. Document: what was hardest, how you debugged it.
+- Book Reading: Database Internals Ch 4–6
+
+**W78 — Distributed Systems Implementation II: Fault-Tolerant K/V Service**
+- CS/Tech Focus: Fault-tolerant key-value service using Raft, linearizability, duplicate detection
+- Primary Resource: MIT 6.824 Lab 3 (Raft KV): https://pdos.csail.mit.edu/6.824/labs/lab-kvraft.html — Lab 3A (Key/Value service without log compaction) + Lab 3B (with log compaction/snapshots) — 12h
+- Secondary Resource: MIT 6.824 Lecture 7 (Fault Tolerance: Zookeeper) + Lecture 8 (Zookeeper continued): https://pdos.csail.mit.edu/6.824/schedule.html — read ZooKeeper paper + watch lectures — 3h
+- Platform Resource: All 6.824 Lab 3 tests must pass: TestBasic3A, TestConcurrent3A, TestUnreliable3A, TestUnreliableOneKey3A, TestOnePartition3A, TestManyPartitionsOneClient3A, TestManyPartitionsManyClients3A, TestPersistConcurrent3A, TestSnapshotRPC3B, TestSnapshotSize3B
+- Action Plan: D1: Lab 3A — KV server Get/Put/Append using Raft. D2: Lab 3A — duplicate detection (client request IDs). D3: Lab 3A — all 3A tests passing. D4: Lab 3B — log compaction (snapshot installation). D5: Lab 3B — all 3B tests passing. D6: ZooKeeper paper + lecture
+- Portfolio Project: Fault-tolerant K/V store (MIT 6.824 Lab 3) — all tests passing. README: architecture diagram + what you learned about distributed systems debugging.
+- Book Reading: Database Internals Ch 7–9
+
+**W79 — Database Replication + High Availability Systems**
+- CS/Tech Focus: PostgreSQL streaming replication advanced, Patroni HA, Redis Sentinel, Redis Cluster, PgBouncer connection pooling
+- Primary Resource: Patroni documentation — complete setup guide + configuration: https://patroni.readthedocs.io/en/latest/ — HA PostgreSQL with etcd as DCS (Distributed Configuration Store) on Proxmox. Primary + 2 replicas. Test manual + automatic failover — 8h
+- Secondary Resource: Redis Sentinel: https://redis.io/docs/manual/sentinel/ — set up Redis Sentinel (1 master + 2 replicas + 3 Sentinels) on Proxmox. Test failover. + Redis Cluster: https://redis.io/docs/manual/scaling/ — set up Redis Cluster (6 nodes: 3 masters + 3 replicas) — 4h
+- Platform Resource: PgBouncer connection pooling: https://www.pgbouncer.org/usage.html — set up between application and PostgreSQL. Test: connection limit before/after PgBouncer.
+- Action Plan: D1: Patroni setup on Proxmox (etcd + primary + replica). D2: Patroni failover test (kill primary → replica promotes automatically). D3: Redis Sentinel setup + failover test. D4: Redis Cluster setup + test shard distribution. D5: PgBouncer setup + connection pooling benchmarks. D6: Write infrastructure runbook: `HA_POSTGRES_RUNBOOK.md` — how to detect failure, how to recover, how to add replica
+- Portfolio Project: High-Availability PostgreSQL Setup Documentation — `infra-ha/` repo. Complete runbook with: architecture diagram, setup scripts, failover procedure, recovery procedure, monitoring setup.
+- Book Reading: Database Internals Ch 10–12 (finish)
+
+**W80 — AWS Cloud Practitioner Exam + Cloud Foundations**
+- CS/Tech Focus: AWS fundamentals, cloud concepts, core services, pricing models
+- Primary Resource: AWS Skill Builder — Cloud Practitioner Essentials — ALL 12 modules: https://skillbuilder.aws/learn/course/134 — Module 1 (Introduction) + Module 2 (Compute) + Module 3 (Global Infrastructure) + Module 4 (Networking) + Module 5 (Storage) + Module 6 (Databases) + Module 7 (Security) + Module 8 (Monitoring) + Module 9 (Pricing) + Module 10 (Migration) + Module 11 (AWS Well-Architected) + Module 12 (Summary) — complete all modules + take all knowledge checks — 8h
+- Secondary Resource: AWS Free Tier — hands-on labs: Launch EC2 instance (t2.micro) + create S3 bucket + set up IAM user with least privilege + create RDS MySQL instance (db.t2.micro) + create VPC with public subnet + configure security group — https://aws.amazon.com/free/ — 4h
+- Platform Resource: Official AWS Cloud Practitioner practice exam (free): https://explore.skillbuilder.aws/learn/course/14050 — take twice. Target ≥ 80% before booking.
+- Action Plan: D1: AWS Skill Builder Modules 1–4. D2: Modules 5–8. D3: Modules 9–12 + hands-on labs. D4: Official practice exam (run 1). D5: Review wrong answers + weak areas + practice exam (run 2). D6: AWS Cloud Practitioner exam day (book online at https://www.aws.training/certification)
+- Cert: AWS Cloud Practitioner EXAM — ~$100 — book at https://www.aws.training/certification
+- Portfolio Project: AWS Free Tier Lab Documentation — `aws-labs/`. Terraform scripts (basic) that launch: EC2 t2.micro + S3 bucket + IAM user with policy. README shows: what each resource does, what it costs (free tier), how to destroy cleanly.
+- Book Reading: Google SRE Book (Phase 2 re-read) Ch 1–8
+
+---
+
+#### W81–W87: Event-Driven Architecture + Kafka + Advanced Patterns (7 weeks)
+
+**W81 — Event-Driven Architecture + Enterprise Integration Patterns**
+- CS/Tech Focus: Event-driven architecture, CQRS, Event Sourcing, Saga pattern, EIP patterns (65 messaging patterns)
+- Primary Resource: Enterprise Integration Patterns (Hohpe & Woolf) — read online: https://www.enterpriseintegrationpatterns.com/patterns/messaging/ — read ALL 65 patterns organized in sections: Message Construction + Message Routing + Message Transformation + Message Endpoint + System Management — 8h
+- Secondary Resource: Martin Fowler on CQRS: https://martinfowler.com/bliki/CQRS.html + Event Sourcing: https://martinfowler.com/eaaDev/EventSourcing.html + Saga Pattern: https://microservices.io/patterns/data/saga.html — read all 3 + implement a simple event-sourced bank account in Go (Deposit, Withdraw, Balance events) — 4h
+- Platform Resource: Implement 10 EIP patterns in Go (standalone examples): Message Channel, Message, Pipe and Filter, Message Router, Message Translator, Message Endpoint, Publish-Subscribe Channel, Dead Letter Channel, Message Filter, Content-Based Router
+- Action Plan: D1: EIP Patterns — Message Construction section (7 patterns: Message, Command Message, Event Message, Document Message, Request-Reply, Return Address, Correlation Identifier). D2: EIP Patterns — Message Routing section (11 patterns: Pipes and Filters, Message Router, Content-Based Router, Message Filter, Dynamic Router, Recipient List, Splitter, Aggregator, Resequencer, Composed Msg Processor, Scatter-Gather). D3: EIP Patterns — Message Transformation section. D4: CQRS + Event Sourcing implementation in Go. D5: Saga pattern implementation (choreography-based: sequence of events with compensating transactions). D6: Read all implemented EIP examples + write blog post: "Enterprise Integration Patterns: The 10 You'll Actually Use"
+- Portfolio Project: Event-Sourced Bank Account (Go) — `event-sourcing/`. Events: AccountOpened, MoneyDeposited, MoneyWithdrawn, AccountClosed. Event store (in-memory list). Rebuild state by replaying events. Snapshot after every 10 events. All with tests.
+- Book Reading: Google SRE Book Ch 9–16
+
+**W82 — Apache Kafka Deep Dive**
+- CS/Tech Focus: Kafka architecture, topics, partitions, consumer groups, exactly-once semantics, Kafka Streams
+- Primary Resource: Kafka documentation — read all sections: Introduction + Use Cases + Design + APIs: https://kafka.apache.org/documentation/ + Kafka: The Definitive Guide (free PDF from Confluent: https://www.confluent.io/resources/kafka-the-definitive-guide/) — Ch 1 (Meet Kafka) + Ch 2 (Installing Kafka) + Ch 3 (Kafka Producers) + Ch 4 (Kafka Consumers) + Ch 5 (Kafka Internals) — 8h
+- Secondary Resource: Kafka Streams documentation: https://kafka.apache.org/documentation/streams/ — read: Architecture + Writing a Streams Application + WordCount tutorial + run it locally — 3h
+- Platform Resource: Install Kafka locally via Docker Compose: https://developer.confluent.io/quickstart/kafka-docker/ — create topics, produce messages, consume messages. Build: producer that sends order events + consumer that processes them + dead letter queue for failed messages
+- Action Plan: D1: Kafka The Definitive Guide Ch 1–2 + local Kafka setup (Docker Compose: Zookeeper + Kafka + Kafka UI). D2: Kafka Ch 3–4 (producers + consumers) + build producer (Go) + consumer (Go). D3: Kafka Ch 5 (internals — replication, leader election, log compaction). D4: Kafka Streams WordCount tutorial. D5: Build Order Processing pipeline: order.placed → payment.service (consumer) → order.confirmed → notification.service (consumer). D6: Kafka exactly-once semantics + idempotent producers test
+- Portfolio Project: Kafka Order Processing Pipeline — `kafka-orders/`. 3 microservices in Go: Order Service (produces order.placed events), Payment Service (consumes + produces payment.processed), Notification Service (consumes + sends mock email). All connected via Kafka. Docker Compose starts everything. README explains each step.
+- Book Reading: Google SRE Book Ch 17–24 (finish)
+
+**W83 — RabbitMQ + Message Queues Comparison**
+- CS/Tech Focus: RabbitMQ architecture, AMQP protocol, exchanges, routing, bindings, vs Kafka comparison
+- Primary Resource: RabbitMQ tutorials — complete ALL 7 tutorials in Go: https://www.rabbitmq.com/tutorials — Tutorial 1 (Hello World) + Tutorial 2 (Work Queues) + Tutorial 3 (Publish/Subscribe) + Tutorial 4 (Routing) + Tutorial 5 (Topics) + Tutorial 6 (RPC) + Tutorial 7 (Publisher Confirms) — 6h
+- Secondary Resource: RabbitMQ documentation: https://www.rabbitmq.com/documentation.html — read: AMQP 0-9-1 Model Explained + Publishers + Consumers + Queues + Exchanges + Routing + Dead Letter Exchanges + TTL + Priority Queues — 4h
+- Platform Resource: Build Kafka vs RabbitMQ comparison: same order processing system, implemented in both. Benchmark: throughput, latency, message persistence, consumer group behavior.
+- Action Plan: D1: RabbitMQ setup (Docker) + Tutorial 1 (Hello World) + Tutorial 2 (Work Queues with ack). D2: Tutorial 3 (Pub/Sub — fanout exchange) + Tutorial 4 (Routing — direct exchange). D3: Tutorial 5 (Topics — topic exchange) + Tutorial 6 (RPC pattern). D4: Tutorial 7 (Publisher Confirms — guaranteeing messages reach server). D5: Dead Letter Exchange setup + TTL + Priority Queues. D6: Kafka vs RabbitMQ benchmark + write comparison blog post
+- Portfolio Project: RabbitMQ Work Queue System — `rabbitmq-workers/`. A task queue where producers emit tasks (simulate image processing jobs). Multiple worker consumers compete for tasks. Ack/nack for fault tolerance. Dead letter queue for failed tasks. Runs via Docker Compose.
+- Book Reading: Building Microservices (Newman) Ch 1–4: https://samnewman.io/books/building_microservices_2nd_edition/ (buy) — Phase 2 key book
+
+**W84–W87: Kubernetes Deep Dive (4 weeks)**
+
+**W84 — Kubernetes Foundations + CKA Curriculum Begins**
+- CS/Tech Focus: Kubernetes architecture, pods, deployments, services, namespaces, kubectl mastery
+- Primary Resource: DevOps with Kubernetes — Part 1: https://devopswithkubernetes.com/ — complete ALL Part 1 exercises (1.01–1.11): Kubernetes overview + Defining + Kubernetes API + Labels + Introduction to storage + Storage in Action — 8h
+- Secondary Resource: Kubernetes the Hard Way (adapted for Debian/Proxmox): https://github.com/kelseyhightower/kubernetes-the-hard-way — set up Kubernetes cluster manually on Proxmox VMs (no kubeadm) — bootstrap certificates + etcd + control plane + workers — 5h
+- Platform Resource: killer.sh CKA simulator: https://killer.sh/ — included free with CKA exam purchase — begin practicing kubectl commands (even before buying exam)
+- Cert Prep: CKA study begins. Use: https://github.com/dgkanatsios/CKAD-exercises as practice — even though it's CKAD, the kubectl exercises apply
+
+**W85 — Kubernetes Intermediate: Helm + Persistent Storage + Networking**
+- CS/Tech Focus: Helm charts, PV/PVC/StorageClass, ConfigMaps/Secrets, Network Policies, Ingress
+- Primary Resource: DevOps with Kubernetes — Part 2: https://devopswithkubernetes.com/ — complete ALL Part 2 exercises: Stateful Applications + Volumes + Helm + Namespaces — 8h
+- Secondary Resource: Kubernetes official docs — Storage: https://kubernetes.io/docs/concepts/storage/ + Networking: https://kubernetes.io/docs/concepts/services-networking/ + Network Policies: https://kubernetes.io/docs/concepts/services-networking/network-policies/ — read all + implement examples
+- Platform Resource: Deploy the capstone SaaS application to Kubernetes (local cluster via kind or k3s): Next.js + Node.js API + PostgreSQL (StatefulSet) + Redis (StatefulSet) + Nginx Ingress
+
+**W86 — Kubernetes Advanced: ArgoCD + Helm + GitOps**
+- CS/Tech Focus: GitOps with ArgoCD, Helm chart authoring, Kubernetes RBAC, OPA Gatekeeper, Falco
+- Primary Resource: DevOps with Kubernetes — Part 3: https://devopswithkubernetes.com/ — complete ALL Part 3 exercises: Kubernetes Internals + Service Mesh + Beyond Kubernetes — 8h
+- Secondary Resource: ArgoCD Getting Started: https://argo-cd.readthedocs.io/en/stable/getting_started/ — install ArgoCD + deploy application from Git repo (GitOps pattern) — 3h
+- Platform Resource: Write a Helm chart for the capstone application from scratch (not using existing charts). Chart must deploy: web (Deployment), api (Deployment), postgres (StatefulSet), redis (StatefulSet), nginx-ingress (Service + Ingress). Values.yaml configurable.
+
+**W87 — Kubernetes Production: Istio + Observability**
+- CS/Tech Focus: Istio service mesh, mTLS, traffic management, circuit breaking, canary deployments, Prometheus + Grafana on K8s
+- Primary Resource: Istio docs — Getting Started: https://istio.io/latest/docs/setup/getting-started/ + Traffic Management: https://istio.io/latest/docs/tasks/traffic-management/ + Security (mTLS): https://istio.io/latest/docs/tasks/security/ — complete all getting started tasks + traffic management tasks + mTLS task — 8h
+- Secondary Resource: Kiali dashboard (Istio observability): https://kiali.io/docs/installation/quick-start/ — install + explore service graph. Prometheus + Grafana on K8s: install Prometheus Operator (kube-prometheus-stack) + set up dashboards for the capstone app — 4h
+- Platform Resource: CKA exam practice — all kubectl tasks from https://github.com/dgkanatsios/CKAD-exercises (do the config + multi-container + pod design + state persistence sections)
+- Cert: CKA exam should be booked this week — schedule for W92
+
+---
+
+#### W88–W91: Observability + SRE + Software Architecture (4 weeks)
+
+**W88 — Observability: Prometheus + Grafana + OpenTelemetry + Loki + Jaeger**
+- CS/Tech Focus: The 3 pillars of observability: metrics (Prometheus), logs (Loki), traces (Jaeger). OpenTelemetry as the standard.
+- Primary Resource: Prometheus documentation — Getting Started: https://prometheus.io/docs/prometheus/latest/getting-started/ + Data Model + Query Language (PromQL) + Alerting (Alertmanager) — write PromQL queries for all capstone metrics — 5h
+- Secondary Resource: OpenTelemetry — Getting Started (Node.js): https://opentelemetry.io/docs/instrumentation/js/getting-started/ + Jaeger: https://www.jaegertracing.io/docs/1.51/getting-started/ — instrument capstone API with OpenTelemetry (traces + metrics + logs) — 4h
+- Platform Resource: Grafana dashboards: https://grafana.com/docs/ — build dashboards for: API request rate, latency P50/P95/P99, error rate, active connections, DB query time. Use RED method (Rate, Errors, Duration).
+
+**W89 — SRE Practices + Error Budgets + Incident Response**
+- CS/Tech Focus: SLIs, SLOs, SLAs, error budgets, toil, postmortems, incident command
+- Primary Resource: Google SRE Book — Part 2 (Principles) complete: Ch 3 (Embracing Risk) + Ch 4 (SLOs) + Ch 5 (Eliminating Toil) + Ch 6 (Monitoring) + Ch 9 (Simplicity) + Ch 11 (Being On-Call) + Ch 12 (Effective Troubleshooting) + Ch 15 (Postmortem Culture): https://sre.google/sre-book/ — 6h
+- Secondary Resource: Google SRE Workbook (free online): https://sre.google/workbook/table-of-contents/ — Ch 2 (Implementing SLOs) + Ch 4 (Monitoring) + Ch 9 (Incident Response) — 3h
+- Platform Resource: Define SLOs for the capstone application: availability SLO (99.9%), latency SLO (P95 < 500ms), error rate SLO (< 0.1%). Set up Prometheus alerts for SLO burn rate. Implement error budget policy.
+
+**W90 — Software Architecture: DDD + Clean Architecture + C4 + Event Storming**
+- CS/Tech Focus: Domain-Driven Design (DDD), bounded contexts, aggregates, domain events, Clean Architecture, C4 model, event storming
+- Primary Resource: Domain-Driven Design Quickly (free PDF): https://www.infoq.com/minibooks/domain-driven-design-quickly/ — read entire book (116 pages) — 4h. Martin Fowler: DDD Aggregate https://martinfowler.com/bliki/DDD_Aggregate.html + Bounded Context https://martinfowler.com/bliki/BoundedContext.html + CQRS https://martinfowler.com/bliki/CQRS.html — read all 3 articles — 2h
+- Secondary Resource: Event Storming: https://www.eventstorming.com/ + Alberto Brandolini's Big Picture Event Storming guide: https://medium.com/@ziobrando/the-picture-worth-a-thousand-user-stories-f3705b680b0d — perform Event Storm of the capstone application (on paper or Miro) — 3h
+- Platform Resource: Refactor the capstone application to use DDD: identify bounded contexts (User, Task, Billing, Notification), define aggregates, define domain events, implement ubiquitous language in code. Draw C4 Component diagram using Mermaid.
+
+**W91 — Technical Leadership + Engineering Strategy**
+- CS/Tech Focus: Technical leadership, engineering strategy, ADRs, RFCs, technical debt management, mentorship
+- Primary Resource: Will Larson's blog — read 10 key posts: https://lethain.com/ — "Staff Engineer's Path", "Digging out of Technical Debt", "Writing an Engineering Strategy", "How to Make Things Happen", "Managing Organizational Risk", "Building Executive Presence", "Technical Migrations", "Organizational Design", "Running Engineering Planning" + Irrational Exuberance newsletter — 4h
+- Secondary Resource: Staff Engineer (Will Larson) — free chapters: https://staffeng.com/ — read: Overview + Operating at Staff + Staff Archetypes + Being Visible + Staying Aligned with Authority + Stay Technical — 3h
+- Platform Resource: Write 3 engineering documents for the capstone project: RFC (Request for Comments) for a new feature, ADR (Architecture Decision Record) for a key decision, Technical Debt Register (3 items with priority + remediation plan)
+
+---
+
+#### W92–W99: Advanced Specializations (8 weeks)
+
+**W92 — CKA Exam + TLA+ Formal Methods**
+- Cert: CKA exam day — book at https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/ — $395
+- CS/Tech Focus: Formal methods intro, TLA+ specification language
+- Primary Resource: TLA+ Video Lectures (Lamport): https://lamport.azurewebsites.net/video/videos.html — watch Videos 1–7 (Introduction, Concepts, Writing Specifications, Safety, Liveness) — 4h
+- After exam: TLA+ write specification for the Raft consensus algorithm you implemented in W75–W77
+
+**W93 — Compiler Design + Crafting Interpreters**
+- CS/Tech Focus: Lexing, parsing, AST, tree-walk interpreter, bytecode compiler, virtual machine
+- Primary Resource: Crafting Interpreters — Part 1 (A Tree-Walk Interpreter in Java): https://craftinginterpreters.com/ — Ch 1–11: Introduction + A Map of the Territory + The Lox Language + Scanning + Representing Code + Parsing Expressions + Evaluating Expressions + Statements and State + Control Flow + Functions + Resolving and Binding — 10h
+- Secondary Resource: Make A Lisp (mal) — implement a Lisp interpreter step-by-step in Go: https://github.com/kanaka/mal — complete steps 1–6 (REPL + types + evaluation + if/def/let + tail calls + closures) — 5h
+
+**W94 — Functional Programming: Haskell**
+- CS/Tech Focus: Pure FP, type system, monads, functors, lazy evaluation, Haskell
+- Primary Resource: Learn You a Haskell for Great Good! (free online): http://learnyouahaskell.com/ — read ALL chapters: Starting Out + Types and Typeclasses + Syntax in Functions + Recursion + Higher Order Functions + Modules + Making Our Own Types and Typeclasses + I/O + More I/O + Functors, Applicative Functors, Monoids + Monads + Zippers — 8h
+- Platform Resource: Exercism Haskell track — 8 exercises: Hello World + Bob + Grains + Hamming + Two Fer + Collatz Conjecture + RNA Transcription + Word Count: https://exercism.org/tracks/haskell
+
+**W95 — Elixir + Concurrency Model + Actor Model**
+- CS/Tech Focus: Elixir, Erlang/OTP, actor model, supervision trees, fault tolerance via processes
+- Primary Resource: Exercism Elixir track — complete first 10 exercises: https://exercism.org/tracks/elixir + Elixir Getting Started guide — all sections: https://elixir-lang.org/getting-started/introduction.html — Basic Types + Basic Operators + Pattern Matching + Case + Cond + If/Else + Binaries/Strings/Charlists + Keyword Lists + Maps + Modules + IO + Processes + IO and File System — 8h
+
+**W96 — Python Advanced Backend: FastAPI + Django + Search Engineering**
+- CS/Tech Focus: FastAPI (async Python), Django (full-featured), SQLAlchemy ORM, Elasticsearch, Typesense
+- Primary Resource: FastAPI official tutorial — ALL sections: https://fastapi.tiangolo.com/tutorial/ — First Steps + Path Parameters + Query Parameters + Request Body + Validation + Extra Models + Response Status Code + Security + Bigger Applications + Background Tasks + Middleware + CORS + SQL Databases + Testing — 8h
+- Secondary Resource: Elasticsearch: Docker setup + Elasticsearch Getting Started https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html + index documents + search + aggregations + mapping — 3h. Typesense: https://typesense.org/docs/guide/ — install + index + search — 2h
+
+**W97 — Terraform Associate Exam + IaC Deep Dive**
+- CS/Tech Focus: Terraform all exam objectives — see Phase 2 Tab 6 for full scope
+- Primary Resource: All Terraform tutorials at https://developer.hashicorp.com/terraform/tutorials/certification-003 — complete every tutorial in the certification prep path
+- Cert: HashiCorp Terraform Associate exam — $70 — book at https://www.hashicorp.com/certification/terraform-associate
+
+**W98 — Module Federation + Micro-frontends + Build Tools Deep**
+- CS/Tech Focus: Module Federation (Webpack 5), Single-spa, Vite deep, esbuild, SWC, monorepo tooling
+- Primary Resource: Module Federation docs: https://module-federation.io/ — Getting Started + Plugin API + Dynamic Remotes — build: 2 micro-frontend apps (shell + remote) that share components via Module Federation — 5h
+- Secondary Resource: Vite docs deep: https://vitejs.dev/guide/ — read all sections including Plugin API + SSR — 3h
+
+**W99 — Phase 2 Capstone + Review**
+- CS/Tech Focus: Distributed Go system on Kubernetes — full capstone integrating everything from Phase 2
+- Portfolio Project: Phase 2 Capstone — `phase2-capstone/`. A distributed task processing system in Go: API service (Go + Gin) + Worker service (Go + Kafka consumers) + Scheduler service (Go + cron) + all on Kubernetes. Observability: Prometheus + Grafana + OpenTelemetry. CI/CD: GitHub Actions → ArgoCD → K8s. 80%+ test coverage.
+
+---
+
+### Phase 2 — Tab 2: DSA Track (W64–W99)
+
+Continue MIT 6.006 advanced topics + LeetCode hard problems. Target 150+ LeetCode total (100 new in Phase 2).
+
+| Week Block | DSA Focus | MIT 6.006 Alignment | Target LeetCode |
+|---|---|---|---|
+| W64–W67 (Go weeks) | String algorithms: KMP, Z-algorithm, Aho-Corasick | L17 (Complexity) + L18 (P/NP) | 10 medium/hard |
+| W68–W73 (Rust/C++) | Advanced trees: B-trees, Red-Black trees, Trie advanced | MIT 6.006 advanced lecture notes Phase 2 | 10 medium/hard |
+| W74–W80 (Distributed) | Graph algorithms advanced: Bellman-Ford, Floyd-Warshall, Prim, Kruskal, articulation points, bridges | - | 15 hard |
+| W81–W87 (Event-driven + K8s) | Dynamic programming hard: Edit distance, Matrix Chain, Optimal BST, Bitmask DP | - | 20 hard |
+| W88–W99 (Architecture + specialization) | Geometry, number theory, segment trees advanced, heavy-light decomposition | CP Handbook Ch 8–10 + Ch 22–24 | 25 hard |
+
+All problems must have direct LeetCode URLs. Add column for "MIT 6.006 Connection" — which lecture concept this problem uses.
+
+---
+
+### Phase 2 — Tab 3: Competitive Programming (W64–W99)
+
+Continue CSES problem set — advanced categories:
+
+| Category | Problems | Target Week | CSES Links |
+|---|---|---|---|
+| Sorting and Searching (advanced) | Josephus Problem I + II, Nested Ranges Check, Room Allocation | W64–W68 | https://cses.fi/problemset/task/2162 etc. |
+| DP advanced | Money Sums, Rectangle Cutting, Counting Towers, Counting Numbers | W68–W75 | https://cses.fi/problemset/ |
+| Graph Algorithms advanced | Teleporters Path, Hamiltonian Flights, Knight's Tour, School Dance | W75–W82 | https://cses.fi/problemset/ |
+| Range Queries | Static Range Sum, Static Range Min, Dynamic Range Sum, Range XOR, Range Update/Query | W82–W89 | https://cses.fi/problemset/ |
+| String Algorithms | Word Combinations, String Matching, Finding Borders, String Functions, Repeating Substring | W89–W96 | https://cses.fi/problemset/ |
+
+Target: 100+ CSES problems total by end of Phase 2
+
+---
+
+### Phase 2 — Tab 4: Testing Track
+
+New testing types introduced in Phase 2:
+
+| Week | Testing Type | Tool | Deliverable | Resource |
+|---|---|---|---|---|
+| W65 | Property-based testing (Go) | rapid (Go) | 5+ property tests for Go REST API | https://github.com/leanovate/gopter |
+| W70 | Fuzzing (Rust) | cargo-fuzz | Fuzz test the Rust HTTP parser | https://rust-fuzz.github.io/book/ |
+| W75 | Chaos Engineering | Chaos Monkey / Pumba | Kill random containers in K8s and verify system recovers | https://github.com/alexei-led/pumba |
+| W81 | Contract Testing (Pact) | Pact | Consumer + Provider contracts between microservices | https://docs.pact.io/ |
+| W85 | Mutation Testing | Stryker (Node.js) + go-mutesting | Mutation score > 60% on critical modules | https://stryker-mutator.io/ |
+| W88 | Load Testing advanced | k6 | k6 load test for K8s-deployed API (1000 VU, 5 min) | https://k6.io/docs/ |
+| W91 | Snapshot testing | Jest (Node) + insta (Rust) | Snapshot tests for all API responses | https://jestjs.io/docs/snapshot-testing |
+| W96 | SAST/DAST in CI | Semgrep + OWASP ZAP | Full CI pipeline: Semgrep on every PR + ZAP on every deploy | https://semgrep.dev/ + https://www.zaproxy.org/ |
+
+---
+
+### Phase 2 — Tab 5: Book Reading Track
+
+| Week(s) | Book | Chapters | Free Link |
+|---|---|---|---|
+| W64–W67 | The Go Programming Language (Donovan & Kernighan) | Ch 1–13 (whole book) | https://www.gopl.io/ (buy) / free: https://go.dev/doc/effective_go |
+| W68–W71 | The Rust Programming Language | Ch 1–20 (whole book) | https://doc.rust-lang.org/book/ (free online) |
+| W72–W73 | LearnCpp.com (book format reference) | Ch 1–27 | https://www.learncpp.com/ (free online) |
+| W74–W80 | Designing Data-Intensive Applications | Full re-read + annotation (especially Ch 5, 7, 8, 9) | https://dataintensive.net/ |
+| W81–W83 | Kafka: The Definitive Guide | Ch 1–9 | https://www.confluent.io/resources/kafka-the-definitive-guide/ (free PDF) |
+| W84–W91 | Building Microservices (Newman, 2nd ed.) | Ch 1–14 (whole book) | https://samnewman.io/books/building_microservices_2nd_edition/ (buy) |
+| W92–W94 | Crafting Interpreters | Ch 1–30 (whole book) | https://craftinginterpreters.com/ (free online) |
+| W95–W97 | Learn You a Haskell for Great Good! | Full book | http://learnyouahaskell.com/ (free online) |
+| W98–W99 | Database Internals (Petrov) | Ch 1–12 (whole book) | https://www.oreilly.com/library/view/database-internals/9781492040330/ (buy) |
+
+---
+
+### Phase 2 — Tab 6: Certifications
+
+| Cert | Exam Week | Study Start | Full Study Scope | Cost | Pass Mark |
+|---|---|---|---|---|---|
+| AWS Cloud Practitioner (CLF-C02) | W80 | W64 | 4 domains: Cloud Concepts (26%), Security (25%), Technology (33%), Billing (16%). Complete all 12 AWS Skill Builder modules. Hands-on: EC2 + S3 + IAM + RDS on free tier. Official practice exam ≥ 80%. | $100 | 70% |
+| HashiCorp Terraform Associate (003) | W97 | W88 | 9 objectives: IaC concepts, Terraform workflow (init/plan/apply/destroy), Providers, Variables/Outputs, State management, Modules, Workspaces, Collaboration, Terraform Cloud. Complete all tutorials at https://developer.hashicorp.com/terraform/tutorials/certification-003. Build: AWS VPC + EC2 + RDS with Terraform. | $70 | 70% |
+| CKA (Certified Kubernetes Admin) | W92 | W84 | 5 domains: Cluster Architecture+Installation (25%), Workloads+Scheduling (15%), Services+Networking (20%), Storage (10%), Troubleshooting (30%). Complete DevOps with Kubernetes all 3 parts. kubectl practice daily for 4 weeks. killer.sh simulator ≥ 80%. Exam is 2 hours, hands-on CLI, open-book (kubernetes.io). | $395 | 66% |
+
+---
+
+## SECTION 4: PHASE 3 SPECIFICATION — CLOUD ARCHITECT + AI/ML + DATA + BLOCKCHAIN (W100–W135, 36 WEEKS)
+
+### Phase 3 Overview
+
+**Milestone at completion:** Cloud Architect + AI/ML Engineer + Data Engineer + Web3/Blockchain Engineer
+**Certification targets:** AWS SAA (W108), GCP Professional Cloud Architect (W116), AWS SAP (W135)
+
+---
+
+### Phase 3 Workbook Structure
+
+Create workbook titled: **"Phase 3 — Cloud + AI + Data + Blockchain (W100–W135)"**
+Same 10 tabs as Phase 1 and Phase 2.
+
+---
+
+### Phase 3 — Tab 1: Weekly Curriculum (W100–W135)
+
+#### W100–W107: AWS Deep Dive (8 weeks)
+
+**W100 — AWS Core Services Deep + SAA Study Begins**
+- Math Focus: Probability + queuing theory (Little's Law, Erlang C formula for capacity planning)
+- CS/Tech Focus: AWS VPC deep, EC2 types, Auto Scaling Groups, ALB/NLB, Route 53
+- Primary Resource: AWS Skill Builder — Solutions Architect Associate learning plan: https://skillbuilder.aws/ — Domain 1: Secure Architectures (all modules) — IAM deep, KMS, VPC security groups + NACLs, WAF, Shield — complete all modules + labs — 8h
+- Secondary Resource: AWS Well-Architected Framework — ALL 6 pillars: https://aws.amazon.com/architecture/well-architected/ — Operational Excellence + Security + Reliability + Performance Efficiency + Cost Optimization + Sustainability — read each pillar whitepaper — 4h
+- Platform Resource: AWS Well-Architected Labs — Security labs: https://wellarchitectedlabs.com/security/ — complete Security 100, 200, 300 level labs (all free on AWS free tier)
+- Portfolio Project: AWS VPC Architecture — using Terraform, provision: custom VPC with public + private subnets across 2 AZs, NAT Gateway, Internet Gateway, ALB in public subnet, EC2 instances in private subnet, RDS in private subnet, security groups with least privilege
+
+**W101 — AWS Compute + Containers + Serverless**
+- CS/Tech Focus: EC2 in depth (instance families, savings plans, spot), ECS (Fargate + EC2), EKS, Lambda, API Gateway, Step Functions
+- Primary Resource: AWS Skill Builder — Domain 3: High-Performing Architectures (compute section) + ECS Workshop: https://ecsworkshop.com/ — complete core ECS modules (Introduction + Containerized Microservices + Service Connect) — 8h
+- Secondary Resource: AWS Lambda docs — Developer Guide: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html — read: Getting Started + Foundation Concepts + Configuring functions + Error handling + Best Practices — build: Lambda function that processes S3 events + Lambda function behind API Gateway — 4h
+- Platform Resource: Deploy capstone application to ECS Fargate (Terraform): ECS cluster + task definitions + Fargate service + ALB + ECR for container images
+
+**W102 — AWS Storage + Databases**
+- CS/Tech Focus: S3 deep (storage classes, lifecycle policies, versioning, replication, encryption), EBS, EFS, RDS Multi-AZ, Aurora, DynamoDB, ElastiCache, Redshift
+- Primary Resource: AWS Skill Builder — Domain 3: High-Performing Architectures (storage + databases section) — all modules — 8h
+- Secondary Resource: DynamoDB documentation: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html — read: Core Components + Data Model + Partitioning + GSI/LSI + Read/Write Capacity + DynamoDB Streams — build: DynamoDB table for user sessions with TTL — 4h
+- Platform Resource: Terraform: provision RDS Aurora MySQL Multi-AZ + ElastiCache Redis cluster + DynamoDB table with GSI. Write Go application that uses all 3.
+
+**W103 — AWS Networking + CDN + Edge**
+- CS/Tech Focus: CloudFront CDN deep, Global Accelerator, Route 53 routing policies, VPN, Direct Connect, Transit Gateway, VPC peering
+- Primary Resource: AWS Skill Builder — Domain 1: Secure Architectures (networking section) + CloudFront developer guide key sections: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html — Distribution settings + Cache behaviors + Origins + Functions + Security — 6h
+- Secondary Resource: Cloudflare Workers: https://developers.cloudflare.com/workers/ — Hello World + Build a REST API + Using KV storage + D1 (SQLite at edge) + R2 (S3-compatible object storage) — deploy a simple worker that serves API responses from the edge — 4h
+- Portfolio Project: Edge-Optimized Architecture — CloudFront distribution in front of S3 static site + API Gateway + Lambda. Cloudflare Worker as alternative. Compare latency from different regions.
+
+**W104 — AWS Monitoring + DevOps + Cost Optimization**
+- CS/Tech Focus: CloudWatch metrics + logs + alarms, AWS X-Ray, CloudTrail, Config, Systems Manager, Cost Explorer, Trusted Advisor, Budgets
+- Primary Resource: AWS Skill Builder — Domain 4: Cost-Optimized Architectures + Monitoring modules — 6h
+- Secondary Resource: AWS Builders' Library — read 5 articles: https://aws.amazon.com/builders-library/ — "Avoiding fallback in distributed systems" + "Caching challenges and strategies" + "Timeouts, retries, and backoff with jitter" + "Making retries safe with idempotent APIs" + "Leader election in distributed systems" — 3h
+- Platform Resource: CloudWatch dashboards for all deployed AWS resources. X-Ray tracing on Lambda functions.
+
+**W105 — Terraform + OpenTofu Mastery + Pulumi**
+- CS/Tech Focus: Terraform advanced (modules, remote state, workspaces, Sentinel), OpenTofu (fork), Pulumi (IaC with TypeScript/Python)
+- Primary Resource: HashiCorp Terraform documentation — Advanced sections: https://developer.hashicorp.com/terraform/docs — Modules + Remote State (S3 backend + DynamoDB locking) + Workspaces + Import existing resources + Testing (terraform test) + Sentinel policies — complete all tutorials in certification prep path — 8h
+- Secondary Resource: Pulumi Getting Started (TypeScript): https://www.pulumi.com/docs/get-started/aws/begin/ — complete AWS Getting Started + define same infrastructure as Terraform in Pulumi TypeScript — compare DX (developer experience) — 4h
+- Cert Prep: AWS SAA exam — Domain 2 (Resilient Architectures) deep study — Multi-AZ, Auto Scaling, ELB algorithms, RDS failover
+
+**W106 — Ansible + Packer + Configuration Management**
+- CS/Tech Focus: Ansible playbooks, roles, inventory, idempotency, Packer AMI creation
+- Primary Resource: Ansible documentation: https://docs.ansible.com/ — Getting Started + Inventory + Playbooks + Roles + Variables + Templates (Jinja2) + Handlers + Tags + Vault (secrets management) — 6h. Packer documentation: https://developer.hashicorp.com/packer — Getting Started + Build an image (AWS AMI) + Builders + Provisioners — 3h
+- Secondary Resource: Ansible best practices: https://docs.ansible.com/ansible/latest/tips_tricks/ansible_tips_tricks.html — implement all best practices. Write Ansible playbook to: install Docker + configure Nginx + deploy application + setup monitoring agent on fresh Debian server (test on Proxmox VM)
+- Portfolio Project: Configuration Management Suite — `ansible-config/`. Playbooks for: common server setup (users, SSH hardening, firewall, updates), Nginx installation + config, Docker installation, PostgreSQL installation + config, application deployment. All idempotent.
+
+**W107 — Multi-Cloud + GCP Introduction**
+- CS/Tech Focus: GCP core services: GKE, BigQuery, Cloud Run, Pub/Sub, Cloud SQL, Firestore, Vertex AI intro
+- Primary Resource: Google Cloud Skills Boost — Professional Cloud Architect learning path first 3 courses: https://cloudskillsboost.google/journeys/12 — Google Cloud Fundamentals: Core Infrastructure + Essential Google Cloud Infrastructure: Foundation + Essential Google Cloud Infrastructure: Core Services — complete all labs — 8h
+- Secondary Resource: GCP Free Tier: https://cloud.google.com/free — create account + deploy: Cloud Run service + BigQuery query + GKE cluster (small) + Cloud SQL instance — 4h
+
+#### W108–W112: GCP Deep + Azure + Multi-Cloud + FinOps (5 weeks)
+
+**W108 — GCP Deep: GKE + BigQuery + Vertex AI**
+- Primary Resource: Google Cloud Skills Boost — Architecting with Google Kubernetes Engine course: https://cloudskillsboost.google/ — complete all modules + labs — 8h. BigQuery: https://cloud.google.com/bigquery/docs — Getting Started + Running queries + Partitioned tables + Clustering + Views + Authorized views — 4h
+- Cert Prep: GCP Professional Cloud Architect — all 4 exam sections deep study begins
+- Portfolio Project: GCP Data Pipeline — BigQuery + Cloud Dataflow + Cloud Storage. Ingest CSV data → transform with Dataflow → load to BigQuery → query with SQL → visualize with Looker Studio (free).
+
+**W109 — Azure Core Services + AKS**
+- Primary Resource: Microsoft Learn — AZ-900 Azure Fundamentals learning path (free): https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/ — complete all modules — 6h. Azure Kubernetes Service: https://learn.microsoft.com/en-us/azure/aks/ — Quickstart + Concepts — deploy application to AKS — 4h
+- Note: Azure is studied at awareness level for multi-cloud understanding. AZ-900 not required cert — study only.
+
+**W110 — Multi-Cloud Architecture + FinOps**
+- CS/Tech Focus: Multi-cloud strategy, vendor lock-in avoidance, cloud cost optimization, FinOps
+- Primary Resource: FinOps Foundation documentation: https://www.finops.org/introduction/what-is-finops/ — read: What is FinOps + FinOps Phases + FinOps Personas — 3h. Infracost: https://www.infracost.io/docs/ — install + run on all Terraform configs (shows cost estimates before apply) — 2h
+- Secondary Resource: Cloud Custodian (policy-as-code for cloud): https://cloudcustodian.io/docs/quickstart.html — write policies to: tag untagged resources + identify idle EC2 instances + alert on expensive resources — 3h
+
+**W111–W112: Security Architecture (2 weeks)**
+
+**W111 — Zero Trust Architecture + HashiCorp Vault**
+- Primary Resource: HashiCorp Vault documentation: https://developer.hashicorp.com/vault/docs — Getting Started (Docker) + Secrets Engines (KV, AWS, Database) + Auth Methods (token, AppRole, Kubernetes) + Policies + Dynamic Credentials (generate DB credentials on demand) — 8h
+- Secondary Resource: Zero Trust Network Access concepts: https://www.nist.gov/publications/zero-trust-architecture — NIST SP 800-207 summary reading — 2h. OPA (Open Policy Agent): https://www.openpolicyagent.org/docs/latest/ — Getting Started + Rego language basics + K8s admission control — 3h
+- Portfolio Project: Vault Setup — `vault-config/`. Vault running in Docker. KV secrets engine for application config. Database secrets engine generating PostgreSQL credentials with TTL=1h. Kubernetes auth method for pods. Policies following least privilege.
+
+**W112 — Supply Chain Security + Compliance + Sigstore**
+- Primary Resource: Sigstore documentation: https://docs.sigstore.dev/ — read: Cosign (container image signing) + Fulcio (certificate authority) + Rekor (transparency log) — sign all Docker images with Cosign — 4h
+- Secondary Resource: SLSA (Supply chain Levels for Software Artifacts): https://slsa.dev/ — read: Levels + Getting Started + Requirements — achieve SLSA Level 1 for capstone project — 3h. Trivy (container vulnerability scanner): https://aquasecurity.github.io/trivy/ — scan all Docker images + add to CI pipeline — 2h
+- Platform Resource: Security in CI pipeline: add to all existing GitHub Actions workflows: Trivy scan + Semgrep SAST + Cosign signing + SBOM generation (Syft)
+
+#### W113–W122: AI/ML Deep + MIT 6.034 Integration (10 weeks)
+
+**W113 — MIT 6.034 Artificial Intelligence: Search + Constraint Satisfaction**
+- Math Focus: State space search, heuristics, constraint propagation, arc consistency
+- CS/Tech Focus: AI search algorithms: BFS, DFS, A*, hill climbing, simulated annealing. Constraint satisfaction problems.
+- Primary Resource: MIT 6.034 — Lecture 1 (Introduction to AI) + Lecture 2 (Goal Trees + Problem Solving) + Lecture 3 (Goal Trees + Rule-based Expert Systems) + Lecture 4 (Search: DFS + BFS + Hill Climbing) + Lecture 5 (Search: Optimal, Branch & Bound, A*): https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/pages/lecture-videos/ — watch all 5 + complete problem sets — 8h
+- Secondary Resource: CS50 AI Week 0 (Search): https://cs50.harvard.edu/ai/2024/weeks/0/ — lecture + notes + problem set (Degrees of Kevin Bacon + Tic-Tac-Toe) — 4h
+- Portfolio Project: AI Search Visualizer — `ai-search/`. Python + Pygame visualization of: BFS, DFS, A* (with Manhattan + Euclidean heuristic) on a grid maze. User can draw walls, set start/end, run any algorithm, see exploration order + final path animated.
+
+**W114 — MIT 6.034: Knowledge Representation + Machine Learning Theory**
+- Primary Resource: MIT 6.034 — Lecture 10 (Introduction to Learning) + Lecture 11 (Learning: Identification Trees) + Lecture 12 (Neural Nets 1) + Lecture 13 (Neural Nets 2) + Lecture 14 (Deep Neural Nets): https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/ — watch all 5 + complete problem sets — 8h
+- Secondary Resource: CS50 AI Week 4 (Learning): https://cs50.harvard.edu/ai/2024/weeks/4/ — lecture + problem set (Nim + Shopping) — 4h
+- Portfolio Project: Decision Tree from Scratch — `decision-tree/`. Implement ID3 algorithm: entropy calculation, information gain, tree construction, prediction. Test on: weather dataset + iris dataset. Visualize the tree.
+
+**W115 — PyTorch Advanced: Custom Architectures + Fine-tuning**
+- CS/Tech Focus: PyTorch advanced (custom layers, hooks, gradient clipping, mixed precision), transformer architecture from scratch, LoRA fine-tuning
+- Primary Resource: fast.ai Practical Deep Learning — Lessons 7–9: https://course.fast.ai/ — Lesson 7 (Collaborative filtering + Tabular) + Lesson 8 (Convolutions from scratch) + Lesson 9 (Recurrent Neural Networks) — all notebooks — 8h
+- Secondary Resource: Andrej Karpathy — "Let's build GPT from scratch": https://www.youtube.com/watch?v=kCc8FmEb1nY (1h 56min) — watch + code along — build a character-level GPT that generates Shakespeare — 4h
+- Portfolio Project: miniGPT — `minigpt/`. Character-level GPT trained on a small text corpus (Shakespeare or your own blog posts). Generates text in the style of the training data. Uses: transformer blocks, multi-head attention, positional encoding. Runs in ~30 min on CPU.
+
+**W116 — GCP Professional Cloud Architect Exam + Transformers + RAG Systems**
+- Cert: GCP Professional Cloud Architect exam — $200 — book at https://cloud.google.com/learn/certification/cloud-architect
+- CS/Tech Focus: Hugging Face Transformers library deep, RAG architecture, vector databases
+- Primary Resource: Hugging Face NLP Course — ALL 9 chapters: https://huggingface.co/learn/nlp-course — Ch 1 (Transformers overview) + Ch 2 (Using HF Transformers) + Ch 3 (Fine-tuning) + Ch 4 (Sharing models) + Ch 5 (Datasets) + Ch 6 (Tokenizers) + Ch 7 (NLP tasks) + Ch 8 (How to ask for help) + Ch 9 (Building demos with Gradio) — 8h
+- Secondary Resource: RAG architecture: LangChain docs https://python.langchain.com/docs/get_started/ + LlamaIndex docs https://docs.llamaindex.ai/ — build production RAG: document ingestion (PDF, Markdown) → chunking → embedding (OpenAI ada-002 or local) → vector store (pgvector or Chroma) → retrieval → augmented generation with citations — 4h
+- Portfolio Project: Production RAG System — `rag-system/`. Ingests: your blog posts + project READMEs + DDIA notes. Answers questions about your knowledge base. Cites sources with page numbers. Streaming response. Deployed to Railway.
+
+**W117 — MLOps: MLflow + Kubeflow + Evidently + DVC + W&B**
+- CS/Tech Focus: ML lifecycle management, experiment tracking, model registry, model monitoring, data versioning
+- Primary Resource: MLflow documentation — ALL sections: https://mlflow.org/docs/latest/index.html — Quickstart + Tracking (experiments, runs, metrics, artifacts) + MLflow Projects + MLflow Models + Model Registry + MLflow Deployments — install locally + track all ML experiments — 6h
+- Secondary Resource: Weights & Biases documentation: https://docs.wandb.ai/ — Getting Started + Experiments + Artifacts + Sweeps (hyperparameter optimization) — instrument at least 2 ML models with W&B tracking — 3h. Evidently AI: https://docs.evidentlyai.com/ — data drift detection + model monitoring — 2h
+- Portfolio Project: MLflow Experiment Tracker — `mlflow-tracking/`. Track: the CIFAR-10 model from Phase 1 + the sentiment classifier + miniGPT. Log: hyperparameters, metrics per epoch, model artifacts. Model registry with staging/production environments.
+
+**W118 — LLM Systems: vLLM + Ollama + Production LLM APIs**
+- CS/Tech Focus: LLM inference optimization (vLLM, speculative decoding), local LLMs (Ollama), LLM API best practices, token counting, cost optimization
+- Primary Resource: Ollama: https://ollama.ai/ — install on Debian + run Llama 2 + Mistral + CodeLlama locally. Ollama REST API. Compare: local vs API (latency, cost, privacy) — 4h. vLLM: https://vllm.readthedocs.io/ — Getting Started + OpenAI-compatible server + throughput benchmark — 4h
+- Secondary Resource: Anthropic API advanced: https://docs.anthropic.com/ — Tool Use deep + Vision + Batch API + Embeddings + Prompt Caching — build: parallel tool use (multiple tools in one request) + image analysis feature — 3h
+- Portfolio Project: Local LLM API Server — `local-llm/`. Ollama + vLLM serving Mistral-7B. OpenAI-compatible endpoint. Streaming. Performance benchmark vs OpenAI API (latency, cost per token). Docker Compose setup.
+
+**W119 — MIT 6.034: Natural Language Processing + Computer Vision**
+- Primary Resource: MIT 6.034 — Lecture 20 (NLP + Syntax) + Lecture 21 (NLP + Semantics) + Lecture 22 (NLP + Information Extraction): https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/ — watch all 3 + problem sets — 5h
+- CS50 AI Week 5 (Neural Networks) + Week 6 (Language): https://cs50.harvard.edu/ai/2024/ — lectures + problem sets (Traffic sign classifier + Attention in transformers) — 5h
+- CS231n (Computer Vision): Stanford CS231n — Lecture 1 (Intro) + Lecture 2 (Image Classification) + Lecture 5 (CNNs in practice) + Lecture 7 (Training Neural Networks): http://cs231n.stanford.edu/ — watch 4 lectures + slides — 4h
+- Portfolio Project: Computer Vision App — `cv-app/`. Real-time object detection using YOLOv8 (https://docs.ultralytics.com/). Webcam input (on Debian) or video file. Draws bounding boxes + labels + confidence. Also: facial emotion detection (DeepFace library).
+
+**W120 — CS224n: NLP with Deep Learning**
+- Primary Resource: Stanford CS224n — Lecture 1 (Intro + Word Vectors) + Lecture 2 (Neural Classifiers) + Lecture 3 (Backprop) + Lecture 4 (Dependencies) + Lecture 8 (Transformers) + Lecture 11 (Pretraining): http://web.stanford.edu/class/cs224n/ — watch 6 lectures + slides — 8h
+- Secondary Resource: Hugging Face — fine-tune BERT on a custom text classification task using CS224n techniques. Use: HuggingFace Trainer API + custom dataset from your domain — 4h
+- Portfolio Project: Custom NER (Named Entity Recognition) system — `custom-ner/`. Fine-tune distilbert-base-cased on a custom NER dataset (create your own by labeling 200 sentences). Entities: PERSON, ORGANIZATION, PRODUCT, DATE. Deployed as API.
+
+**W121 — CS229: Machine Learning Theory + Advanced ML**
+- Primary Resource: Stanford CS229 — Lecture 1 (Intro + Linear Regression) + Lecture 2 (Logistic Regression + Newton's method) + Lecture 3 (Generalized Linear Models) + Lecture 7 (SVM) + Lecture 14 (EM Algorithm) + Lecture 16 (Reinforcement Learning intro): https://cs229.stanford.edu/ — watch 6 lectures + notes — 8h
+- Secondary Resource: sklearn documentation: https://scikit-learn.org/stable/ — implement CS229 algorithms using sklearn + compare with from-scratch implementations — 3h
+- Portfolio Project: ML Algorithm Comparison — `ml-benchmark/`. Implement from scratch (NumPy) + sklearn version of: Linear Regression, Logistic Regression, SVM, k-NN, Naive Bayes, Decision Tree. Benchmark on 3 datasets. Comparison table: accuracy + training time + inference time.
+
+**W122 — MLOps Production: Kubeflow + Feature Store + Model Serving**
+- CS/Tech Focus: Kubeflow pipelines, Feast feature store, BentoML model serving, A/B testing ML models, model drift detection
+- Primary Resource: Kubeflow Pipelines: https://www.kubeflow.org/docs/components/pipelines/overview/ — Getting Started + Build a Pipeline + Run a Pipeline — build a training pipeline that: loads data → preprocesses → trains → evaluates → registers in MLflow — 6h
+- Secondary Resource: Feast feature store: https://docs.feast.dev/ — Getting Started + Define features + Materialize to online store + Serve features for inference — 3h. BentoML: https://docs.bentoml.com/ — Getting Started + Serve sklearn model — deploy model as REST API — 2h
+- Portfolio Project: End-to-End ML Pipeline — `ml-pipeline/`. Kubeflow pipeline: data ingestion → feature engineering (Feast) → training (logged to MLflow + W&B) → evaluation → if accuracy > threshold → deploy with BentoML. Monitor with Evidently.
+
+#### W123–W126: Big Data Engineering + Financial APIs (4 weeks)
+
+**W123 — Apache Spark + dbt + Data Lakehouse**
+- CS/Tech Focus: Spark architecture, RDDs vs DataFrames vs Datasets, Spark SQL, dbt (data build tool), Apache Iceberg table format
+- Primary Resource: Spark documentation — Getting Started: https://spark.apache.org/docs/latest/quick-start.html + Spark SQL guide + PySpark: https://spark.apache.org/docs/latest/api/python/ — complete all quickstart sections + run Spark on local mode — 6h
+- Secondary Resource: dbt documentation: https://docs.getdbt.com/ — Getting Started + Building models + Tests + Documentation + Snapshots — set up dbt project with BigQuery or DuckDB — 3h. Apache Iceberg: https://iceberg.apache.org/docs/latest/ — read: Table Format + Getting Started — 2h
+
+**W124 — Flink + Debezium + Real-Time Data**
+- CS/Tech Focus: Apache Flink (stream processing), Debezium (CDC — Change Data Capture), ClickHouse (OLAP), streaming SQL
+- Primary Resource: Apache Flink — Getting Started: https://nightlies.apache.org/flink/flink-docs-stable/ + DataStream API + Table API + Flink SQL — build: streaming word count + streaming aggregation on Kafka events — 6h
+- Secondary Resource: Debezium: https://debezium.io/documentation/ — Getting Started + Connectors (PostgreSQL) — set up CDC: capture all PostgreSQL changes → stream to Kafka — 3h. ClickHouse: https://clickhouse.com/docs — Quick Start + SQL Reference — ingest Kafka events into ClickHouse + run analytical queries — 2h
+
+**W125 — Financial Data APIs + Time-Series Analysis**
+- CS/Tech Focus: Financial data APIs (Alpha Vantage, Yahoo Finance, Polygon.io), time-series analysis with pandas, financial metrics
+- Primary Resource: Alpha Vantage documentation: https://www.alphavantage.co/documentation/ — TIME_SERIES_DAILY, TIME_SERIES_INTRADAY, TECHNICAL_INDICATORS (RSI, MACD, Bollinger Bands), FUNDAMENTAL_DATA — use free API key — 3h. Polygon.io documentation: https://polygon.io/docs — Stocks + Options + Forex + Crypto endpoints — 2h. yfinance (Yahoo Finance Python library): https://pypi.org/project/yfinance/ — 1h
+- Secondary Resource: pandas time-series analysis: https://pandas.pydata.org/docs/user_guide/timeseries.html — read + implement: resampling, rolling windows, lag features, returns calculation, correlation matrix — 4h
+- Portfolio Project: Financial Data Dashboard — `fin-data/`. Python dashboard (Streamlit or Dash) that: fetches stock data (Alpha Vantage), shows OHLC candlestick chart (plotly), computes RSI + MACD + Bollinger Bands, shows correlation heatmap between 5 stocks, backtests a simple moving average crossover strategy.
+
+**W126 — Data Engineering Capstone + Platform Engineering Intro**
+- CS/Tech Focus: End-to-end data pipeline, Backstage developer portal, eBPF, WASM
+- Primary Resource: Backstage: https://backstage.io/docs — Getting Started + Software Catalog + TechDocs + Templates — set up internal developer portal with: service catalog (all your projects), runbooks (TechDocs), scaffolding templates — 5h
+- Secondary Resource: eBPF: https://ebpf.io/what-is-ebpf/ — read What is eBPF + Introduction to eBPF — conceptual understanding. Cilium (eBPF-based K8s networking): https://docs.cilium.io/en/stable/overview/intro/ — install in K8s cluster, replace kube-proxy — 3h
+
+#### W127–W128: IoT + Edge Computing (2 weeks)
+
+**W127 — IoT + MQTT + Raspberry Pi**
+- CS/Tech Focus: IoT architecture, MQTT protocol, Raspberry Pi setup, GPIO programming, edge computing
+- Primary Resource: Eclipse Mosquitto MQTT broker: https://mosquitto.org/documentation/ — install + configure + test with mosquitto_pub/sub — 3h. Paho MQTT Python client: https://eclipse.dev/paho/clients/python/ — publisher + subscriber implementation — 2h
+- Secondary Resource: AWS IoT Core: https://docs.aws.amazon.com/iot/latest/developerguide/ — Getting Started — connect a simulated device (if no Raspberry Pi) to AWS IoT Core via MQTT — 3h
+- Portfolio Project: IoT Sensor Simulator — `iot-sim/`. Python program simulates 5 temperature sensors publishing to MQTT topics every 5 seconds. Another Python program subscribes, stores in InfluxDB, visualizes in Grafana. Alert if temperature > threshold (Alertmanager).
+
+**W128 — Platform Engineering Completion + IoT continuation**
+- CS/Tech Focus: Wasm in production (Wasmtime), Cosmonic/Wasmcloud, edge functions
+- Primary Resource: WebAssembly documentation: https://webassembly.org/getting-started/developers-guide/ + Wasmtime: https://docs.wasmtime.dev/ — compile a simple Rust program to WASM + run with Wasmtime — 4h
+- Secondary Resource: Cloudflare Workers + WASM: https://developers.cloudflare.com/workers/runtime-apis/webassembly/ — deploy WASM module to Cloudflare Workers edge — 3h
+
+#### W129–W135: Blockchain + Web3 (7 weeks)
+
+**W129 — Blockchain Fundamentals**
+- Math Focus: Hash functions (SHA-256 properties), digital signatures (ECDSA), Merkle trees
+- CS/Tech Focus: Blockchain from scratch in Python, Bitcoin/Ethereum whitepapers, consensus mechanisms
+- Primary Resource: MIT 15.S12 Blockchain and Money: https://ocw.mit.edu/courses/15-s12-blockchain-and-money-fall-2018/ — Lecture 1 (Introduction) + Lecture 2 (Money, Ledgers & Bitcoin) + Lecture 3 (Blockchain Basics & Cryptography) + Lecture 4 (Blockchain Basics & Consensus) + Lecture 5 (Blockchain Basics & Transactions, UTXO & Script) — watch all 5 lectures — 8h
+- Secondary Resource: Bitcoin whitepaper: https://bitcoin.org/bitcoin.pdf — read entire (9 pages) + annotate. Ethereum whitepaper: https://ethereum.org/en/whitepaper/ — read sections: Introduction + Ethereum Accounts + Messages and Transactions + Ethereum State Transition Function — 3h. Anders Brownworth blockchain demo: https://andersbrownworth.com/blockchain/ — interactive visualization
+- Portfolio Project: Blockchain from scratch (Python) — `python-blockchain/`. Implement: Block (index, timestamp, data, prev_hash, hash, nonce), Chain (add_block, validate), Proof of Work (mining difficulty), Consensus (longest chain rule), REST API (Flask) to: mine block, get chain, add transaction. Multi-node simulation (2 Python processes that sync).
+
+**W130 — Ethereum + EVM Deep**
+- CS/Tech Focus: Ethereum architecture, EVM opcodes, gas, account types, transactions, Solidity basics intro
+- Primary Resource: ethereum.org developer docs — Foundational topics: https://ethereum.org/en/developers/docs/ — read: Intro to Ethereum + Intro to Ether + Intro to dapps + Web2 vs Web3 + Ethereum accounts + Transactions + Blocks + EVM + Gas — 4h. Ethereum Book (Mastering Ethereum): https://github.com/ethereumbook/ethereumbook — Ch 1 (What is Ethereum) + Ch 2 (Ethereum Basics) + Ch 3 (Ethereum Clients) + Ch 6 (Transactions) + Ch 13 (EVM) — 6h
+- Secondary Resource: EVM Codes interactive reference: https://www.evm.codes/ — understand 10 key opcodes: PUSH, POP, ADD, MUL, CALLER, CALLVALUE, SLOAD, SSTORE, JUMP, RETURN. Trace a simple transaction at the EVM level — 3h
+
+**W131–W132 — Solidity + Smart Contract Security (2 weeks)**
+
+**W131:**
+- Primary Resource: CryptoZombies — Solidity Path Chapters 1–6: https://cryptozombies.io/ — Lesson 1 (Making the Zombie Factory) through Lesson 6 (App Front-ends & Web3.js) — all 6 lessons — 8h
+- Secondary Resource: Solidity by Example — read ALL examples: https://solidity-by-example.org/ — Hello World + First App + Primitive Data Types + Variables + State Variables + Local Variables + View and Pure Functions + Counter + Default Values + Constants + Immutable + ... (all 70+ examples) — implement each — 4h
+- Platform Resource: Solidity docs: https://docs.soliditylang.org/en/latest/ — Language Reference: Types + Units + Control Structures + Contracts + Functions + Events + Errors + Inheritance + Libraries + Interfaces
+
+**W132:**
+- Primary Resource: Ethernaut — ALL 30 levels: https://ethernaut.openzeppelin.com/ — each level is an exploitable smart contract. Use Hardhat or Foundry to attack them — 8h
+- Secondary Resource: Damn Vulnerable DeFi — https://www.damnvulnerabledefi.xyz/ — complete at least 8 challenges. Key ones: Unstoppable + Naive Receiver + Truster + Side Entrance + Selfie + Compromised + Puppet — 4h
+- Platform Resource: Hardhat: https://hardhat.org/docs + Foundry: https://book.getfoundry.sh/ — set up both. Write Solidity contract + test with Hardhat (JavaScript tests) + Foundry (Solidity tests). OpenZeppelin: https://docs.openzeppelin.com/
+
+**W133 — Web3 Frontend + DeFi Protocols**
+- CS/Tech Focus: ethers.js v6, viem, wagmi, RainbowKit, The Graph, IPFS, DApp development
+- Primary Resource: ethers.js v6 docs: https://docs.ethers.org/v6/ — Getting Started + Providers + Signers + Contract interaction + Events — 4h. wagmi docs: https://wagmi.sh/react/getting-started — Getting Started + Hooks (useAccount, useBalance, useReadContract, useWriteContract) + WalletConnect — build a React dApp that reads from and writes to a deployed contract — 4h
+- Secondary Resource: The Graph: https://thegraph.com/docs/en/ — Getting Started + Deploy a Subgraph + Query with GraphQL — index events from your deployed ERC-20 contract — 3h. IPFS: https://docs.ipfs.tech/ — install IPFS Desktop + upload/retrieve files + use nft.storage for NFT metadata — 2h
+- Portfolio Project: Full DApp — ERC-20 staking contract (stake tokens → earn rewards over time). React frontend with wagmi + RainbowKit. The Graph subgraph for event indexing. Deploy to Sepolia testnet. Live URL on Vercel.
+
+**W134 — DeFi Deep + MEV + Vyper + Solana intro**
+- CS/Tech Focus: Uniswap v2/v3, Aave, flash loans, MEV (Maximal Extractable Value), alternative smart contract languages
+- Primary Resource: Finematics educational videos — DeFi playlist: https://www.youtube.com/c/Finematics — watch: What is DeFi + Uniswap + Aave + Flash Loans + Liquidity Pools + Impermanent Loss + MEV (10 videos, ~3h total) — 3h. Uniswap v2 contracts: https://github.com/Uniswap/v2-core — read: UniswapV2Pair.sol + UniswapV2Factory.sol — understand the constant product formula (x * y = k) — 3h
+- Secondary Resource: Vyper by Example: https://vyper-by-example.org/ — first 10 examples: Hello World + Primitive Data Types + Variables + State Variables + Constants + If/Else + For Loop + Functions + Default Function + ERC-20 Token — implement each — 2h. Solana + Anchor intro: https://www.anchor-lang.com/docs/installation — Getting Started + Hello World program — 3h
+- Portfolio Project: Flash Loan Arbitrage Bot — `flash-arbitrage/`. Uses Aave flash loans to: borrow USDC → trade on DEX 1 → trade on DEX 2 → repay. Works on Sepolia fork (not mainnet). Demonstrates the concept without real funds.
+
+**W135 — Blockchain Infrastructure + Phase 3 Capstone**
+- CS/Tech Focus: Blockchain node management, OpenZeppelin Defender, Gnosis Safe, Immunefi, Dune Analytics, Phase 3 capstone
+- Primary Resource: Alchemy: https://docs.alchemy.com/ — Getting Started + WebSocket subscriptions + Enhanced APIs — switch all dApps to Alchemy endpoints — 3h. OpenZeppelin Defender: https://docs.openzeppelin.com/defender/ — Monitor + Relayer + Autotask — set up monitoring for deployed contracts — 3h
+- Secondary Resource: Dune Analytics: https://dune.com/docs — write 3 SQL queries analyzing real on-chain data (Uniswap trades + Aave deposits + ENS registrations) — 2h. Immunefi (bug bounty platform): https://immunefi.com/learn/ — read bug bounty reports for learning common vulnerabilities — 2h
+- Portfolio Project: **Phase 3 Final Capstone** — `web3-capstone/`. Complete DeFi protocol: ERC-20 governance token + staking contract + DAO voting contract + NFT collection (ERC-721 with on-chain SVG). React dApp connecting all. Deployed on Sepolia. OpenZeppelin Defender monitoring. Subgraph for indexing. This is your blockchain portfolio centerpiece.
+- Cert: AWS Solutions Architect Professional exam — $300 — https://www.aws.training/certification
+- Cert Prep: For the last 4 weeks (W132–W135): 1h/day dedicated to AWS SAP study
+
+---
+
+## SECTION 5: ADDITIONAL SPECIFICATIONS FOR ALL PHASES
+
+### 5.1 Column Format Requirements (APPLY TO ALL TABS IN ALL PHASES)
+
+Every single resource cell in Tab 1 (Primary, Secondary, Platform) must follow the exact format:
+```
+[Course/Platform Name] — [Exact Section/Lecture/Module Title]
+URL: [deep link directly to that section — never homepage]
+Complete: [exact list of items to complete — lectures by number, exercises by name, problem sets by identifier]
+Deliverable: [what you produce — working code, notes, flashcards, etc.]
+Est. time: [hours]
+Sequence: [Day X — when in the week to do this]
+```
+
+No exceptions. A student must be able to open Tab 1 on Monday morning and execute the entire week without making a single interpretation decision.
+
+### 5.2 Infrastructure Deployment Rules (APPLY TO ALL PHASES)
+
+Every project must be deployed. No exceptions. Deployment map by project type:
+
+| Project Type | Deploy To | Free Tier |
+|---|---|---|
+| Next.js / React frontend | Vercel https://vercel.com/ | Yes — unlimited hobby |
+| Node.js / Go / Rust API | Railway https://railway.app/ | Yes — $5/month credit |
+| PostgreSQL | Supabase https://supabase.com/ | Yes — 500MB, 2 projects |
+| Redis | Upstash https://upstash.com/ | Yes — 10K commands/day |
+| ML models / Gradio | HuggingFace Spaces https://huggingface.co/spaces | Yes — CPU tier |
+| Docker images | GitHub Container Registry (GHCR) | Yes — public repos free |
+| Static HTML/CSS | GitHub Pages | Yes — unlimited public repos |
+| Phaser.js game | itch.io https://itch.io/ | Yes — free uploads |
+| Chrome extension | Chrome Web Store | $5 one-time developer fee |
+| Serverless functions | Cloudflare Workers | Yes — 100K req/day |
+| K8s (Phase 2+) | AWS EKS (free tier cluster) or local kind/k3s | kind is free local |
+| Blockchain contracts | Sepolia testnet (Ethereum) | Yes — free testnet ETH from faucet |
+
+### 5.3 Testing Coverage Requirements Per Phase
+
+| Phase | Minimum Coverage | Test Types Required |
+|---|---|---|
+| Phase 1 | 70% | Unit + Integration + E2E (Playwright) + Mobile (Detox + Flutter) + a11y (axe-core) + Security (ZAP) |
+| Phase 2 | 80% | All Phase 1 types + Property-based + Chaos Engineering + Contract (Pact) + Mutation + Load (k6) |
+| Phase 3 | 85% | All Phase 2 types + Smart contract tests (Foundry/Hardhat) + ML model evaluation tests + Infrastructure tests (Terratest) |
+
+### 5.4 GitHub Commit Requirements
+
+- Minimum 5 commits per week (every week, no exceptions)
+- Every commit must have a meaningful message (not "fix" or "update") — use Conventional Commits: https://www.conventionalcommits.org/
+- Every project must have a README with: description, tech stack, setup instructions, deployment URL, screenshots
+
+### 5.5 Blog Post Requirements
+
+- 1 technical blog post per week from Phase 1 Week 5 onward
+- Platform: dev.to or Hashnode
+- Minimum 500 words
+- Topics: what you built, what you learned, a concept explained in your own words, a bug you fixed and how
+- By end of Phase 3: 130+ blog posts = significant SEO presence + portfolio signal
+
+### 5.6 MIT 6.006 Phase 2 Integration
+
+In Phase 2, the remaining MIT 6.006 lectures (not covered in Phase 1 W49–W54) must be integrated:
+
+| MIT 6.006 Lecture | Phase 2 Week | Topic | Connection |
+|---|---|---|---|
+| L17: DP IV — Optimal BST | W73 | DP advanced | After Go/Rust language weeks |
+| L18: Complexity | W73 | P vs NP, NP-hardness | Theory grounding |
+| L19: Algorithms and Complexity | W73 | Approximation algorithms | - |
+| L20: Numerical Algorithms | W73 | Numerical methods | Math applications |
+| Review sessions | W73 | Problem set review | - |
+
+All remaining MIT 6.006 problem sets must be completed in Phase 2 W73 dedicated block.
+
+---
+
+## SECTION 6: ACCOUNTABILITY SYSTEM (ALL PHASES)
+
+### Tab 9 Structure — Same for All Phases
+
+**Weekly checklist columns (same 12 columns):**
+1. Week
+2. Hours Logged (target: 36)
+3. GitHub Commits (target: 5+)
+4. Khan Academy / Primary Math: 100% before advancing? (checkbox)
+5. LeetCode / CSES Problems count
+6. Exercism Problems count
+7. Test Coverage Met? (checkbox)
+8. Blog Post Published? (checkbox — TRUE/FALSE only)
+9. Book Reading Done? (checkbox)
+10. Exit Criteria Met? (checkbox)
+11. Deploy Status (checkbox — all projects deployed?)
+12. Notes / Blockers
+
+**Monthly review columns:**
+1. Month
+2. All Projects Deployed? (checkbox)
+3. Portfolio Updated? (checkbox)
+4. Applications Sent (number — fill yourself)
+5. Cert Study On Track? (checkbox)
+6. Weakest Topics (free text)
+7. Math Progress (number — fill yourself: how many Khan Academy units completed)
+8. Hours Total (number — fill yourself)
+9. Blog Posts Published (number — fill yourself)
+10. Notes
+
+**IMPORTANT: No pre-filled values in any column. All numeric columns default to blank. Checkboxes default to FALSE. You fill everything yourself based on actual progress.**
+
+---
+
+## SECTION 7: SUMMARY OF ALL REQUIRED ACTIONS FOR NEW CHAT WINDOW
+
+### For Phase 1 Sheet (Existing):
+1. Extend Tab 1 from 48 rows to 64 rows (add W49–W63 with full detail)
+2. Fix all Secondary Resource cells (Column I) — exact sections + URLs + execution order
+3. Fix all Platform Resource cells (Column J) — exact exercises by name + URLs
+4. Fix all Action Plan cells (Column K) — day-by-day tied to exact resource sections with URLs
+5. Update Tab 0 with: revised 136-week timeline, infrastructure map, updated Phase 1 exit criteria for W63
+6. Update Tab 10 with: Infrastructure Deployment Map, MIT course usage guide
+7. Add AWS Free Tier + Railway + Supabase + Vercel + Upstash to Tab 10 infrastructure section
+8. Add W49–W54 MIT 6.006 dedicated block rows to Tab 1
+9. Add W55–W63 extended buffer/exam/interview prep rows to Tab 1
+10. Tab 8: Add SaaS monetization + first paid client rows
+
+### For Phase 2 Sheet (New):
+1. Create new workbook with 10 tabs (same structure as Phase 1)
+2. Build Tab 1 with W64–W99 (36 weeks) — full detail for all 22 columns
+3. Build Tab 2 (DSA advanced — LeetCode hard with direct URLs + MIT 6.006 Phase 2 connection column)
+4. Build Tab 3 (CSES advanced — individual rows per problem with direct CSES links)
+5. Build Tab 4 (Testing advanced — property-based, chaos, contract, mutation)
+6. Build Tab 5 (Books: Go + Rust + Crafting Interpreters + Building Microservices + Database Internals + SRE Workbook)
+7. Build Tab 6 (Certs: CKA + Terraform Associate + AWS Cloud Practitioner — full scope)
+8. Build Tab 7 (Math Projects: distributed systems math, consistency proofs, probability for systems)
+9. Build Tab 8 (Career: senior engineer job applications, conference talks, open source leadership)
+10. Build Tab 9 (Accountability — same structure, Phase 2 targets)
+11. Build Tab 10 (How To Use — Phase 2 specific guidance + K8s deployment map)
+12. Build Tab 0 (Phase 2 Master Guide)
+
+### For Phase 3 Sheet (New):
+1. Create new workbook with 10 tabs
+2. Build Tab 1 with W100–W135 (36 weeks) — full detail
+3. Build Tab 2 (DSA: competitive programming hard problems + graph theory advanced)
+4. Build Tab 3 (CSES: advanced sections — geometry, number theory)
+5. Build Tab 4 (Testing: ML model tests, smart contract tests, Terratest)
+6. Build Tab 5 (Books: ML books, blockchain books, CS229/CS231n/CS224n notes)
+7. Build Tab 6 (Certs: AWS SAA + GCP PCA + AWS SAP)
+8. Build Tab 7 (Math Projects: ML math projects, cryptography math, financial math)
+9. Build Tab 8 (Career: staff engineer applications, ML engineer, Web3 engineer)
+10. Build Tab 9 (Accountability — same structure, Phase 3 targets)
+11. Build Tab 10 (How To Use — Phase 3 specific + AI/blockchain deployment guidance)
+12. Build Tab 0 (Phase 3 Master Guide)
+
+---
+
+## SECTION 8: FINAL CHECKLIST BEFORE EXECUTING IN NEW CHAT
+
+Before asking the AI to build anything, confirm:
+
+- [ ] This document has been fully read and understood
+- [ ] The 136-week timeline is confirmed (64 + 36 + 36)
+- [ ] Phase 1 sheet is uploaded to the new chat (the latest edited version)
+- [ ] The AI confirms it understands the "exact section + URL + execution order" requirement for every resource cell
+- [ ] The AI confirms it will NOT generate generic links — only deep links to exact sections
+- [ ] The AI confirms it will add the 16 new Phase 1 weeks (W49–W63) before moving to Phase 2
+- [ ] The AI confirms it will treat each phase as a separate workbook build
+- [ ] Permission is confirmed before the AI begins any editing
+
+---
+
+**END OF SPECIFICATION DOCUMENT**
+
+
+
