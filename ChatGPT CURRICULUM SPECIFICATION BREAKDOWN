@@ -1,0 +1,615 @@
+Understood. You are asking for a **single, authoritative, system-level specification document** that:
+
+* Merges:
+
+  * Your original GitHub specification
+  * Claude’s audit corrections
+  * All refinements from our discussion
+* Expands Phase 1 → **64 weeks**
+* Defines **Phase 2 + Phase 3 in full depth**
+* Is reusable as a **master prompt / system spec**
+
+Below is that document.
+
+---
+
+# 🧠 COMPLETE CURRICULUM SPECIFICATION DOCUMENT (UPGRADED MASTER VERSION)
+
+---
+
+# 1. SYSTEM OVERVIEW
+
+## 1.1 Purpose
+
+This curriculum is a **deterministic engineering training system** designed to transform a complete beginner into a:
+
+* Full-stack engineer
+* Systems engineer
+* AI engineer
+
+through:
+
+* Structured execution
+* Project-based mastery
+* Real-world infrastructure
+* Multi-track parallel learning
+
+---
+
+## 1.2 Core Philosophy
+
+This system enforces:
+
+### ✔ Deterministic Learning
+
+* No vague instructions
+* No “explore on your own”
+* Every step is predefined
+
+### ✔ Parallel Tracks (Always Active)
+
+Each week includes:
+
+* Math
+* CS/Programming
+* DSA
+* Systems thinking
+* Projects
+* Testing
+* Infrastructure
+* Career development
+
+---
+
+### ✔ Project-Based Mastery
+
+Every concept must result in:
+
+* A working system
+* A GitHub artifact
+* A deployable output
+
+---
+
+### ✔ Real-World Simulation
+
+All learning must mimic:
+
+* Production environments
+* Real engineering workflows
+* Deployment pipelines
+
+---
+
+# 2. GLOBAL STRUCTURE
+
+---
+
+## 2.1 Phases Overview
+
+| Phase     | Focus                                | Duration      |
+| --------- | ------------------------------------ | ------------- |
+| Phase 1   | Foundations + Fullstack + Discipline | **64 weeks**  |
+| Phase 2   | Systems + Advanced CS                | **36 weeks**  |
+| Phase 3   | AI + Specialization                  | **36 weeks**  |
+| **TOTAL** | Full mastery                         | **136 weeks** |
+
+---
+
+## 2.2 Daily Execution Model (Non-Negotiable)
+
+| Block | Focus                      | Duration  |
+| ----- | -------------------------- | --------- |
+| 1     | Math                       | 90 min    |
+| 2     | Primary CS Resource        | 2 hours   |
+| 3     | DSA Practice               | 45 min    |
+| 4     | Build / Project            | 1.5 hours |
+| 5     | Secondary + Testing + Cert | 45 min    |
+| 6     | Reading                    | 30 min    |
+
+---
+
+## 2.3 Weekly Execution Rules
+
+Each week MUST include:
+
+* Exact math topic
+* Exact CS topic
+* Exact modules (links)
+* Project with defined scope
+* Testing deliverable
+* Infra usage
+* Exit criteria
+
+---
+
+# 3. TAB SYSTEM ARCHITECTURE
+
+---
+
+## Tab 1 — Weekly Curriculum (CONTROL HUB)
+
+This is the **core execution engine**.
+
+Each row (week) must contain:
+
+* Exact resources (no generic links)
+* Ordered modules
+* Defined outputs
+* System integration
+
+---
+
+## Tab 2 — DSA Track
+
+Parallel system:
+
+* Daily problems (3/day)
+* Pattern-based progression
+* Interview readiness
+
+---
+
+## Tab 3 — Competitive Programming
+
+* CSES progression
+* Applied algorithm mastery
+* Late-phase (W41+)
+
+---
+
+## Tab 4 — Testing Track
+
+Tracks:
+
+* Unit testing
+* Integration testing
+* CI/CD validation
+
+---
+
+## Tab 5 — Book Reading
+
+* Structured reading
+* Direct links
+* Weekly mapping
+
+---
+
+## Tab 6 — Certification
+
+* AWS
+* ISTQB
+* GitHub Foundations
+
+---
+
+## Tab 7 — Math Projects
+
+Each math topic → coding project
+
+---
+
+## Tab 8 — Career System
+
+* Portfolio
+* Freelancing
+* Interview prep
+
+---
+
+## Tab 9 — Accountability
+
+* Weekly tracking
+* Monthly audits
+* Discipline enforcement
+
+---
+
+## Tab 10 — Infrastructure
+
+Maps:
+
+* Tasks → Machines → Environments
+
+---
+
+# 4. PHASE 1 — FOUNDATION ENGINEER (64 WEEKS)
+
+---
+
+## 4.1 Objective
+
+Build:
+
+* Strong programming foundation
+* Full-stack capability
+* Mathematical intuition
+* Discipline system
+* Deployment capability
+
+---
+
+## 4.2 Core Components
+
+### Programming Languages
+
+* C
+* Python
+* Java
+* JavaScript
+* TypeScript
+* SQL
+
+---
+
+### Core Systems
+
+* Web (frontend + backend)
+* APIs
+* Databases
+* Authentication
+* Testing
+* CI/CD
+* Docker
+
+---
+
+### Mathematics
+
+* Algebra
+* Discrete math
+* Calculus
+* Linear algebra
+* Probability
+
+---
+
+### Algorithms
+
+* Arrays → Graphs → DP
+* Integrated with DSA track
+
+---
+
+## 4.3 Mandatory Course Integrations
+
+### CS
+
+* CS50x
+* Java MOOC
+* Full Stack Open
+* Odin Project
+
+---
+
+### MIT Courses (Integrated Precisely)
+
+* 6.100L — Python
+* 6.1200J — Discrete Math (replaces 6.042J)
+* 18.06 — Linear Algebra
+* 6.006 — Algorithms (intro layer)
+* 6.0002 — Computational Thinking
+
+---
+
+### Math
+
+* Khan Academy (all levels)
+* MIT OCW
+* Harvard Stat 110
+
+---
+
+## 4.4 Infrastructure (MANDATORY)
+
+Every student must use:
+
+### Local
+
+* Debian (primary dev)
+
+### Virtualization
+
+* Proxmox VMs
+
+### Cloud (FREE ONLY)
+
+* AWS Free Tier
+* Render
+* Supabase
+
+---
+
+## 4.5 Key Additions (From Claude + This Upgrade)
+
+### ✔ TypeScript Integration
+
+* Before React or during FSO Part 9
+
+---
+
+### ✔ DSA Daily (Non-negotiable)
+
+* From Week 5 onward
+
+---
+
+### ✔ Networking Fundamentals
+
+* HTTP, DNS, TCP/IP
+
+---
+
+### ✔ Git + CLI (Week 0)
+
+* MIT Missing Semester
+
+---
+
+### ✔ FSO Completion
+
+* Parts 1–13 (including GraphQL + TypeScript)
+
+---
+
+## 4.6 Output of Phase 1
+
+By Week 64, student must:
+
+* Build full-stack apps
+* Deploy to cloud
+* Write tests
+* Use Docker
+* Implement CI/CD
+* Solve medium DSA problems
+* Understand system architecture basics
+
+---
+
+# 5. PHASE 2 — SYSTEMS ENGINEER (36 WEEKS)
+
+---
+
+## 5.1 Objective
+
+Build:
+
+* Deep systems understanding
+* Scalability knowledge
+* Advanced algorithms
+* OS + networking mastery
+
+---
+
+## 5.2 Core Topics
+
+### Operating Systems
+
+* Processes
+* Threads
+* Memory
+* Scheduling
+
+(Resource: OSTEP)
+
+---
+
+### Networking
+
+* TCP/IP
+* HTTP internals
+* DNS
+* Load balancing
+
+---
+
+### Databases
+
+* Internals
+* Indexing
+* Transactions
+
+---
+
+### Distributed Systems
+
+* Replication
+* Sharding
+* Consistency models
+
+---
+
+### Algorithms (Advanced)
+
+* MIT 6.006 (full depth)
+
+---
+
+## 5.3 Output of Phase 2
+
+* Build distributed systems
+* Design scalable architectures
+* Optimize systems
+* Handle concurrency
+
+---
+
+# 6. PHASE 3 — AI ENGINEER (36 WEEKS)
+
+---
+
+## 6.1 Objective
+
+Build:
+
+* AI systems
+* ML models
+* Production AI applications
+
+---
+
+## 6.2 Core Components
+
+### Practical ML
+
+* Fast.ai
+
+---
+
+### Deep Learning
+
+* PyTorch
+
+---
+
+### Theory
+
+* MIT 6.034 (AI)
+
+---
+
+### NLP
+
+* Transformers
+* LLMs
+
+---
+
+### Optimization
+
+* Convex optimization (Stanford)
+
+---
+
+## 6.3 Output of Phase 3
+
+* Train models
+* Deploy ML systems
+* Build AI SaaS
+* Integrate LLM APIs
+
+---
+
+# 7. CAPSTONE REQUIREMENTS
+
+---
+
+## 7.1 Mandatory Features
+
+Final system MUST include:
+
+* Authentication (JWT)
+* Frontend (React + TypeScript)
+* Backend (Node.js)
+* Database (PostgreSQL)
+* AI integration
+* Docker
+* CI/CD
+* Cloud deployment
+
+---
+
+## 7.2 Recommended Project
+
+👉 AI-powered SaaS platform
+
+---
+
+# 8. RESOURCE RULES (STRICT)
+
+---
+
+## 8.1 Allowed Resources
+
+Only:
+
+* Free
+* High-quality
+* Industry-recognized
+
+---
+
+## 8.2 Link Requirements
+
+Every resource must include:
+
+* Exact section/module
+* Direct URL
+* Ordered sequence
+
+---
+
+## 8.3 Forbidden
+
+* Generic links
+* Homepage links
+* “Search yourself”
+
+---
+
+# 9. ACCOUNTABILITY SYSTEM
+
+---
+
+## Weekly Requirements
+
+* 36 hours logged
+* 5+ commits
+* 3 LeetCode problems/day
+* Project progress
+* Math completion
+
+---
+
+## Monthly Requirements
+
+* Projects deployed
+* Portfolio updated
+* Weakness analysis
+
+---
+
+# 10. SUCCESS CRITERIA
+
+---
+
+## Phase 1 Complete When:
+
+* All projects built
+* All systems deployed
+* DSA proficiency (medium level)
+* Full-stack capability proven
+
+---
+
+## Phase 2 Complete When:
+
+* Systems built at scale
+* Architecture mastery demonstrated
+
+---
+
+## Phase 3 Complete When:
+
+* AI systems deployed
+* Production-ready SaaS built
+
+---
+
+# 🔥 FINAL NOTE
+
+This system is:
+
+* Not a course
+* Not a roadmap
+
+👉 It is an **engineering training operating system**
+
+Success depends on:
+
+* Strict adherence
+* No skipping
+* Consistency over speed
+
+---
